@@ -203,6 +203,30 @@
         .netflix-card h3 { font-size: 1.1rem; font-weight: 700; }
         .netflix-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
 
+        /* KPI SUMMARY CARDS */
+        .summary-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .kpi-card {
+            background: var(--clear-trans-medium);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--clear-border);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .kpi-card-title { font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; }
+        .kpi-card-value { font-size: 1.8rem; font-weight: 800; color: var(--brand-color); }
+        .kpi-card-value.used { color: #C0392B; }
+
         header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
         header h2 { font-size: 1.35rem; font-weight: 700; color: var(--text-main); }
 
@@ -623,9 +647,9 @@
         <p>Aesthetic minimalist stock management with isolated batch tracking & full audit history monitoring.</p>
         <div class="hero-action-group">
             <button type="button" class="btn-proceed" onclick="navigateTo('menu')">📂 Menu Inventory</button>
+            <button type="button" class="btn-proceed secondary" onclick="navigateTo('cafe-totals')">📈 Café Totals Summary</button>
             <button type="button" class="btn-proceed secondary" onclick="navigateTo('markedout')">🥐 Marked Out Pastries</button>
             <button type="button" class="btn-proceed secondary" onclick="navigateTo('deliveries')">🚚 Deliveries Inventory</button>
-            <button type="button" class="btn-proceed secondary" onclick="navigateTo('master')">🔍 Master Search List</button>
         </div>
     </div>
 </section>
@@ -636,6 +660,7 @@
         <h2>📂 Menu Inventory</h2>
         <div class="action-btns">
             <button type="button" onclick="navigateTo('home')" class="btn">🏠 Home</button>
+            <button type="button" onclick="navigateTo('cafe-totals')" class="btn">📈 Café Totals Summary</button>
             <button type="button" onclick="navigateTo('master')" class="btn">🔍 Master Search</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
@@ -650,28 +675,93 @@
         <div class="netflix-cards-grid">
             <div class="netflix-card" onclick="navigateTo('inventory', 'Café')">
                 <div class="netflix-card-icon">☕</div>
-                <div class="netflix-badge-tag">Inventory</div>
-                <h3>Café</h3>
+                <h3>Café Inventory</h3>
                 <p>Espresso beans, milks, syrups, and daily consumables.</p>
+            </div>
+            <div class="netflix-card" onclick="navigateTo('cafe-totals')">
+                <div class="netflix-card-icon">📈</div>
+                <h3>Café Totals Summary</h3>
+                <p>Detailed view of total stocks and used products for Café only.</p>
             </div>
             <div class="netflix-card" onclick="navigateTo('markedout')">
                 <div class="netflix-card-icon">🥐</div>
-                <div class="netflix-badge-tag">Waste Log</div>
                 <h3>Marked Out Pastries</h3>
                 <p>Track expired, sampled, or damaged pastry waste & deduct stock.</p>
             </div>
             <div class="netflix-card" onclick="navigateTo('inventory', 'Community')">
                 <div class="netflix-card-icon">🤝</div>
-                <div class="netflix-badge-tag">Inventory</div>
                 <h3>Community</h3>
                 <p>Entertainment sets, furniture, seating, and electronics.</p>
             </div>
-            <div class="netflix-card" onclick="navigateTo('inventory', 'Housekeeping')">
-                <div class="netflix-card-icon">🧹</div>
-                <div class="netflix-badge-tag">Inventory</div>
-                <h3>Housekeeping</h3>
-                <p>Cleaning chemicals, linens, equipment, and supplies.</p>
-            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DEDICATED CAFÉ TOTAL STOCKS & USAGE SUMMARY PAGE -->
+<section id="view-cafe-totals" class="page-view">
+    <header>
+        <h2>☕ Café Inventory - Total Stocks & Usage Summary</h2>
+        <div class="action-btns">
+            <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
+            <button type="button" onclick="navigateTo('inventory', 'Café')" class="btn">☕ Café Inventory</button>
+            <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
+        </div>
+    </header>
+
+    <!-- CAFÉ KPI METRICS -->
+    <div class="summary-kpi-grid">
+        <div class="kpi-card">
+            <span class="kpi-card-title">Total Active Café Products</span>
+            <span class="kpi-card-value" id="cafeKpiTotalProducts">0</span>
+        </div>
+        <div class="kpi-card">
+            <span class="kpi-card-title">Total Remaining Café Stock</span>
+            <span class="kpi-card-value" id="cafeKpiTotalRemaining">0</span>
+        </div>
+        <div class="kpi-card">
+            <span class="kpi-card-title">Total Used / Consumed Café Stock</span>
+            <span class="kpi-card-value used" id="cafeKpiTotalUsed">0</span>
+        </div>
+    </div>
+
+    <!-- SUBCATEGORY SUMMARY TABLE -->
+    <div class="glass-card">
+        <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">📂 Café Totals Summary by Subcategory</div>
+        <div class="table-container" style="box-shadow: none; border: none; margin-bottom: 16px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subcategory</th>
+                        <th>Active Products</th>
+                        <th>Total Stock Remaining</th>
+                        <th>Total Stock Used</th>
+                    </tr>
+                </thead>
+                <tbody id="cafeSubTotalsTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- DETAILED ITEM-BY-ITEM LEDGER FOR CAFÉ ONLY -->
+    <div class="glass-card">
+        <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">📋 Itemized Café Stock & Usage Breakdown</div>
+        <div class="table-container" style="box-shadow: none; border: none; margin-bottom: 0;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Subcategory</th>
+                        <th>Remaining Stock</th>
+                        <th>Total Stock Used</th>
+                        <th>Initial Total (Calculated)</th>
+                        <th>Unit</th>
+                        <th>Active FIFO Batches</th>
+                    </tr>
+                </thead>
+                <tbody id="cafeItemTotalsTableBody"></tbody>
+            </table>
         </div>
     </div>
 </section>
@@ -998,6 +1088,7 @@
         <h2 id="currentTitle">☕ Café Inventory</h2>
         <div class="action-btns">
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
+            <button type="button" onclick="navigateTo('cafe-totals')" class="btn">📈 Café Totals</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
@@ -1125,7 +1216,7 @@
                 unit: "Case",
                 lastUpdated: new Date().toISOString().split('T')[0],
                 batches: [
-                    { batchId: "b3", addedDate: "2026-08-25", lastUpdated: "2026-08-25", initQty: 2, remQty: 2, usedQty: 0, unit: "Case", sourceNote: "Delivery" }
+                    { batchId: "b3", addedDate: "2026-08-25", lastUpdated: "2026-08-25", initQty: 5, remQty: 3, usedQty: 2, unit: "Case", sourceNote: "Delivery" }
                 ]
             },
             {
@@ -1334,11 +1425,79 @@
         sortItemBatches(item);
     }
 
+    function renderCafeTotalsSummary() {
+        const subTbody = document.getElementById('cafeSubTotalsTableBody');
+        const itemTbody = document.getElementById('cafeItemTotalsTableBody');
+        if (!subTbody || !itemTbody) return;
+
+        subTbody.innerHTML = '';
+        itemTbody.innerHTML = '';
+
+        const cafeItems = appData.inventory.filter(i => i.category === 'Café');
+
+        let grandRemaining = 0;
+        let grandUsed = 0;
+
+        const subMap = {};
+        const allowedSubs = appData.categories['Café'] || [];
+
+        allowedSubs.forEach(s => {
+            subMap[s] = { count: 0, rem: 0, used: 0 };
+        });
+
+        cafeItems.forEach(item => {
+            const sub = item.subcategory || 'General';
+            const totalRem = getItemTotalQty(item);
+            const totalUsed = getItemTotalUsed(item);
+            const unitStr = getItemActiveUnit(item);
+            const activeBatchesCount = item.batches ? item.batches.filter(b => b.remQty > 0).length : 0;
+
+            grandRemaining += totalRem;
+            grandUsed += totalUsed;
+
+            if (!subMap[sub]) {
+                subMap[sub] = { count: 0, rem: 0, used: 0 };
+            }
+            subMap[sub].count += 1;
+            subMap[sub].rem += totalRem;
+            subMap[sub].used += totalUsed;
+
+            const trItem = document.createElement('tr');
+            trItem.innerHTML = `
+                <td><strong>• ${item.name}</strong></td>
+                <td>${item.subcategory}</td>
+                <td><strong>${totalRem}</strong> <span class="unit-label">${unitStr}</span></td>
+                <td><span class="used-badge-red">-${totalUsed} ${unitStr}</span></td>
+                <td><strong>${totalRem + totalUsed}</strong> <span class="unit-label">${unitStr}</span></td>
+                <td><span class="unit-label">${unitStr}</span></td>
+                <td><span class="fifo-batch-tag">${activeBatchesCount} Active Batch(es)</span></td>
+            `;
+            itemTbody.appendChild(trItem);
+        });
+
+        document.getElementById('cafeKpiTotalProducts').innerText = cafeItems.length;
+        document.getElementById('cafeKpiTotalRemaining').innerText = grandRemaining;
+        document.getElementById('cafeKpiTotalUsed').innerText = grandUsed;
+
+        Object.keys(subMap).forEach(subName => {
+            const data = subMap[subName];
+            const trSub = document.createElement('tr');
+            trSub.innerHTML = `
+                <td><strong>📂 ${subName} ONLY</strong></td>
+                <td>${data.count} product(s)</td>
+                <td><strong>${data.rem}</strong> units</td>
+                <td><span class="used-badge-red">-${data.used} units</span></td>
+            `;
+            subTbody.appendChild(trSub);
+        });
+    }
+
     function refreshAllViews() {
         renderTable();
         renderMasterTables();
         renderDeliveriesTable();
         renderMarkedOutTable();
+        renderCafeTotalsSummary();
         updateMarkedOutDropdown();
         renderLogs();
         updateBatchBarVisibility();
@@ -1867,7 +2026,6 @@
         URL.revokeObjectURL(url);
     }
 
-    // HELPER: GROUP ITEMS BY SUBCATEGORY CLEANLY
     function getGroupedInventoryBySubcategory() {
         const grouped = {};
         const categories = Object.keys(appData.categories);
@@ -1888,7 +2046,6 @@
         return grouped;
     }
 
-    // EXPORT TO EXCEL ISOLATED & ORGANIZED BY SUBCATEGORIES (.xls XML)
     function exportToExcel() {
         const dateTag = new Date().toISOString().split('T')[0];
         const fullTimeStr = getFormattedTimestamp();
@@ -1905,166 +2062,51 @@
           <Style ss:ID="SubHeader"><Font ss:Bold="1"/><Interior ss:Color="#F8F6F4" ss:Pattern="Solid"/></Style>
          </Styles>
 
-         <!-- WORKSHEET 1: ORGANIZED INVENTORY BY SUBCATEGORY -->
-         <Worksheet ss:Name="Inventory Summary">
+         <Worksheet ss:Name="Café Summary">
           <Table>
            <Row ss:StyleID="Title">
-            <Cell><Data ss:Type="String">QuadLink Inventory Audit Report (Organized)</Data></Cell>
+            <Cell><Data ss:Type="String">Café Inventory Totals Summary Report</Data></Cell>
             <Cell><Data ss:Type="String">Export Date: ${fullTimeStr}</Data></Cell>
            </Row>
-           <Row></Row>`;
-
-        const grouped = getGroupedInventoryBySubcategory();
-        let currentExcelRow = 3;
-
-        Object.keys(grouped).forEach(subGroup => {
-            const items = grouped[subGroup];
-            if (!items || items.length === 0) return;
-
-            xml += `
-           <Row ss:StyleID="GroupHeader">
-            <Cell><Data ss:Type="String">📂 GROUP: ${subGroup.toUpperCase()} ONLY (${items.length} items)</Data></Cell>
-            <Cell><Data ss:Type="String"></Data></Cell>
-            <Cell><Data ss:Type="String"></Data></Cell>
-            <Cell><Data ss:Type="String"></Data></Cell>
-            <Cell><Data ss:Type="String"></Data></Cell>
-            <Cell><Data ss:Type="String"></Data></Cell>
-            <Cell><Data ss:Type="String"></Data></Cell>
-            <Cell><Data ss:Type="String"></Data></Cell>
-           </Row>
+           <Row></Row>
            <Row ss:StyleID="Header">
-            <Cell><Data ss:Type="String">Item Name</Data></Cell>
+            <Cell><Data ss:Type="String">Café Item Name</Data></Cell>
             <Cell><Data ss:Type="String">Subcategory</Data></Cell>
-            <Cell><Data ss:Type="String">Main Category</Data></Cell>
             <Cell><Data ss:Type="String">Unit</Data></Cell>
             <Cell><Data ss:Type="String">Remaining Stock</Data></Cell>
             <Cell><Data ss:Type="String">Used Stock</Data></Cell>
             <Cell><Data ss:Type="String">Initial Total (Formula)</Data></Cell>
-            <Cell><Data ss:Type="String">Batch Entry Date</Data></Cell>
-            <Cell><Data ss:Type="String">Last Updated Date</Data></Cell>
            </Row>`;
 
-            currentExcelRow += 2;
-            let groupStartRow = currentExcelRow;
+        const cafeItems = appData.inventory.filter(i => i.category === 'Café');
+        let rIndex = 4;
 
-            items.forEach(item => {
-                const totalRem = getItemTotalQty(item);
-                const totalUsed = getItemTotalUsed(item);
-                const unitStr = getItemActiveUnit(item);
-                const earliestDate = getItemActiveBatchDate(item);
-                const lastUpdate = item.lastUpdated || dateTag;
+        cafeItems.forEach(item => {
+            const rem = getItemTotalQty(item);
+            const used = getItemTotalUsed(item);
+            const unitStr = getItemActiveUnit(item);
 
-                xml += `
+            xml += `
            <Row>
             <Cell><Data ss:Type="String">${item.name}</Data></Cell>
             <Cell><Data ss:Type="String">${item.subcategory}</Data></Cell>
-            <Cell><Data ss:Type="String">${item.category}</Data></Cell>
             <Cell><Data ss:Type="String">${unitStr}</Data></Cell>
-            <Cell><Data ss:Type="Number">${totalRem}</Data></Cell>
-            <Cell><Data ss:Type="Number">${totalUsed}</Data></Cell>
-            <Cell ss:Formula="=RC[-2]+RC[-1]"><Data ss:Type="Number">${totalRem + totalUsed}</Data></Cell>
-            <Cell><Data ss:Type="String">${earliestDate}</Data></Cell>
-            <Cell><Data ss:Type="String">${lastUpdate}</Data></Cell>
+            <Cell><Data ss:Type="Number">${rem}</Data></Cell>
+            <Cell><Data ss:Type="Number">${used}</Data></Cell>
+            <Cell ss:Formula="=RC[-2]+RC[-1]"><Data ss:Type="Number">${rem + used}</Data></Cell>
            </Row>`;
-                currentExcelRow++;
-            });
+            rIndex++;
+        });
 
-            xml += `
+        xml += `
            <Row ss:StyleID="SubHeader">
-            <Cell><Data ss:Type="String">SUBTOTAL (${subGroup.toUpperCase()} ONLY)</Data></Cell>
+            <Cell><Data ss:Type="String">TOTAL CAFÉ STOCK</Data></Cell>
             <Cell><Data ss:Type="String"></Data></Cell>
             <Cell><Data ss:Type="String"></Data></Cell>
-            <Cell><Data ss:Type="String"></Data></Cell>
-            <Cell ss:Formula="=SUM(E${groupStartRow}:E${currentExcelRow-1})"><Data ss:Type="Number">0</Data></Cell>
-            <Cell ss:Formula="=SUM(F${groupStartRow}:F${currentExcelRow-1})"><Data ss:Type="Number">0</Data></Cell>
-            <Cell ss:Formula="=SUM(G${groupStartRow}:G${currentExcelRow-1})"><Data ss:Type="Number">0</Data></Cell>
-            <Cell><Data ss:Type="String"></Data></Cell>
-            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell ss:Formula="=SUM(D4:D${rIndex-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell ss:Formula="=SUM(E4:E${rIndex-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell ss:Formula="=SUM(F4:F${rIndex-1})"><Data ss:Type="Number">0</Data></Cell>
            </Row>
-           <Row></Row>`;
-            currentExcelRow += 2;
-        });
-
-        xml += `
-          </Table>
-         </Worksheet>
-
-         <!-- WORKSHEET 2: BATCH BREAKDOWN (GROUPED BY SUBCATEGORY) -->
-         <Worksheet ss:Name="Batch Breakdown">
-          <Table>
-           <Row ss:StyleID="Title">
-            <Cell><Data ss:Type="String">Detailed Batch Ledger (Grouped by Subcategory)</Data></Cell>
-           </Row>
-           <Row></Row>`;
-
-        Object.keys(grouped).forEach(subGroup => {
-            const items = grouped[subGroup];
-            if (!items || items.length === 0) return;
-
-            xml += `
-           <Row ss:StyleID="GroupHeader">
-            <Cell><Data ss:Type="String">📂 ${subGroup.toUpperCase()} BATCHES ONLY</Data></Cell>
-           </Row>
-           <Row ss:StyleID="Header">
-            <Cell><Data ss:Type="String">Item Name</Data></Cell>
-            <Cell><Data ss:Type="String">Subcategory</Data></Cell>
-            <Cell><Data ss:Type="String">Batch Entry Date</Data></Cell>
-            <Cell><Data ss:Type="String">Batch Last Updated</Data></Cell>
-            <Cell><Data ss:Type="String">Source</Data></Cell>
-            <Cell><Data ss:Type="String">Initial Qty</Data></Cell>
-            <Cell><Data ss:Type="String">Remaining Qty</Data></Cell>
-            <Cell><Data ss:Type="String">Used Qty Formula</Data></Cell>
-            <Cell><Data ss:Type="String">Unit</Data></Cell>
-           </Row>`;
-
-            items.forEach(item => {
-                (item.batches || []).forEach(b => {
-                    const initQty = b.initQty !== undefined ? b.initQty : b.remQty;
-                    xml += `
-           <Row>
-            <Cell><Data ss:Type="String">${item.name}</Data></Cell>
-            <Cell><Data ss:Type="String">${item.subcategory}</Data></Cell>
-            <Cell><Data ss:Type="String">${b.addedDate}</Data></Cell>
-            <Cell><Data ss:Type="String">${b.lastUpdated || b.addedDate}</Data></Cell>
-            <Cell><Data ss:Type="String">${b.sourceNote || 'In-House'}</Data></Cell>
-            <Cell><Data ss:Type="Number">${initQty}</Data></Cell>
-            <Cell><Data ss:Type="Number">${b.remQty}</Data></Cell>
-            <Cell ss:Formula="=RC[-2]-RC[-1]"><Data ss:Type="Number">${initQty - b.remQty}</Data></Cell>
-            <Cell><Data ss:Type="String">${b.unit || item.unit}</Data></Cell>
-           </Row>`;
-                });
-            });
-
-            xml += `<Row></Row>`;
-        });
-
-        xml += `
-          </Table>
-         </Worksheet>
-
-         <!-- WORKSHEET 3: MARKED OUT PASTRIES LOG -->
-         <Worksheet ss:Name="Marked Out Pastries">
-          <Table>
-           <Row ss:StyleID="Header">
-            <Cell><Data ss:Type="String">Marked Out Date</Data></Cell>
-            <Cell><Data ss:Type="String">Pastry Item Name</Data></Cell>
-            <Cell><Data ss:Type="String">Qty Marked Out</Data></Cell>
-            <Cell><Data ss:Type="String">Unit</Data></Cell>
-            <Cell><Data ss:Type="String">Reason</Data></Cell>
-           </Row>`;
-
-        (appData.markedOutPastries || []).forEach(mo => {
-            xml += `
-           <Row>
-            <Cell><Data ss:Type="String">${mo.date}</Data></Cell>
-            <Cell><Data ss:Type="String">${mo.itemName}</Data></Cell>
-            <Cell><Data ss:Type="Number">${mo.qty}</Data></Cell>
-            <Cell><Data ss:Type="String">${mo.unit}</Data></Cell>
-            <Cell><Data ss:Type="String">${mo.reason}</Data></Cell>
-           </Row>`;
-        });
-
-        xml += `
           </Table>
          </Worksheet>
         </Workbook>`;
@@ -2073,56 +2115,38 @@
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = `inventory_excel_organized_${dateTag}.xls`;
+        link.download = `cafe_totals_summary_${dateTag}.xls`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
     }
 
-    // EXPORT TO GOOGLE SHEETS ISOLATED BY SUBCATEGORIES (.csv)
     function exportToGoogleSheets() {
         const dateTag = new Date().toISOString().split('T')[0];
         const fullTimeStr = getFormattedTimestamp();
 
-        let csvContent = `Report Title: QuadLink Inventory Report (Grouped & Isolated),Generated Date: ${fullTimeStr}\n\n`;
+        let csvContent = `Report Title: Café Inventory Totals & Usage Summary,Generated Date: ${fullTimeStr}\n\n`;
+        csvContent += "Item Name,Subcategory,Unit,Remaining Stock,Used Stock,Initial Stock (Formula)\n";
 
-        const grouped = getGroupedInventoryBySubcategory();
-        let currentRowIndex = 4;
+        const cafeItems = appData.inventory.filter(i => i.category === 'Café');
+        let rIndex = 4;
 
-        Object.keys(grouped).forEach(subGroup => {
-            const items = grouped[subGroup];
-            if (!items || items.length === 0) return;
+        cafeItems.forEach(item => {
+            const rem = getItemTotalQty(item);
+            const used = getItemTotalUsed(item);
+            const unitStr = getItemActiveUnit(item);
+            const formula = `"=D${rIndex}+E${rIndex}"`;
 
-            csvContent += `\n--- SUBCATEGORY GROUP: ${subGroup.toUpperCase()} ONLY ---\n`;
-            csvContent += "Item Name,Subcategory,Main Category,Unit,Remaining Stock,Used Stock,Initial Stock (Formula),Earliest Batch Date,Last Updated Date\n";
-            currentRowIndex += 3;
-
-            items.forEach(item => {
-                const totalRem = getItemTotalQty(item);
-                const totalUsed = getItemTotalUsed(item);
-                const unitStr = getItemActiveUnit(item);
-                const earliestDate = getItemActiveBatchDate(item);
-                const lastUpdate = item.lastUpdated || dateTag;
-                
-                const formula = `"=E${currentRowIndex}+F${currentRowIndex}"`;
-                csvContent += `"${item.name}","${item.subcategory}","${item.category}","${unitStr}",${totalRem},${totalUsed},${formula},"${earliestDate}","${lastUpdate}"\n`;
-                currentRowIndex++;
-            });
-        });
-
-        csvContent += "\n--- MARKED OUT PASTRIES LOG ---\n";
-        csvContent += "Marked Out Date,Pastry Item Name,Qty Marked Out,Unit,Reason\n";
-
-        (appData.markedOutPastries || []).forEach(mo => {
-            csvContent += `"${mo.date}","${mo.itemName}",${mo.qty},"${mo.unit}","${mo.reason}"\n`;
+            csvContent += `"${item.name}","${item.subcategory}","${unitStr}",${rem},${used},${formula}\n`;
+            rIndex++;
         });
 
         const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = `google_sheets_inventory_organized_${dateTag}.csv`;
+        link.download = `cafe_totals_summary_${dateTag}.csv`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -2191,7 +2215,7 @@
         const target = document.getElementById(`view-${page}`);
         const backBtn = document.getElementById('backBtn');
 
-        if (page === 'inventory' || page === 'markedout') {
+        if (page === 'inventory' || page === 'markedout' || page === 'cafe-totals') {
             if (backBtn) { backBtn.style.display = 'inline-flex'; backBtn.setAttribute('onclick', "navigateTo('menu')"); }
         } else {
             if (backBtn) backBtn.style.display = 'none';
@@ -2202,6 +2226,7 @@
             if (page === 'master') renderMasterTables();
             if (page === 'deliveries') { updateSupplierDropdown(); renderDeliveriesTable(); }
             if (page === 'markedout') { updateMarkedOutDropdown(); renderMarkedOutTable(); }
+            if (page === 'cafe-totals') renderCafeTotalsSummary();
             return;
         }
 
@@ -2221,6 +2246,7 @@
         if (page === 'master') renderMasterTables();
         if (page === 'deliveries') { updateSupplierDropdown(); renderDeliveriesTable(); }
         if (page === 'markedout') { updateMarkedOutDropdown(); renderMarkedOutTable(); }
+        if (page === 'cafe-totals') renderCafeTotalsSummary();
         target.classList.add('active');
         target.style.opacity = '1';
     }
