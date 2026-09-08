@@ -500,6 +500,23 @@
 
         .unit-label { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); margin-left: 2px; }
 
+        /* RED USED BADGES FOR FIFO DEDUCTIONS */
+        .used-badge-red {
+            display: inline-block;
+            background: rgba(217, 107, 107, 0.2);
+            color: #C0392B;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 6px;
+            border: 1px solid rgba(217, 107, 107, 0.4);
+            font-size: 0.72rem;
+        }
+
+        .used-text-red {
+            color: #C0392B;
+            font-weight: 700;
+        }
+
         .waste-tag {
             display: inline-block;
             background: rgba(217, 107, 107, 0.2);
@@ -950,6 +967,7 @@
                         <th>Item Name</th>
                         <th>Subcategory</th>
                         <th>Total Qty</th>
+                        <th>Total Used</th>
                         <th>Active Batches</th>
                         <th>Earliest Batch Date</th>
                         <th>Action</th>
@@ -969,6 +987,7 @@
                         <th>Item Name</th>
                         <th>Subcategory</th>
                         <th>Total Qty</th>
+                        <th>Total Used</th>
                         <th>Active Batches</th>
                         <th>Earliest Batch Date</th>
                         <th>Action</th>
@@ -988,6 +1007,7 @@
                         <th>Item Name</th>
                         <th>Subcategory</th>
                         <th>Total Qty</th>
+                        <th>Total Used</th>
                         <th>Active Batches</th>
                         <th>Earliest Batch Date</th>
                         <th>Action</th>
@@ -1128,8 +1148,8 @@
                 unit: "Kg",
                 lastUpdated: new Date().toISOString().split('T')[0],
                 batches: [
-                    { batchId: "b1", addedDate: "2026-09-01", lastUpdated: "2026-09-01", initQty: 10, remQty: 2, unit: "Kg", sourceNote: "In-House" },
-                    { batchId: "b2", addedDate: "2026-09-05", lastUpdated: "2026-09-05", initQty: 10, remQty: 10, unit: "Kg", sourceNote: "Delivery" }
+                    { batchId: "b1", addedDate: "2026-09-01", lastUpdated: "2026-09-01", initQty: 10, remQty: 2, usedQty: 8, unit: "Kg", sourceNote: "In-House" },
+                    { batchId: "b2", addedDate: "2026-09-05", lastUpdated: "2026-09-05", initQty: 10, remQty: 10, usedQty: 0, unit: "Kg", sourceNote: "Delivery" }
                 ]
             },
             { 
@@ -1140,7 +1160,7 @@
                 unit: "Case",
                 lastUpdated: new Date().toISOString().split('T')[0],
                 batches: [
-                    { batchId: "b3", addedDate: "2026-08-25", lastUpdated: "2026-08-25", initQty: 2, remQty: 2, unit: "Case", sourceNote: "Delivery" }
+                    { batchId: "b3", addedDate: "2026-08-25", lastUpdated: "2026-08-25", initQty: 2, remQty: 2, usedQty: 0, unit: "Case", sourceNote: "Delivery" }
                 ]
             },
             {
@@ -1151,7 +1171,7 @@
                 unit: "Pcs",
                 lastUpdated: new Date().toISOString().split('T')[0],
                 batches: [
-                    { batchId: "b4", addedDate: "2026-09-06", lastUpdated: "2026-09-06", initQty: 15, remQty: 15, unit: "Pcs", sourceNote: "Delivery" }
+                    { batchId: "b4", addedDate: "2026-09-06", lastUpdated: "2026-09-06", initQty: 15, remQty: 15, usedQty: 0, unit: "Pcs", sourceNote: "Delivery" }
                 ]
             }
         ],
@@ -1198,6 +1218,7 @@
                 lastUpdated: oldDate,
                 initQty: oldQty,
                 remQty: oldQty,
+                usedQty: 0,
                 unit: item.unit || 'Pcs',
                 sourceNote: oldSource
             }];
@@ -1207,6 +1228,8 @@
         } else {
             item.batches.forEach(b => {
                 if (!b.unit) b.unit = item.unit || 'Pcs';
+                if (b.initQty === undefined) b.initQty = b.remQty || 0;
+                if (b.usedQty === undefined) b.usedQty = Math.max(0, b.initQty - (b.remQty || 0));
                 if (!b.lastUpdated) b.lastUpdated = b.addedDate || new Date().toISOString().split('T')[0];
             });
         }
@@ -1270,6 +1293,11 @@
         return item.batches.reduce((sum, b) => sum + (b.remQty || 0), 0);
     }
 
+    function getItemTotalUsed(item) {
+        if (!item.batches) return 0;
+        return item.batches.reduce((sum, b) => sum + (b.usedQty || 0), 0);
+    }
+
     function getItemActiveUnit(item) {
         if (!item.batches || item.batches.length === 0) return item.unit || 'Pcs';
         sortItemBatches(item);
@@ -1302,16 +1330,21 @@
             if (batch.remQty > 0) {
                 batch.lastUpdated = todayStr;
                 const batchUnit = batch.unit || item.unit || 'Pcs';
+                if (batch.initQty === undefined) batch.initQty = batch.remQty;
+                if (batch.usedQty === undefined) batch.usedQty = 0;
+
                 if (batch.remQty >= remainingToDeduct) {
                     batch.remQty -= remainingToDeduct;
-                    detailedLogs.push(`Deducted ${remainingToDeduct} ${batchUnit} from Batch [${batch.addedDate}] (Remaining: ${batch.remQty} ${batchUnit})`);
+                    batch.usedQty += remainingToDeduct;
+                    detailedLogs.push(`Deducted ${remainingToDeduct} ${batchUnit} from Batch [${batch.addedDate}] (Remaining: ${batch.remQty} ${batchUnit}, Total Used: ${batch.usedQty} ${batchUnit})`);
                     remainingToDeduct = 0;
                     break;
                 } else {
                     const deductedFromThisBatch = batch.remQty;
                     remainingToDeduct -= batch.remQty;
+                    batch.usedQty += batch.remQty;
                     batch.remQty = 0;
-                    detailedLogs.push(`Depleted entire Batch [${batch.addedDate}] (-${deductedFromThisBatch} ${batchUnit})`);
+                    detailedLogs.push(`Depleted entire Batch [${batch.addedDate}] (-${deductedFromThisBatch} ${batchUnit}, Total Used: ${batch.usedQty} ${batchUnit})`);
                 }
             }
         }
@@ -1330,6 +1363,7 @@
             lastUpdated: todayStr,
             initQty: qty,
             remQty: qty,
+            usedQty: 0,
             unit: unitToUse,
             sourceNote: sourceNoteStr
         });
@@ -1605,7 +1639,7 @@
             date: dateStr
         });
 
-        recordLog(`🥐 Marked out -${qty} ${unitStr} of "${itemName}" (Reason: ${reason}).`);
+        recordLog(`🥐 Marked out <span class="used-text-red">-${qty} ${unitStr}</span> of "${itemName}" (Reason: ${reason}).`);
         document.getElementById('moQty').value = '';
         await autoSaveData();
         refreshAllViews();
@@ -1636,7 +1670,7 @@
             tr.innerHTML = `
                 <td><strong>${mo.date}</strong></td>
                 <td>• ${mo.itemName}</td>
-                <td><strong>${mo.qty}</strong> <span class="unit-label">${mo.unit}</span></td>
+                <td><strong class="used-text-red">-${mo.qty}</strong> <span class="unit-label">${mo.unit}</span></td>
                 <td><span class="waste-tag">${mo.reason}</span></td>
                 <td>
                     <button type="button" class="btn-delete-x" onclick="deleteMarkedOutEntry(${mo.id})" title="Delete Record">✕</button>
@@ -1854,7 +1888,6 @@
         await pushToGitHub(token.trim(), true);
     }
 
-    // FIX 1: Enhanced pushToGitHub with automatic SHA refetch and retry mechanism
     async function pushToGitHub(token, showAlert = true, retryCount = 0) {
         if (isSyncingActive && retryCount === 0) {
             pendingSyncRequested = true;
@@ -1882,7 +1915,6 @@
 
         try {
             let sha = null;
-            // Always fetch the freshest SHA right before writing to avoid 409 conflict errors
             const getRes = await fetch(`${apiUrl}?t=${Date.now()}`, {
                 headers: { 
                     "Authorization": `token ${token}`,
@@ -1918,7 +1950,6 @@
             } else {
                 const err = await putRes.json();
                 
-                // Retry if SHA mismatch or conflict occurred
                 if ((putRes.status === 409 || putRes.status === 422) && retryCount < 3) {
                     isSyncingActive = false;
                     return await pushToGitHub(token, showAlert, retryCount + 1);
@@ -1946,7 +1977,6 @@
         }
     }
 
-    // FIX 2: Bypassing browser cache completely when fetching inventory_data.json
     async function loadFromGitHub(isInitialLoad = false) {
         const badge = document.getElementById('syncBadge');
         if (badge) {
@@ -1987,6 +2017,7 @@
                                 lastUpdated: oldDate,
                                 initQty: oldQty,
                                 remQty: oldQty,
+                                usedQty: 0,
                                 unit: item.unit || 'Pcs',
                                 sourceNote: oldSource
                             }];
@@ -1995,6 +2026,8 @@
                         } else {
                             item.batches.forEach(b => {
                                 if (!b.unit) b.unit = item.unit || 'Pcs';
+                                if (b.initQty === undefined) b.initQty = b.remQty || 0;
+                                if (b.usedQty === undefined) b.usedQty = Math.max(0, b.initQty - (b.remQty || 0));
                                 if (!b.lastUpdated) b.lastUpdated = b.addedDate || new Date().toISOString().split('T')[0];
                             });
                         }
@@ -2069,7 +2102,7 @@
                 csvContent += `${nameEsc},${d.category},${d.subcategory},${d.supplier},${d.qty},${d.unit},${d.deliveryDate}\n`;
             });
         } else {
-            csvContent += "Category,Subcategory,Item Name,Batch Source,Current Active Date,Historical Entry Date (Old Date),Last Updated Date (New Update Date),Initial Batch Qty,New Remaining Qty (New Stock),Unit,Audit Status\n";
+            csvContent += "Category,Subcategory,Item Name,Batch Source,Current Active Date,Historical Entry Date (Old Date),Last Updated Date (New Update Date),Initial Batch Qty,New Remaining Qty (New Stock),Total Used Qty,Unit,Audit Status\n";
             const categoryItems = appData.inventory.filter(i => i.category === currentCategory);
 
             categoryItems.forEach(item => {
@@ -2084,8 +2117,9 @@
                     const oldDate = b.addedDate || 'N/A';
                     const lastUpdate = b.lastUpdated || item.lastUpdated || oldDate;
                     const initQty = b.initQty !== undefined ? b.initQty : b.remQty;
+                    const usedQty = b.usedQty !== undefined ? b.usedQty : Math.max(0, initQty - b.remQty);
 
-                    csvContent += `${item.category},${subEsc},${nameEsc},${b.sourceNote},${activeDate},${oldDate},${lastUpdate},${initQty},${b.remQty},${bUnit},${status}\n`;
+                    csvContent += `${item.category},${subEsc},${nameEsc},${b.sourceNote},${activeDate},${oldDate},${lastUpdate},${initQty},${b.remQty},${usedQty},${bUnit},${status}\n`;
                 });
             });
         }
@@ -2132,7 +2166,7 @@
             const categoryItems = appData.inventory.filter(i => i.category === currentCategory);
 
             const summaryRows = [
-                ["Item Name", "Subcategory", "Active Unit", "Current Active Date", "Total On Hand (Formula)", "Active Batches (Formula)"]
+                ["Item Name", "Subcategory", "Active Unit", "Current Active Date", "Total On Hand (Formula)", "Total Used (Formula)", "Active Batches (Formula)"]
             ];
 
             let rowCounter = 2;
@@ -2145,6 +2179,7 @@
                     activeUnit,
                     activeDate,
                     { f: `SUMIF('FIFO Batches Ledger'!A:A, "${item.name}", 'FIFO Batches Ledger'!F:F)` },
+                    { f: `SUMIF('FIFO Batches Ledger'!A:A, "${item.name}", 'FIFO Batches Ledger'!G:G)` },
                     { f: `COUNTIFS('FIFO Batches Ledger'!A:A, "${item.name}", 'FIFO Batches Ledger'!F:F, ">0")` }
                 ]);
                 rowCounter++;
@@ -2156,14 +2191,15 @@
                 "",
                 "",
                 { f: `SUM(E2:E${rowCounter - 1})` },
-                { f: `SUM(F2:F${rowCounter - 1})` }
+                { f: `SUM(F2:F${rowCounter - 1})` },
+                { f: `SUM(G2:G${rowCounter - 1})` }
             ]);
 
             const wsSummary = XLSX.utils.aoa_to_sheet(summaryRows);
             XLSX.utils.book_append_sheet(wb, wsSummary, `${currentCategory} Summary`);
 
             const batchRows = [
-                ["Item Name", "Historical Batch Date (Old Date)", "Last Updated Date (New Update Date)", "Source Note", "Initial Qty", "New Remaining Qty", "Unit", "Batch Status (Formula)"]
+                ["Item Name", "Historical Batch Date (Old Date)", "Last Updated Date (New Update Date)", "Source Note", "Initial Qty", "New Remaining Qty", "Total Used Qty", "Unit", "Batch Status (Formula)"]
             ];
 
             let batchRowCounter = 2;
@@ -2177,6 +2213,7 @@
                         b.sourceNote,
                         Number(b.initQty),
                         Number(b.remQty),
+                        Number(b.usedQty || 0),
                         b.unit || item.unit,
                         { f: `IF(F${batchRowCounter}>0, "Active Queue", "Depleted")` }
                     ]);
@@ -2191,6 +2228,7 @@
                 "",
                 { f: `SUM(E2:E${batchRowCounter - 1})` },
                 { f: `SUM(F2:F${batchRowCounter - 1})` },
+                { f: `SUM(G2:G${batchRowCounter - 1})` },
                 "",
                 ""
             ]);
@@ -2462,6 +2500,8 @@
                 const oldQty = batch.remQty;
                 const todayStr = new Date().toISOString().split('T')[0];
                 batch.remQty = newQty;
+                if (batch.initQty === undefined) batch.initQty = oldQty;
+                batch.usedQty = Math.max(0, batch.initQty - newQty);
                 batch.lastUpdated = todayStr;
                 item.lastUpdated = todayStr;
 
@@ -2502,9 +2542,10 @@
             saveSnapshotForUndo();
             const deductionDetails = consumeFIFOStock(item, deductQty);
             const newTotal = getItemTotalQty(item);
+            const totalUsed = getItemTotalUsed(item);
             
             const detailStr = deductionDetails.length > 0 ? ` Details: [${deductionDetails.join(' | ')}]` : '';
-            recordLog(`🔻 Decreased -${deductQty} ${activeUnit} from "${item.name}". Total on hand went from ${oldTotal} to ${newTotal} ${activeUnit}.${detailStr}`);
+            recordLog(`🔻 Decreased <span class="used-text-red">-${deductQty} ${activeUnit}</span> from "${item.name}". Total on hand went from ${oldTotal} to ${newTotal} ${activeUnit}. <span class="used-text-red">(Total Used to Date: ${totalUsed} ${activeUnit})</span>.${detailStr}`);
         } else {
             saveSnapshotForUndo();
             const todayStr = new Date().toISOString().split('T')[0];
@@ -2594,6 +2635,7 @@
                 items.forEach(item => {
                     sortItemBatches(item);
                     const totalQty = getItemTotalQty(item);
+                    const totalUsed = getItemTotalUsed(item);
                     const activeUnit = getItemActiveUnit(item);
                     const activeBatchesCount = item.batches ? item.batches.filter(b => b.remQty > 0).length : 0;
                     const earliestDate = (item.batches && item.batches.length > 0) ? item.batches[0].addedDate : 'N/A';
@@ -2610,6 +2652,7 @@
                                 <span class="unit-label">${activeUnit}</span>
                             </div>
                         </td>
+                        <td><span class="used-badge-red">-${totalUsed} ${activeUnit}</span></td>
                         <td><span class="fifo-batch-tag">${activeBatchesCount} Active Batch(es)</span></td>
                         <td><span style="font-size: 0.75rem; font-weight:600; color: var(--text-muted);">${earliestDate}</span></td>
                         <td>
@@ -2690,6 +2733,7 @@
                                 <tr>
                                     <th>Item Name</th>
                                     <th>Total On Hand</th>
+                                    <th>Total Used</th>
                                     <th>FIFO Active Status</th>
                                     <th>Batches</th>
                                     <th>Action</th>
@@ -2701,6 +2745,7 @@
                 subItems.forEach(item => {
                     sortItemBatches(item);
                     const totalQty = getItemTotalQty(item);
+                    const totalUsed = getItemTotalUsed(item);
                     const activeUnit = getItemActiveUnit(item);
                     const activeBatchesCount = item.batches ? item.batches.filter(b => b.remQty > 0).length : 0;
 
@@ -2718,6 +2763,7 @@
                                     <span class="unit-label">${activeUnit}</span>
                                 </div>
                             </td>
+                            <td><span class="used-badge-red">-${totalUsed} ${activeUnit}</span></td>
                             <td><span class="fifo-batch-tag">${activeBatchesCount} Active Batch(es)</span></td>
                             <td>
                                 <button type="button" class="btn" onclick="toggleBatchBreakdown(${item.id})" style="padding: 4px 8px; font-size: 0.7rem;">📋 View FIFO Batches (${displayBatches.length})</button>
@@ -2730,7 +2776,7 @@
                             </td>
                         </tr>
                         <tr id="batchRow-${item.id}" class="batch-breakdown-row" style="display: none;">
-                            <td colspan="5" style="padding: 10px 20px;">
+                            <td colspan="6" style="padding: 10px 20px;">
                                 <div style="font-size:0.75rem; font-weight:700; margin-bottom:6px; color:var(--brand-color);">📦 FIFO Batches Ledger (Monitored Chronologically):</div>
                                 <table class="batch-subtable">
                                     <thead>
@@ -2738,7 +2784,8 @@
                                             <th>Batch Date (Old)</th>
                                             <th>Updated Date (New)</th>
                                             <th>Initial Qty</th>
-                                            <th>New Remaining Qty</th>
+                                            <th>Remaining Stock</th>
+                                            <th>Used / Consumed</th>
                                             <th>Unit</th>
                                             <th>Source</th>
                                             <th>Status</th>
@@ -2755,12 +2802,15 @@
                             : `<span style="color:var(--success); font-weight:700;">Active Queue</span>`;
                         const srcTag = b.sourceNote === 'Delivery' ? `<span class="delivery-note-tag">Delivery</span>` : `<span class="inhouse-note-tag">In-House</span>`;
 
+                        const bUsed = b.usedQty !== undefined ? b.usedQty : Math.max(0, (b.initQty || b.remQty) - b.remQty);
+
                         tableHtml += `
                             <tr>
                                 <td><strong>${b.addedDate}</strong></td>
                                 <td><span style="font-size:0.7rem; color:var(--text-muted);">${b.lastUpdated || item.lastUpdated || b.addedDate}</span></td>
-                                <td>${b.initQty} ${b.unit || item.unit}</td>
+                                <td>${b.initQty !== undefined ? b.initQty : b.remQty} ${b.unit || item.unit}</td>
                                 <td><strong>${b.remQty}</strong> ${b.unit || item.unit}</td>
+                                <td><span class="used-text-red">-${bUsed} ${b.unit || item.unit}</span></td>
                                 <td><span class="unit-label">${b.unit || item.unit}</span></td>
                                 <td>${srcTag}</td>
                                 <td>${statusBadge}</td>
@@ -2822,7 +2872,6 @@
 
     loadFromGitHub(true);
 
-    // FIX 3: Periodic polling to sync data every 60 seconds
     setInterval(() => {
         if (!isSyncingActive) {
             loadFromGitHub(true);
