@@ -25,6 +25,7 @@
             --danger: #D96B6B;
             --success: #6B9B7E;
             --warning: #D9A06B;
+            --info: #4A90E2;
         }
 
         * { 
@@ -206,8 +207,8 @@
         /* KPI SUMMARY CARDS */
         .summary-kpi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
             margin-bottom: 20px;
         }
 
@@ -216,15 +217,17 @@
             backdrop-filter: blur(20px);
             border: 1px solid var(--clear-border);
             border-radius: 20px;
-            padding: 20px;
+            padding: 18px;
             display: flex;
             flex-direction: column;
             gap: 6px;
             box-shadow: var(--glass-shadow);
         }
 
-        .kpi-card-title { font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; }
-        .kpi-card-value { font-size: 1.8rem; font-weight: 800; color: var(--brand-color); }
+        .kpi-card-title { font-size: 0.68rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; }
+        .kpi-card-value { font-size: 1.6rem; font-weight: 800; color: var(--brand-color); }
+        .kpi-card-value.bar { color: #27AE60; }
+        .kpi-card-value.storage { color: #2980B9; }
         .kpi-card-value.used { color: #C0392B; }
 
         header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
@@ -493,6 +496,28 @@
 
         .unit-label { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); margin-left: 2px; }
 
+        .location-tag-bar {
+            display: inline-block;
+            background: rgba(39, 174, 96, 0.18);
+            color: #1E8449;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 6px;
+            border: 1px solid rgba(39, 174, 96, 0.35);
+            font-size: 0.7rem;
+        }
+
+        .location-tag-storage {
+            display: inline-block;
+            background: rgba(41, 128, 185, 0.18);
+            color: #1F618D;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 6px;
+            border: 1px solid rgba(41, 128, 185, 0.35);
+            font-size: 0.7rem;
+        }
+
         .used-badge-red {
             display: inline-block;
             background: rgba(217, 107, 107, 0.2);
@@ -647,7 +672,7 @@
         <p>Aesthetic minimalist stock management with isolated batch tracking & full audit history monitoring.</p>
         <div class="hero-action-group">
             <button type="button" class="btn-proceed" onclick="navigateTo('menu')">📂 Menu Inventory</button>
-            <button type="button" class="btn-proceed secondary" onclick="navigateTo('cafe-totals')">📈 Café Totals Summary</button>
+            <button type="button" class="btn-proceed secondary" onclick="navigateTo('cafe-totals')">📈 Bar vs. Storage Summary</button>
             <button type="button" class="btn-proceed secondary" onclick="navigateTo('markedout')">🥐 Marked Out Pastries</button>
             <button type="button" class="btn-proceed secondary" onclick="navigateTo('deliveries')">🚚 Deliveries Inventory</button>
         </div>
@@ -680,8 +705,8 @@
             </div>
             <div class="netflix-card" onclick="navigateTo('cafe-totals')">
                 <div class="netflix-card-icon">📈</div>
-                <h3>Café Totals Summary</h3>
-                <p>Detailed view of total stocks and used products for Café only.</p>
+                <h3>Bar vs Storage Summary</h3>
+                <p>Detailed breakdown of stock on storage vs. in-house bar stock.</p>
             </div>
             <div class="netflix-card" onclick="navigateTo('markedout')">
                 <div class="netflix-card-icon">🥐</div>
@@ -697,10 +722,10 @@
     </div>
 </section>
 
-<!-- DEDICATED CAFÉ TOTAL STOCKS & USAGE SUMMARY PAGE -->
+<!-- DEDICATED CAFÉ TOTAL STOCKS & USAGE SUMMARY PAGE (BAR VS. STORAGE) -->
 <section id="view-cafe-totals" class="page-view">
     <header>
-        <h2>☕ Café Inventory - Total Stocks & Usage Summary</h2>
+        <h2>☕ Café Inventory - Bar vs. Storage Stocks Summary</h2>
         <div class="action-btns">
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="navigateTo('inventory', 'Café')" class="btn">☕ Café Inventory</button>
@@ -710,32 +735,42 @@
         </div>
     </header>
 
-    <!-- CAFÉ KPI METRICS -->
+    <!-- CAFÉ KPI METRICS (ORGANIZED BY BAR & STORAGE) -->
     <div class="summary-kpi-grid">
         <div class="kpi-card">
-            <span class="kpi-card-title">Total Active Café Products</span>
+            <span class="kpi-card-title">Total Active Products</span>
             <span class="kpi-card-value" id="cafeKpiTotalProducts">0</span>
         </div>
         <div class="kpi-card">
-            <span class="kpi-card-title">Total Remaining Café Stock</span>
+            <span class="kpi-card-title">☕ In-House Bar Stock</span>
+            <span class="kpi-card-value bar" id="cafeKpiBarStock">0</span>
+        </div>
+        <div class="kpi-card">
+            <span class="kpi-card-title">📦 Storage Room Stock</span>
+            <span class="kpi-card-value storage" id="cafeKpiStorageStock">0</span>
+        </div>
+        <div class="kpi-card">
+            <span class="kpi-card-title">📊 Total Stock On Hand</span>
             <span class="kpi-card-value" id="cafeKpiTotalRemaining">0</span>
         </div>
         <div class="kpi-card">
-            <span class="kpi-card-title">Total Used / Consumed Café Stock</span>
+            <span class="kpi-card-title">🔻 Total Stock Used</span>
             <span class="kpi-card-value used" id="cafeKpiTotalUsed">0</span>
         </div>
     </div>
 
-    <!-- SUBCATEGORY SUMMARY TABLE -->
+    <!-- SUBCATEGORY SUMMARY TABLE (BAR VS STORAGE) -->
     <div class="glass-card">
-        <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">📂 Café Totals Summary by Subcategory</div>
+        <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">📂 Café Totals Summary by Subcategory (Bar vs. Storage)</div>
         <div class="table-container" style="box-shadow: none; border: none; margin-bottom: 16px;">
             <table>
                 <thead>
                     <tr>
                         <th>Subcategory</th>
                         <th>Active Products</th>
-                        <th>Total Stock Remaining</th>
+                        <th>Bar Stock (In-House)</th>
+                        <th>Storage Stock</th>
+                        <th>Total Stock On Hand</th>
                         <th>Total Stock Used</th>
                     </tr>
                 </thead>
@@ -746,18 +781,20 @@
 
     <!-- DETAILED ITEM-BY-ITEM LEDGER FOR CAFÉ ONLY -->
     <div class="glass-card">
-        <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">📋 Itemized Café Stock & Usage Breakdown</div>
+        <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">📋 Detailed Café Product Breakdown (Storage & Bar Stock)</div>
         <div class="table-container" style="box-shadow: none; border: none; margin-bottom: 0;">
             <table>
                 <thead>
                     <tr>
                         <th>Item Name</th>
                         <th>Subcategory</th>
-                        <th>Remaining Stock</th>
-                        <th>Total Stock Used</th>
-                        <th>Initial Total (Calculated)</th>
+                        <th>Bar Stock</th>
+                        <th>Storage Stock</th>
+                        <th>Total On-Hand</th>
+                        <th>Total Used</th>
+                        <th>Initial Total</th>
                         <th>Unit</th>
-                        <th>Active FIFO Batches</th>
+                        <th>Active Batches</th>
                     </tr>
                 </thead>
                 <tbody id="cafeItemTotalsTableBody"></tbody>
@@ -1088,7 +1125,7 @@
         <h2 id="currentTitle">☕ Café Inventory</h2>
         <div class="action-btns">
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
-            <button type="button" onclick="navigateTo('cafe-totals')" class="btn">📈 Café Totals</button>
+            <button type="button" onclick="navigateTo('cafe-totals')" class="btn">📈 Bar vs Storage Summary</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
@@ -1119,6 +1156,13 @@
                     <input type="text" id="itemName" placeholder="e.g. Espresso Beans" required>
                 </div>
                 <div class="input-group">
+                    <label>Stock Location</label>
+                    <select id="itemLocation" required>
+                        <option value="Bar">☕ Bar / Front of House</option>
+                        <option value="Storage">📦 Storage / Back Room</option>
+                    </select>
+                </div>
+                <div class="input-group">
                     <label>Source Note</label>
                     <select id="itemSourceNote" required>
                         <option value="In-House">In-House</option>
@@ -1140,7 +1184,7 @@
                     </div>
                 </div>
                 <div class="input-group">
-                    <label>Batch / Entry Date (Backdate Support)</label>
+                    <label>Batch / Entry Date</label>
                     <input type="date" id="itemAddedDate" required>
                 </div>
             </div>
@@ -1204,8 +1248,8 @@
                 unit: "Kg",
                 lastUpdated: new Date().toISOString().split('T')[0],
                 batches: [
-                    { batchId: "b1", addedDate: "2026-09-01", lastUpdated: "2026-09-01", initQty: 10, remQty: 2, usedQty: 8, unit: "Kg", sourceNote: "In-House" },
-                    { batchId: "b2", addedDate: "2026-09-05", lastUpdated: "2026-09-05", initQty: 10, remQty: 10, usedQty: 0, unit: "Kg", sourceNote: "Delivery" }
+                    { batchId: "b1", addedDate: "2026-09-01", lastUpdated: "2026-09-01", initQty: 10, remQty: 2, usedQty: 8, unit: "Kg", location: "Bar", sourceNote: "In-House" },
+                    { batchId: "b2", addedDate: "2026-09-05", lastUpdated: "2026-09-05", initQty: 10, remQty: 10, usedQty: 0, unit: "Kg", location: "Storage", sourceNote: "Delivery" }
                 ]
             },
             { 
@@ -1216,7 +1260,8 @@
                 unit: "Case",
                 lastUpdated: new Date().toISOString().split('T')[0],
                 batches: [
-                    { batchId: "b3", addedDate: "2026-08-25", lastUpdated: "2026-08-25", initQty: 5, remQty: 3, usedQty: 2, unit: "Case", sourceNote: "Delivery" }
+                    { batchId: "b3", addedDate: "2026-08-25", lastUpdated: "2026-08-25", initQty: 5, remQty: 2, usedQty: 1, unit: "Case", location: "Bar", sourceNote: "Delivery" },
+                    { batchId: "b4", addedDate: "2026-08-28", lastUpdated: "2026-08-28", initQty: 5, remQty: 3, usedQty: 0, unit: "Case", location: "Storage", sourceNote: "Delivery" }
                 ]
             },
             {
@@ -1227,7 +1272,7 @@
                 unit: "Pcs",
                 lastUpdated: new Date().toISOString().split('T')[0],
                 batches: [
-                    { batchId: "b4", addedDate: "2026-09-06", lastUpdated: "2026-09-06", initQty: 15, remQty: 15, usedQty: 0, unit: "Pcs", sourceNote: "Delivery" }
+                    { batchId: "b5", addedDate: "2026-09-06", lastUpdated: "2026-09-06", initQty: 15, remQty: 15, usedQty: 0, unit: "Pcs", location: "Bar", sourceNote: "Delivery" }
                 ]
             }
         ],
@@ -1277,6 +1322,7 @@
                 remQty: oldQty,
                 usedQty: 0,
                 unit: item.unit || 'Pcs',
+                location: "Bar",
                 sourceNote: oldSource
             }];
             delete item.qty;
@@ -1285,6 +1331,7 @@
         } else {
             item.batches.forEach(b => {
                 if (!b.unit) b.unit = item.unit || 'Pcs';
+                if (!b.location) b.location = "Bar";
                 if (b.initQty === undefined) b.initQty = b.remQty || 0;
                 if (b.usedQty === undefined) b.usedQty = Math.max(0, b.initQty - (b.remQty || 0));
                 if (!b.lastUpdated) b.lastUpdated = b.addedDate || new Date().toISOString().split('T')[0];
@@ -1347,6 +1394,16 @@
         return item.batches.reduce((sum, b) => sum + (b.remQty || 0), 0);
     }
 
+    function getItemBarQty(item) {
+        if (!item.batches) return 0;
+        return item.batches.filter(b => b.location === 'Bar').reduce((sum, b) => sum + (b.remQty || 0), 0);
+    }
+
+    function getItemStorageQty(item) {
+        if (!item.batches) return 0;
+        return item.batches.filter(b => b.location === 'Storage').reduce((sum, b) => sum + (b.remQty || 0), 0);
+    }
+
     function getItemTotalUsed(item) {
         if (!item.batches) return 0;
         return item.batches.reduce((sum, b) => sum + (b.usedQty || 0), 0);
@@ -1384,13 +1441,14 @@
             if (batch.remQty > 0) {
                 batch.lastUpdated = todayStr;
                 const batchUnit = batch.unit || item.unit || 'Pcs';
+                const batchLoc = batch.location || 'Bar';
                 if (batch.initQty === undefined) batch.initQty = batch.remQty;
                 if (batch.usedQty === undefined) batch.usedQty = 0;
 
                 if (batch.remQty >= remainingToDeduct) {
                     batch.remQty -= remainingToDeduct;
                     batch.usedQty += remainingToDeduct;
-                    detailedLogs.push(`Deducted ${remainingToDeduct} ${batchUnit} from Batch [${batch.addedDate}] (Remaining: ${batch.remQty} ${batchUnit}, Total Used: ${batch.usedQty} ${batchUnit})`);
+                    detailedLogs.push(`Deducted ${remainingToDeduct} ${batchUnit} from ${batchLoc} Batch [${batch.addedDate}]`);
                     remainingToDeduct = 0;
                     break;
                 } else {
@@ -1398,16 +1456,17 @@
                     remainingToDeduct -= batch.remQty;
                     batch.usedQty += batch.remQty;
                     batch.remQty = 0;
-                    detailedLogs.push(`Depleted entire Batch [${batch.addedDate}] (-${deductedFromThisBatch} ${batchUnit}, Total Used: ${batch.usedQty} ${batchUnit})`);
+                    detailedLogs.push(`Depleted entire ${batchLoc} Batch [${batch.addedDate}] (-${deductedFromThisBatch} ${batchUnit})`);
                 }
             }
         }
         return detailedLogs;
     }
 
-    function addFIFOStock(item, qty, dateStr, sourceNoteStr, batchUnitStr) {
+    function addFIFOStock(item, qty, dateStr, sourceNoteStr, batchUnitStr, locationStr) {
         if (!item.batches) item.batches = [];
         const unitToUse = batchUnitStr || item.unit || 'Pcs';
+        const locToUse = locationStr || 'Bar';
         const todayStr = new Date().toISOString().split('T')[0];
         item.lastUpdated = todayStr;
 
@@ -1419,6 +1478,7 @@
             remQty: qty,
             usedQty: 0,
             unit: unitToUse,
+            location: locToUse,
             sourceNote: sourceNoteStr
         });
         item.unit = unitToUse;
@@ -1435,6 +1495,8 @@
 
         const cafeItems = appData.inventory.filter(i => i.category === 'Café');
 
+        let grandBarStock = 0;
+        let grandStorageStock = 0;
         let grandRemaining = 0;
         let grandUsed = 0;
 
@@ -1442,23 +1504,29 @@
         const allowedSubs = appData.categories['Café'] || [];
 
         allowedSubs.forEach(s => {
-            subMap[s] = { count: 0, rem: 0, used: 0 };
+            subMap[s] = { count: 0, bar: 0, storage: 0, rem: 0, used: 0 };
         });
 
         cafeItems.forEach(item => {
             const sub = item.subcategory || 'General';
+            const barQty = getItemBarQty(item);
+            const storageQty = getItemStorageQty(item);
             const totalRem = getItemTotalQty(item);
             const totalUsed = getItemTotalUsed(item);
             const unitStr = getItemActiveUnit(item);
             const activeBatchesCount = item.batches ? item.batches.filter(b => b.remQty > 0).length : 0;
 
+            grandBarStock += barQty;
+            grandStorageStock += storageQty;
             grandRemaining += totalRem;
             grandUsed += totalUsed;
 
             if (!subMap[sub]) {
-                subMap[sub] = { count: 0, rem: 0, used: 0 };
+                subMap[sub] = { count: 0, bar: 0, storage: 0, rem: 0, used: 0 };
             }
             subMap[sub].count += 1;
+            subMap[sub].bar += barQty;
+            subMap[sub].storage += storageQty;
             subMap[sub].rem += totalRem;
             subMap[sub].used += totalUsed;
 
@@ -1466,6 +1534,8 @@
             trItem.innerHTML = `
                 <td><strong>• ${item.name}</strong></td>
                 <td>${item.subcategory}</td>
+                <td><span class="location-tag-bar">${barQty} ${unitStr}</span></td>
+                <td><span class="location-tag-storage">${storageQty} ${unitStr}</span></td>
                 <td><strong>${totalRem}</strong> <span class="unit-label">${unitStr}</span></td>
                 <td><span class="used-badge-red">-${totalUsed} ${unitStr}</span></td>
                 <td><strong>${totalRem + totalUsed}</strong> <span class="unit-label">${unitStr}</span></td>
@@ -1476,6 +1546,8 @@
         });
 
         document.getElementById('cafeKpiTotalProducts').innerText = cafeItems.length;
+        document.getElementById('cafeKpiBarStock').innerText = grandBarStock;
+        document.getElementById('cafeKpiStorageStock').innerText = grandStorageStock;
         document.getElementById('cafeKpiTotalRemaining').innerText = grandRemaining;
         document.getElementById('cafeKpiTotalUsed').innerText = grandUsed;
 
@@ -1485,6 +1557,8 @@
             trSub.innerHTML = `
                 <td><strong>📂 ${subName} ONLY</strong></td>
                 <td>${data.count} product(s)</td>
+                <td><span class="location-tag-bar">${data.bar} units</span></td>
+                <td><span class="location-tag-storage">${data.storage} units</span></td>
                 <td><strong>${data.rem}</strong> units</td>
                 <td><span class="used-badge-red">-${data.used} units</span></td>
             `;
@@ -1945,7 +2019,7 @@
             const batchDate = del.deliveryDate || dateNow;
 
             if (existingItem) {
-                addFIFOStock(existingItem, del.qty, batchDate, "Delivery", del.unit);
+                addFIFOStock(existingItem, del.qty, batchDate, "Delivery", del.unit, "Storage");
             } else {
                 const newItem = {
                     id: Date.now() + Math.random(),
@@ -1956,15 +2030,15 @@
                     lastUpdated: dateNow,
                     batches: []
                 };
-                addFIFOStock(newItem, del.qty, batchDate, "Delivery", del.unit);
+                addFIFOStock(newItem, del.qty, batchDate, "Delivery", del.unit, "Storage");
                 appData.inventory.push(newItem);
             }
 
             if (!isCopy) {
                 appData.deliveries = appData.deliveries.filter(d => d.id !== itemId);
-                recordLog(`Processed delivery "${del.name}" into ${targetName} FIFO batch queue`);
+                recordLog(`Processed delivery "${del.name}" into ${targetName} FIFO batch queue (Storage)`);
             } else {
-                recordLog(`Copied delivery "${del.name}" to ${targetName} FIFO batch queue`);
+                recordLog(`Copied delivery "${del.name}" to ${targetName} FIFO batch queue (Storage)`);
             }
         }
     }
@@ -2026,26 +2100,6 @@
         URL.revokeObjectURL(url);
     }
 
-    function getGroupedInventoryBySubcategory() {
-        const grouped = {};
-        const categories = Object.keys(appData.categories);
-
-        categories.forEach(cat => {
-            const subs = appData.categories[cat] || [];
-            subs.forEach(sub => {
-                grouped[sub] = [];
-            });
-        });
-
-        appData.inventory.forEach(item => {
-            const sub = item.subcategory || 'General';
-            if (!grouped[sub]) grouped[sub] = [];
-            grouped[sub].push(item);
-        });
-
-        return grouped;
-    }
-
     function exportToExcel() {
         const dateTag = new Date().toISOString().split('T')[0];
         const fullTimeStr = getFormattedTimestamp();
@@ -2058,14 +2112,13 @@
          <Styles>
           <Style ss:ID="Header"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#8C7B6B" ss:Pattern="Solid"/></Style>
           <Style ss:ID="Title"><Font ss:Bold="1" ss:Size="12"/><Interior ss:Color="#EAE6E1" ss:Pattern="Solid"/></Style>
-          <Style ss:ID="GroupHeader"><Font ss:Bold="1" ss:Size="11" ss:Color="#5C3D1E"/><Interior ss:Color="#F0ECE7" ss:Pattern="Solid"/></Style>
           <Style ss:ID="SubHeader"><Font ss:Bold="1"/><Interior ss:Color="#F8F6F4" ss:Pattern="Solid"/></Style>
          </Styles>
 
-         <Worksheet ss:Name="Café Summary">
+         <Worksheet ss:Name="Café Bar vs Storage Summary">
           <Table>
            <Row ss:StyleID="Title">
-            <Cell><Data ss:Type="String">Café Inventory Totals Summary Report</Data></Cell>
+            <Cell><Data ss:Type="String">Café Inventory Totals (Bar vs Storage)</Data></Cell>
             <Cell><Data ss:Type="String">Export Date: ${fullTimeStr}</Data></Cell>
            </Row>
            <Row></Row>
@@ -2073,7 +2126,9 @@
             <Cell><Data ss:Type="String">Café Item Name</Data></Cell>
             <Cell><Data ss:Type="String">Subcategory</Data></Cell>
             <Cell><Data ss:Type="String">Unit</Data></Cell>
-            <Cell><Data ss:Type="String">Remaining Stock</Data></Cell>
+            <Cell><Data ss:Type="String">Bar Stock (In-House)</Data></Cell>
+            <Cell><Data ss:Type="String">Storage Stock</Data></Cell>
+            <Cell><Data ss:Type="String">Total Remaining Stock</Data></Cell>
             <Cell><Data ss:Type="String">Used Stock</Data></Cell>
             <Cell><Data ss:Type="String">Initial Total (Formula)</Data></Cell>
            </Row>`;
@@ -2082,6 +2137,8 @@
         let rIndex = 4;
 
         cafeItems.forEach(item => {
+            const bar = getItemBarQty(item);
+            const storage = getItemStorageQty(item);
             const rem = getItemTotalQty(item);
             const used = getItemTotalUsed(item);
             const unitStr = getItemActiveUnit(item);
@@ -2091,7 +2148,9 @@
             <Cell><Data ss:Type="String">${item.name}</Data></Cell>
             <Cell><Data ss:Type="String">${item.subcategory}</Data></Cell>
             <Cell><Data ss:Type="String">${unitStr}</Data></Cell>
-            <Cell><Data ss:Type="Number">${rem}</Data></Cell>
+            <Cell><Data ss:Type="Number">${bar}</Data></Cell>
+            <Cell><Data ss:Type="Number">${storage}</Data></Cell>
+            <Cell ss:Formula="=RC[-2]+RC[-1]"><Data ss:Type="Number">${rem}</Data></Cell>
             <Cell><Data ss:Type="Number">${used}</Data></Cell>
             <Cell ss:Formula="=RC[-2]+RC[-1]"><Data ss:Type="Number">${rem + used}</Data></Cell>
            </Row>`;
@@ -2106,6 +2165,8 @@
             <Cell ss:Formula="=SUM(D4:D${rIndex-1})"><Data ss:Type="Number">0</Data></Cell>
             <Cell ss:Formula="=SUM(E4:E${rIndex-1})"><Data ss:Type="Number">0</Data></Cell>
             <Cell ss:Formula="=SUM(F4:F${rIndex-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell ss:Formula="=SUM(G4:G${rIndex-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell ss:Formula="=SUM(H4:H${rIndex-1})"><Data ss:Type="Number">0</Data></Cell>
            </Row>
           </Table>
          </Worksheet>
@@ -2115,7 +2176,7 @@
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = `cafe_totals_summary_${dateTag}.xls`;
+        link.download = `cafe_bar_vs_storage_summary_${dateTag}.xls`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -2126,19 +2187,21 @@
         const dateTag = new Date().toISOString().split('T')[0];
         const fullTimeStr = getFormattedTimestamp();
 
-        let csvContent = `Report Title: Café Inventory Totals & Usage Summary,Generated Date: ${fullTimeStr}\n\n`;
-        csvContent += "Item Name,Subcategory,Unit,Remaining Stock,Used Stock,Initial Stock (Formula)\n";
+        let csvContent = `Report Title: Café Inventory Totals (Bar vs. Storage Summary),Generated Date: ${fullTimeStr}\n\n`;
+        csvContent += "Item Name,Subcategory,Unit,Bar Stock (In-House),Storage Stock,Total Remaining Stock,Used Stock,Initial Stock (Formula)\n";
 
         const cafeItems = appData.inventory.filter(i => i.category === 'Café');
         let rIndex = 4;
 
         cafeItems.forEach(item => {
+            const bar = getItemBarQty(item);
+            const storage = getItemStorageQty(item);
             const rem = getItemTotalQty(item);
             const used = getItemTotalUsed(item);
             const unitStr = getItemActiveUnit(item);
-            const formula = `"=D${rIndex}+E${rIndex}"`;
+            const formula = `"=F${rIndex}+G${rIndex}"`;
 
-            csvContent += `"${item.name}","${item.subcategory}","${unitStr}",${rem},${used},${formula}\n`;
+            csvContent += `"${item.name}","${item.subcategory}","${unitStr}",${bar},${storage},${rem},${used},${formula}\n`;
             rIndex++;
         });
 
@@ -2146,7 +2209,7 @@
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = `cafe_totals_summary_${dateTag}.csv`;
+        link.download = `cafe_bar_vs_storage_summary_${dateTag}.csv`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -2182,6 +2245,7 @@
                                 remQty: oldQty,
                                 usedQty: 0,
                                 unit: item.unit || 'Pcs',
+                                location: "Bar",
                                 sourceNote: oldSource
                             }];
                             delete item.qty;
@@ -2189,6 +2253,7 @@
                         } else {
                             item.batches.forEach(b => {
                                 if (!b.unit) b.unit = item.unit || 'Pcs';
+                                if (!b.location) b.location = "Bar";
                                 if (b.initQty === undefined) b.initQty = b.remQty || 0;
                                 if (b.usedQty === undefined) b.usedQty = Math.max(0, b.initQty - (b.remQty || 0));
                                 if (!b.lastUpdated) b.lastUpdated = b.addedDate || new Date().toISOString().split('T')[0];
@@ -2322,6 +2387,7 @@
         const editingId = document.getElementById('editingItemId').value;
         const name = document.getElementById('itemName').value.trim();
         const subcategory = document.getElementById('itemSubcategory').value;
+        const locationStr = document.getElementById('itemLocation').value;
         const sourceNote = document.getElementById('itemSourceNote').value;
         const qtyVal = document.getElementById('itemQty').value;
         const qty = qtyVal !== '' ? parseInt(qtyVal) : 0;
@@ -2340,8 +2406,8 @@
                 item.lastUpdated = todayStr;
 
                 if (qty > 0) {
-                    addFIFOStock(item, qty, addedDate, sourceNote, unit);
-                    recordLog(`Updated item "${prevName}" details & added batch +${qty} ${unit} (Date: ${addedDate})`);
+                    addFIFOStock(item, qty, addedDate, sourceNote, unit, locationStr);
+                    recordLog(`Updated item "${prevName}" details & added batch +${qty} ${unit} to ${locationStr} (Date: ${addedDate})`);
                 } else {
                     recordLog(`Updated item metadata for "${prevName}" (Renamed/Subcategory changed)`);
                 }
@@ -2351,8 +2417,8 @@
             let existingItem = appData.inventory.find(i => i.category === currentCategory && i.name.toLowerCase().trim() === name.toLowerCase());
             if (existingItem) {
                 if (qty > 0) {
-                    addFIFOStock(existingItem, qty, addedDate, sourceNote, unit);
-                    recordLog(`Added new batch (${qty} ${unit}, Date: ${addedDate}) into FIFO queue for "${name}"`);
+                    addFIFOStock(existingItem, qty, addedDate, sourceNote, unit, locationStr);
+                    recordLog(`Added new batch (${qty} ${unit}, Location: ${locationStr}, Date: ${addedDate}) into FIFO queue for "${name}"`);
                 } else {
                     alert("Please specify a quantity greater than 0 for new stock batches.");
                     return;
@@ -2371,9 +2437,9 @@
                     lastUpdated: todayStr,
                     batches: []
                 };
-                addFIFOStock(newItem, qty, addedDate, sourceNote, unit);
+                addFIFOStock(newItem, qty, addedDate, sourceNote, unit, locationStr);
                 appData.inventory.push(newItem);
-                recordLog(`Created new FIFO item "${name}" with initial batch of ${qty} ${unit} (Date: ${addedDate})`);
+                recordLog(`Created new FIFO item "${name}" with initial batch of ${qty} ${unit} in ${locationStr} (Date: ${addedDate})`);
             }
             document.getElementById('itemName').value = '';
             document.getElementById('itemQty').value = '';
@@ -2412,7 +2478,7 @@
 
             const existingItem = appData.inventory.find(i => i.category === category && i.name.toLowerCase().trim() === name.toLowerCase());
             if (existingItem) {
-                addFIFOStock(existingItem, qty, deliveryDate, "Delivery", unit);
+                addFIFOStock(existingItem, qty, deliveryDate, "Delivery", unit, "Storage");
             } else {
                 const newItem = {
                     id: Date.now() + Math.random() + 1,
@@ -2423,11 +2489,11 @@
                     lastUpdated: new Date().toISOString().split('T')[0],
                     batches: []
                 };
-                addFIFOStock(newItem, qty, deliveryDate, "Delivery", unit);
+                addFIFOStock(newItem, qty, deliveryDate, "Delivery", unit, "Storage");
                 appData.inventory.push(newItem);
             }
 
-            recordLog(`Scheduled delivery "${name}" & auto-added to ${category} FIFO batch timeline`);
+            recordLog(`Scheduled delivery "${name}" & auto-added to ${category} Storage FIFO queue`);
             document.getElementById('delItemName').value = '';
             document.getElementById('delQty').value = '';
         }
@@ -2464,7 +2530,7 @@
         const batch = item.batches.find(b => b.batchId === batchId);
         if (!batch) return;
 
-        const newQtyStr = prompt(`Audit Adjustment for "${item.name}" Batch (${batch.addedDate}):\nEnter new remaining quantity:`, batch.remQty);
+        const newQtyStr = prompt(`Audit Adjustment for "${item.name}" Batch (${batch.addedDate} - ${batch.location || 'Bar'}):\nEnter new remaining quantity:`, batch.remQty);
         if (newQtyStr !== null && newQtyStr.trim() !== '') {
             const newQty = parseInt(newQtyStr);
             if (!isNaN(newQty) && newQty >= 0) {
@@ -2521,9 +2587,9 @@
         } else {
             saveSnapshotForUndo();
             const todayStr = new Date().toISOString().split('T')[0];
-            addFIFOStock(item, delta, todayStr, "In-House", activeUnit);
+            addFIFOStock(item, delta, todayStr, "In-House", activeUnit, "Bar");
             const newTotal = getItemTotalQty(item);
-            recordLog(`🟢 Increased +${delta} ${activeUnit} to "${item.name}". Total on hand went from ${oldTotal} to ${newTotal} ${activeUnit}.`);
+            recordLog(`🟢 Increased +${delta} ${activeUnit} to "${item.name}" in Bar Stock. Total on hand went from ${oldTotal} to ${newTotal} ${activeUnit}.`);
         }
 
         await autoSaveData();
@@ -2754,7 +2820,7 @@
                                     <thead>
                                         <tr>
                                             <th>Batch Date (Old)</th>
-                                            <th>Updated Date (New)</th>
+                                            <th>Location</th>
                                             <th>Initial Qty</th>
                                             <th>Remaining Stock</th>
                                             <th>Used / Consumed</th>
@@ -2773,13 +2839,14 @@
                             ? `<span style="color:var(--danger); font-weight:700;">Depleted</span>` 
                             : `<span style="color:var(--success); font-weight:700;">Active Queue</span>`;
                         const srcTag = b.sourceNote === 'Delivery' ? `<span class="delivery-note-tag">Delivery</span>` : `<span class="inhouse-note-tag">In-House</span>`;
+                        const locBadge = b.location === 'Bar' ? `<span class="location-tag-bar">☕ Bar</span>` : `<span class="location-tag-storage">📦 Storage</span>`;
 
                         const bUsed = b.usedQty !== undefined ? b.usedQty : Math.max(0, (b.initQty || b.remQty) - b.remQty);
 
                         tableHtml += `
                             <tr>
                                 <td><strong>${b.addedDate}</strong></td>
-                                <td><span style="font-size:0.7rem; color:var(--text-muted);">${b.lastUpdated || item.lastUpdated || b.addedDate}</span></td>
+                                <td>${locBadge}</td>
                                 <td>${b.initQty !== undefined ? b.initQty : b.remQty} ${b.unit || item.unit}</td>
                                 <td><strong>${b.remQty}</strong> ${b.unit || item.unit}</td>
                                 <td><span class="used-text-red">-${bUsed} ${b.unit || item.unit}</span></td>
