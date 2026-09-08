@@ -17,45 +17,18 @@
       "Restroom Supplies"
     ]
   },
-  "inventory": [
-    {
-      "id": 1788846495169,
-      "name": "Clubhouse",
-      "category": "Café",
-      "subcategory": "Pastries",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-08",
-      "batches": []
-    },
-    {
-      "id": 1788846495170,
-      "name": "Tuna Melt",
-      "category": "Café",
-      "subcategory": "Pastries",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-08",
-      "batches": []
-    },
-    {
-      "id": 1788846495171,
-      "name": "Spam Aioli",
-      "category": "Café",
-      "subcategory": "Pastries",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-08",
-      "batches": []
-    },
-    {
-      "id": 1788846495172,
-      "name": "Grilled Cheese",
-      "category": "Café",
-      "subcategory": "Pastries",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-08",
-      "batches": []
-    }
-  ],
+  "inventory": [],
   "logs": [
+    {
+      "id": "log_1788847257121",
+      "timestamp": "2026-09-08 14:00",
+      "details": "🗑️ Cleared out all 4 items in subcategory [Pastries]"
+    },
+    {
+      "id": "log_1788847246396",
+      "timestamp": "2026-09-08 14:00",
+      "details": "☁️ Loaded sync file \"inventory_data.json\" from GitHub repository"
+    },
     {
       "id": "log_1788846213123",
       "timestamp": "2026-09-08 13:43",
@@ -82,5 +55,5 @@
     "LALAMOVE"
   ],
   "markedOutPastries": [],
-  "lastUpdatedTimestamp": 1788846213123
+  "lastUpdatedTimestamp": 1788847257121
 }
