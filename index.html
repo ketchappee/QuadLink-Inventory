@@ -1093,7 +1093,7 @@
     const MAX_UNDO_LEVELS = 30;
 
     let defaultSubcategories = {
-        'Café': ['Beans', 'Milk', 'Pastries', 'Syrups & Flavorings', 'Cups & Packaging', 'Consumables & Others'],
+        'Café': ['Beans', 'Milk', 'Pastries', 'Syrups & Flavorings', 'Retail', 'Cups & Packaging', 'Consumables & Others'],
         'Community': ['Entertainment & Games', 'Furniture & Seating', 'Electronics & AV', 'General Supplies'],
         'Housekeeping': ['Cleaning Supplies', 'Linens & Towels', 'Tools & Equipment', 'Restroom Supplies']
     };
@@ -1149,6 +1149,7 @@
 
     if (!appData.categories) appData.categories = JSON.parse(JSON.stringify(defaultSubcategories));
     if (!appData.categories['Café'].includes('Pastries')) appData.categories['Café'].unshift('Pastries');
+    if (!appData.categories['Café'].includes('Retail')) appData.categories['Café'].push('Retail');
     if (!appData.suppliers) appData.suppliers = ['JAMBI', 'YARDSTICK', 'NIMO', 'KUKIDO', 'MMB', 'LALAMOVE'];
     if (!appData.deliveries) appData.deliveries = [];
     if (!appData.markedOutPastries) appData.markedOutPastries = [];
@@ -1866,7 +1867,28 @@
         URL.revokeObjectURL(url);
     }
 
-    // EXPORT TO EXCEL MULTI-TAB WORKBOOK WITH FORMULAS & FULL DATES (.xls XML)
+    // HELPER: GROUP ITEMS BY SUBCATEGORY CLEANLY
+    function getGroupedInventoryBySubcategory() {
+        const grouped = {};
+        const categories = Object.keys(appData.categories);
+
+        categories.forEach(cat => {
+            const subs = appData.categories[cat] || [];
+            subs.forEach(sub => {
+                grouped[sub] = [];
+            });
+        });
+
+        appData.inventory.forEach(item => {
+            const sub = item.subcategory || 'General';
+            if (!grouped[sub]) grouped[sub] = [];
+            grouped[sub].push(item);
+        });
+
+        return grouped;
+    }
+
+    // EXPORT TO EXCEL ISOLATED & ORGANIZED BY SUBCATEGORIES (.xls XML)
     function exportToExcel() {
         const dateTag = new Date().toISOString().split('T')[0];
         const fullTimeStr = getFormattedTimestamp();
@@ -1879,42 +1901,64 @@
          <Styles>
           <Style ss:ID="Header"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#8C7B6B" ss:Pattern="Solid"/></Style>
           <Style ss:ID="Title"><Font ss:Bold="1" ss:Size="12"/><Interior ss:Color="#EAE6E1" ss:Pattern="Solid"/></Style>
-          <Style ss:ID="SubHeader"><Font ss:Bold="1"/><Interior ss:Color="#F3F0EC" ss:Pattern="Solid"/></Style>
+          <Style ss:ID="GroupHeader"><Font ss:Bold="1" ss:Size="11" ss:Color="#5C3D1E"/><Interior ss:Color="#F0ECE7" ss:Pattern="Solid"/></Style>
+          <Style ss:ID="SubHeader"><Font ss:Bold="1"/><Interior ss:Color="#F8F6F4" ss:Pattern="Solid"/></Style>
          </Styles>
 
-         <!-- WORKSHEET 1: INVENTORY SUMMARY -->
+         <!-- WORKSHEET 1: ORGANIZED INVENTORY BY SUBCATEGORY -->
          <Worksheet ss:Name="Inventory Summary">
           <Table>
            <Row ss:StyleID="Title">
-            <Cell><Data ss:Type="String">QuadLink Inventory Audit Report</Data></Cell>
+            <Cell><Data ss:Type="String">QuadLink Inventory Audit Report (Organized)</Data></Cell>
             <Cell><Data ss:Type="String">Export Date: ${fullTimeStr}</Data></Cell>
            </Row>
-           <Row></Row>
+           <Row></Row>`;
+
+        const grouped = getGroupedInventoryBySubcategory();
+        let currentExcelRow = 3;
+
+        Object.keys(grouped).forEach(subGroup => {
+            const items = grouped[subGroup];
+            if (!items || items.length === 0) return;
+
+            xml += `
+           <Row ss:StyleID="GroupHeader">
+            <Cell><Data ss:Type="String">📂 GROUP: ${subGroup.toUpperCase()} ONLY (${items.length} items)</Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+           </Row>
            <Row ss:StyleID="Header">
-            <Cell><Data ss:Type="String">Category</Data></Cell>
-            <Cell><Data ss:Type="String">Subcategory</Data></Cell>
             <Cell><Data ss:Type="String">Item Name</Data></Cell>
+            <Cell><Data ss:Type="String">Subcategory</Data></Cell>
+            <Cell><Data ss:Type="String">Main Category</Data></Cell>
             <Cell><Data ss:Type="String">Unit</Data></Cell>
             <Cell><Data ss:Type="String">Remaining Stock</Data></Cell>
             <Cell><Data ss:Type="String">Used Stock</Data></Cell>
-            <Cell><Data ss:Type="String">Initial Stock (Formula)</Data></Cell>
-            <Cell><Data ss:Type="String">Earliest Batch Date</Data></Cell>
+            <Cell><Data ss:Type="String">Initial Total (Formula)</Data></Cell>
+            <Cell><Data ss:Type="String">Batch Entry Date</Data></Cell>
             <Cell><Data ss:Type="String">Last Updated Date</Data></Cell>
            </Row>`;
 
-        let rowIndex = 4;
-        appData.inventory.forEach(item => {
-            const totalRem = getItemTotalQty(item);
-            const totalUsed = getItemTotalUsed(item);
-            const unitStr = getItemActiveUnit(item);
-            const earliestDate = getItemActiveBatchDate(item);
-            const lastUpdate = item.lastUpdated || dateTag;
+            currentExcelRow += 2;
+            let groupStartRow = currentExcelRow;
 
-            xml += `
+            items.forEach(item => {
+                const totalRem = getItemTotalQty(item);
+                const totalUsed = getItemTotalUsed(item);
+                const unitStr = getItemActiveUnit(item);
+                const earliestDate = getItemActiveBatchDate(item);
+                const lastUpdate = item.lastUpdated || dateTag;
+
+                xml += `
            <Row>
-            <Cell><Data ss:Type="String">${item.category}</Data></Cell>
-            <Cell><Data ss:Type="String">${item.subcategory}</Data></Cell>
             <Cell><Data ss:Type="String">${item.name}</Data></Cell>
+            <Cell><Data ss:Type="String">${item.subcategory}</Data></Cell>
+            <Cell><Data ss:Type="String">${item.category}</Data></Cell>
             <Cell><Data ss:Type="String">${unitStr}</Data></Cell>
             <Cell><Data ss:Type="Number">${totalRem}</Data></Cell>
             <Cell><Data ss:Type="Number">${totalUsed}</Data></Cell>
@@ -1922,46 +1966,64 @@
             <Cell><Data ss:Type="String">${earliestDate}</Data></Cell>
             <Cell><Data ss:Type="String">${lastUpdate}</Data></Cell>
            </Row>`;
-            rowIndex++;
-        });
+                currentExcelRow++;
+            });
 
-        xml += `
+            xml += `
            <Row ss:StyleID="SubHeader">
-            <Cell><Data ss:Type="String">TOTALS</Data></Cell>
+            <Cell><Data ss:Type="String">SUBTOTAL (${subGroup.toUpperCase()} ONLY)</Data></Cell>
             <Cell><Data ss:Type="String"></Data></Cell>
             <Cell><Data ss:Type="String"></Data></Cell>
             <Cell><Data ss:Type="String"></Data></Cell>
-            <Cell ss:Formula="=SUM(E4:E${rowIndex-1})"><Data ss:Type="Number">0</Data></Cell>
-            <Cell ss:Formula="=SUM(F4:F${rowIndex-1})"><Data ss:Type="Number">0</Data></Cell>
-            <Cell ss:Formula="=SUM(G4:G${rowIndex-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell ss:Formula="=SUM(E${groupStartRow}:E${currentExcelRow-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell ss:Formula="=SUM(F${groupStartRow}:F${currentExcelRow-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell ss:Formula="=SUM(G${groupStartRow}:G${currentExcelRow-1})"><Data ss:Type="Number">0</Data></Cell>
             <Cell><Data ss:Type="String"></Data></Cell>
             <Cell><Data ss:Type="String"></Data></Cell>
            </Row>
+           <Row></Row>`;
+            currentExcelRow += 2;
+        });
+
+        xml += `
           </Table>
          </Worksheet>
 
-         <!-- WORKSHEET 2: DETAILED BATCH BREAKDOWN -->
+         <!-- WORKSHEET 2: BATCH BREAKDOWN (GROUPED BY SUBCATEGORY) -->
          <Worksheet ss:Name="Batch Breakdown">
           <Table>
+           <Row ss:StyleID="Title">
+            <Cell><Data ss:Type="String">Detailed Batch Ledger (Grouped by Subcategory)</Data></Cell>
+           </Row>
+           <Row></Row>`;
+
+        Object.keys(grouped).forEach(subGroup => {
+            const items = grouped[subGroup];
+            if (!items || items.length === 0) return;
+
+            xml += `
+           <Row ss:StyleID="GroupHeader">
+            <Cell><Data ss:Type="String">📂 ${subGroup.toUpperCase()} BATCHES ONLY</Data></Cell>
+           </Row>
            <Row ss:StyleID="Header">
             <Cell><Data ss:Type="String">Item Name</Data></Cell>
-            <Cell><Data ss:Type="String">Category</Data></Cell>
+            <Cell><Data ss:Type="String">Subcategory</Data></Cell>
             <Cell><Data ss:Type="String">Batch Entry Date</Data></Cell>
             <Cell><Data ss:Type="String">Batch Last Updated</Data></Cell>
             <Cell><Data ss:Type="String">Source</Data></Cell>
             <Cell><Data ss:Type="String">Initial Qty</Data></Cell>
             <Cell><Data ss:Type="String">Remaining Qty</Data></Cell>
-            <Cell><Data ss:Type="String">Used Qty (Formula)</Data></Cell>
+            <Cell><Data ss:Type="String">Used Qty Formula</Data></Cell>
             <Cell><Data ss:Type="String">Unit</Data></Cell>
            </Row>`;
 
-        appData.inventory.forEach(item => {
-            (item.batches || []).forEach(b => {
-                const initQty = b.initQty !== undefined ? b.initQty : b.remQty;
-                xml += `
+            items.forEach(item => {
+                (item.batches || []).forEach(b => {
+                    const initQty = b.initQty !== undefined ? b.initQty : b.remQty;
+                    xml += `
            <Row>
             <Cell><Data ss:Type="String">${item.name}</Data></Cell>
-            <Cell><Data ss:Type="String">${item.category}</Data></Cell>
+            <Cell><Data ss:Type="String">${item.subcategory}</Data></Cell>
             <Cell><Data ss:Type="String">${b.addedDate}</Data></Cell>
             <Cell><Data ss:Type="String">${b.lastUpdated || b.addedDate}</Data></Cell>
             <Cell><Data ss:Type="String">${b.sourceNote || 'In-House'}</Data></Cell>
@@ -1970,7 +2032,10 @@
             <Cell ss:Formula="=RC[-2]-RC[-1]"><Data ss:Type="Number">${initQty - b.remQty}</Data></Cell>
             <Cell><Data ss:Type="String">${b.unit || item.unit}</Data></Cell>
            </Row>`;
+                });
             });
+
+            xml += `<Row></Row>`;
         });
 
         xml += `
@@ -2002,85 +2067,51 @@
         xml += `
           </Table>
          </Worksheet>
-
-         <!-- WORKSHEET 4: DELIVERIES LOG -->
-         <Worksheet ss:Name="Deliveries Log">
-          <Table>
-           <Row ss:StyleID="Header">
-            <Cell><Data ss:Type="String">Delivery Date</Data></Cell>
-            <Cell><Data ss:Type="String">Item Name</Data></Cell>
-            <Cell><Data ss:Type="String">Category</Data></Cell>
-            <Cell><Data ss:Type="String">Subcategory</Data></Cell>
-            <Cell><Data ss:Type="String">Supplier</Data></Cell>
-            <Cell><Data ss:Type="String">Qty</Data></Cell>
-            <Cell><Data ss:Type="String">Unit</Data></Cell>
-           </Row>`;
-
-        (appData.deliveries || []).forEach(d => {
-            xml += `
-           <Row>
-            <Cell><Data ss:Type="String">${d.deliveryDate}</Data></Cell>
-            <Cell><Data ss:Type="String">${d.name}</Data></Cell>
-            <Cell><Data ss:Type="String">${d.category}</Data></Cell>
-            <Cell><Data ss:Type="String">${d.subcategory}</Data></Cell>
-            <Cell><Data ss:Type="String">${d.supplier}</Data></Cell>
-            <Cell><Data ss:Type="Number">${d.qty}</Data></Cell>
-            <Cell><Data ss:Type="String">${d.unit}</Data></Cell>
-           </Row>`;
-        });
-
-        xml += `
-          </Table>
-         </Worksheet>
         </Workbook>`;
 
         const blob = new Blob([xml], { type: "application/vnd.ms-excel" });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = `inventory_excel_detailed_${dateTag}.xls`;
+        link.download = `inventory_excel_organized_${dateTag}.xls`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
     }
 
-    // EXPORT TO GOOGLE SHEETS READY FORMAT WITH DETAILED DATE COLUMNS (.csv)
+    // EXPORT TO GOOGLE SHEETS ISOLATED BY SUBCATEGORIES (.csv)
     function exportToGoogleSheets() {
         const dateTag = new Date().toISOString().split('T')[0];
         const fullTimeStr = getFormattedTimestamp();
 
-        let csvContent = `Report Title: QuadLink Inventory Report,Generated Date: ${fullTimeStr}\n\n`;
-        csvContent += "Category,Subcategory,Item Name,Unit,Remaining Stock,Used Stock,Initial Stock (Formula),Earliest Batch Date,Last Updated Date\n";
+        let csvContent = `Report Title: QuadLink Inventory Report (Grouped & Isolated),Generated Date: ${fullTimeStr}\n\n`;
 
-        appData.inventory.forEach((item, index) => {
-            const totalRem = getItemTotalQty(item);
-            const totalUsed = getItemTotalUsed(item);
-            const unitStr = getItemActiveUnit(item);
-            const earliestDate = getItemActiveBatchDate(item);
-            const lastUpdate = item.lastUpdated || dateTag;
-            
-            // Formula row index offset considering header rows
-            const rowNum = index + 5; 
-            const formula = `"=E${rowNum}+F${rowNum}"`;
-            
-            csvContent += `"${item.category}","${item.subcategory}","${item.name}","${unitStr}",${totalRem},${totalUsed},${formula},"${earliestDate}","${lastUpdate}"\n`;
-        });
+        const grouped = getGroupedInventoryBySubcategory();
+        let currentRowIndex = 4;
 
-        csvContent += "\n--- DETAILED BATCH BREAKDOWN ---\n";
-        csvContent += "Item Name,Category,Batch Entry Date,Batch Last Updated,Source,Initial Qty,Remaining Qty,Used Qty (Formula),Unit\n";
+        Object.keys(grouped).forEach(subGroup => {
+            const items = grouped[subGroup];
+            if (!items || items.length === 0) return;
 
-        let batchRowOffset = appData.inventory.length + 8;
-        appData.inventory.forEach(item => {
-            (item.batches || []).forEach(b => {
-                const initQty = b.initQty !== undefined ? b.initQty : b.remQty;
-                const formula = `"=F${batchRowOffset}-G${batchRowOffset}"`;
-                csvContent += `"${item.name}","${item.category}","${b.addedDate}","${b.lastUpdated || b.addedDate}","${b.sourceNote || 'In-House'}",${initQty},${b.remQty},${formula},"${b.unit || item.unit}"\n`;
-                batchRowOffset++;
+            csvContent += `\n--- SUBCATEGORY GROUP: ${subGroup.toUpperCase()} ONLY ---\n`;
+            csvContent += "Item Name,Subcategory,Main Category,Unit,Remaining Stock,Used Stock,Initial Stock (Formula),Earliest Batch Date,Last Updated Date\n";
+            currentRowIndex += 3;
+
+            items.forEach(item => {
+                const totalRem = getItemTotalQty(item);
+                const totalUsed = getItemTotalUsed(item);
+                const unitStr = getItemActiveUnit(item);
+                const earliestDate = getItemActiveBatchDate(item);
+                const lastUpdate = item.lastUpdated || dateTag;
+                
+                const formula = `"=E${currentRowIndex}+F${currentRowIndex}"`;
+                csvContent += `"${item.name}","${item.subcategory}","${item.category}","${unitStr}",${totalRem},${totalUsed},${formula},"${earliestDate}","${lastUpdate}"\n`;
+                currentRowIndex++;
             });
         });
 
-        csvContent += "\n--- MARKED OUT PASTRIES HISTORY ---\n";
+        csvContent += "\n--- MARKED OUT PASTRIES LOG ---\n";
         csvContent += "Marked Out Date,Pastry Item Name,Qty Marked Out,Unit,Reason\n";
 
         (appData.markedOutPastries || []).forEach(mo => {
@@ -2091,7 +2122,7 @@
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = `google_sheets_inventory_detailed_${dateTag}.csv`;
+        link.download = `google_sheets_inventory_organized_${dateTag}.csv`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
