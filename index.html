@@ -204,7 +204,6 @@
         .netflix-card h3 { font-size: 1.1rem; font-weight: 700; }
         .netflix-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
 
-        /* KPI SUMMARY CARDS */
         .summary-kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -719,7 +718,6 @@
         </div>
     </header>
 
-    <!-- CAFÉ KPI METRICS -->
     <div class="summary-kpi-grid">
         <div class="kpi-card">
             <span class="kpi-card-title">Total Active Products</span>
@@ -743,7 +741,6 @@
         </div>
     </div>
 
-    <!-- SUBCATEGORY SUMMARY TABLE -->
     <div class="glass-card">
         <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">📂 Café Totals Summary by Subcategory (Bar vs. Storage)</div>
         <div class="table-container" style="box-shadow: none; border: none; margin-bottom: 16px;">
@@ -763,7 +760,6 @@
         </div>
     </div>
 
-    <!-- DETAILED ITEM-BY-ITEM LEDGER FOR CAFÉ ONLY -->
     <div class="glass-card">
         <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">📋 Detailed Café Product Breakdown (Storage & Bar Stock)</div>
         <div class="table-container" style="box-shadow: none; border: none; margin-bottom: 0;">
@@ -940,7 +936,6 @@
         </form>
     </div>
 
-    <!-- BATCH ACTION BAR FOR DELIVERIES -->
     <div id="delBatchBar" class="batch-action-bar" style="display: none;">
         <span class="batch-info" id="delBatchCount">0 selected</span>
         <div class="batch-controls">
@@ -1101,10 +1096,7 @@
         </form>
     </div>
 
-    <!-- SUBCATEGORY ACCORDION TABS CONTAINER -->
-    <div id="subAccordionContainer" class="sub-accordion-container">
-        <!-- Rendered dynamically via renderTable() -->
-    </div>
+    <div id="subAccordionContainer" class="sub-accordion-container"></div>
 
     <div class="glass-card">
         <div class="log-header">
@@ -1133,18 +1125,14 @@
     let currentDeliveryFilter = 'Café';
     let hideOldItemsEnabled = false;
 
-    // STORE OPEN/CLOSED ACCORDION TAB STATES
     let openAccordionSubcategories = {};
 
-    // GLOBAL STATE HISTORY UNDO STACK (MAX 30 STEPS)
     let stateHistory = [];
     const MAX_UNDO_LEVELS = 30;
 
     let defaultSubcategories = {
         'Café': ['Beans', 'Milk', 'Pastries', 'Syrups & Flavorings', 'Retail', 'Cups & Packaging', 'Consumables & Others']
     };
-
-    const initialPastryItems = ["Clubhouse", "Tuna Melt", "Spam Aioli", "Grilled Cheese"];
 
     let appData = JSON.parse(localStorage.getItem('cafe_inventory_data')) || {
         categories: defaultSubcategories,
@@ -1174,17 +1162,6 @@
                     { batchId: "b3", addedDate: "2026-08-25", lastUpdated: "2026-08-25", initQty: 5, remQty: 2, usedQty: 1, unit: "Case", location: "Bar", sourceNote: "Delivery" },
                     { batchId: "b4", addedDate: "2026-08-28", lastUpdated: "2026-08-28", initQty: 5, remQty: 3, usedQty: 0, unit: "Case", location: "Storage", sourceNote: "Delivery" }
                 ]
-            },
-            {
-                id: 3,
-                name: "Butter Croissant",
-                category: "Café",
-                subcategory: "Pastries",
-                unit: "Pcs",
-                lastUpdated: new Date().toISOString().split('T')[0],
-                batches: [
-                    { batchId: "b5", addedDate: "2026-09-06", lastUpdated: "2026-09-06", initQty: 15, remQty: 15, usedQty: 0, unit: "Pcs", location: "Bar", sourceNote: "Delivery" }
-                ]
             }
         ],
         deliveries: [
@@ -1205,21 +1182,6 @@
     if (!appData.deliveries) appData.deliveries = [];
     if (!appData.markedOutPastries) appData.markedOutPastries = [];
     if (!appData.lastUpdatedTimestamp) appData.lastUpdatedTimestamp = Date.now();
-
-    initialPastryItems.forEach((pName, index) => {
-        const exists = appData.inventory.some(i => i.category === 'Café' && i.name.toLowerCase().trim() === pName.toLowerCase().trim());
-        if (!exists) {
-            appData.inventory.push({
-                id: Date.now() + index + 10,
-                name: pName,
-                category: "Café",
-                subcategory: "Pastries",
-                unit: "Pcs",
-                lastUpdated: new Date().toISOString().split('T')[0],
-                batches: []
-            });
-        }
-    });
 
     appData.inventory.forEach(item => {
         if (!item.subcategory) item.subcategory = "General";
@@ -1287,7 +1249,6 @@
 
         const dataStr = JSON.stringify(appData, null, 2);
         
-        // 1. Download local JSON backup file
         const blob = new Blob([dataStr], { type: "application/json" });
         const urlLocal = URL.createObjectURL(blob);
         const link = document.createElement("a");
@@ -1298,7 +1259,6 @@
         document.body.removeChild(link);
         URL.revokeObjectURL(urlLocal);
 
-        // 2. Direct Sync to GitHub Repository File "inventory_data.json"
         const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
         const encodedContent = btoa(unescape(encodeURIComponent(dataStr)));
 
