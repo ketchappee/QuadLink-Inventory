@@ -500,7 +500,6 @@
 
         .unit-label { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); margin-left: 2px; }
 
-        /* RED USED BADGES FOR FIFO DEDUCTIONS */
         .used-badge-red {
             display: inline-block;
             background: rgba(217, 107, 107, 0.2);
@@ -1516,19 +1515,31 @@
         }
     }
 
-    function handleMarkedOutSelectChange(selectEl) {
+    async function handleMarkedOutSelectChange(selectEl) {
         if (selectEl.value === 'CUSTOM') {
             const customName = prompt("Enter Custom Pastry Name:");
             if (customName && customName.trim() !== '') {
                 const cleanName = customName.trim();
-                let customOpt = Array.from(selectEl.options).find(opt => opt.value === `CUSTOM_${cleanName}`);
-                if (!customOpt) {
-                    customOpt = document.createElement('option');
-                    customOpt.value = `CUSTOM_${cleanName}`;
-                    customOpt.innerText = `🥐 ${cleanName} (Custom Pastry Entry)`;
-                    selectEl.insertBefore(customOpt, selectEl.lastElementChild);
+                let existingItem = appData.inventory.find(i => i.category === 'Café' && i.name.toLowerCase().trim() === cleanName.toLowerCase());
+                
+                if (!existingItem) {
+                    saveSnapshotForUndo();
+                    existingItem = {
+                        id: Date.now(),
+                        name: cleanName,
+                        category: "Café",
+                        subcategory: "Pastries",
+                        unit: "Pcs",
+                        lastUpdated: new Date().toISOString().split('T')[0],
+                        batches: []
+                    };
+                    appData.inventory.push(existingItem);
+                    recordLog(`Added new pastry item "${cleanName}" to Café Inventory.`);
+                    await autoSaveData();
                 }
-                selectEl.value = customOpt.value;
+                
+                updateMarkedOutDropdown();
+                selectEl.value = existingItem.id;
             } else {
                 updateMarkedOutDropdown();
             }
@@ -1541,13 +1552,6 @@
 
         if (!selectedVal || selectedVal === 'CUSTOM') {
             alert("Please select a valid pastry item from the dropdown to delete.");
-            return;
-        }
-
-        if (selectedVal.startsWith('CUSTOM_')) {
-            selectEl.querySelector(`option[value="${selectedVal}"]`)?.remove();
-            updateMarkedOutDropdown();
-            alert("Custom entry removed from dropdown.");
             return;
         }
 
@@ -1606,28 +1610,24 @@
 
         saveSnapshotForUndo();
 
-        let itemId = null;
-        let itemName = "";
-        let unitStr = "Pcs";
+        const itemId = parseInt(selectedValue);
+        let item = appData.inventory.find(i => i.id === itemId);
 
-        if (selectedValue.startsWith('CUSTOM_')) {
-            itemName = selectedValue.replace('CUSTOM_', '');
-            itemId = null;
-        } else {
-            itemId = parseInt(selectedValue);
-            const item = appData.inventory.find(i => i.id === itemId);
-            if (!item) return;
+        if (!item) {
+            alert("Selected pastry item was not found in inventory.");
+            return;
+        }
 
-            const totalAvailable = getItemTotalQty(item);
-            if (totalAvailable < qty) {
-                alert(`Insufficient stock. Available on hand: ${totalAvailable} ${getItemActiveUnit(item)}`);
+        const totalAvailable = getItemTotalQty(item);
+        if (totalAvailable < qty) {
+            if (!confirm(`Insufficient stock (${totalAvailable} available). Proceed to mark out anyway?`)) {
                 return;
             }
-
-            consumeFIFOStock(item, qty);
-            itemName = item.name;
-            unitStr = getItemActiveUnit(item);
         }
+
+        consumeFIFOStock(item, qty);
+        const itemName = item.name;
+        const unitStr = getItemActiveUnit(item);
 
         appData.markedOutPastries.unshift({
             id: Date.now(),
