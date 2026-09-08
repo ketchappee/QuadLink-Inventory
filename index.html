@@ -330,6 +330,19 @@
             border: 1px solid rgba(140, 123, 107, 0.25);
         }
 
+        .btn-clear-sub-group {
+            background: rgba(217, 107, 107, 0.15);
+            color: var(--danger);
+            border: 1px solid rgba(217, 107, 107, 0.3);
+            border-radius: 8px;
+            padding: 4px 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn-clear-sub-group:hover { background: rgba(217, 107, 107, 0.35); }
+
         .sub-accordion-arrow {
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 0.85rem;
@@ -932,8 +945,8 @@
         <div class="batch-controls">
             <select id="delBatchTarget" class="select-transfer" style="max-width: 170px;">
                 <option value="">Transfer / Copy...</option>
-                <option value="MOVE_Café">☕ Move to Café Storage</option>
-                <option value="COPY_Café">☕ Copy to Café Storage</option>
+                <option value="MOVE_Café">☕ Move to Storage</option>
+                <option value="COPY_Café">☕ Copy to Storage</option>
             </select>
             <button type="button" class="btn primary" onclick="executeBatchAction('DELIVERY')" style="padding: 6px 12px; font-size: 0.75rem;">Apply</button>
             <button type="button" class="btn-clear-selected" onclick="deleteSelectedDeliveries()">🗑️ Delete Selected</button>
@@ -1660,6 +1673,21 @@
         }
     }
 
+    async function clearSubcategoryItems(subName) {
+        const matchingItems = appData.inventory.filter(i => i.category === 'Café' && (i.subcategory || 'General') === subName);
+        if (matchingItems.length === 0) {
+            alert(`Subcategory "${subName}" has no items to clear.`);
+            return;
+        }
+
+        if (confirm(`Are you sure you want to clear out ALL ${matchingItems.length} items in "${subName}"?\n\nThis will remove all stored batches for this subcategory.`)) {
+            saveSnapshotForUndo();
+            appData.inventory = appData.inventory.filter(i => !(i.category === 'Café' && (i.subcategory || 'General') === subName));
+            recordLog(`🗑️ Cleared out all ${matchingItems.length} items in subcategory [${subName}]`);
+            await autoSaveData();
+        }
+    }
+
     async function addMarkedOutPastry(e) {
         e.preventDefault();
         const selectEl = document.getElementById('moItemSelect');
@@ -1808,7 +1836,10 @@
         updateDeliverySubcategoryDropdown('Café');
     }
 
-    function toggleAccordion(headerEl) {
+    function toggleAccordion(headerEl, event) {
+        if (event && (event.target.closest('.btn-clear-sub-group') || event.target.tagName === 'BUTTON')) {
+            return;
+        }
         const card = headerEl.parentElement;
         const content = card.querySelector('.sub-accordion-content');
         const subName = card.dataset.subName;
@@ -2602,13 +2633,16 @@
 
             const header = document.createElement('div');
             header.className = 'sub-accordion-header';
-            header.setAttribute('onclick', 'toggleAccordion(this)');
+            header.setAttribute('onclick', 'toggleAccordion(this, event)');
             header.innerHTML = `
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <span>📂 ${subGroup}</span>
                     <span class="sub-accordion-badge">${subItems.length} active items</span>
                 </div>
-                <span class="sub-accordion-arrow">▼</span>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <button type="button" class="btn-clear-sub-group" onclick="clearSubcategoryItems('${subGroup}')" title="Clear all stock items in ${subGroup}">🗑️ Clear All Items</button>
+                    <span class="sub-accordion-arrow">▼</span>
+                </div>
             `;
 
             const content = document.createElement('div');
