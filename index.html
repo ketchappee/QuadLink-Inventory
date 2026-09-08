@@ -799,7 +799,7 @@
     </header>
 
     <div class="glass-card">
-        <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 12px;">🥐 Log Marked Out Pastry (Auto-Deducts from Café Inventory)</span>
+        <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 12px;">🥐 Log Marked Out Pastry (Auto-Deducts from Café & Deliveries Inventory)</span>
         <form id="markedOutForm" onsubmit="addMarkedOutPastry(event)">
             <div class="form-grid">
                 <div class="input-group">
@@ -877,7 +877,7 @@
                 <input type="text" id="deliverySearchInput" placeholder="Search delivery items or suppliers..." oninput="renderDeliveriesTable()">
             </div>
             <label class="filter-toggle-label">
-                <input type="checkbox" id="hideOldDeliveriesToggle" onchange="toggleHideOldItems(this.checked)"> 👁️ Hide 0 Qty / Old Deliveries
+                <input type="checkbox" id="hideOldDeliveriesToggle" onchange="toggleHideOldItems(this.checked)"> 👁️ Hide 0 Remaining Deliveries
             </label>
         </div>
     </div>
@@ -896,7 +896,7 @@
                 </div>
                 <div class="input-group">
                     <label>Item Name</label>
-                    <input type="text" id="delItemName" placeholder="e.g. Beans Batch" required>
+                    <input type="text" id="delItemName" placeholder="e.g. Espresso Beans" required>
                 </div>
                 <div class="input-group">
                     <label>Supplier</label>
@@ -911,7 +911,7 @@
                     </div>
                 </div>
                 <div class="input-group">
-                    <label>Qty & Unit</label>
+                    <label>Initial Qty & Unit</label>
                     <div class="qty-input-wrapper">
                         <input type="number" id="delQty" placeholder="0" min="1" required>
                         <select id="delUnit" required>
@@ -930,7 +930,7 @@
                 </div>
             </div>
             <div style="display: flex; gap: 8px; align-items: center;">
-                <button type="submit" id="delSubmitBtn" class="btn primary">+ Schedule Delivery (Auto-Syncs to Storage)</button>
+                <button type="submit" id="delSubmitBtn" class="btn primary">+ Log Delivery Shipment</button>
                 <button type="button" id="delCancelEditBtn" class="btn" style="display: none;" onclick="cancelDeliveryEdit()">Cancel Edit</button>
             </div>
         </form>
@@ -957,7 +957,9 @@
                     <th>Item Name</th>
                     <th>Subcategory</th>
                     <th>Supplier</th>
-                    <th>Qty & Unit</th>
+                    <th>Initial Qty</th>
+                    <th>Remaining Stock</th>
+                    <th>Total Used</th>
                     <th>Delivery Date</th>
                     <th>Action</th>
                 </tr>
@@ -1165,8 +1167,8 @@
             }
         ],
         deliveries: [
-            { id: 101, name: "Espresso Beans", category: "Café", subcategory: "Beans", supplier: "YARDSTICK", qty: 10, unit: "Kg", deliveryDate: "2026-09-05" },
-            { id: 102, name: "Oat Milk", category: "Café", subcategory: "Milk", supplier: "JAMBI", qty: 3, unit: "Case", deliveryDate: "2026-08-28" }
+            { id: 101, name: "Espresso Beans", category: "Café", subcategory: "Beans", supplier: "YARDSTICK", initQty: 10, remQty: 10, usedQty: 0, unit: "Kg", deliveryDate: "2026-09-05" },
+            { id: 102, name: "Oat Milk", category: "Café", subcategory: "Milk", supplier: "JAMBI", initQty: 3, remQty: 3, usedQty: 0, unit: "Case", deliveryDate: "2026-08-28" }
         ],
         markedOutPastries: [],
         logs: []
@@ -1183,6 +1185,13 @@
     if (!appData.deliveries) appData.deliveries = [];
     if (!appData.markedOutPastries) appData.markedOutPastries = [];
     if (!appData.lastUpdatedTimestamp) appData.lastUpdatedTimestamp = Date.now();
+
+    // Standardize Deliveries Structure
+    appData.deliveries.forEach(del => {
+        if (del.initQty === undefined) del.initQty = del.qty !== undefined ? del.qty : 0;
+        if (del.remQty === undefined) del.remQty = del.qty !== undefined ? del.qty : del.initQty;
+        if (del.usedQty === undefined) del.usedQty = Math.max(0, del.initQty - del.remQty);
+    });
 
     appData.inventory.forEach(item => {
         if (!item.subcategory) item.subcategory = "General";
@@ -1325,6 +1334,12 @@
 
                 appData.inventory = appData.inventory.filter(i => i.category === 'Café');
                 if (appData.deliveries) appData.deliveries = appData.deliveries.filter(d => d.category === 'Café');
+
+                appData.deliveries.forEach(del => {
+                    if (del.initQty === undefined) del.initQty = del.qty !== undefined ? del.qty : 0;
+                    if (del.remQty === undefined) del.remQty = del.qty !== undefined ? del.qty : del.initQty;
+                    if (del.usedQty === undefined) del.usedQty = Math.max(0, del.initQty - del.remQty);
+                });
 
                 appData.inventory.forEach(item => {
                     if (!item.batches) {
@@ -1473,6 +1488,12 @@
                 if (remainingToDeduct === 0) break;
             }
         }
+
+        // Auto-sync deduction to delivery inventory even if item has no active batches left
+        if (remainingToDeduct > 0) {
+            syncDeductionToDeliveries(item.name, remainingToDeduct);
+        }
+
         return detailedLogs;
     }
 
@@ -1482,17 +1503,19 @@
         let remainingDeduction = qtyToDeduct;
 
         const matchingDeliveries = appData.deliveries.filter(d => 
-            d.name.toLowerCase().trim() === itemName.toLowerCase().trim() && (d.qty > 0)
+            d.name.toLowerCase().trim() === itemName.toLowerCase().trim() && (d.remQty > 0)
         );
 
         for (let del of matchingDeliveries) {
-            if (del.qty >= remainingDeduction) {
-                del.qty -= remainingDeduction;
+            if (del.remQty >= remainingDeduction) {
+                del.remQty -= remainingDeduction;
+                del.usedQty += remainingDeduction;
                 remainingDeduction = 0;
                 break;
             } else {
-                remainingDeduction -= del.qty;
-                del.qty = 0;
+                remainingDeduction -= del.remQty;
+                del.usedQty += del.remQty;
+                del.remQty = 0;
             }
         }
     }
@@ -2053,9 +2076,10 @@
             const existingItem = appData.inventory.find(i => i.category === 'Café' && i.name.toLowerCase().trim() === del.name.toLowerCase().trim());
 
             const batchDate = del.deliveryDate || dateNow;
+            const transferQty = del.remQty > 0 ? del.remQty : del.initQty;
 
             if (existingItem) {
-                addFIFOStock(existingItem, del.qty, batchDate, "Delivery", del.unit, "Storage");
+                addFIFOStock(existingItem, transferQty, batchDate, "Delivery", del.unit, "Storage");
             } else {
                 const newItem = {
                     id: Date.now() + Math.random(),
@@ -2066,13 +2090,13 @@
                     lastUpdated: dateNow,
                     batches: []
                 };
-                addFIFOStock(newItem, del.qty, batchDate, "Delivery", del.unit, "Storage");
+                addFIFOStock(newItem, transferQty, batchDate, "Delivery", del.unit, "Storage");
                 appData.inventory.push(newItem);
             }
 
             if (!isCopy) {
                 appData.deliveries = appData.deliveries.filter(d => d.id !== itemId);
-                recordLog(`Processed delivery "${del.name}" into Café Storage FIFO queue`);
+                recordLog(`Moved delivery "${del.name}" into Café Storage FIFO queue`);
             } else {
                 recordLog(`Copied delivery "${del.name}" to Café Storage FIFO queue`);
             }
@@ -2321,7 +2345,7 @@
         document.getElementById('delSubcategory').value = del.subcategory || '';
         document.getElementById('delItemName').value = del.name;
         document.getElementById('delSupplier').value = del.supplier || 'JAMBI';
-        document.getElementById('delQty').value = del.qty;
+        document.getElementById('delQty').value = del.initQty;
         document.getElementById('delUnit').value = del.unit || 'Pcs';
         document.getElementById('delDate').value = del.deliveryDate;
 
@@ -2334,7 +2358,7 @@
         document.getElementById('editingDeliveryId').value = '';
         document.getElementById('delItemName').value = '';
         document.getElementById('delQty').value = '';
-        document.getElementById('delSubmitBtn').innerText = '+ Schedule Delivery';
+        document.getElementById('delSubmitBtn').innerText = '+ Log Delivery Shipment';
         document.getElementById('delCancelEditBtn').style.display = 'none';
     }
 
@@ -2405,6 +2429,7 @@
         await autoSaveData();
     }
 
+    // ADD DELIVERY: DOES NOT COPY DIRECTLY TO CAFE INVENTORY NOW
     async function addDelivery(e) {
         e.preventDefault();
         saveSnapshotForUndo();
@@ -2425,33 +2450,28 @@
                 del.category = category;
                 del.subcategory = subcategory;
                 del.supplier = supplier;
-                del.qty = qty;
+                del.initQty = qty;
+                del.remQty = Math.max(0, qty - del.usedQty);
                 del.unit = unit;
                 del.deliveryDate = deliveryDate;
-                recordLog(`Re-edited delivery "${name}"`);
+                recordLog(`Updated delivery shipment details for "${name}"`);
             }
             cancelDeliveryEdit();
         } else {
-            appData.deliveries.unshift({ id: Date.now(), name, category, subcategory, supplier, qty, unit, deliveryDate });
+            appData.deliveries.unshift({ 
+                id: Date.now(), 
+                name, 
+                category, 
+                subcategory, 
+                supplier, 
+                initQty: qty, 
+                remQty: qty, 
+                usedQty: 0, 
+                unit, 
+                deliveryDate 
+            });
 
-            const existingItem = appData.inventory.find(i => i.category === category && i.name.toLowerCase().trim() === name.toLowerCase());
-            if (existingItem) {
-                addFIFOStock(existingItem, qty, deliveryDate, "Delivery", unit, "Storage");
-            } else {
-                const newItem = {
-                    id: Date.now() + Math.random() + 1,
-                    name: name,
-                    category: category,
-                    subcategory: subcategory || 'General',
-                    unit: unit,
-                    lastUpdated: new Date().toISOString().split('T')[0],
-                    batches: []
-                };
-                addFIFOStock(newItem, qty, deliveryDate, "Delivery", unit, "Storage");
-                appData.inventory.push(newItem);
-            }
-
-            recordLog(`Scheduled delivery "${name}" & auto-added to Café Storage FIFO queue`);
+            recordLog(`Logged delivery shipment for "${name}" (${qty} ${unit}) in Deliveries Dashboard`);
             document.getElementById('delItemName').value = '';
             document.getElementById('delQty').value = '';
         }
@@ -2465,8 +2485,6 @@
             saveSnapshotForUndo();
             appData.inventory = appData.inventory.filter(i => i.id !== id);
             
-            appData.deliveries = appData.deliveries.filter(d => !(d.category === item.category && d.name.toLowerCase().trim() === item.name.toLowerCase().trim()));
-
             recordLog(`Deleted item "${item.name}" across all page views`);
             await autoSaveData();
         }
@@ -2474,7 +2492,7 @@
 
     async function deleteDeliveryItem(id) {
         const del = appData.deliveries.find(d => d.id === id);
-        if (del && confirm(`Delete delivery "${del.name}" across all views?`)) {
+        if (del && confirm(`Delete delivery "${del.name}"?`)) {
             saveSnapshotForUndo();
             appData.deliveries = appData.deliveries.filter(d => d.id !== id);
             recordLog(`Deleted delivery "${del.name}"`);
@@ -2496,7 +2514,7 @@
                 const oldQty = batch.remQty;
                 const todayStr = new Date().toISOString().split('T')[0];
                 
-                if (newQty < oldQty && batch.sourceNote === 'Delivery') {
+                if (newQty < oldQty) {
                     syncDeductionToDeliveries(item.name, oldQty - newQty);
                 }
 
@@ -2566,23 +2584,27 @@
 
         let list = appData.deliveries || [];
         if (query) list = list.filter(d => d.name.toLowerCase().includes(query) || d.supplier.toLowerCase().includes(query));
-        if (hideOldItemsEnabled) list = list.filter(d => d.qty > 0);
+        if (hideOldItemsEnabled) list = list.filter(d => (d.remQty !== undefined ? d.remQty : d.initQty) > 0);
 
         if (list.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 20px;">No active delivery records found.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 20px;">No active delivery records found.</td></tr>`;
             return;
         }
 
         list.forEach(del => {
-            const tr = document.createElement('tr');
-            const qtyStatusClass = del.qty === 0 ? 'used-text-red' : '';
+            const remQty = del.remQty !== undefined ? del.remQty : del.initQty;
+            const usedQty = del.usedQty !== undefined ? del.usedQty : 0;
+            const qtyStatusClass = remQty === 0 ? 'used-text-red' : '';
 
+            const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td style="text-align: center;"><input type="checkbox" class="row-checkbox del-row-cb" value="${del.id}" onchange="updateBatchBarVisibility()"></td>
                 <td><strong>• ${del.name}</strong></td>
                 <td>${del.subcategory}</td>
                 <td><span class="delivery-note-tag">${del.supplier}</span></td>
-                <td><strong class="${qtyStatusClass}">${del.qty}</strong> <span class="unit-label">${del.unit}</span></td>
+                <td><strong>${del.initQty}</strong> <span class="unit-label">${del.unit}</span></td>
+                <td><strong class="${qtyStatusClass}">${remQty}</strong> <span class="unit-label">${del.unit}</span></td>
+                <td><span class="used-badge-red">-${usedQty} ${del.unit}</span></td>
                 <td>${del.deliveryDate}</td>
                 <td>
                     <div class="action-cell-wrapper">
