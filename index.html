@@ -468,7 +468,7 @@
             margin-bottom: 20px;
         }
 
-        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 820px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 860px; }
         th, td { padding: 12px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.35); font-size: 0.8rem; white-space: nowrap; }
         th { background: rgba(255, 255, 255, 0.3); color: var(--text-muted); font-weight: 700; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.6px; }
 
@@ -495,6 +495,28 @@
             color: #1F618D;
             font-weight: 800;
             padding: 2px 7px;
+            border-radius: 6px;
+            border: 1px solid rgba(41, 128, 185, 0.35);
+            font-size: 0.7rem;
+        }
+
+        .status-tag-pending {
+            display: inline-block;
+            background: rgba(217, 160, 107, 0.25);
+            color: #8C5B2B;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(217, 160, 107, 0.5);
+            font-size: 0.7rem;
+        }
+
+        .status-tag-synced {
+            display: inline-block;
+            background: rgba(41, 128, 185, 0.18);
+            color: #1F618D;
+            font-weight: 800;
+            padding: 3px 8px;
             border-radius: 6px;
             border: 1px solid rgba(41, 128, 185, 0.35);
             font-size: 0.7rem;
@@ -939,12 +961,7 @@
     <div id="delBatchBar" class="batch-action-bar" style="display: none;">
         <span class="batch-info" id="delBatchCount">0 selected</span>
         <div class="batch-controls">
-            <select id="delBatchTarget" class="select-transfer" style="max-width: 170px;">
-                <option value="">Transfer / Copy...</option>
-                <option value="MOVE_Café">☕ Move to Storage</option>
-                <option value="COPY_Café">☕ Copy to Storage</option>
-            </select>
-            <button type="button" class="btn primary" onclick="executeBatchAction('DELIVERY')" style="padding: 6px 12px; font-size: 0.75rem;">Apply</button>
+            <button type="button" class="btn primary" onclick="transferSelectedDeliveriesToStorage()" style="padding: 6px 12px; font-size: 0.75rem;">📦 Transfer Selected to Storage</button>
             <button type="button" class="btn-clear-selected" onclick="deleteSelectedDeliveries()">🗑️ Delete Selected</button>
         </div>
     </div>
@@ -960,6 +977,7 @@
                     <th>Initial Qty</th>
                     <th>Remaining Stock</th>
                     <th>Total Used</th>
+                    <th>Storage Status</th>
                     <th>Delivery Date</th>
                     <th>Action</th>
                 </tr>
@@ -1167,8 +1185,8 @@
             }
         ],
         deliveries: [
-            { id: 101, name: "Espresso Beans", category: "Café", subcategory: "Beans", supplier: "YARDSTICK", initQty: 10, remQty: 10, usedQty: 0, unit: "Kg", deliveryDate: "2026-09-05" },
-            { id: 102, name: "Oat Milk", category: "Café", subcategory: "Milk", supplier: "JAMBI", initQty: 3, remQty: 3, usedQty: 0, unit: "Case", deliveryDate: "2026-08-28" }
+            { id: 101, name: "Espresso Beans", category: "Café", subcategory: "Beans", supplier: "YARDSTICK", initQty: 10, remQty: 10, usedQty: 0, unit: "Kg", deliveryDate: "2026-09-05", transferredToStorage: true },
+            { id: 102, name: "Oat Milk", category: "Café", subcategory: "Milk", supplier: "JAMBI", initQty: 3, remQty: 3, usedQty: 0, unit: "Case", deliveryDate: "2026-08-28", transferredToStorage: true }
         ],
         markedOutPastries: [],
         logs: []
@@ -1186,11 +1204,12 @@
     if (!appData.markedOutPastries) appData.markedOutPastries = [];
     if (!appData.lastUpdatedTimestamp) appData.lastUpdatedTimestamp = Date.now();
 
-    // Standardize Deliveries Structure
+    // Standardize Deliveries Structure & Transfer Status
     appData.deliveries.forEach(del => {
         if (del.initQty === undefined) del.initQty = del.qty !== undefined ? del.qty : 0;
         if (del.remQty === undefined) del.remQty = del.qty !== undefined ? del.qty : del.initQty;
         if (del.usedQty === undefined) del.usedQty = Math.max(0, del.initQty - del.remQty);
+        if (del.transferredToStorage === undefined) del.transferredToStorage = false;
     });
 
     appData.inventory.forEach(item => {
@@ -1339,6 +1358,7 @@
                     if (del.initQty === undefined) del.initQty = del.qty !== undefined ? del.qty : 0;
                     if (del.remQty === undefined) del.remQty = del.qty !== undefined ? del.qty : del.initQty;
                     if (del.usedQty === undefined) del.usedQty = Math.max(0, del.initQty - del.remQty);
+                    if (del.transferredToStorage === undefined) del.transferredToStorage = false;
                 });
 
                 appData.inventory.forEach(item => {
@@ -1489,7 +1509,6 @@
             }
         }
 
-        // Auto-sync deduction to delivery inventory even if item has no active batches left
         if (remainingToDeduct > 0) {
             syncDeductionToDeliveries(item.name, remainingToDeduct);
         }
@@ -2042,65 +2061,54 @@
         }
     }
 
-    async function executeBatchAction(sourceType) {
-        let actionVal = document.getElementById('delBatchTarget').value;
-        let checkedBoxes = document.querySelectorAll('.del-row-cb:checked');
-
-        if (!actionVal || checkedBoxes.length === 0) {
-            alert("Please select a transfer destination and at least one item.");
-            return;
-        }
-
+    async function pushSingleDeliveryToStorage(delId) {
         saveSnapshotForUndo();
-        const itemIds = Array.from(checkedBoxes).map(cb => parseInt(cb.value));
-        itemIds.forEach(id => processItemAction(id, actionVal, sourceType));
+        transferDeliveryToStorageInternal(delId);
         await autoSaveData();
+        refreshAllViews();
     }
 
-    async function handleRowDropdownAction(itemId, actionVal, sourceType) {
-        if (!actionVal) return;
+    async function transferSelectedDeliveriesToStorage() {
+        const checkedBoxes = document.querySelectorAll('.del-row-cb:checked');
+        if (checkedBoxes.length === 0) return;
+
         saveSnapshotForUndo();
-        processItemAction(itemId, actionVal, sourceType);
+        const ids = Array.from(checkedBoxes).map(cb => parseInt(cb.value));
+        ids.forEach(id => transferDeliveryToStorageInternal(id));
         await autoSaveData();
+        refreshAllViews();
     }
 
-    function processItemAction(itemId, actionVal, currentSourceType) {
-        const isCopy = actionVal.startsWith('COPY_');
+    function transferDeliveryToStorageInternal(delId) {
+        const del = appData.deliveries.find(d => d.id === delId);
+        if (!del) return;
+
         const dateNow = new Date().toISOString().split('T')[0];
+        const targetSubcategory = del.subcategory || ((appData.categories['Café'] && appData.categories['Café'].length > 0) ? appData.categories['Café'][0] : 'General');
+        
+        const transferQty = del.remQty > 0 ? del.remQty : del.initQty;
+        const batchDate = del.deliveryDate || dateNow;
 
-        if (currentSourceType === 'DELIVERY') {
-            const del = appData.deliveries.find(d => d.id === itemId);
-            if (!del) return;
+        let existingItem = appData.inventory.find(i => i.category === 'Café' && i.name.toLowerCase().trim() === del.name.toLowerCase().trim());
 
-            const targetSubcategory = (appData.categories['Café'] && appData.categories['Café'].length > 0) ? appData.categories['Café'][0] : 'General';
-            const existingItem = appData.inventory.find(i => i.category === 'Café' && i.name.toLowerCase().trim() === del.name.toLowerCase().trim());
-
-            const batchDate = del.deliveryDate || dateNow;
-            const transferQty = del.remQty > 0 ? del.remQty : del.initQty;
-
-            if (existingItem) {
-                addFIFOStock(existingItem, transferQty, batchDate, "Delivery", del.unit, "Storage");
-            } else {
-                const newItem = {
-                    id: Date.now() + Math.random(),
-                    name: del.name,
-                    category: 'Café',
-                    subcategory: del.subcategory || targetSubcategory,
-                    unit: del.unit,
-                    lastUpdated: dateNow,
-                    batches: []
-                };
-                addFIFOStock(newItem, transferQty, batchDate, "Delivery", del.unit, "Storage");
-                appData.inventory.push(newItem);
-            }
-
-            if (!isCopy) {
-                appData.deliveries = appData.deliveries.filter(d => d.id !== itemId);
-                recordLog(`Moved delivery "${del.name}" into Café Storage FIFO queue`);
-            } else {
-                recordLog(`Copied delivery "${del.name}" to Café Storage FIFO queue`);
-            }
+        if (existingItem) {
+            addFIFOStock(existingItem, transferQty, batchDate, "Delivery", del.unit, "Storage");
+        } else {
+            const newItem = {
+                id: Date.now() + Math.random(),
+                name: del.name,
+                category: 'Café',
+                subcategory: targetSubcategory,
+                unit: del.unit,
+                lastUpdated: dateNow,
+                batches: []
+            };
+            addFIFOStock(newItem, transferQty, batchDate, "Delivery", del.unit, "Storage");
+            appData.inventory.push(newItem);
         }
+
+        del.transferredToStorage = true;
+        recordLog(`🚚 Transferred delivery "${del.name}" (${transferQty} ${del.unit}) directly into Café Storage stock.`);
     }
 
     async function deleteSelectedDeliveries() {
@@ -2429,7 +2437,6 @@
         await autoSaveData();
     }
 
-    // ADD DELIVERY: DOES NOT COPY DIRECTLY TO CAFE INVENTORY NOW
     async function addDelivery(e) {
         e.preventDefault();
         saveSnapshotForUndo();
@@ -2468,10 +2475,11 @@
                 remQty: qty, 
                 usedQty: 0, 
                 unit, 
-                deliveryDate 
+                deliveryDate,
+                transferredToStorage: false
             });
 
-            recordLog(`Logged delivery shipment for "${name}" (${qty} ${unit}) in Deliveries Dashboard`);
+            recordLog(`📦 Logged delivery shipment for "${name}" (${qty} ${unit}). Flagged as pending for Storage.`);
             document.getElementById('delItemName').value = '';
             document.getElementById('delQty').value = '';
         }
@@ -2587,7 +2595,7 @@
         if (hideOldItemsEnabled) list = list.filter(d => (d.remQty !== undefined ? d.remQty : d.initQty) > 0);
 
         if (list.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted); padding: 20px;">No active delivery records found.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; color: var(--text-muted); padding: 20px;">No active delivery records found.</td></tr>`;
             return;
         }
 
@@ -2595,6 +2603,15 @@
             const remQty = del.remQty !== undefined ? del.remQty : del.initQty;
             const usedQty = del.usedQty !== undefined ? del.usedQty : 0;
             const qtyStatusClass = remQty === 0 ? 'used-text-red' : '';
+
+            const isTransferred = del.transferredToStorage;
+            const statusBadge = isTransferred 
+                ? `<span class="status-tag-synced">📦 In Storage</span>` 
+                : `<span class="status-tag-pending">⏳ Pending Transfer</span>`;
+
+            const transferBtn = !isTransferred 
+                ? `<button type="button" class="btn primary" onclick="pushSingleDeliveryToStorage(${del.id})" style="padding: 5px 8px; font-size: 0.72rem;">🚚 Transfer to Storage</button>` 
+                : `<button type="button" class="btn" disabled style="padding: 5px 8px; font-size: 0.72rem; opacity: 0.6; cursor: default;">✓ Added</button>`;
 
             const tr = document.createElement('tr');
             tr.innerHTML = `
@@ -2605,15 +2622,12 @@
                 <td><strong>${del.initQty}</strong> <span class="unit-label">${del.unit}</span></td>
                 <td><strong class="${qtyStatusClass}">${remQty}</strong> <span class="unit-label">${del.unit}</span></td>
                 <td><span class="used-badge-red">-${usedQty} ${del.unit}</span></td>
+                <td>${statusBadge}</td>
                 <td>${del.deliveryDate}</td>
                 <td>
                     <div class="action-cell-wrapper">
-                        <button type="button" class="btn edit-btn" onclick="editDeliveryRecord(${del.id})" style="padding: 5px 8px; font-size: 0.72rem;">✏️ Re-Edit</button>
-                        <select class="select-transfer" onchange="handleRowDropdownAction(${del.id}, this.value, 'DELIVERY')">
-                            <option value="">Move/Copy...</option>
-                            <option value="MOVE_Café">☕ Move to Storage</option>
-                            <option value="COPY_Café">☕ Copy to Storage</option>
-                        </select>
+                        ${transferBtn}
+                        <button type="button" class="btn edit-btn" onclick="editDeliveryRecord(${del.id})" style="padding: 5px 8px; font-size: 0.72rem;">✏️ Edit</button>
                         <button type="button" class="btn-delete-x" onclick="deleteDeliveryItem(${del.id})" title="Delete">✕</button>
                     </div>
                 </td>
