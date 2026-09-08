@@ -1,0 +1,86 @@
+{
+  "categories": {
+    "Café": [
+      "Pastries",
+      "RETAIL",
+      "BAR",
+      "MILK",
+      "Retail"
+    ],
+    "Community": [
+      "General"
+    ],
+    "Housekeeping": [
+      "Cleaning Supplies",
+      "Linens & Towels",
+      "Tools & Equipment",
+      "Restroom Supplies"
+    ]
+  },
+  "inventory": [
+    {
+      "id": 1788846495169,
+      "name": "Clubhouse",
+      "category": "Café",
+      "subcategory": "Pastries",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-08",
+      "batches": []
+    },
+    {
+      "id": 1788846495170,
+      "name": "Tuna Melt",
+      "category": "Café",
+      "subcategory": "Pastries",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-08",
+      "batches": []
+    },
+    {
+      "id": 1788846495171,
+      "name": "Spam Aioli",
+      "category": "Café",
+      "subcategory": "Pastries",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-08",
+      "batches": []
+    },
+    {
+      "id": 1788846495172,
+      "name": "Grilled Cheese",
+      "category": "Café",
+      "subcategory": "Pastries",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-08",
+      "batches": []
+    }
+  ],
+  "logs": [
+    {
+      "id": "log_1788846213123",
+      "timestamp": "2026-09-08 13:43",
+      "details": "Deleted marked out pastry record."
+    },
+    {
+      "id": "log_1788846210865",
+      "timestamp": "2026-09-08 13:43",
+      "details": "Deleted marked out pastry record."
+    },
+    {
+      "id": "log_1788846161084",
+      "timestamp": "2026-09-08 13:42",
+      "details": "🗑️ Cleared out all 4 items in subcategory [Pastries]"
+    }
+  ],
+  "deliveries": [],
+  "suppliers": [
+    "JAMBI",
+    "YARDSTICK",
+    "NIMO",
+    "KUKIDO",
+    "MMB",
+    "LALAMOVE"
+  ],
+  "markedOutPastries": [],
+  "lastUpdatedTimestamp": 1788846213123
+}
