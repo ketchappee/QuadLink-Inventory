@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>QuadLink Inventory - FIFO System</title>
+    <title>QuadLink Inventory - Café System</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -277,36 +277,6 @@
             border: 1px solid var(--clear-border);
             cursor: pointer;
         }
-
-        .dashboard-nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .dash-card-btn {
-            background: var(--clear-trans-medium);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--clear-border);
-            border-radius: 14px;
-            padding: 12px 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-        .dash-card-btn:hover { background: var(--clear-trans-hover); }
-        .dash-card-btn.active {
-            background: var(--brand-color);
-            color: #fff;
-            border-color: var(--brand-color);
-        }
-        .dash-card-icon { font-size: 1.1rem; }
-        .dash-card-title { font-size: 0.78rem; font-weight: 700; }
 
         .glass-card {
             background: var(--clear-trans-medium);
@@ -668,10 +638,10 @@
 <section id="view-home" class="page-view active">
     <div class="home-hero">
         <img class="home-hero-logo" src="viber_image_2026-09-02_16-28-15-350.png" alt="Quad Logo">
-        <h1>QuadLink Inventory</h1>
+        <h1>QuadLink Café Inventory</h1>
         <p>Aesthetic minimalist stock management with isolated batch tracking & full audit history monitoring.</p>
         <div class="hero-action-group">
-            <button type="button" class="btn-proceed" onclick="navigateTo('menu')">📂 Menu Inventory</button>
+            <button type="button" class="btn-proceed" onclick="navigateTo('inventory', 'Café')">☕ Café Inventory</button>
             <button type="button" class="btn-proceed secondary" onclick="navigateTo('cafe-totals')">📈 Bar vs. Storage Summary</button>
             <button type="button" class="btn-proceed secondary" onclick="navigateTo('markedout')">🥐 Marked Out Pastries</button>
             <button type="button" class="btn-proceed secondary" onclick="navigateTo('deliveries')">🚚 Deliveries Inventory</button>
@@ -696,7 +666,7 @@
     </header>
 
     <div class="netflix-container">
-        <div class="netflix-row-title">✨ Select Category Hub</div>
+        <div class="netflix-row-title">✨ Café Management Options</div>
         <div class="netflix-cards-grid">
             <div class="netflix-card" onclick="navigateTo('inventory', 'Café')">
                 <div class="netflix-card-icon">☕</div>
@@ -713,10 +683,10 @@
                 <h3>Marked Out Pastries</h3>
                 <p>Track expired, sampled, or damaged pastry waste & deduct stock.</p>
             </div>
-            <div class="netflix-card" onclick="navigateTo('inventory', 'Community')">
-                <div class="netflix-card-icon">🤝</div>
-                <h3>Community</h3>
-                <p>Entertainment sets, furniture, seating, and electronics.</p>
+            <div class="netflix-card" onclick="navigateTo('deliveries')">
+                <div class="netflix-card-icon">🚚</div>
+                <h3>Deliveries Inventory</h3>
+                <p>Schedule and sync incoming supplier shipments into inventory.</p>
             </div>
         </div>
     </div>
@@ -735,7 +705,7 @@
         </div>
     </header>
 
-    <!-- CAFÉ KPI METRICS (ORGANIZED BY BAR & STORAGE) -->
+    <!-- CAFÉ KPI METRICS -->
     <div class="summary-kpi-grid">
         <div class="kpi-card">
             <span class="kpi-card-title">Total Active Products</span>
@@ -759,7 +729,7 @@
         </div>
     </div>
 
-    <!-- SUBCATEGORY SUMMARY TABLE (BAR VS STORAGE) -->
+    <!-- SUBCATEGORY SUMMARY TABLE -->
     <div class="glass-card">
         <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">📂 Café Totals Summary by Subcategory (Bar vs. Storage)</div>
         <div class="table-container" style="box-shadow: none; border: none; margin-bottom: 16px;">
@@ -890,25 +860,6 @@
         </div>
     </header>
 
-    <div class="dashboard-nav-grid">
-        <div class="dash-card-btn active" id="dashNav-ALL" onclick="filterDeliveryDashboard('ALL')">
-            <div class="dash-card-icon">📦</div>
-            <div class="dash-card-title">All Categories</div>
-        </div>
-        <div class="dash-card-btn" id="dashNav-Café" onclick="filterDeliveryDashboard('Café')">
-            <div class="dash-card-icon">☕</div>
-            <div class="dash-card-title">Café</div>
-        </div>
-        <div class="dash-card-btn" id="dashNav-Community" onclick="filterDeliveryDashboard('Community')">
-            <div class="dash-card-icon">🤝</div>
-            <div class="dash-card-title">Community</div>
-        </div>
-        <div class="dash-card-btn" id="dashNav-Housekeeping" onclick="filterDeliveryDashboard('Housekeeping')">
-            <div class="dash-card-icon">🧹</div>
-            <div class="dash-card-title">Housekeeping</div>
-        </div>
-    </div>
-
     <div class="glass-card" style="padding: 14px 18px;">
         <div class="search-bar-container">
             <div class="search-input-wrapper">
@@ -924,15 +875,8 @@
     <div class="glass-card">
         <form id="deliveryForm" onsubmit="addDelivery(event)">
             <input type="hidden" id="editingDeliveryId" value="">
+            <input type="hidden" id="delCategory" value="Café">
             <div class="form-grid">
-                <div class="input-group">
-                    <label>Target Category</label>
-                    <select id="delCategory" required onchange="updateDeliverySubcategoryDropdown(this.value)">
-                        <option value="Café">Café</option>
-                        <option value="Community">Community</option>
-                        <option value="Housekeeping">Housekeeping</option>
-                    </select>
-                </div>
                 <div class="input-group">
                     <label>Subcategory</label>
                     <div class="subcategory-input-wrapper">
@@ -976,7 +920,7 @@
                 </div>
             </div>
             <div style="display: flex; gap: 8px; align-items: center;">
-                <button type="submit" id="delSubmitBtn" class="btn primary">+ Schedule Delivery (Auto-Syncs to Inventory)</button>
+                <button type="submit" id="delSubmitBtn" class="btn primary">+ Schedule Delivery (Auto-Syncs to Storage)</button>
                 <button type="button" id="delCancelEditBtn" class="btn" style="display: none;" onclick="cancelDeliveryEdit()">Cancel Edit</button>
             </div>
         </form>
@@ -988,16 +932,8 @@
         <div class="batch-controls">
             <select id="delBatchTarget" class="select-transfer" style="max-width: 170px;">
                 <option value="">Transfer / Copy...</option>
-                <optgroup label="Move To">
-                    <option value="MOVE_Café">☕ Move to Café</option>
-                    <option value="MOVE_Community">🤝 Move to Community</option>
-                    <option value="MOVE_Housekeeping">🧹 Move to Housekeeping</option>
-                </optgroup>
-                <optgroup label="Copy To">
-                    <option value="COPY_Café">☕ Copy to Café</option>
-                    <option value="COPY_Community">🤝 Copy to Community</option>
-                    <option value="COPY_Housekeeping">🧹 Copy to Housekeeping</option>
-                </optgroup>
+                <option value="MOVE_Café">☕ Move to Café Storage</option>
+                <option value="COPY_Café">☕ Copy to Café Storage</option>
             </select>
             <button type="button" class="btn primary" onclick="executeBatchAction('DELIVERY')" style="padding: 6px 12px; font-size: 0.75rem;">Apply</button>
             <button type="button" class="btn-clear-selected" onclick="deleteSelectedDeliveries()">🗑️ Delete Selected</button>
@@ -1010,7 +946,7 @@
                 <tr>
                     <th style="width: 36px; text-align: center;"><input type="checkbox" id="delSelectAll" class="row-checkbox" onchange="toggleSelectAllPage(this, '.del-row-cb')"></th>
                     <th>Item Name</th>
-                    <th>Category / Subcategory</th>
+                    <th>Subcategory</th>
                     <th>Supplier</th>
                     <th>Qty & Unit</th>
                     <th>Delivery Date</th>
@@ -1040,14 +976,8 @@
         <div class="search-bar-container">
             <div class="search-input-wrapper">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Search across all inventories..." oninput="renderMasterTables()">
+                <input type="text" id="searchInput" placeholder="Search Café items..." oninput="renderMasterTables()">
             </div>
-            <select id="categoryFilter" onchange="renderMasterTables()" style="min-width: 140px;">
-                <option value="ALL">All Categories</option>
-                <option value="Café">Café</option>
-                <option value="Community">Community</option>
-                <option value="Housekeeping">Housekeeping</option>
-            </select>
             <label class="filter-toggle-label">
                 <input type="checkbox" id="hideOldMasterToggle" onchange="toggleHideOldItems(this.checked)"> 👁️ Hide Depleted (0 Stock) Items
             </label>
@@ -1059,13 +989,15 @@
     </div>
 
     <div id="sec-Café">
-        <div class="category-section-header">☕ Café Inventory</div>
+        <div class="category-section-header">☕ Café Inventory Overview</div>
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
                         <th>Item Name</th>
                         <th>Subcategory</th>
+                        <th>Bar Stock</th>
+                        <th>Storage Stock</th>
                         <th>Total Qty</th>
                         <th>Total Used</th>
                         <th>Active Batches</th>
@@ -1074,46 +1006,6 @@
                     </tr>
                 </thead>
                 <tbody id="tbody-Café"></tbody>
-            </table>
-        </div>
-    </div>
-
-    <div id="sec-Community">
-        <div class="category-section-header">🤝 Community Inventory</div>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Item Name</th>
-                        <th>Subcategory</th>
-                        <th>Total Qty</th>
-                        <th>Total Used</th>
-                        <th>Active Batches</th>
-                        <th>Earliest Batch Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-Community"></tbody>
-            </table>
-        </div>
-    </div>
-
-    <div id="sec-Housekeeping">
-        <div class="category-section-header">🧹 Housekeeping Inventory</div>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Item Name</th>
-                        <th>Subcategory</th>
-                        <th>Total Qty</th>
-                        <th>Total Used</th>
-                        <th>Active Batches</th>
-                        <th>Earliest Batch Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody-Housekeeping"></tbody>
             </table>
         </div>
     </div>
@@ -1217,10 +1109,10 @@
 </section>
 
 <script>
-    let currentDeliveryFilter = 'ALL';
+    let currentDeliveryFilter = 'Café';
     let hideOldItemsEnabled = false;
 
-    // STORE OPEN/CLOSED ACCORDION TAB STATES PER CATEGORY
+    // STORE OPEN/CLOSED ACCORDION TAB STATES
     let openAccordionSubcategories = {};
 
     // GLOBAL STATE HISTORY UNDO STACK (MAX 30 STEPS)
@@ -1228,9 +1120,7 @@
     const MAX_UNDO_LEVELS = 30;
 
     let defaultSubcategories = {
-        'Café': ['Beans', 'Milk', 'Pastries', 'Syrups & Flavorings', 'Retail', 'Cups & Packaging', 'Consumables & Others'],
-        'Community': ['Entertainment & Games', 'Furniture & Seating', 'Electronics & AV', 'General Supplies'],
-        'Housekeeping': ['Cleaning Supplies', 'Linens & Towels', 'Tools & Equipment', 'Restroom Supplies']
+        'Café': ['Beans', 'Milk', 'Pastries', 'Syrups & Flavorings', 'Retail', 'Cups & Packaging', 'Consumables & Others']
     };
 
     const initialPastryItems = ["Clubhouse", "Tuna Melt", "Spam Aioli", "Grilled Cheese"];
@@ -1283,9 +1173,14 @@
         logs: []
     };
 
-    if (!appData.categories) appData.categories = JSON.parse(JSON.stringify(defaultSubcategories));
+    if (!appData.categories || !appData.categories['Café']) appData.categories = JSON.parse(JSON.stringify(defaultSubcategories));
     if (!appData.categories['Café'].includes('Pastries')) appData.categories['Café'].unshift('Pastries');
     if (!appData.categories['Café'].includes('Retail')) appData.categories['Café'].push('Retail');
+    
+    // Purge legacy non-Café items if present
+    appData.inventory = appData.inventory.filter(i => i.category === 'Café');
+    appData.deliveries = appData.deliveries.filter(d => d.category === 'Café');
+
     if (!appData.suppliers) appData.suppliers = ['JAMBI', 'YARDSTICK', 'NIMO', 'KUKIDO', 'MMB', 'LALAMOVE'];
     if (!appData.deliveries) appData.deliveries = [];
     if (!appData.markedOutPastries) appData.markedOutPastries = [];
@@ -1416,13 +1311,6 @@
         if (activeBatch && activeBatch.unit) return activeBatch.unit;
         const lastBatch = item.batches[item.batches.length - 1];
         return (lastBatch && lastBatch.unit) ? lastBatch.unit : (item.unit || 'Pcs');
-    }
-
-    function getItemActiveBatchDate(item) {
-        if (!item.batches || item.batches.length === 0) return 'N/A';
-        sortItemBatches(item);
-        const activeBatch = item.batches.find(b => b.remQty > 0);
-        return activeBatch ? activeBatch.addedDate : item.batches[item.batches.length - 1].addedDate;
     }
 
     function sortItemBatches(item) {
@@ -1619,17 +1507,6 @@
         }
     }
 
-    function filterDeliveryDashboard(cat) {
-        currentDeliveryFilter = cat;
-        document.querySelectorAll('.dash-card-btn').forEach(btn => btn.classList.remove('active'));
-        document.getElementById(`dashNav-${cat}`).classList.add('active');
-        if (cat !== 'ALL') {
-            document.getElementById('delCategory').value = cat;
-            updateDeliverySubcategoryDropdown(cat);
-        }
-        renderDeliveriesTable();
-    }
-
     function updateSubcategoryDropdown(cat) {
         const select = document.getElementById('itemSubcategory');
         if (!select) return;
@@ -1753,33 +1630,32 @@
 
     async function handleSubcategoryChange(selectEl) {
         if (selectEl.value === 'CUSTOM') {
-            const customVal = prompt(`Enter new subcategory for ${currentCategory}:`);
+            const customVal = prompt(`Enter new subcategory for Café:`);
             if (customVal && customVal.trim() !== '') {
                 saveSnapshotForUndo();
                 const subName = customVal.trim();
-                if (!appData.categories[currentCategory].includes(subName)) appData.categories[currentCategory].push(subName);
+                if (!appData.categories['Café'].includes(subName)) appData.categories['Café'].push(subName);
                 await autoSaveData();
-                updateSubcategoryDropdown(currentCategory);
+                updateSubcategoryDropdown('Café');
                 selectEl.value = subName;
             } else {
-                updateSubcategoryDropdown(currentCategory);
+                updateSubcategoryDropdown('Café');
             }
         }
     }
 
     async function handleDeliverySubcategoryChange(selectEl) {
-        const targetCat = document.getElementById('delCategory').value;
         if (selectEl.value === 'CUSTOM') {
-            const customVal = prompt(`Enter new subcategory for ${targetCat}:`);
+            const customVal = prompt(`Enter new subcategory for Café:`);
             if (customVal && customVal.trim() !== '') {
                 saveSnapshotForUndo();
                 const subName = customVal.trim();
-                if (!appData.categories[targetCat].includes(subName)) appData.categories[targetCat].push(subName);
+                if (!appData.categories['Café'].includes(subName)) appData.categories['Café'].push(subName);
                 await autoSaveData();
-                updateDeliverySubcategoryDropdown(targetCat);
+                updateDeliverySubcategoryDropdown('Café');
                 selectEl.value = subName;
             } else {
-                updateDeliverySubcategoryDropdown(targetCat);
+                updateDeliverySubcategoryDropdown('Café');
             }
         }
     }
@@ -1914,24 +1790,22 @@
         if (!selectedSub || selectedSub === 'CUSTOM') return;
         if (!confirm(`Delete subcategory "${selectedSub}"?`)) return;
         saveSnapshotForUndo();
-        appData.categories[currentCategory] = appData.categories[currentCategory].filter(s => s !== selectedSub);
-        recordLog(`Deleted subcategory [${selectedSub}] from ${currentCategory}`);
+        appData.categories['Café'] = appData.categories['Café'].filter(s => s !== selectedSub);
+        recordLog(`Deleted subcategory [${selectedSub}] from Café`);
         await autoSaveData();
-        updateSubcategoryDropdown(currentCategory);
+        updateSubcategoryDropdown('Café');
     }
 
     async function deleteDeliverySubcategory() {
-        const catSelect = document.getElementById('delCategory');
         const subSelect = document.getElementById('delSubcategory');
-        const selectedCat = catSelect.value;
         const selectedSub = subSelect.value;
         if (!selectedSub || selectedSub === 'CUSTOM') return;
-        if (!confirm(`Delete subcategory "${selectedSub}" from ${selectedCat}?`)) return;
+        if (!confirm(`Delete subcategory "${selectedSub}"?`)) return;
         saveSnapshotForUndo();
-        appData.categories[selectedCat] = appData.categories[selectedCat].filter(s => s !== selectedCat);
-        recordLog(`Deleted subcategory [${selectedSub}] from ${selectedCat}`);
+        appData.categories['Café'] = appData.categories['Café'].filter(s => s !== selectedSub);
+        recordLog(`Deleted subcategory [${selectedSub}] from Café`);
         await autoSaveData();
-        updateDeliverySubcategoryDropdown(selectedCat);
+        updateDeliverySubcategoryDropdown('Café');
     }
 
     function toggleAccordion(headerEl) {
@@ -1943,12 +1817,12 @@
         card.classList.toggle('active', !isOpen);
         if (!isOpen) {
             content.classList.add('open');
-            if (!openAccordionSubcategories[currentCategory]) openAccordionSubcategories[currentCategory] = {};
-            openAccordionSubcategories[currentCategory][subName] = true;
+            if (!openAccordionSubcategories['Café']) openAccordionSubcategories['Café'] = {};
+            openAccordionSubcategories['Café'][subName] = true;
         } else {
             content.classList.remove('open');
-            if (openAccordionSubcategories[currentCategory]) {
-                openAccordionSubcategories[currentCategory][subName] = false;
+            if (openAccordionSubcategories['Café']) {
+                openAccordionSubcategories['Café'][subName] = false;
             }
         }
     }
@@ -2005,16 +1879,14 @@
 
     function processItemAction(itemId, actionVal, currentSourceType) {
         const isCopy = actionVal.startsWith('COPY_');
-        const targetName = actionVal.replace('MOVE_', '').replace('COPY_', '');
         const dateNow = new Date().toISOString().split('T')[0];
 
         if (currentSourceType === 'DELIVERY') {
             const del = appData.deliveries.find(d => d.id === itemId);
             if (!del) return;
-            if (targetName === 'DELIVERIES') return;
 
-            const targetSubcategory = (appData.categories[targetName] && appData.categories[targetName].length > 0) ? appData.categories[targetName][0] : 'General';
-            const existingItem = appData.inventory.find(i => i.category === targetName && i.name.toLowerCase().trim() === del.name.toLowerCase().trim());
+            const targetSubcategory = (appData.categories['Café'] && appData.categories['Café'].length > 0) ? appData.categories['Café'][0] : 'General';
+            const existingItem = appData.inventory.find(i => i.category === 'Café' && i.name.toLowerCase().trim() === del.name.toLowerCase().trim());
 
             const batchDate = del.deliveryDate || dateNow;
 
@@ -2024,7 +1896,7 @@
                 const newItem = {
                     id: Date.now() + Math.random(),
                     name: del.name,
-                    category: targetName,
+                    category: 'Café',
                     subcategory: del.subcategory || targetSubcategory,
                     unit: del.unit,
                     lastUpdated: dateNow,
@@ -2036,9 +1908,9 @@
 
             if (!isCopy) {
                 appData.deliveries = appData.deliveries.filter(d => d.id !== itemId);
-                recordLog(`Processed delivery "${del.name}" into ${targetName} FIFO batch queue (Storage)`);
+                recordLog(`Processed delivery "${del.name}" into Café Storage FIFO queue`);
             } else {
-                recordLog(`Copied delivery "${del.name}" to ${targetName} FIFO batch queue (Storage)`);
+                recordLog(`Copied delivery "${del.name}" to Café Storage FIFO queue`);
             }
         }
     }
@@ -2232,6 +2104,9 @@
                     saveSnapshotForUndo();
                     appData = loadedData;
                     
+                    appData.inventory = appData.inventory.filter(i => i.category === 'Café');
+                    if (appData.deliveries) appData.deliveries = appData.deliveries.filter(d => d.category === 'Café');
+
                     appData.inventory.forEach(item => {
                         if (!item.batches) {
                             const oldQty = item.qty !== undefined ? item.qty : 0;
@@ -2263,7 +2138,7 @@
                     });
 
                     autoSaveData();
-                    alert("Inventory file loaded successfully!");
+                    alert("Café Inventory file loaded successfully!");
                 } else {
                     alert("Invalid JSON data format. File must contain valid inventory structure.");
                 }
@@ -2317,17 +2192,15 @@
     }
 
     function switchCategory(cat) {
-        currentCategory = cat;
-        const icons = { Café: '☕', Community: '🤝', Housekeeping: '🧹' };
-        document.getElementById('currentTitle').innerText = `${icons[cat]} ${cat} Inventory`;
-        updateSubcategoryDropdown(cat);
+        currentCategory = 'Café';
+        document.getElementById('currentTitle').innerText = `☕ Café Inventory`;
+        updateSubcategoryDropdown('Café');
         renderTable();
     }
 
     function editInventoryItem(id) {
         const item = appData.inventory.find(i => i.id === id);
         if (!item) return;
-        if (item.category !== currentCategory) switchCategory(item.category);
 
         const activeUnit = getItemActiveUnit(item);
 
@@ -2355,11 +2228,9 @@
     function editDeliveryRecord(id) {
         const del = appData.deliveries.find(d => d.id === id);
         if (!del) return;
-        if (currentDeliveryFilter !== 'ALL' && currentDeliveryFilter !== del.category) filterDeliveryDashboard('ALL');
 
         document.getElementById('editingDeliveryId').value = del.id;
-        document.getElementById('delCategory').value = del.category;
-        updateDeliverySubcategoryDropdown(del.category);
+        updateDeliverySubcategoryDropdown('Café');
         document.getElementById('delSubcategory').value = del.subcategory || '';
         document.getElementById('delItemName').value = del.name;
         document.getElementById('delSupplier').value = del.supplier || 'JAMBI';
@@ -2400,7 +2271,7 @@
             if (item) {
                 const prevName = item.name;
                 item.name = name;
-                item.category = currentCategory;
+                item.category = 'Café';
                 item.subcategory = subcategory;
                 item.unit = unit;
                 item.lastUpdated = todayStr;
@@ -2414,7 +2285,7 @@
             }
             cancelItemEdit();
         } else {
-            let existingItem = appData.inventory.find(i => i.category === currentCategory && i.name.toLowerCase().trim() === name.toLowerCase());
+            let existingItem = appData.inventory.find(i => i.category === 'Café' && i.name.toLowerCase().trim() === name.toLowerCase());
             if (existingItem) {
                 if (qty > 0) {
                     addFIFOStock(existingItem, qty, addedDate, sourceNote, unit, locationStr);
@@ -2431,7 +2302,7 @@
                 const newItem = {
                     id: Date.now(),
                     name: name,
-                    category: currentCategory,
+                    category: 'Café',
                     subcategory: subcategory,
                     unit: unit,
                     lastUpdated: todayStr,
@@ -2452,7 +2323,7 @@
         saveSnapshotForUndo();
 
         const editingId = document.getElementById('editingDeliveryId').value;
-        const category = document.getElementById('delCategory').value;
+        const category = 'Café';
         const subcategory = document.getElementById('delSubcategory').value;
         const name = document.getElementById('delItemName').value.trim();
         const supplier = document.getElementById('delSupplier').value;
@@ -2493,7 +2364,7 @@
                 appData.inventory.push(newItem);
             }
 
-            recordLog(`Scheduled delivery "${name}" & auto-added to ${category} Storage FIFO queue`);
+            recordLog(`Scheduled delivery "${name}" & auto-added to Café Storage FIFO queue`);
             document.getElementById('delItemName').value = '';
             document.getElementById('delQty').value = '';
         }
@@ -2602,7 +2473,6 @@
         const query = (document.getElementById('deliverySearchInput')?.value || '').toLowerCase().trim();
 
         let list = appData.deliveries || [];
-        if (currentDeliveryFilter !== 'ALL') list = list.filter(d => d.category === currentDeliveryFilter);
         if (query) list = list.filter(d => d.name.toLowerCase().includes(query) || d.supplier.toLowerCase().includes(query));
         if (hideOldItemsEnabled) list = list.filter(d => d.qty > 0);
 
@@ -2616,7 +2486,7 @@
             tr.innerHTML = `
                 <td style="text-align: center;"><input type="checkbox" class="row-checkbox del-row-cb" value="${del.id}" onchange="updateBatchBarVisibility()"></td>
                 <td><strong>• ${del.name}</strong></td>
-                <td>${del.category} <span style="font-size:0.7rem; color: var(--text-muted);">(${del.subcategory})</span></td>
+                <td>${del.subcategory}</td>
                 <td><span class="delivery-note-tag">${del.supplier}</span></td>
                 <td><strong>${del.qty}</strong> <span class="unit-label">${del.unit}</span></td>
                 <td>${del.deliveryDate}</td>
@@ -2625,16 +2495,8 @@
                         <button type="button" class="btn edit-btn" onclick="editDeliveryRecord(${del.id})" style="padding: 5px 8px; font-size: 0.72rem;">✏️ Re-Edit</button>
                         <select class="select-transfer" onchange="handleRowDropdownAction(${del.id}, this.value, 'DELIVERY')">
                             <option value="">Move/Copy...</option>
-                            <optgroup label="Move To FIFO Queue">
-                                <option value="MOVE_Café">☕ Café</option>
-                                <option value="MOVE_Community">🤝 Community</option>
-                                <option value="MOVE_Housekeeping">🧹 Housekeeping</option>
-                            </optgroup>
-                            <optgroup label="Copy To FIFO Queue">
-                                <option value="COPY_Café">☕ Café</option>
-                                <option value="COPY_Community">🤝 Community</option>
-                                <option value="COPY_Housekeeping">🧹 Housekeeping</option>
-                            </optgroup>
+                            <option value="MOVE_Café">☕ Move to Storage</option>
+                            <option value="COPY_Café">☕ Copy to Storage</option>
                         </select>
                         <button type="button" class="btn-delete-x" onclick="deleteDeliveryItem(${del.id})" title="Delete">✕</button>
                     </div>
@@ -2646,67 +2508,58 @@
 
     function renderMasterTables() {
         const query = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
-        const catFilter = document.getElementById('categoryFilter')?.value || 'ALL';
-        const categories = ['Café', 'Community', 'Housekeeping'];
-        let total = 0;
+        const sec = document.getElementById('sec-Café');
+        const tbody = document.getElementById('tbody-Café');
+        if (!sec || !tbody) return;
+        tbody.innerHTML = '';
 
-        categories.forEach(cat => {
-            const sec = document.getElementById(`sec-${cat}`);
-            const tbody = document.getElementById(`tbody-${cat}`);
-            if (!sec || !tbody) return;
-            tbody.innerHTML = '';
+        let items = appData.inventory.filter(i => i.category === 'Café');
+        if (query) items = items.filter(i => i.name.toLowerCase().includes(query) || i.subcategory.toLowerCase().includes(query));
+        if (hideOldItemsEnabled) items = items.filter(i => getItemTotalQty(i) > 0);
 
-            if (catFilter !== 'ALL' && catFilter !== cat) {
-                sec.style.display = 'none';
-                return;
-            }
+        if (items.length === 0) {
+            sec.style.display = 'none';
+            document.getElementById('noResultsMsg').style.display = 'block';
+        } else {
+            sec.style.display = 'block';
+            document.getElementById('noResultsMsg').style.display = 'none';
+            items.forEach(item => {
+                sortItemBatches(item);
+                const barQty = getItemBarQty(item);
+                const storageQty = getItemStorageQty(item);
+                const totalQty = getItemTotalQty(item);
+                const totalUsed = getItemTotalUsed(item);
+                const activeUnit = getItemActiveUnit(item);
+                const activeBatchesCount = item.batches ? item.batches.filter(b => b.remQty > 0).length : 0;
+                const earliestDate = (item.batches && item.batches.length > 0) ? item.batches[0].addedDate : 'N/A';
 
-            let items = appData.inventory.filter(i => i.category === cat);
-            if (query) items = items.filter(i => i.name.toLowerCase().includes(query) || i.subcategory.toLowerCase().includes(query));
-            if (hideOldItemsEnabled) items = items.filter(i => getItemTotalQty(i) > 0);
-
-            if (items.length === 0) {
-                sec.style.display = 'none';
-            } else {
-                sec.style.display = 'block';
-                total += items.length;
-                items.forEach(item => {
-                    sortItemBatches(item);
-                    const totalQty = getItemTotalQty(item);
-                    const totalUsed = getItemTotalUsed(item);
-                    const activeUnit = getItemActiveUnit(item);
-                    const activeBatchesCount = item.batches ? item.batches.filter(b => b.remQty > 0).length : 0;
-                    const earliestDate = (item.batches && item.batches.length > 0) ? item.batches[0].addedDate : 'N/A';
-
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>• ${item.name}</td>
-                        <td>${item.subcategory}</td>
-                        <td>
-                            <div class="qty-control">
-                                <button type="button" class="btn-qty" onclick="updateQty(${item.id}, -1)">-</button>
-                                <span style="font-weight: 600; min-width: 20px; text-align: center;">${totalQty}</span>
-                                <button type="button" class="btn-qty" onclick="updateQty(${item.id}, 1)">+</button>
-                                <span class="unit-label">${activeUnit}</span>
-                            </div>
-                        </td>
-                        <td><span class="used-badge-red">-${totalUsed} ${activeUnit}</span></td>
-                        <td><span class="fifo-batch-tag">${activeBatchesCount} Active Batch(es)</span></td>
-                        <td><span style="font-size: 0.75rem; font-weight:600; color: var(--text-muted);">${earliestDate}</span></td>
-                        <td>
-                            <div class="action-cell-wrapper">
-                                <button type="button" class="btn edit-btn" onclick="navigateTo('inventory', '${item.category}'); setTimeout(() => editInventoryItem(${item.id}), 80);" style="padding: 5px 8px; font-size: 0.72rem;">✏️ Edit Metadata / + Batch</button>
-                                <button type="button" class="btn-delete-x" onclick="deleteItem(${item.id})" title="Delete">✕</button>
-                            </div>
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            }
-        });
-
-        const noRes = document.getElementById('noResultsMsg');
-        if (noRes) noRes.style.display = (total === 0) ? 'block' : 'none';
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>• ${item.name}</td>
+                    <td>${item.subcategory}</td>
+                    <td><span class="location-tag-bar">${barQty} ${activeUnit}</span></td>
+                    <td><span class="location-tag-storage">${storageQty} ${activeUnit}</span></td>
+                    <td>
+                        <div class="qty-control">
+                            <button type="button" class="btn-qty" onclick="updateQty(${item.id}, -1)">-</button>
+                            <span style="font-weight: 600; min-width: 20px; text-align: center;">${totalQty}</span>
+                            <button type="button" class="btn-qty" onclick="updateQty(${item.id}, 1)">+</button>
+                            <span class="unit-label">${activeUnit}</span>
+                        </div>
+                    </td>
+                    <td><span class="used-badge-red">-${totalUsed} ${activeUnit}</span></td>
+                    <td><span class="fifo-batch-tag">${activeBatchesCount} Active Batch(es)</span></td>
+                    <td><span style="font-size: 0.75rem; font-weight:600; color: var(--text-muted);">${earliestDate}</span></td>
+                    <td>
+                        <div class="action-cell-wrapper">
+                            <button type="button" class="btn edit-btn" onclick="navigateTo('inventory', 'Café'); setTimeout(() => editInventoryItem(${item.id}), 80);" style="padding: 5px 8px; font-size: 0.72rem;">✏️ Edit Metadata / + Batch</button>
+                            <button type="button" class="btn-delete-x" onclick="deleteItem(${item.id})" title="Delete">✕</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
     }
 
     function renderTable() {
@@ -2714,13 +2567,13 @@
         if (!container) return;
         container.innerHTML = '';
 
-        let items = appData.inventory.filter(i => i.category === currentCategory);
+        let items = appData.inventory.filter(i => i.category === 'Café');
         if (hideOldItemsEnabled) items = items.filter(i => getItemTotalQty(i) > 0);
 
-        const subcategories = appData.categories[currentCategory] || [];
+        const subcategories = appData.categories['Café'] || [];
 
         if (subcategories.length === 0 && items.length === 0) {
-            container.innerHTML = `<div class="glass-card" style="text-align: center; color: var(--text-muted); padding: 20px;">No active items registered for ${currentCategory}.</div>`;
+            container.innerHTML = `<div class="glass-card" style="text-align: center; color: var(--text-muted); padding: 20px;">No active items registered for Café Inventory.</div>`;
             return;
         }
 
@@ -2732,16 +2585,16 @@
             grouped[sub].push(i);
         });
 
-        if (!openAccordionSubcategories[currentCategory]) {
-            openAccordionSubcategories[currentCategory] = {};
+        if (!openAccordionSubcategories['Café']) {
+            openAccordionSubcategories['Café'] = {};
         }
 
         Object.keys(grouped).forEach((subGroup, index) => {
             const subItems = grouped[subGroup];
             if (hideOldItemsEnabled && subItems.length === 0) return;
 
-            let isExplicitlySet = openAccordionSubcategories[currentCategory][subGroup] !== undefined;
-            let isOpen = isExplicitlySet ? openAccordionSubcategories[currentCategory][subGroup] : (index === 0);
+            let isExplicitlySet = openAccordionSubcategories['Café'][subGroup] !== undefined;
+            let isOpen = isExplicitlySet ? openAccordionSubcategories['Café'][subGroup] : (index === 0);
 
             const card = document.createElement('div');
             card.className = isOpen ? 'sub-accordion-card active' : 'sub-accordion-card';
