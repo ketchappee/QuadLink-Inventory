@@ -51,34 +51,6 @@
             padding-bottom: env(safe-area-inset-bottom);
         }
 
-        .sync-badge {
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            padding: 6px 12px;
-            border-radius: 30px;
-            background: rgba(107, 155, 126, 0.25);
-            color: #264A35;
-            border: 1px solid rgba(107, 155, 126, 0.4);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .sync-badge.syncing {
-            background: rgba(217, 160, 107, 0.25);
-            color: #5C3D1E;
-            border-color: rgba(217, 160, 107, 0.4);
-        }
-
-        .sync-badge.error {
-            background: rgba(217, 107, 107, 0.25);
-            color: #5C1E1E;
-            border-color: rgba(217, 107, 107, 0.4);
-        }
-
         .navbar {
             background: var(--clear-trans-light);
             backdrop-filter: blur(20px);
@@ -259,8 +231,8 @@
         button.danger-btn:hover { background: rgba(217, 107, 107, 0.4); }
         
         button.undo-btn { color: #5C3D1E; background: rgba(217, 160, 107, 0.25); border-color: rgba(217, 160, 107, 0.4); font-weight: 700; }
-        button.github-btn { color: #24292e; background: rgba(255, 255, 255, 0.85); font-weight: 700; }
-        button.load-github-btn { color: #1b4d3e; background: rgba(107, 155, 126, 0.25); font-weight: 700; border-color: rgba(107, 155, 126, 0.4); }
+        button.save-file-btn { color: #24292e; background: rgba(255, 255, 255, 0.85); font-weight: 700; }
+        button.load-file-btn { color: #1b4d3e; background: rgba(107, 155, 126, 0.25); font-weight: 700; border-color: rgba(107, 155, 126, 0.4); }
         button.edit-btn { color: var(--warning); background: rgba(217, 160, 107, 0.15); border-color: rgba(217, 160, 107, 0.3); }
 
         .filter-toggle-label {
@@ -627,6 +599,8 @@
 </head>
 <body>
 
+<input type="file" id="fileImporter" accept=".json" style="display: none;" onchange="importFromFile(event)">
+
 <nav class="navbar">
     <div class="nav-left" id="navLeftContainer">
         <button type="button" class="back-nav-btn" onclick="navigateTo('menu')" id="backBtn" style="display: none;">← Back</button>
@@ -636,7 +610,6 @@
     </div>
     <div style="display: flex; align-items: center; gap: 10px;">
         <button type="button" onclick="undoLastAction()" class="btn undo-btn" title="Undo last action (Ctrl+U)">↩️ Undo (Ctrl+U)</button>
-        <div id="syncBadge" class="sync-badge">● Initializing GitHub Sync...</div>
     </div>
 </nav>
 
@@ -663,8 +636,8 @@
             <button type="button" onclick="navigateTo('home')" class="btn">🏠 Home</button>
             <button type="button" onclick="navigateTo('master')" class="btn">🔍 Master Search</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
-            <button type="button" onclick="loadFromGitHub(false)" class="btn load-github-btn">🌐 Load Sync from GitHub</button>
-            <button type="button" onclick="triggerGitHubSync()" class="btn github-btn">☁️ Save Sync to GitHub</button>
+            <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
+            <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
         </div>
     </header>
 
@@ -707,8 +680,8 @@
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="navigateTo('inventory', 'Café')" class="btn">☕ Café Inventory</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
-            <button type="button" onclick="loadFromGitHub(false)" class="btn load-github-btn">🌐 Load Sync from GitHub</button>
-            <button type="button" onclick="triggerGitHubSync()" class="btn github-btn">☁️ Save Sync to GitHub</button>
+            <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
+            <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
         </div>
     </header>
 
@@ -775,8 +748,8 @@
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="navigateTo('master')" class="btn">🔍 Master Search</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
-            <button type="button" onclick="loadFromGitHub(false)" class="btn load-github-btn">🌐 Load Sync from GitHub</button>
-            <button type="button" onclick="triggerGitHubSync()" class="btn github-btn">☁️ Save Sync to GitHub</button>
+            <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
+            <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
         </div>
     </header>
 
@@ -919,8 +892,8 @@
         <div class="action-btns">
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
-            <button type="button" onclick="loadFromGitHub(false)" class="btn load-github-btn">🌐 Load Sync from GitHub</button>
-            <button type="button" onclick="triggerGitHubSync()" class="btn github-btn">☁️ Save Sync to GitHub</button>
+            <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
+            <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
         </div>
     </header>
 
@@ -1014,8 +987,8 @@
         <div class="action-btns">
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
-            <button type="button" onclick="loadFromGitHub(false)" class="btn load-github-btn">🌐 Load Sync from GitHub</button>
-            <button type="button" onclick="triggerGitHubSync()" class="btn github-btn">☁️ Save Sync to GitHub</button>
+            <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
+            <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
         </div>
     </header>
 
@@ -1096,8 +1069,6 @@
 
 <script>
     let currentDeliveryFilter = 'ALL';
-    let isSyncingActive = false;
-    let pendingSyncRequested = false;
     let hideOldItemsEnabled = false;
 
     // STORE OPEN/CLOSED ACCORDION TAB STATES PER CATEGORY
@@ -1106,10 +1077,6 @@
     // GLOBAL STATE HISTORY UNDO STACK (MAX 30 STEPS)
     let stateHistory = [];
     const MAX_UNDO_LEVELS = 30;
-
-    const GITHUB_OWNER = "ketchappee";
-    const GITHUB_REPO = "QuadLinkInventory";
-    const GITHUB_FILE_PATH = "inventory_data.json";
 
     let defaultSubcategories = {
         'Café': ['Beans', 'Milk', 'Pastries', 'Syrups & Flavorings', 'Cups & Packaging', 'Consumables & Others'],
@@ -1260,9 +1227,6 @@
         recordLog("↩️ Triggered Undo Command (Restored previous inventory state)");
         localStorage.setItem('cafe_inventory_data', JSON.stringify(appData));
         refreshAllViews();
-
-        let token = localStorage.getItem('github_pat');
-        if (token) pushToGitHub(token, false);
     }
 
     window.addEventListener('keydown', (e) => {
@@ -1369,13 +1333,6 @@
         if (e.key === 'cafe_inventory_data' && e.newValue) {
             appData = JSON.parse(e.newValue);
             refreshAllViews();
-        }
-    });
-
-    window.addEventListener('beforeunload', (e) => {
-        if (isSyncingActive) {
-            e.preventDefault();
-            e.returnValue = 'Syncing updates to GitHub in progress. Are you sure you want to exit or refresh?';
         }
     });
 
@@ -1840,163 +1797,43 @@
         appData.lastUpdatedTimestamp = Date.now();
         localStorage.setItem('cafe_inventory_data', JSON.stringify(appData));
         refreshAllViews();
-
-        let token = localStorage.getItem('github_pat');
-        if (!token) {
-            token = prompt("Enter your GitHub Personal Access Token (PAT) with 'repo' scope to activate live cloud syncing:");
-            if (token && token.trim() !== '') {
-                token = token.trim();
-                localStorage.setItem('github_pat', token);
-            }
-        }
-
-        if (token) {
-            if (isSyncingActive) {
-                pendingSyncRequested = true;
-            } else {
-                await pushToGitHub(token, false);
-            }
-        } else {
-            const badge = document.getElementById('syncBadge');
-            if (badge) {
-                badge.innerText = "● Saved Locally (No GitHub PAT)";
-                badge.className = "sync-badge error";
-            }
-        }
     }
 
-    async function triggerGitHubSync() {
-        let token = localStorage.getItem('github_pat');
-        token = prompt("Enter/Update your GitHub Personal Access Token (PAT with 'repo' scope):", token || '');
-        if (!token) return;
-        localStorage.setItem('github_pat', token.trim());
-        await pushToGitHub(token.trim(), true);
-    }
-
-    function utf8ToBase64(str) {
-        return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
-            return String.fromCharCode('0x' + p1);
-        }));
-    }
-
-    async function pushToGitHub(token, showAlert = true, retryCount = 0) {
-        if (isSyncingActive && retryCount === 0) {
-            pendingSyncRequested = true;
-            return;
-        }
-        isSyncingActive = true;
-        const badge = document.getElementById('syncBadge');
-        if (badge) {
-            badge.innerText = "⏳ Saving Sync to GitHub Repository...";
-            badge.className = "sync-badge syncing";
-        }
-
-        const message = `Save sync repository updates: ${getFormattedTimestamp()}`;
+    // EXPORT INVENTORY DATA TO LOCAL JSON FILE
+    function exportToFile() {
+        const dataStr = JSON.stringify(appData, null, 2);
+        const blob = new Blob([dataStr], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        const dateTag = new Date().toISOString().split('T')[0];
         
-        let contentBase64 = "";
-        try {
-            const jsonString = JSON.stringify(appData, null, 2);
-            contentBase64 = utf8ToBase64(jsonString);
-        } catch(e) {
-            console.error("Base64 Encoding Error: ", e);
-        }
-
-        const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`;
-        const authHeader = token.startsWith('ghp_') || token.startsWith('github_pat_') ? `Bearer ${token}` : `token ${token}`;
-
-        try {
-            let sha = null;
-            const getRes = await fetch(`${apiUrl}?t=${Date.now()}`, {
-                headers: { 
-                    "Authorization": authHeader,
-                    "Accept": "application/vnd.github.v3+json",
-                    "Cache-Control": "no-cache"
-                }
-            });
-            if (getRes.ok) {
-                const fileData = await getRes.json();
-                sha = fileData.sha;
-            }
-
-            const putRes = await fetch(apiUrl, {
-                method: "PUT",
-                headers: {
-                    "Authorization": authHeader,
-                    "Content-Type": "application/json",
-                    "Accept": "application/vnd.github.v3+json"
-                },
-                body: JSON.stringify({
-                    message: message,
-                    content: contentBase64,
-                    sha: sha
-                })
-            });
-
-            if (putRes.ok) {
-                if (badge) {
-                    badge.innerText = "● Save Synced to GitHub inventory_data.json";
-                    badge.className = "sync-badge";
-                }
-                if (showAlert) alert(`Successfully saved sync directly to ${GITHUB_FILE_PATH} in ${GITHUB_OWNER}/${GITHUB_REPO}!`);
-            } else {
-                const err = await putRes.json();
-                
-                if ((putRes.status === 409 || putRes.status === 422) && retryCount < 3) {
-                    isSyncingActive = false;
-                    return await pushToGitHub(token, showAlert, retryCount + 1);
-                }
-
-                if (badge) {
-                    badge.innerText = "✖ Sync Failed";
-                    badge.className = "sync-badge error";
-                }
-                if (showAlert) alert("GitHub Sync Error: " + (err.message || 'Check PAT permissions'));
-                if (putRes.status === 401) localStorage.removeItem('github_pat');
-            }
-        } catch (e) {
-            if (badge) {
-                badge.innerText = "✖ Network Error";
-                badge.className = "sync-badge error";
-            }
-            if (showAlert) alert("Network error while trying to sync with GitHub. Check connection or PAT token.");
-        } finally {
-            isSyncingActive = false;
-            if (pendingSyncRequested) {
-                pendingSyncRequested = false;
-                setTimeout(() => pushToGitHub(token, false), 300);
-            }
-        }
+        link.href = url;
+        link.download = `inventory_backup_${dateTag}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
     }
 
-    async function loadFromGitHub(isInitialLoad = false) {
-        const badge = document.getElementById('syncBadge');
-        if (badge) {
-            badge.innerText = "⏳ Load syncing from GitHub repository...";
-            badge.className = "sync-badge syncing";
-        }
+    // TRIGGER HIDDEN FILE INPUT FOR IMPORT
+    function triggerFileInput() {
+        document.getElementById('fileImporter').click();
+    }
 
-        const rawUrl = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/${GITHUB_FILE_PATH}?_nocache=${Date.now()}`;
+    // IMPORT INVENTORY DATA FROM LOCAL JSON FILE
+    function importFromFile(e) {
+        const file = e.target.files[0];
+        if (!file) return;
 
-        try {
-            const res = await fetch(rawUrl, { cache: "no-store" });
-            if (res.ok) {
-                const remoteData = await res.json();
-                if (remoteData && remoteData.inventory) {
-                    const localTimestamp = appData.lastUpdatedTimestamp || 0;
-                    const remoteTimestamp = remoteData.lastUpdatedTimestamp || 0;
-
-                    if (isInitialLoad && localTimestamp > remoteTimestamp) {
-                        if (badge) {
-                            badge.innerText = "● Load Synced (Local Ahead)";
-                            badge.className = "sync-badge";
-                        }
-                        let token = localStorage.getItem('github_pat');
-                        if (token) pushToGitHub(token, false);
-                        return;
-                    }
-
-                    appData = remoteData;
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            try {
+                const loadedData = JSON.parse(event.target.result);
+                if (loadedData && loadedData.inventory) {
+                    saveSnapshotForUndo();
+                    appData = loadedData;
                     
+                    // Normalize batch items
                     appData.inventory.forEach(item => {
                         if (!item.batches) {
                             const oldQty = item.qty !== undefined ? item.qty : 0;
@@ -2025,32 +1862,17 @@
                         sortItemBatches(item);
                     });
 
-                    localStorage.setItem('cafe_inventory_data', JSON.stringify(appData));
-                    refreshAllViews();
-
-                    if (badge) {
-                        badge.innerText = "● Load Synced from GitHub";
-                        badge.className = "sync-badge";
-                    }
-
-                    if (!isInitialLoad) alert(`Successfully loaded sync directly from ${GITHUB_FILE_PATH} in ${GITHUB_OWNER}/${GITHUB_REPO}!`);
+                    autoSaveData();
+                    alert("Inventory file loaded successfully!");
                 } else {
-                    if (!isInitialLoad) alert("The remote GitHub data file format is invalid.");
+                    alert("Invalid JSON data format. File must contain valid inventory structure.");
                 }
-            } else {
-                if (badge) {
-                    badge.innerText = "● Saved Locally (No Remote File)";
-                    badge.className = "sync-badge";
-                }
-                if (!isInitialLoad) alert("Could not find inventory_data.json on GitHub yet. Make sure someone has saved sync data first.");
+            } catch (err) {
+                alert("Error reading file: " + err.message);
             }
-        } catch (e) {
-            if (badge) {
-                badge.innerText = "● Saved Locally (Offline)";
-                badge.className = "sync-badge";
-            }
-            if (!isInitialLoad) alert("Network error while trying to fetch data from GitHub.");
-        }
+        };
+        reader.readAsText(file);
+        e.target.value = ''; // Reset input selection
     }
 
     function navigateTo(page, category = null) {
@@ -2682,14 +2504,6 @@
     updateDeliverySubcategoryDropdown('Café');
     updateSupplierDropdown();
     refreshAllViews();
-
-    loadFromGitHub(true);
-
-    setInterval(() => {
-        if (!isSyncingActive) {
-            loadFromGitHub(true);
-        }
-    }, 60000);
 </script>
 
 </body>
