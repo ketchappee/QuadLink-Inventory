@@ -233,6 +233,8 @@
         button.undo-btn { color: #5C3D1E; background: rgba(217, 160, 107, 0.25); border-color: rgba(217, 160, 107, 0.4); font-weight: 700; }
         button.save-file-btn { color: #24292e; background: rgba(255, 255, 255, 0.85); font-weight: 700; }
         button.load-file-btn { color: #1b4d3e; background: rgba(107, 155, 126, 0.25); font-weight: 700; border-color: rgba(107, 155, 126, 0.4); }
+        button.excel-btn { color: #1e7145; background: rgba(30, 113, 69, 0.18); border-color: rgba(30, 113, 69, 0.4); font-weight: 700; }
+        button.gsheet-btn { color: #0f9d58; background: rgba(15, 157, 88, 0.18); border-color: rgba(15, 157, 88, 0.4); font-weight: 700; }
         button.edit-btn { color: var(--warning); background: rgba(217, 160, 107, 0.15); border-color: rgba(217, 160, 107, 0.3); }
 
         .filter-toggle-label {
@@ -638,6 +640,8 @@
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Export Excel</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets</button>
         </div>
     </header>
 
@@ -682,6 +686,8 @@
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Export Excel</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets</button>
         </div>
     </header>
 
@@ -692,7 +698,9 @@
                 <div class="input-group">
                     <label>Select Pastry Item</label>
                     <div class="subcategory-input-wrapper">
-                        <select id="moItemSelect" required onchange="handleMarkedOutSelectChange(this)"></select>
+                        <select id="moItemSelect" onchange="handleMarkedOutSelectChange(this)"></select>
+                        <input type="text" id="moCustomInput" placeholder="Enter custom pastry name..." style="display: none; flex: 1;">
+                        <button type="button" id="moToggleBtn" class="btn" onclick="toggleCustomPastryMode(true)" style="padding: 0 10px; font-size: 0.72rem;">+ Custom</button>
                         <button type="button" class="btn-del-sub" onclick="deleteSelectedPastryFromDropdown()" title="Delete Selected Pastry Item Entirely">✕</button>
                     </div>
                 </div>
@@ -750,6 +758,8 @@
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Export Excel</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets</button>
         </div>
     </header>
 
@@ -894,6 +904,8 @@
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Export Excel</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets</button>
         </div>
     </header>
 
@@ -989,6 +1001,8 @@
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Export Excel</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets</button>
         </div>
     </header>
 
@@ -1430,6 +1444,27 @@
         }
     }
 
+    function toggleCustomPastryMode(isCustom) {
+        const selectEl = document.getElementById('moItemSelect');
+        const customInput = document.getElementById('moCustomInput');
+        const toggleBtn = document.getElementById('moToggleBtn');
+
+        if (isCustom) {
+            selectEl.style.display = 'none';
+            customInput.style.display = 'block';
+            customInput.value = '';
+            customInput.focus();
+            toggleBtn.innerText = '📋 List';
+            toggleBtn.setAttribute('onclick', 'toggleCustomPastryMode(false)');
+        } else {
+            selectEl.style.display = 'block';
+            customInput.style.display = 'none';
+            toggleBtn.innerText = '+ Custom';
+            toggleBtn.setAttribute('onclick', 'toggleCustomPastryMode(true)');
+            if (selectEl.options.length > 0) selectEl.selectedIndex = 0;
+        }
+    }
+
     function updateMarkedOutDropdown() {
         const select = document.getElementById('moItemSelect');
         if (!select) return;
@@ -1454,37 +1489,14 @@
 
         if (previousVal && Array.from(select.options).some(opt => opt.value === previousVal)) {
             select.value = previousVal;
+        } else if (select.options.length > 0) {
+            select.selectedIndex = 0;
         }
     }
 
-    async function handleMarkedOutSelectChange(selectEl) {
+    function handleMarkedOutSelectChange(selectEl) {
         if (selectEl.value === 'CUSTOM') {
-            const customName = prompt("Enter Custom Pastry Name:");
-            if (customName && customName.trim() !== '') {
-                const cleanName = customName.trim();
-                let existingItem = appData.inventory.find(i => i.category === 'Café' && i.name.toLowerCase().trim() === cleanName.toLowerCase());
-                
-                if (!existingItem) {
-                    saveSnapshotForUndo();
-                    existingItem = {
-                        id: Date.now(),
-                        name: cleanName,
-                        category: "Café",
-                        subcategory: "Pastries",
-                        unit: "Pcs",
-                        lastUpdated: new Date().toISOString().split('T')[0],
-                        batches: []
-                    };
-                    appData.inventory.push(existingItem);
-                    recordLog(`Added new pastry item "${cleanName}" to Café Inventory.`);
-                    await autoSaveData();
-                }
-                
-                updateMarkedOutDropdown();
-                selectEl.value = existingItem.id;
-            } else {
-                updateMarkedOutDropdown();
-            }
+            toggleCustomPastryMode(true);
         }
     }
 
@@ -1492,8 +1504,8 @@
         const selectEl = document.getElementById('moItemSelect');
         const selectedVal = selectEl.value;
 
-        if (!selectedVal || selectedVal === 'CUSTOM') {
-            alert("Please select a valid pastry item from the dropdown to delete.");
+        if (!selectedVal || selectedVal === 'CUSTOM' || document.getElementById('moCustomInput').style.display === 'block') {
+            alert("Please select a valid pastry item from the dropdown list to delete.");
             return;
         }
 
@@ -1540,24 +1552,61 @@
 
     async function addMarkedOutPastry(e) {
         e.preventDefault();
-        const selectedValue = document.getElementById('moItemSelect').value;
+        const selectEl = document.getElementById('moItemSelect');
+        const customInput = document.getElementById('moCustomInput');
+        const isCustomMode = customInput.style.display === 'block';
+
+        let itemId = null;
+        let itemName = "";
+
+        if (isCustomMode) {
+            itemName = customInput.value.trim();
+            if (!itemName) {
+                alert("Please enter a custom pastry name.");
+                return;
+            }
+        } else {
+            const selectedValue = selectEl.value;
+            if (selectedValue === 'CUSTOM') {
+                toggleCustomPastryMode(true);
+                return;
+            }
+            if (!selectedValue) {
+                alert("Please select or enter a valid pastry item.");
+                return;
+            }
+            itemId = parseInt(selectedValue);
+        }
+
         const reason = document.getElementById('moReason').value;
         const qty = parseInt(document.getElementById('moQty').value);
         const dateStr = document.getElementById('moDate').value;
 
-        if (!selectedValue || selectedValue === 'CUSTOM') {
-            alert("Please select or specify a valid pastry item.");
-            return;
-        }
-
         saveSnapshotForUndo();
 
-        const itemId = parseInt(selectedValue);
-        let item = appData.inventory.find(i => i.id === itemId);
+        let item = itemId ? appData.inventory.find(i => i.id === itemId) : null;
 
         if (!item) {
-            alert("Selected pastry item was not found in inventory.");
-            return;
+            if (!itemName && selectEl.options[selectEl.selectedIndex]) {
+                itemName = selectEl.options[selectEl.selectedIndex].text;
+            }
+            
+            let existingItem = appData.inventory.find(i => i.category === 'Café' && i.name.toLowerCase().trim() === itemName.toLowerCase());
+            if (existingItem) {
+                item = existingItem;
+            } else {
+                item = {
+                    id: Date.now(),
+                    name: itemName,
+                    category: "Café",
+                    subcategory: "Pastries",
+                    unit: "Pcs",
+                    lastUpdated: new Date().toISOString().split('T')[0],
+                    batches: []
+                };
+                appData.inventory.push(item);
+                recordLog(`Added new pastry item "${itemName}" to Café Inventory.`);
+            }
         }
 
         const totalAvailable = getItemTotalQty(item);
@@ -1568,21 +1617,24 @@
         }
 
         consumeFIFOStock(item, qty);
-        const itemName = item.name;
         const unitStr = getItemActiveUnit(item);
 
         appData.markedOutPastries.unshift({
             id: Date.now(),
-            itemId: itemId,
-            itemName: itemName,
+            itemId: item.id,
+            itemName: item.name,
             qty: qty,
             unit: unitStr,
             reason: reason,
             date: dateStr
         });
 
-        recordLog(`🥐 Marked out <span class="used-text-red">-${qty} ${unitStr}</span> of "${itemName}" (Reason: ${reason}).`);
+        recordLog(`🥐 Marked out <span class="used-text-red">-${qty} ${unitStr}</span> of "${item.name}" (Reason: ${reason}).`);
+        
         document.getElementById('moQty').value = '';
+        customInput.value = '';
+        toggleCustomPastryMode(false);
+        
         await autoSaveData();
         refreshAllViews();
     }
@@ -1799,7 +1851,6 @@
         refreshAllViews();
     }
 
-    // EXPORT INVENTORY DATA TO LOCAL JSON FILE
     function exportToFile() {
         const dataStr = JSON.stringify(appData, null, 2);
         const blob = new Blob([dataStr], { type: "application/json" });
@@ -1815,12 +1866,168 @@
         URL.revokeObjectURL(url);
     }
 
-    // TRIGGER HIDDEN FILE INPUT FOR IMPORT
+    // EXPORT TO EXCEL WITH AUTOMATED FORMULAS AND STYLED TABLES (.xls)
+    function exportToExcel() {
+        const dateTag = new Date().toISOString().split('T')[0];
+        let xml = `<?xml version="1.0"?><?mso-application progid="Excel.Sheet"?>
+        <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+         xmlns:o="urn:schemas-microsoft-com:office:office"
+         xmlns:x="urn:schemas-microsoft-com:office:excel"
+         xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+         <Styles>
+          <Style ss:ID="Header"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#8C7B6B" ss:Pattern="Solid"/></Style>
+          <Style ss:ID="SubHeader"><Font ss:Bold="1"/><Interior ss:Color="#EAE6E1" ss:Pattern="Solid"/></Style>
+          <Style ss:ID="Bold"><Font ss:Bold="1"/></Style>
+         </Styles>
+         <Worksheet ss:Name="Inventory Summary">
+          <Table>
+           <Row ss:StyleID="Header">
+            <Cell><Data ss:Type="String">Category</Data></Cell>
+            <Cell><Data ss:Type="String">Subcategory</Data></Cell>
+            <Cell><Data ss:Type="String">Item Name</Data></Cell>
+            <Cell><Data ss:Type="String">Unit</Data></Cell>
+            <Cell><Data ss:Type="String">Remaining Stock</Data></Cell>
+            <Cell><Data ss:Type="String">Used Stock</Data></Cell>
+            <Cell><Data ss:Type="String">Initial Stock Formula</Data></Cell>
+           </Row>`;
+
+        let rowIndex = 2;
+        appData.inventory.forEach(item => {
+            const totalRem = getItemTotalQty(item);
+            const totalUsed = getItemTotalUsed(item);
+            const unitStr = getItemActiveUnit(item);
+            xml += `
+           <Row>
+            <Cell><Data ss:Type="String">${item.category}</Data></Cell>
+            <Cell><Data ss:Type="String">${item.subcategory}</Data></Cell>
+            <Cell><Data ss:Type="String">${item.name}</Data></Cell>
+            <Cell><Data ss:Type="String">${unitStr}</Data></Cell>
+            <Cell><Data ss:Type="Number">${totalRem}</Data></Cell>
+            <Cell><Data ss:Type="Number">${totalUsed}</Data></Cell>
+            <Cell ss:Formula="=RC[-2]+RC[-1]"><Data ss:Type="Number">${totalRem + totalUsed}</Data></Cell>
+           </Row>`;
+            rowIndex++;
+        });
+
+        xml += `
+           <Row ss:StyleID="SubHeader">
+            <Cell><Data ss:Type="String">TOTALS</Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell ss:Formula="=SUM(E2:E${rowIndex-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell ss:Formula="=SUM(F2:F${rowIndex-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell ss:Formula="=SUM(G2:G${rowIndex-1})"><Data ss:Type="Number">0</Data></Cell>
+           </Row>
+          </Table>
+         </Worksheet>
+         <Worksheet ss:Name="Batch Breakdown">
+          <Table>
+           <Row ss:StyleID="Header">
+            <Cell><Data ss:Type="String">Item Name</Data></Cell>
+            <Cell><Data ss:Type="String">Category</Data></Cell>
+            <Cell><Data ss:Type="String">Batch Date</Data></Cell>
+            <Cell><Data ss:Type="String">Source</Data></Cell>
+            <Cell><Data ss:Type="String">Initial Qty</Data></Cell>
+            <Cell><Data ss:Type="String">Remaining Qty</Data></Cell>
+            <Cell><Data ss:Type="String">Used Qty Formula</Data></Cell>
+            <Cell><Data ss:Type="String">Unit</Data></Cell>
+           </Row>`;
+
+        appData.inventory.forEach(item => {
+            (item.batches || []).forEach(b => {
+                const initQty = b.initQty !== undefined ? b.initQty : b.remQty;
+                xml += `
+           <Row>
+            <Cell><Data ss:Type="String">${item.name}</Data></Cell>
+            <Cell><Data ss:Type="String">${item.category}</Data></Cell>
+            <Cell><Data ss:Type="String">${b.addedDate}</Data></Cell>
+            <Cell><Data ss:Type="String">${b.sourceNote || 'In-House'}</Data></Cell>
+            <Cell><Data ss:Type="Number">${initQty}</Data></Cell>
+            <Cell><Data ss:Type="Number">${b.remQty}</Data></Cell>
+            <Cell ss:Formula="=RC[-2]-RC[-1]"><Data ss:Type="Number">${initQty - b.remQty}</Data></Cell>
+            <Cell><Data ss:Type="String">${b.unit || item.unit}</Data></Cell>
+           </Row>`;
+            });
+        });
+
+        xml += `
+          </Table>
+         </Worksheet>
+         <Worksheet ss:Name="Marked Out Pastries">
+          <Table>
+           <Row ss:StyleID="Header">
+            <Cell><Data ss:Type="String">Date</Data></Cell>
+            <Cell><Data ss:Type="String">Pastry Item Name</Data></Cell>
+            <Cell><Data ss:Type="String">Qty Marked Out</Data></Cell>
+            <Cell><Data ss:Type="String">Unit</Data></Cell>
+            <Cell><Data ss:Type="String">Reason</Data></Cell>
+           </Row>`;
+
+        (appData.markedOutPastries || []).forEach(mo => {
+            xml += `
+           <Row>
+            <Cell><Data ss:Type="String">${mo.date}</Data></Cell>
+            <Cell><Data ss:Type="String">${mo.itemName}</Data></Cell>
+            <Cell><Data ss:Type="Number">${mo.qty}</Data></Cell>
+            <Cell><Data ss:Type="String">${mo.unit}</Data></Cell>
+            <Cell><Data ss:Type="String">${mo.reason}</Data></Cell>
+           </Row>`;
+        });
+
+        xml += `
+          </Table>
+         </Worksheet>
+        </Workbook>`;
+
+        const blob = new Blob([xml], { type: "application/vnd.ms-excel" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `inventory_excel_${dateTag}.xls`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+
+    // EXPORT DIRECTLY TO GOOGLE SHEETS READY FORMAT (.csv)
+    function exportToGoogleSheets() {
+        const dateTag = new Date().toISOString().split('T')[0];
+        let csvContent = "Category,Subcategory,Item Name,Unit,Remaining Stock,Used Stock,Initial Total Stock (Formula)\n";
+
+        appData.inventory.forEach((item, index) => {
+            const totalRem = getItemTotalQty(item);
+            const totalUsed = getItemTotalUsed(item);
+            const unitStr = getItemActiveUnit(item);
+            const rowNum = index + 2;
+            const formula = `"=E${rowNum}+F${rowNum}"`;
+            
+            csvContent += `"${item.category}","${item.subcategory}","${item.name}","${unitStr}",${totalRem},${totalUsed},${formula}\n`;
+        });
+
+        csvContent += "\n--- MARKED OUT PASTRIES HISTORY ---\n";
+        csvContent += "Date,Pastry Item Name,Qty Marked Out,Unit,Reason\n";
+
+        (appData.markedOutPastries || []).forEach(mo => {
+            csvContent += `"${mo.date}","${mo.itemName}",${mo.qty},"${mo.unit}","${mo.reason}"\n`;
+        });
+
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `google_sheets_inventory_${dateTag}.csv`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+
     function triggerFileInput() {
         document.getElementById('fileImporter').click();
     }
 
-    // IMPORT INVENTORY DATA FROM LOCAL JSON FILE
     function importFromFile(e) {
         const file = e.target.files[0];
         if (!file) return;
@@ -1833,7 +2040,6 @@
                     saveSnapshotForUndo();
                     appData = loadedData;
                     
-                    // Normalize batch items
                     appData.inventory.forEach(item => {
                         if (!item.batches) {
                             const oldQty = item.qty !== undefined ? item.qty : 0;
@@ -1872,7 +2078,7 @@
             }
         };
         reader.readAsText(file);
-        e.target.value = ''; // Reset input selection
+        e.target.value = '';
     }
 
     function navigateTo(page, category = null) {
