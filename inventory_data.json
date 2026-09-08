@@ -1,0 +1,2083 @@
+{
+  "categories": {
+    "Café": [
+      "Pastries",
+      "RETAIL",
+      "BAR",
+      "MILK"
+    ],
+    "Community": [
+      "General"
+    ],
+    "Housekeeping": [
+      "Cleaning Supplies",
+      "Linens & Towels",
+      "Tools & Equipment",
+      "Restroom Supplies"
+    ]
+  },
+  "inventory": [
+    {
+      "id": 4,
+      "name": "Disinfectant Spray",
+      "category": "Housekeeping",
+      "subcategory": "Cleaning Supplies",
+      "lastChanged": "2026-08-15 11:30",
+      "unit": "Pcs",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_ntkjs",
+          "addedDate": "2026-08-01",
+          "initQty": 8,
+          "remQty": 8,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-01"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785981992777,
+      "name": "COKE REGULAR",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastChanged": "2026-08-06 11:48",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_hsan8",
+          "addedDate": "2026-08-06",
+          "initQty": 2,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Case",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785981993353,
+      "name": "COKE ZERO",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_if0tb",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 0,
+          "sourceNote": "In-House",
+          "unit": "Case",
+          "lastUpdated": "2026-08-06"
+        },
+        {
+          "batchId": "b_1788750457195_devnd",
+          "addedDate": "2026-09-07",
+          "initQty": 16,
+          "remQty": 16,
+          "unit": "Pcs",
+          "sourceNote": "In-House",
+          "lastUpdated": "2026-09-07"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785981993123,
+      "name": "ROYAL",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_i3lll",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Case",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785981993109,
+      "name": "VITA COCO ( BIG ) ",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_8ka86",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Case",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785981993283,
+      "name": "VITA COCO ( SMALL )",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_htkj0",
+          "addedDate": "2026-08-06",
+          "initQty": 2,
+          "remQty": 2,
+          "sourceNote": "In-House",
+          "unit": "Case",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785981993288,
+      "name": "TICTAC",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Box",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_g43ug",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Box",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785981993328,
+      "name": "LOACKER",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Box",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_zipzg",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Box",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785981993388,
+      "name": "LAY'S SOUR CREAM",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_0nkr1",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Case",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785981993368,
+      "name": "LAY'S ORIGINAL",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_ma3jm",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Case",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785981993559,
+      "name": "TAKE IT",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_xbjjv",
+          "addedDate": "2026-08-06",
+          "initQty": 10,
+          "remQty": 10,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785981992820,
+      "name": "DAIRY MILK CADBURY",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_56pq0",
+          "addedDate": "2026-08-06",
+          "initQty": 24,
+          "remQty": 24,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785981992792,
+      "name": "CLOUD 9",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_3xlw5",
+          "addedDate": "2026-08-06",
+          "initQty": 12,
+          "remQty": 12,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785981993274,
+      "name": "FITBAR",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_irmng",
+          "addedDate": "2026-08-06",
+          "initQty": 12,
+          "remQty": 12,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785981993237,
+      "name": "SNICKERS",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_l9lkw",
+          "addedDate": "2026-08-06",
+          "initQty": 12,
+          "remQty": 12,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785983542759,
+      "name": "ARLA MOZZARELLA",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_py3lv",
+          "addedDate": "2026-08-06",
+          "initQty": 10,
+          "remQty": 10,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785983583519,
+      "name": "RAM SWEET PICKELS",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_6jwhr",
+          "addedDate": "2026-08-06",
+          "initQty": 2,
+          "remQty": 2,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785983628499,
+      "name": "LEA & PERRINS WORCESTERSHIRE SAUCE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_ecb3a",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785983649687,
+      "name": "POTATO CHIPS ORIGINAL",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_wu7vi",
+          "addedDate": "2026-08-06",
+          "initQty": 30,
+          "remQty": 30,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785983664797,
+      "name": "EDEN CHEESE SLICED BY 10",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_e5d0n",
+          "addedDate": "2026-08-06",
+          "initQty": 10,
+          "remQty": 10,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785983691956,
+      "name": "MOLINERA WHITE TRUFFLE IN OLIVE OIL",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 10:50",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_o7vcb",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785984055493,
+      "name": "JERSEY CONDENSED",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Case",
+      "lastChanged": "2026-08-06 10:40",
+      "isDeliveryItem": true,
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_ujueg",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Case",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785984979857,
+      "name": "MUSCOVADO",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Kg",
+      "lastChanged": "2026-08-06 10:56",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_nguzf",
+          "addedDate": "2026-08-06",
+          "initQty": 10,
+          "remQty": 10,
+          "sourceNote": "In-House",
+          "unit": "Kg",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785988031417,
+      "name": "BISCOFF SPREAD",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastChanged": "2026-08-06 11:47",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_wr1b9",
+          "addedDate": "2026-08-06",
+          "initQty": 5,
+          "remQty": 5,
+          "sourceNote": "In-House",
+          "unit": "Pack",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785988041024,
+      "name": "BISCOFF BISCUIT",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastChanged": "2026-08-06 11:47",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_oubrj",
+          "addedDate": "2026-08-06",
+          "initQty": 5,
+          "remQty": 5,
+          "sourceNote": "In-House",
+          "unit": "Pack",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785988158956,
+      "name": "SPAM LITE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 11:49",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_yqmec",
+          "addedDate": "2026-08-06",
+          "initQty": 10,
+          "remQty": 10,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785988178751,
+      "name": "CENTURY TUNA",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 11:49",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_u87ck",
+          "addedDate": "2026-08-06",
+          "initQty": 10,
+          "remQty": 10,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785988194053,
+      "name": "MAGNOLIA MAYONNAISE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 11:49",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_fgdlq",
+          "addedDate": "2026-08-06",
+          "initQty": 10,
+          "remQty": 10,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785988326693,
+      "name": "DEL MONTE KETCHUP ORIGINAL BLEND",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 11:52",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_5fghd",
+          "addedDate": "2026-08-06",
+          "initQty": 5,
+          "remQty": 5,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785989237635,
+      "name": "MCCORMICK BLACK PEPPER GROUND",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Bottle",
+      "lastChanged": "2026-08-06 12:07",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_n3hqg",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Bottle",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785989263242,
+      "name": "MCCORMICK SPANISH PAPRIKA",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Bottle",
+      "lastChanged": "2026-08-06 12:07",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_8vz0s",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Bottle",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785989270093,
+      "name": "MCCORMICK GARLIC POWDER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Bottle",
+      "lastChanged": "2026-08-06 12:07",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_v12b1",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Bottle",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785989281414,
+      "name": "MCCORMICK ONION POWDER SPECIAL",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Bottle",
+      "lastChanged": "2026-08-06 12:08",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_js6bl",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Bottle",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785989294648,
+      "name": "MCCORMICK IODIZED SALT",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Kg",
+      "lastChanged": "2026-08-06 12:08",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_ocsj0",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Kg",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785989820642,
+      "name": "MCCORMICK PREPARED MUSTARD",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 12:17",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_3zbsl",
+          "addedDate": "2026-08-06",
+          "initQty": 2,
+          "remQty": 2,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785989835264,
+      "name": "EDEN SLICED CHEESE",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastChanged": "2026-08-06 12:17",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_scavt",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Case",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785989930136,
+      "name": "MCCORMICK PREPARED MUSTARD",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 12:18",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_4dkei",
+          "addedDate": "2026-08-06",
+          "initQty": 2,
+          "remQty": 2,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785989940424,
+      "name": "EDEN SLICED CHEESE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Case",
+      "lastChanged": "2026-08-06 12:19",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_apnie",
+          "addedDate": "2026-08-06",
+          "initQty": 1,
+          "remQty": 1,
+          "sourceNote": "In-House",
+          "unit": "Case",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1785989952868,
+      "name": "HEINZ YELLOW MUSTARD",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastChanged": "2026-08-06 12:19",
+      "sourceNote": "In-House",
+      "batches": [
+        {
+          "batchId": "b_1788749540562_4nisw",
+          "addedDate": "2026-08-06",
+          "initQty": 2,
+          "remQty": 2,
+          "sourceNote": "In-House",
+          "unit": "Pcs",
+          "lastUpdated": "2026-08-06"
+        }
+      ],
+      "lastUpdated": "2026-09-07"
+    },
+    {
+      "id": 1788758891490.3804,
+      "name": "GILCO ALMOND MILK",
+      "category": "Café",
+      "subcategory": "MILK",
+      "unit": "Case",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788758891490_8qutu",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 1,
+          "remQty": 1,
+          "unit": "Case",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788758917193.8528,
+      "name": "PERRIER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Case",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788758917192_n73vu",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 3,
+          "remQty": 3,
+          "unit": "Case",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788758928608.9414,
+      "name": "EVIAN",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Case",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788758928607_zr2rw",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 3,
+          "remQty": 3,
+          "unit": "Case",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788758971115.6833,
+      "name": "WOODEN STIRRER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788758971114_ftnja",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 1,
+          "remQty": 1,
+          "unit": "Pack",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788759000630.7246,
+      "name": "THICK WHITE CHOPPING BOARD",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788759000629_nqeaz",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 5,
+          "remQty": 5,
+          "unit": "Pcs",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788759021197.3706,
+      "name": "SANTOKU KNIFE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788759021196_20u9i",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 3,
+          "remQty": 3,
+          "unit": "Pcs",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788759104014.8455,
+      "name": "STAINLESS MIXING BOWL 30CM",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788759104013_1ao3l",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 1,
+          "remQty": 1,
+          "unit": "Pcs",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788759121363.778,
+      "name": "JAMS SQUEEZE BOTTLE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788759121362_xl5sg",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 5,
+          "remQty": 5,
+          "unit": "Pcs",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788759131157.215,
+      "name": "BREAD KNIFE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788759131156_o53xo",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 2,
+          "remQty": 2,
+          "unit": "Pcs",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788759142023.358,
+      "name": "CAN OPENER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788759142022_8k5be",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 2,
+          "remQty": 2,
+          "unit": "Pcs",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788759153581.6802,
+      "name": "FROTHER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788759153580_cmcqa",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 2,
+          "remQty": 0,
+          "unit": "Pcs",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788761229498_4oa1z",
+          "addedDate": "2026-09-07",
+          "lastUpdated": "2026-09-07",
+          "initQty": 1,
+          "remQty": 1,
+          "unit": "Pcs",
+          "sourceNote": "In-House"
+        }
+      ]
+    },
+    {
+      "id": 1788759164620.3403,
+      "name": "GLOVES BLACK",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788759164619_r4e9e",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 1,
+          "remQty": 1,
+          "unit": "Pcs",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788759184199.3582,
+      "name": "CLING WRAP 1",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788759184198_g8nt0",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 1,
+          "remQty": 1,
+          "unit": "Pcs",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788759199615.3315,
+      "name": "BAR SPOON",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788759199614_17v17",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 2,
+          "remQty": 2,
+          "unit": "Pcs",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788759213275.874,
+      "name": "FOLDING STOOL",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788759213274_ehgxt",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 1,
+          "remQty": 1,
+          "unit": "Pcs",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788759329525.9604,
+      "name": "16 OZ PLASTIC CUPS",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788759329524_del9v",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 5,
+          "remQty": 5,
+          "unit": "Pack",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788759344444.1682,
+      "name": "STRAWLESS LIDS W/ HOLE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788759344443_1zqmi",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 2,
+          "remQty": 2,
+          "unit": "Pack",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788759382862.57,
+      "name": "PLASTIC FLAT LIDS W/ HOLE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788759382861_su78q",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 5,
+          "remQty": 5,
+          "unit": "Pack",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788759397370.7507,
+      "name": "PLASIC DOME LIDS",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788759397369_m6355",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 2,
+          "remQty": 2,
+          "unit": "Pack",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788781189724.251,
+      "name": "EMBORG FULL CREAM MILK",
+      "category": "Café",
+      "subcategory": "MILK",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-07",
+      "batches": [
+        {
+          "batchId": "b_1788781189723_lrmn6",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-07",
+          "initQty": 60,
+          "remQty": 60,
+          "unit": "Pcs",
+          "sourceNote": "Delivery"
+        }
+      ]
+    }
+  ],
+  "logs": [
+    {
+      "id": "log_1788781189723",
+      "timestamp": "2026-09-07 19:39",
+      "details": "Scheduled delivery \"EMBORG FULL CREAM MILK\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788781147499",
+      "timestamp": "2026-09-07 19:39",
+      "details": "Deleted item \"EMBORG\" across all page views"
+    },
+    {
+      "id": "log_1788777055821",
+      "timestamp": "2026-09-07 18:30",
+      "details": "Deleted item \"EMBORG FULL CREAM MILK\" across all page views"
+    },
+    {
+      "id": "log_1788767553832",
+      "timestamp": "2026-09-07 15:52",
+      "details": "🔻 Decreased -1 Pcs from \"EMBORG\". Total on hand went from 59 to 58 Pcs. Details: [Deducted 1 Pcs from Batch [2026-07-17] (Remaining: 58 Pcs)]"
+    },
+    {
+      "id": "log_1788767549826",
+      "timestamp": "2026-09-07 15:52",
+      "details": "🔻 Decreased -1 Pcs from \"EMBORG\". Total on hand went from 60 to 59 Pcs. Details: [Deducted 1 Pcs from Batch [2026-07-17] (Remaining: 59 Pcs)]"
+    },
+    {
+      "id": "log_1788767535407",
+      "timestamp": "2026-09-07 15:52",
+      "details": "Scheduled delivery \"EMBORG\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788767516244",
+      "timestamp": "2026-09-07 15:51",
+      "details": "Deleted delivery \"EMBORG FULL CREAM MILK\""
+    },
+    {
+      "id": "log_1788767474378",
+      "timestamp": "2026-09-07 15:51",
+      "details": "Scheduled delivery \"EMBORG FULL CREAM MILK\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788765488756",
+      "timestamp": "2026-09-07 15:18",
+      "details": "Deleted delivery \"EMBORG FULL CREAM MILK\""
+    },
+    {
+      "id": "log_1788764860375",
+      "timestamp": "2026-09-07 15:07",
+      "details": "Scheduled delivery \"EMBORG FULL CREAM MILK\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788764835906",
+      "timestamp": "2026-09-07 15:07",
+      "details": "Deleted delivery \"EMBORG FULL CREAM MILK\""
+    },
+    {
+      "id": "log_1788764518061",
+      "timestamp": "2026-09-07 15:01",
+      "details": "Scheduled delivery \"EMBORG FULL CREAM MILK\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788764279858",
+      "timestamp": "2026-09-07 14:57",
+      "details": "↩️ Triggered Undo Command (Restored previous inventory state)"
+    },
+    {
+      "id": "log_1788763057117",
+      "timestamp": "2026-09-07 14:37",
+      "details": "Deleted item \"EMBORG FULL CREAM\" across all page views"
+    },
+    {
+      "id": "log_1788763047702",
+      "timestamp": "2026-09-07 14:37",
+      "details": "↩️ Triggered Undo Command (Restored previous inventory state)"
+    },
+    {
+      "id": "log_1788762798340",
+      "timestamp": "2026-09-07 14:33",
+      "details": "↩️ Triggered Undo Command (Restored previous inventory state)"
+    },
+    {
+      "id": "log_1788761418661",
+      "timestamp": "2026-09-07 14:10",
+      "details": "FIFO Depleted 1 Pcs from \"FROTHER\" (Oldest stock first)"
+    },
+    {
+      "id": "log_1788761260912",
+      "timestamp": "2026-09-07 14:07",
+      "details": "FIFO Depleted 1 Pcs from \"FROTHER\" (Oldest stock first)"
+    },
+    {
+      "id": "log_1788761229498",
+      "timestamp": "2026-09-07 14:07",
+      "details": "Added new batch (1 Pcs, Date: 2026-09-07) into FIFO queue for \"FROTHER\""
+    },
+    {
+      "id": "log_1788761164380",
+      "timestamp": "2026-09-07 14:06",
+      "details": "Deleted batch from \"STAINLESS MIXING BOWL 30CM\""
+    },
+    {
+      "id": "log_1788761144054",
+      "timestamp": "2026-09-07 14:05",
+      "details": "Audited Batch (2026-07-17) for \"STAINLESS MIXING BOWL 30CM\": Adjusted Qty from 0 to 1 Pcs"
+    },
+    {
+      "id": "log_1788761116782",
+      "timestamp": "2026-09-07 14:05",
+      "details": "Added +1 Pcs quick batch to \"STAINLESS MIXING BOWL 30CM\""
+    },
+    {
+      "id": "log_1788760576598",
+      "timestamp": "2026-09-07 13:56",
+      "details": "Re-edited delivery \"STAINLESS MIXING BOWL 30CM\""
+    },
+    {
+      "id": "log_1788760534048",
+      "timestamp": "2026-09-07 13:55",
+      "details": "Deleted batch from \"STAINLESS MIXING BOWL 30CM\""
+    },
+    {
+      "id": "log_1788760510754",
+      "timestamp": "2026-09-07 13:55",
+      "details": "Added +1 Pcs quick batch to \"STAINLESS MIXING BOWL 30CM\""
+    },
+    {
+      "id": "log_1788760366746",
+      "timestamp": "2026-09-07 13:52",
+      "details": "Deleted batch from \"STAINLESS MIXING BOWL 30CM\""
+    },
+    {
+      "id": "log_1788760251139",
+      "timestamp": "2026-09-07 13:50",
+      "details": "Added +1 Pcs quick batch to \"STAINLESS MIXING BOWL 30CM\""
+    },
+    {
+      "id": "log_1788760244455",
+      "timestamp": "2026-09-07 13:50",
+      "details": "Deleted batch from \"STAINLESS MIXING BOWL 30CM\""
+    },
+    {
+      "id": "log_1788760231883",
+      "timestamp": "2026-09-07 13:50",
+      "details": "Added +1 Pcs quick batch to \"STAINLESS MIXING BOWL 30CM\""
+    },
+    {
+      "id": "log_1788760209939",
+      "timestamp": "2026-09-07 13:50",
+      "details": "FIFO Depleted 1 Pcs from \"STAINLESS MIXING BOWL 30CM\" (Oldest stock first)"
+    },
+    {
+      "id": "log_1788759397369",
+      "timestamp": "2026-09-07 13:36",
+      "details": "Scheduled delivery \"PLASIC DOME LIDS\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788759382861",
+      "timestamp": "2026-09-07 13:36",
+      "details": "Scheduled delivery \"PLASTIC FLAT LIDS W/ HOLE\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788759364029",
+      "timestamp": "2026-09-07 13:36",
+      "details": "Re-edited delivery \"STRAWLESS LIDS\""
+    },
+    {
+      "id": "log_1788759344443",
+      "timestamp": "2026-09-07 13:35",
+      "details": "Scheduled delivery \"STRAWLESS LIDS W/ HOLE\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788759329524",
+      "timestamp": "2026-09-07 13:35",
+      "details": "Scheduled delivery \"16 OZ PLASTIC CUPS\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788759213274",
+      "timestamp": "2026-09-07 13:33",
+      "details": "Scheduled delivery \"FOLDING STOOL\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788759199614",
+      "timestamp": "2026-09-07 13:33",
+      "details": "Scheduled delivery \"BAR SPOON\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788759184198",
+      "timestamp": "2026-09-07 13:33",
+      "details": "Scheduled delivery \"CLING WRAP 1\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788759164619",
+      "timestamp": "2026-09-07 13:32",
+      "details": "Scheduled delivery \"GLOVES BLACK\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788759153580",
+      "timestamp": "2026-09-07 13:32",
+      "details": "Scheduled delivery \"FROTHER\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788759142022",
+      "timestamp": "2026-09-07 13:32",
+      "details": "Scheduled delivery \"CAN OPENER\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788759131156",
+      "timestamp": "2026-09-07 13:32",
+      "details": "Scheduled delivery \"BREAD KNIFE\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788759121362",
+      "timestamp": "2026-09-07 13:32",
+      "details": "Scheduled delivery \"JAMS SQUEEZE BOTTLE\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788759104013",
+      "timestamp": "2026-09-07 13:31",
+      "details": "Scheduled delivery \"STAINLESS MIXING BOWL 30CM\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788759021196",
+      "timestamp": "2026-09-07 13:30",
+      "details": "Scheduled delivery \"SANTOKU KNIFE\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788759000629",
+      "timestamp": "2026-09-07 13:30",
+      "details": "Scheduled delivery \"THICK WHITE CHOPPING BOARD\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788758971114",
+      "timestamp": "2026-09-07 13:29",
+      "details": "Scheduled delivery \"WOODEN STIRRER\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788758928607",
+      "timestamp": "2026-09-07 13:28",
+      "details": "Scheduled delivery \"EVIAN\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788758917192",
+      "timestamp": "2026-09-07 13:28",
+      "details": "Scheduled delivery \"PERRIER\" & auto-added to Café FIFO batch timeline"
+    },
+    {
+      "id": "log_1788758891490",
+      "timestamp": "2026-09-07 13:28",
+      "details": "Scheduled delivery \"GILCO ALMOND MILK\" & auto-added to Café FIFO batch timeline"
+    }
+  ],
+  "deliveries": [
+    {
+      "id": 1788781189723,
+      "name": "EMBORG FULL CREAM MILK",
+      "category": "Café",
+      "subcategory": "MILK",
+      "supplier": "JAMBI",
+      "qty": 60,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788759397369,
+      "name": "PLASIC DOME LIDS",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 2,
+      "unit": "Pack",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788759382861,
+      "name": "PLASTIC FLAT LIDS W/ HOLE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 5,
+      "unit": "Pack",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788759344443,
+      "name": "STRAWLESS LIDS",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 2,
+      "unit": "Pack",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788759329524,
+      "name": "16 OZ PLASTIC CUPS",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 5,
+      "unit": "Pack",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788759213274,
+      "name": "FOLDING STOOL",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788759199614,
+      "name": "BAR SPOON",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 2,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788759184198,
+      "name": "CLING WRAP 1",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788759164619,
+      "name": "GLOVES BLACK",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788759153580,
+      "name": "FROTHER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 2,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788759142022,
+      "name": "CAN OPENER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 2,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788759131156,
+      "name": "BREAD KNIFE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 2,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788759121362,
+      "name": "JAMS SQUEEZE BOTTLE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 5,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788759104013,
+      "name": "STAINLESS MIXING BOWL 30CM",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788759021196,
+      "name": "SANTOKU KNIFE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 3,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788759000629,
+      "name": "THICK WHITE CHOPPING BOARD",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 5,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788758971114,
+      "name": "WOODEN STIRRER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Pack",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788758928607,
+      "name": "EVIAN",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 3,
+      "unit": "Case",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788758917192,
+      "name": "PERRIER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 3,
+      "unit": "Case",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1788758891489,
+      "name": "GILCO ALMOND MILK",
+      "category": "Café",
+      "subcategory": "MILK",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Case",
+      "deliveryDate": "2026-07-17"
+    },
+    {
+      "id": 1785989951910,
+      "name": "HEINZ YELLOW MUSTARD",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 2,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785989940252,
+      "name": "EDEN SLICED CHEESE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785989930001,
+      "name": "MCCORMICK PREPARED MUSTARD",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 2,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785989293704,
+      "name": "MCCORMICK IODIZED SALT",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Kg",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785989281269,
+      "name": "MCCORMICK ONION POWDER SPECIAL",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Bottle",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785989269180,
+      "name": "MCCORMICK GARLIC POWDER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Bottle",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785989263058,
+      "name": "MCCORMICK SPANISH PAPRIKA",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Bottle",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785989237498,
+      "name": "MCCORMICK BLACK PEPPER GROUND",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Bottle",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785988325935,
+      "name": "DEL MONTE KETCHUP ORIGINAL BLEND",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 5,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785988193765,
+      "name": "MAGNOLIA MAYONNAISE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 10,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785988178273,
+      "name": "CENTURY TUNA",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 10,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785988158717,
+      "name": "SPAM LITE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 10,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785988040474,
+      "name": "BISCOFF BISCUIT",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 5,
+      "unit": "Pack",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785988030696,
+      "name": "BISCOFF SPREAD",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 5,
+      "unit": "Pack",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785984979293,
+      "name": "MUSCOVADO",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 10,
+      "unit": "Kg",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785984055007,
+      "name": "JERSEY CONDENSED",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785983691956,
+      "name": "MOLINERA WHITE TRUFFLE IN OLIVE OIL",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785983664797,
+      "name": "EDEN CHEESE SLICED BY 10",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 10,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785983649687,
+      "name": "POTATO CHIPS ORIGINAL",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 30,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785983628499,
+      "name": "LEA & PERRINS WORCESTERSHIRE SAUCE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785983583519,
+      "name": "RAM SWEET PICKELS",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 2,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785983542759,
+      "name": "ARLA MOZZARELLA",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "qty": 10,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980109725,
+      "name": "SPRITE",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980110168,
+      "name": "COKE REGULAR",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980109855,
+      "name": "COKE ZERO",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980109487,
+      "name": "ROYAL",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980109557,
+      "name": "VITA COCO ( BIG ) ",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980110324,
+      "name": "VITA COCO ( SMALL )",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 2,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980110219,
+      "name": "TICTAC",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Box",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980109582,
+      "name": "LOACKER",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Box",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980110168,
+      "name": "LAY'S EXTRA CHEESE",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980110171,
+      "name": "LAY'S SOUR CREAM",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980110432,
+      "name": "LAY'S ORIGINAL",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 1,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980110278,
+      "name": "TAKE IT",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 10,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980110191,
+      "name": "DAIRY MILK CADBURY",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 24,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980109524,
+      "name": "CLOUD 9",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 12,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980110166,
+      "name": "FITBAR",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 12,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    },
+    {
+      "id": 1785980109657,
+      "name": "SNICKERS",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 12,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    }
+  ],
+  "suppliers": [
+    "JAMBI",
+    "YARDSTICK",
+    "NIMO",
+    "KUKIDO",
+    "MMB",
+    "LALAMOVE"
+  ],
+  "markedOutPastries": [],
+  "lastUpdatedTimestamp": 1788781189723
+}
