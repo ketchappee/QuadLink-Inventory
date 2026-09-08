@@ -1888,6 +1888,13 @@
         await pushToGitHub(token.trim(), true);
     }
 
+    // Unicode-safe Base64 encoding helper to prevent UTF-8/emoji crashes
+    function utf8ToBase64(str) {
+        return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+            return String.fromCharCode('0x' + p1);
+        }));
+    }
+
     async function pushToGitHub(token, showAlert = true, retryCount = 0) {
         if (isSyncingActive && retryCount === 0) {
             pendingSyncRequested = true;
@@ -1902,22 +1909,24 @@
 
         const message = `Auto-sync repository updates: ${getFormattedTimestamp()}`;
         
-        const jsonString = JSON.stringify(appData, null, 2);
-        const encoder = new TextEncoder();
-        const data = encoder.encode(jsonString);
-        let binary = '';
-        for (let i = 0; i < data.length; i++) {
-            binary += String.fromCharCode(data[i]);
+        let contentBase64 = "";
+        try {
+            const jsonString = JSON.stringify(appData, null, 2);
+            contentBase64 = utf8ToBase64(jsonString);
+        } catch(e) {
+            console.error("Base64 Encoding Error: ", e);
         }
-        const contentBase64 = btoa(binary);
 
         const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`;
+
+        // Support both "Bearer <token>" and "token <token>" formats
+        const authHeader = token.startsWith('ghp_') || token.startsWith('github_pat_') ? `Bearer ${token}` : `token ${token}`;
 
         try {
             let sha = null;
             const getRes = await fetch(`${apiUrl}?t=${Date.now()}`, {
                 headers: { 
-                    "Authorization": `token ${token}`,
+                    "Authorization": authHeader,
                     "Accept": "application/vnd.github.v3+json",
                     "Cache-Control": "no-cache"
                 }
@@ -1930,7 +1939,7 @@
             const putRes = await fetch(apiUrl, {
                 method: "PUT",
                 headers: {
-                    "Authorization": `token ${token}`,
+                    "Authorization": authHeader,
                     "Content-Type": "application/json",
                     "Accept": "application/vnd.github.v3+json"
                 },
@@ -1967,7 +1976,7 @@
                 badge.innerText = "✖ Network Error";
                 badge.className = "sync-badge error";
             }
-            if (showAlert) alert("Network error while trying to sync with GitHub.");
+            if (showAlert) alert("Network error while trying to sync with GitHub. Check connection or PAT token.");
         } finally {
             isSyncingActive = false;
             if (pendingSyncRequested) {
