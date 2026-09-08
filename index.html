@@ -8,9 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- SheetJS CDN for native Excel (.xlsx) export with dynamic formula support -->
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
     <style>
         :root {
@@ -239,7 +236,7 @@
 
         .action-btns { display: flex; gap: 8px; flex-wrap: wrap; }
         
-        button.btn, label.btn-label {
+        button.btn {
             background: var(--clear-trans-medium);
             backdrop-filter: blur(12px);
             color: var(--text-main);
@@ -255,15 +252,13 @@
             transition: all 0.2s ease;
         }
 
-        button.btn:hover, label.btn-label:hover { background: var(--clear-trans-hover); }
+        button.btn:hover { background: var(--clear-trans-hover); }
         button.primary { background: var(--brand-color); color: #fff; }
         button.primary:hover { background: var(--brand-hover); }
         button.danger-btn { background: rgba(217, 107, 107, 0.2); color: var(--danger); border-color: rgba(217, 107, 107, 0.4); }
         button.danger-btn:hover { background: rgba(217, 107, 107, 0.4); }
         
         button.undo-btn { color: #5C3D1E; background: rgba(217, 160, 107, 0.25); border-color: rgba(217, 160, 107, 0.4); font-weight: 700; }
-        button.json-btn { color: #2C4254; }
-        button.gsheets-btn { color: #264A35; background: rgba(107, 155, 126, 0.2); border-color: rgba(107, 155, 126, 0.4); font-weight: 700; }
         button.github-btn { color: #24292e; background: rgba(255, 255, 255, 0.85); font-weight: 700; }
         button.load-github-btn { color: #1b4d3e; background: rgba(107, 155, 126, 0.25); font-weight: 700; border-color: rgba(107, 155, 126, 0.4); }
         button.edit-btn { color: var(--warning); background: rgba(217, 160, 107, 0.15); border-color: rgba(217, 160, 107, 0.3); }
@@ -640,7 +635,7 @@
         </div>
     </div>
     <div style="display: flex; align-items: center; gap: 10px;">
-        <button type="button" onclick="undoLastAction()" class="btn undo-btn" title="Undo last action (Ctrl+Z or Ctrl+U)">↩️ Undo (Ctrl+U)</button>
+        <button type="button" onclick="undoLastAction()" class="btn undo-btn" title="Undo last action (Ctrl+U)">↩️ Undo (Ctrl+U)</button>
         <div id="syncBadge" class="sync-badge">● Initializing GitHub Sync...</div>
     </div>
 </nav>
@@ -668,8 +663,8 @@
             <button type="button" onclick="navigateTo('home')" class="btn">🏠 Home</button>
             <button type="button" onclick="navigateTo('master')" class="btn">🔍 Master Search</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
-            <button type="button" onclick="loadFromGitHub(false)" class="btn load-github-btn">🌐 Load from GitHub</button>
-            <button type="button" onclick="triggerGitHubSync()" class="btn github-btn">☁️ Sync to GitHub</button>
+            <button type="button" onclick="loadFromGitHub(false)" class="btn load-github-btn">🌐 Load Sync from GitHub</button>
+            <button type="button" onclick="triggerGitHubSync()" class="btn github-btn">☁️ Save Sync to GitHub</button>
         </div>
     </header>
 
@@ -712,8 +707,8 @@
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="navigateTo('inventory', 'Café')" class="btn">☕ Café Inventory</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
-            <button type="button" onclick="loadFromGitHub(false)" class="btn load-github-btn">🌐 Load from GitHub</button>
-            <button type="button" onclick="triggerGitHubSync()" class="btn github-btn">☁️ Sync to GitHub</button>
+            <button type="button" onclick="loadFromGitHub(false)" class="btn load-github-btn">🌐 Load Sync from GitHub</button>
+            <button type="button" onclick="triggerGitHubSync()" class="btn github-btn">☁️ Save Sync to GitHub</button>
         </div>
     </header>
 
@@ -780,12 +775,8 @@
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="navigateTo('master')" class="btn">🔍 Master Search</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
-            <button type="button" onclick="exportToGoogleSheets('DELIVERIES')" class="btn gsheets-btn">📥 Download CSV for Google Sheets</button>
-            <button type="button" onclick="exportToExcelFormulas('DELIVERIES')" class="btn gsheets-btn">📊 Export Excel Workbook</button>
-            <button type="button" onclick="loadFromGitHub(false)" class="btn load-github-btn">🌐 Load from GitHub</button>
-            <button type="button" onclick="triggerGitHubSync()" class="btn github-btn">☁️ Sync to GitHub</button>
-            <label class="btn-label json-btn">📂 Load<input type="file" id="deliveriesJsonFileInput" accept=".json" onchange="loadFromJSONFile(event)" style="display:none;"></label>
-            <button type="button" onclick="saveJSONFileManually()" class="btn">💾 Save JSON</button>
+            <button type="button" onclick="loadFromGitHub(false)" class="btn load-github-btn">🌐 Load Sync from GitHub</button>
+            <button type="button" onclick="triggerGitHubSync()" class="btn github-btn">☁️ Save Sync to GitHub</button>
         </div>
     </header>
 
@@ -928,10 +919,8 @@
         <div class="action-btns">
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
-            <button type="button" onclick="loadFromGitHub(false)" class="btn load-github-btn">🌐 Load from GitHub</button>
-            <button type="button" onclick="triggerGitHubSync()" class="btn github-btn">☁️ Sync to GitHub</button>
-            <label class="btn-label json-btn">📂 Load<input type="file" id="masterJsonFileInput" accept=".json" onchange="loadFromJSONFile(event)" style="display:none;"></label>
-            <button type="button" onclick="saveJSONFileManually()" class="btn">💾 Save JSON</button>
+            <button type="button" onclick="loadFromGitHub(false)" class="btn load-github-btn">🌐 Load Sync from GitHub</button>
+            <button type="button" onclick="triggerGitHubSync()" class="btn github-btn">☁️ Save Sync to GitHub</button>
         </div>
     </header>
 
@@ -1025,12 +1014,8 @@
         <div class="action-btns">
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
-            <button type="button" onclick="exportToGoogleSheets('CATEGORY')" class="btn gsheets-btn">📥 Download CSV for Google Sheets</button>
-            <button type="button" onclick="exportToExcelFormulas('CATEGORY')" class="btn gsheets-btn">📊 Export Excel Workbook</button>
-            <button type="button" onclick="loadFromGitHub(false)" class="btn load-github-btn">🌐 Load from GitHub</button>
-            <button type="button" onclick="triggerGitHubSync()" class="btn github-btn">☁️ Sync to GitHub</button>
-            <label class="btn-label json-btn">📂 Load<input type="file" id="inventoryJsonFileInput" accept=".json" onchange="loadFromJSONFile(event)" style="display:none;"></label>
-            <button type="button" onclick="saveJSONFileManually()" class="btn">💾 Save JSON</button>
+            <button type="button" onclick="loadFromGitHub(false)" class="btn load-github-btn">🌐 Load Sync from GitHub</button>
+            <button type="button" onclick="triggerGitHubSync()" class="btn github-btn">☁️ Save Sync to GitHub</button>
         </div>
     </header>
 
@@ -1888,7 +1873,6 @@
         await pushToGitHub(token.trim(), true);
     }
 
-    // Unicode-safe Base64 encoding helper to prevent UTF-8/emoji crashes
     function utf8ToBase64(str) {
         return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
             return String.fromCharCode('0x' + p1);
@@ -1903,11 +1887,11 @@
         isSyncingActive = true;
         const badge = document.getElementById('syncBadge');
         if (badge) {
-            badge.innerText = "⏳ Syncing to GitHub Repository...";
+            badge.innerText = "⏳ Saving Sync to GitHub Repository...";
             badge.className = "sync-badge syncing";
         }
 
-        const message = `Auto-sync repository updates: ${getFormattedTimestamp()}`;
+        const message = `Save sync repository updates: ${getFormattedTimestamp()}`;
         
         let contentBase64 = "";
         try {
@@ -1918,8 +1902,6 @@
         }
 
         const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`;
-
-        // Support both "Bearer <token>" and "token <token>" formats
         const authHeader = token.startsWith('ghp_') || token.startsWith('github_pat_') ? `Bearer ${token}` : `token ${token}`;
 
         try {
@@ -1952,10 +1934,10 @@
 
             if (putRes.ok) {
                 if (badge) {
-                    badge.innerText = "● Live Synced to GitHub File";
+                    badge.innerText = "● Save Synced to GitHub inventory_data.json";
                     badge.className = "sync-badge";
                 }
-                if (showAlert) alert(`Successfully saved and auto-synced live to ${GITHUB_OWNER}/${GITHUB_REPO} repository!`);
+                if (showAlert) alert(`Successfully saved sync directly to ${GITHUB_FILE_PATH} in ${GITHUB_OWNER}/${GITHUB_REPO}!`);
             } else {
                 const err = await putRes.json();
                 
@@ -1989,7 +1971,7 @@
     async function loadFromGitHub(isInitialLoad = false) {
         const badge = document.getElementById('syncBadge');
         if (badge) {
-            badge.innerText = "⏳ Loading live repo data...";
+            badge.innerText = "⏳ Load syncing from GitHub repository...";
             badge.className = "sync-badge syncing";
         }
 
@@ -2005,7 +1987,7 @@
 
                     if (isInitialLoad && localTimestamp > remoteTimestamp) {
                         if (badge) {
-                            badge.innerText = "● Live Synced (Local Ahead)";
+                            badge.innerText = "● Load Synced (Local Ahead)";
                             badge.className = "sync-badge";
                         }
                         let token = localStorage.getItem('github_pat');
@@ -2047,11 +2029,11 @@
                     refreshAllViews();
 
                     if (badge) {
-                        badge.innerText = "● Loaded & Live Synced";
+                        badge.innerText = "● Load Synced from GitHub";
                         badge.className = "sync-badge";
                     }
 
-                    if (!isInitialLoad) alert(`Successfully loaded live inventory file directly from ${GITHUB_OWNER}/${GITHUB_REPO}!`);
+                    if (!isInitialLoad) alert(`Successfully loaded sync directly from ${GITHUB_FILE_PATH} in ${GITHUB_OWNER}/${GITHUB_REPO}!`);
                 } else {
                     if (!isInitialLoad) alert("The remote GitHub data file format is invalid.");
                 }
@@ -2060,7 +2042,7 @@
                     badge.innerText = "● Saved Locally (No Remote File)";
                     badge.className = "sync-badge";
                 }
-                if (!isInitialLoad) alert("Could not find a saved inventory file on GitHub yet. Make sure someone has synced data first.");
+                if (!isInitialLoad) alert("Could not find inventory_data.json on GitHub yet. Make sure someone has saved sync data first.");
             }
         } catch (e) {
             if (badge) {
@@ -2068,184 +2050,6 @@
                 badge.className = "sync-badge";
             }
             if (!isInitialLoad) alert("Network error while trying to fetch data from GitHub.");
-        }
-    }
-
-    function saveJSONFileManually() {
-        const blob = new Blob([JSON.stringify(appData, null, 2)], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `inventory_${new Date().toISOString().split('T')[0]}.json`;
-        a.click();
-        a.remove();
-    }
-
-    async function loadFromJSONFile(event) {
-        const reader = new FileReader();
-        reader.onload = async function(e) {
-            try {
-                const loaded = JSON.parse(e.target.result);
-                if (loaded.inventory) {
-                    saveSnapshotForUndo();
-                    appData = loaded;
-                }
-                await autoSaveData();
-                alert('File loaded successfully!');
-            } catch (err) { alert('Invalid JSON file.'); }
-        };
-        if (event.target.files[0]) reader.readAsText(event.target.files[0]);
-    }
-
-    function exportToGoogleSheets(type) {
-        let csvContent = "";
-
-        if (type === 'DELIVERIES') {
-            csvContent += "Item Name,Category,Subcategory,Supplier,Qty Received,Unit,Delivery Date\n";
-            const list = (currentDeliveryFilter === 'ALL') 
-                ? appData.deliveries 
-                : appData.deliveries.filter(d => d.category === currentDeliveryFilter);
-
-            list.forEach(d => {
-                const nameEsc = `"${d.name.replace(/"/g, '""')}"`;
-                csvContent += `${nameEsc},${d.category},${d.subcategory},${d.supplier},${d.qty},${d.unit},${d.deliveryDate}\n`;
-            });
-        } else {
-            csvContent += "Category,Subcategory,Item Name,Batch Source,Current Active Date,Historical Entry Date (Old Date),Last Updated Date (New Update Date),Initial Batch Qty,New Remaining Qty (New Stock),Total Used Qty,Unit,Audit Status\n";
-            const categoryItems = appData.inventory.filter(i => i.category === currentCategory);
-
-            categoryItems.forEach(item => {
-                sortItemBatches(item);
-                const activeDate = getItemActiveBatchDate(item);
-
-                item.batches.forEach(b => {
-                    const nameEsc = `"${item.name.replace(/"/g, '""')}"`;
-                    const subEsc = `"${item.subcategory.replace(/"/g, '""')}"`;
-                    const status = b.remQty > 0 ? "Active Queue" : "Depleted";
-                    const bUnit = b.unit || item.unit;
-                    const oldDate = b.addedDate || 'N/A';
-                    const lastUpdate = b.lastUpdated || item.lastUpdated || oldDate;
-                    const initQty = b.initQty !== undefined ? b.initQty : b.remQty;
-                    const usedQty = b.usedQty !== undefined ? b.usedQty : Math.max(0, initQty - b.remQty);
-
-                    csvContent += `${item.category},${subEsc},${nameEsc},${b.sourceNote},${activeDate},${oldDate},${lastUpdate},${initQty},${b.remQty},${usedQty},${bUnit},${status}\n`;
-                });
-            });
-        }
-
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.setAttribute("href", url);
-        link.setAttribute("download", `GoogleSheets_Inventory_${type}_${new Date().toISOString().split('T')[0]}.csv`);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-
-    function exportToExcelFormulas(type) {
-        if (typeof XLSX === 'undefined') {
-            alert("Spreadsheet exporter library is loading. Please try again in a few seconds.");
-            return;
-        }
-
-        const wb = XLSX.utils.book_new();
-
-        if (type === 'DELIVERIES') {
-            const rows = [
-                ["Item Name", "Category", "Subcategory", "Supplier", "Qty Received", "Unit", "Delivery Date"]
-            ];
-
-            const list = (currentDeliveryFilter === 'ALL') 
-                ? appData.deliveries 
-                : appData.deliveries.filter(d => d.category === currentDeliveryFilter);
-
-            list.forEach(d => {
-                rows.push([d.name, d.category, d.subcategory, d.supplier, Number(d.qty), d.unit, d.deliveryDate]);
-            });
-
-            const totalRowIndex = rows.length + 1;
-            rows.push(["TOTALS", "", "", "", { f: `SUM(E2:E${totalRowIndex - 1})` }, "", ""]);
-
-            const ws = XLSX.utils.aoa_to_sheet(rows);
-            XLSX.utils.book_append_sheet(wb, ws, "Deliveries");
-            XLSX.writeFile(wb, `Deliveries_Inventory_${new Date().toISOString().split('T')[0]}.xlsx`);
-
-        } else {
-            const categoryItems = appData.inventory.filter(i => i.category === currentCategory);
-
-            const summaryRows = [
-                ["Item Name", "Subcategory", "Active Unit", "Current Active Date", "Total On Hand (Formula)", "Total Used (Formula)", "Active Batches (Formula)"]
-            ];
-
-            let rowCounter = 2;
-            categoryItems.forEach(item => {
-                const activeUnit = getItemActiveUnit(item);
-                const activeDate = getItemActiveBatchDate(item);
-                summaryRows.push([
-                    item.name,
-                    item.subcategory,
-                    activeUnit,
-                    activeDate,
-                    { f: `SUMIF('FIFO Batches Ledger'!A:A, "${item.name}", 'FIFO Batches Ledger'!F:F)` },
-                    { f: `SUMIF('FIFO Batches Ledger'!A:A, "${item.name}", 'FIFO Batches Ledger'!G:G)` },
-                    { f: `COUNTIFS('FIFO Batches Ledger'!A:A, "${item.name}", 'FIFO Batches Ledger'!F:F, ">0")` }
-                ]);
-                rowCounter++;
-            });
-
-            summaryRows.push([
-                "GRAND TOTAL",
-                "",
-                "",
-                "",
-                { f: `SUM(E2:E${rowCounter - 1})` },
-                { f: `SUM(F2:F${rowCounter - 1})` },
-                { f: `SUM(G2:G${rowCounter - 1})` }
-            ]);
-
-            const wsSummary = XLSX.utils.aoa_to_sheet(summaryRows);
-            XLSX.utils.book_append_sheet(wb, wsSummary, `${currentCategory} Summary`);
-
-            const batchRows = [
-                ["Item Name", "Historical Batch Date (Old Date)", "Last Updated Date (New Update Date)", "Source Note", "Initial Qty", "New Remaining Qty", "Total Used Qty", "Unit", "Batch Status (Formula)"]
-            ];
-
-            let batchRowCounter = 2;
-            categoryItems.forEach(item => {
-                sortItemBatches(item);
-                item.batches.forEach(b => {
-                    batchRows.push([
-                        item.name,
-                        b.addedDate,
-                        b.lastUpdated || item.lastUpdated || b.addedDate,
-                        b.sourceNote,
-                        Number(b.initQty),
-                        Number(b.remQty),
-                        Number(b.usedQty || 0),
-                        b.unit || item.unit,
-                        { f: `IF(F${batchRowCounter}>0, "Active Queue", "Depleted")` }
-                    ]);
-                    batchRowCounter++;
-                });
-            });
-
-            batchRows.push([
-                "TOTALS",
-                "",
-                "",
-                "",
-                { f: `SUM(E2:E${batchRowCounter - 1})` },
-                { f: `SUM(F2:F${batchRowCounter - 1})` },
-                { f: `SUM(G2:G${batchRowCounter - 1})` },
-                "",
-                ""
-            ]);
-
-            const wsBatches = XLSX.utils.aoa_to_sheet(batchRows);
-            XLSX.utils.book_append_sheet(wb, wsBatches, "FIFO Batches Ledger");
-
-            XLSX.writeFile(wb, `${currentCategory}_FIFO_Inventory_${new Date().toISOString().split('T')[0]}.xlsx`);
         }
     }
 
