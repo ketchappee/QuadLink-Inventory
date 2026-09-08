@@ -17,12 +17,34 @@
       "Restroom Supplies"
     ]
   },
-  "inventory": [],
+  "inventory": [
+    {
+      "id": 1788847708684.935,
+      "name": "DAIRY CADBURY",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-08",
+      "batches": [
+        {
+          "batchId": "b_1788847708683_lnsaf",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-08",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    }
+  ],
   "logs": [
     {
-      "id": "log_1788847317157",
-      "timestamp": "2026-09-08 14:01",
-      "details": "☁️ Loaded sync file \"inventory_data.json\" from GitHub repository"
+      "id": "log_1788847708683",
+      "timestamp": "2026-09-08 14:08",
+      "details": "Scheduled delivery \"DAIRY CADBURY\" & auto-added to Café Storage FIFO queue"
     },
     {
       "id": "log_1788847257121",
@@ -50,7 +72,18 @@
       "details": "🗑️ Cleared out all 4 items in subcategory [Pastries]"
     }
   ],
-  "deliveries": [],
+  "deliveries": [
+    {
+      "id": 1788847708683,
+      "name": "DAIRY CADBURY",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "qty": 24,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06"
+    }
+  ],
   "suppliers": [
     "JAMBI",
     "YARDSTICK",
@@ -60,5 +93,5 @@
     "LALAMOVE"
   ],
   "markedOutPastries": [],
-  "lastUpdatedTimestamp": 1788847317156
+  "lastUpdatedTimestamp": 1788847708683
 }
