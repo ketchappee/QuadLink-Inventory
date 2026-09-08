@@ -1165,7 +1165,8 @@
             }
         ],
         deliveries: [
-            { id: 101, name: "Specialty Espresso Batch", category: "Café", subcategory: "Beans", supplier: "YARDSTICK", qty: 10, unit: "Kg", deliveryDate: "2026-09-10" }
+            { id: 101, name: "Espresso Beans", category: "Café", subcategory: "Beans", supplier: "YARDSTICK", qty: 10, unit: "Kg", deliveryDate: "2026-09-05" },
+            { id: 102, name: "Oat Milk", category: "Café", subcategory: "Milk", supplier: "JAMBI", qty: 3, unit: "Case", deliveryDate: "2026-08-28" }
         ],
         markedOutPastries: [],
         logs: []
@@ -1451,22 +1452,49 @@
                 if (batch.initQty === undefined) batch.initQty = batch.remQty;
                 if (batch.usedQty === undefined) batch.usedQty = 0;
 
+                let qtyDeductedFromBatch = 0;
+
                 if (batch.remQty >= remainingToDeduct) {
+                    qtyDeductedFromBatch = remainingToDeduct;
                     batch.remQty -= remainingToDeduct;
                     batch.usedQty += remainingToDeduct;
                     detailedLogs.push(`Deducted ${remainingToDeduct} ${batchUnit} from ${batchLoc} Batch [${batch.addedDate}]`);
                     remainingToDeduct = 0;
-                    break;
                 } else {
-                    const deductedFromThisBatch = batch.remQty;
+                    qtyDeductedFromBatch = batch.remQty;
                     remainingToDeduct -= batch.remQty;
                     batch.usedQty += batch.remQty;
                     batch.remQty = 0;
-                    detailedLogs.push(`Depleted entire ${batchLoc} Batch [${batch.addedDate}] (-${deductedFromThisBatch} ${batchUnit})`);
+                    detailedLogs.push(`Depleted entire ${batchLoc} Batch [${batch.addedDate}] (-${qtyDeductedFromBatch} ${batchUnit})`);
                 }
+
+                syncDeductionToDeliveries(item.name, qtyDeductedFromBatch);
+
+                if (remainingToDeduct === 0) break;
             }
         }
         return detailedLogs;
+    }
+
+    function syncDeductionToDeliveries(itemName, qtyToDeduct) {
+        if (!appData.deliveries) return;
+        
+        let remainingDeduction = qtyToDeduct;
+
+        const matchingDeliveries = appData.deliveries.filter(d => 
+            d.name.toLowerCase().trim() === itemName.toLowerCase().trim() && (d.qty > 0)
+        );
+
+        for (let del of matchingDeliveries) {
+            if (del.qty >= remainingDeduction) {
+                del.qty -= remainingDeduction;
+                remainingDeduction = 0;
+                break;
+            } else {
+                remainingDeduction -= del.qty;
+                del.qty = 0;
+            }
+        }
     }
 
     function addFIFOStock(item, qty, dateStr, sourceNoteStr, batchUnitStr, locationStr) {
@@ -2467,6 +2495,11 @@
                 saveSnapshotForUndo();
                 const oldQty = batch.remQty;
                 const todayStr = new Date().toISOString().split('T')[0];
+                
+                if (newQty < oldQty && batch.sourceNote === 'Delivery') {
+                    syncDeductionToDeliveries(item.name, oldQty - newQty);
+                }
+
                 batch.remQty = newQty;
                 if (batch.initQty === undefined) batch.initQty = oldQty;
                 batch.usedQty = Math.max(0, batch.initQty - newQty);
@@ -2542,12 +2575,14 @@
 
         list.forEach(del => {
             const tr = document.createElement('tr');
+            const qtyStatusClass = del.qty === 0 ? 'used-text-red' : '';
+
             tr.innerHTML = `
                 <td style="text-align: center;"><input type="checkbox" class="row-checkbox del-row-cb" value="${del.id}" onchange="updateBatchBarVisibility()"></td>
                 <td><strong>• ${del.name}</strong></td>
                 <td>${del.subcategory}</td>
                 <td><span class="delivery-note-tag">${del.supplier}</span></td>
-                <td><strong>${del.qty}</strong> <span class="unit-label">${del.unit}</span></td>
+                <td><strong class="${qtyStatusClass}">${del.qty}</strong> <span class="unit-label">${del.unit}</span></td>
                 <td>${del.deliveryDate}</td>
                 <td>
                     <div class="action-cell-wrapper">
