@@ -258,6 +258,7 @@
         button.danger-btn:hover { background: rgba(217, 107, 107, 0.4); }
         
         button.undo-btn { color: #5C3D1E; background: rgba(217, 160, 107, 0.25); border-color: rgba(217, 160, 107, 0.4); font-weight: 700; }
+        button.github-btn { color: #000; background: rgba(255, 255, 255, 0.9); font-weight: 700; border-color: #24292e; }
         button.save-file-btn { color: #24292e; background: rgba(255, 255, 255, 0.85); font-weight: 700; }
         button.load-file-btn { color: #1b4d3e; background: rgba(107, 155, 126, 0.25); font-weight: 700; border-color: rgba(107, 155, 126, 0.4); }
         button.excel-btn { color: #1e7145; background: rgba(30, 113, 69, 0.18); border-color: rgba(30, 113, 69, 0.4); font-weight: 700; }
@@ -643,6 +644,7 @@
         </div>
     </div>
     <div style="display: flex; align-items: center; gap: 10px;">
+        <button type="button" onclick="loadFromGitHub()" class="btn github-btn" title="Sync from GitHub">☁️ Load GitHub Sync</button>
         <button type="button" onclick="undoLastAction()" class="btn undo-btn" title="Undo last action (Ctrl+U)">↩️ Undo (Ctrl+U)</button>
     </div>
 </nav>
@@ -671,6 +673,7 @@
             <button type="button" onclick="navigateTo('cafe-totals')" class="btn">📈 Café Totals Summary</button>
             <button type="button" onclick="navigateTo('master')" class="btn">🔍 Master Search</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
+            <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
             <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
@@ -713,6 +716,7 @@
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="navigateTo('inventory', 'Café')" class="btn">☕ Café Inventory</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
+            <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
             <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
             <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
         </div>
@@ -794,6 +798,7 @@
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="navigateTo('inventory', 'Café')" class="btn">☕ Café Inventory</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
+            <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
             <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
@@ -866,6 +871,7 @@
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="navigateTo('master')" class="btn">🔍 Master Search</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
+            <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
             <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
@@ -978,6 +984,7 @@
         <div class="action-btns">
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
+            <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
             <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
@@ -1032,6 +1039,7 @@
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="navigateTo('cafe-totals')" class="btn">📈 Bar vs Storage Summary</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
+            <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
             <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
@@ -1122,6 +1130,13 @@
 </section>
 
 <script>
+    const GITHUB_CONFIG = {
+        owner: "ketchappee",
+        repo: "QuadLink-Inventory",
+        path: "inventory_data.json",
+        branch: "main"
+    };
+
     let currentDeliveryFilter = 'Café';
     let hideOldItemsEnabled = false;
 
@@ -1190,7 +1205,6 @@
     if (!appData.categories['Café'].includes('Pastries')) appData.categories['Café'].unshift('Pastries');
     if (!appData.categories['Café'].includes('Retail')) appData.categories['Café'].push('Retail');
     
-    // Purge legacy non-Café items if present
     appData.inventory = appData.inventory.filter(i => i.category === 'Café');
     appData.deliveries = appData.deliveries.filter(d => d.category === 'Café');
 
@@ -1258,6 +1272,131 @@
     document.getElementById('itemAddedDate').value = new Date().toISOString().split('T')[0];
     document.getElementById('delDate').value = new Date().toISOString().split('T')[0];
     document.getElementById('moDate').value = new Date().toISOString().split('T')[0];
+
+    function getGitHubToken() {
+        let token = localStorage.getItem('github_pat_token');
+        if (!token) {
+            token = prompt("Enter your GitHub Personal Access Token (PAT) for repo synchronization:");
+            if (token && token.trim() !== '') {
+                token = token.trim();
+                localStorage.setItem('github_pat_token', token);
+            }
+        }
+        return token;
+    }
+
+    async function exportToFileGitHub() {
+        const token = getGitHubToken();
+        if (!token) {
+            alert("GitHub Token is required to sync changes.");
+            return;
+        }
+
+        const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
+        const contentStr = JSON.stringify(appData, null, 2);
+        const encodedContent = btoa(unescape(encodeURIComponent(contentStr)));
+
+        try {
+            let sha = null;
+            const checkRes = await fetch(`${url}?ref=${GITHUB_CONFIG.branch}`, {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+            if (checkRes.ok) {
+                const checkData = await checkRes.json();
+                sha = checkData.sha;
+            }
+
+            const bodyData = {
+                message: `Auto-sync inventory updates: ${getFormattedTimestamp()}`,
+                content: encodedContent,
+                branch: GITHUB_CONFIG.branch
+            };
+            if (sha) bodyData.sha = sha;
+
+            const putRes = await fetch(url, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(bodyData)
+            });
+
+            if (putRes.ok) {
+                recordLog("☁️ Successfully auto-synced save file to GitHub repository");
+                alert("Inventory saved locally and synced directly to GitHub!");
+            } else {
+                const errJson = await putRes.json();
+                alert(`GitHub Sync Failed: ${errJson.message || 'Check your GitHub Token permissions'}`);
+            }
+        } catch (err) {
+            alert(`GitHub Sync Error: ${err.message}`);
+        }
+    }
+
+    async function loadFromGitHub() {
+        const token = getGitHubToken();
+        const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}?ref=${GITHUB_CONFIG.branch}`;
+
+        try {
+            const res = await fetch(url, {
+                headers: token ? { "Authorization": `Bearer ${token}` } : {}
+            });
+
+            if (!res.ok) {
+                alert("Failed to fetch inventory from GitHub. Please verify repository availability or GitHub Token.");
+                return;
+            }
+
+            const data = await res.json();
+            const decodedContent = decodeURIComponent(escape(atob(data.content)));
+            const loadedData = JSON.parse(decodedContent);
+
+            if (loadedData && loadedData.inventory) {
+                saveSnapshotForUndo();
+                appData = loadedData;
+
+                appData.inventory = appData.inventory.filter(i => i.category === 'Café');
+                if (appData.deliveries) appData.deliveries = appData.deliveries.filter(d => d.category === 'Café');
+
+                appData.inventory.forEach(item => {
+                    if (!item.batches) {
+                        const oldQty = item.qty !== undefined ? item.qty : 0;
+                        const oldDate = item.addedDate || new Date().toISOString().split('T')[0];
+                        const oldSource = item.sourceNote || "In-House";
+                        item.batches = [{
+                            batchId: 'b_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+                            addedDate: oldDate,
+                            lastUpdated: oldDate,
+                            initQty: oldQty,
+                            remQty: oldQty,
+                            usedQty: 0,
+                            unit: item.unit || 'Pcs',
+                            location: "Bar",
+                            sourceNote: oldSource
+                        }];
+                        delete item.qty;
+                        delete item.addedDate;
+                    } else {
+                        item.batches.forEach(b => {
+                            if (!b.unit) b.unit = item.unit || 'Pcs';
+                            if (!b.location) b.location = "Bar";
+                            if (b.initQty === undefined) b.initQty = b.remQty || 0;
+                            if (b.usedQty === undefined) b.usedQty = Math.max(0, b.initQty - (b.remQty || 0));
+                            if (!b.lastUpdated) b.lastUpdated = b.addedDate || new Date().toISOString().split('T')[0];
+                        });
+                    }
+                    sortItemBatches(item);
+                });
+
+                await autoSaveData();
+                recordLog("☁️ Loaded latest inventory sync from GitHub repository");
+                alert("Loaded inventory file from GitHub successfully!");
+            }
+        } catch (err) {
+            alert(`Error loading from GitHub: ${err.message}`);
+        }
+    }
 
     function toggleHideOldItems(isChecked) {
         hideOldItemsEnabled = isChecked;
@@ -2001,6 +2140,8 @@
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
+
+        exportToFileGitHub();
     }
 
     function exportToExcel() {
