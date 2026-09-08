@@ -260,7 +260,6 @@
         button.undo-btn { color: #5C3D1E; background: rgba(217, 160, 107, 0.25); border-color: rgba(217, 160, 107, 0.4); font-weight: 700; }
         button.github-btn { color: #000; background: rgba(255, 255, 255, 0.9); font-weight: 700; border-color: #24292e; }
         button.save-file-btn { color: #24292e; background: rgba(255, 255, 255, 0.85); font-weight: 700; }
-        button.load-file-btn { color: #1b4d3e; background: rgba(107, 155, 126, 0.25); font-weight: 700; border-color: rgba(107, 155, 126, 0.4); }
         button.excel-btn { color: #1e7145; background: rgba(30, 113, 69, 0.18); border-color: rgba(30, 113, 69, 0.4); font-weight: 700; }
         button.gsheet-btn { color: #0f9d58; background: rgba(15, 157, 88, 0.18); border-color: rgba(15, 157, 88, 0.4); font-weight: 700; }
         button.edit-btn { color: var(--warning); background: rgba(217, 160, 107, 0.15); border-color: rgba(217, 160, 107, 0.3); }
@@ -634,8 +633,6 @@
 </head>
 <body>
 
-<input type="file" id="fileImporter" accept=".json" style="display: none;" onchange="importFromFile(event)">
-
 <nav class="navbar">
     <div class="nav-left" id="navLeftContainer">
         <button type="button" class="back-nav-btn" onclick="navigateTo('menu')" id="backBtn" style="display: none;">← Back</button>
@@ -674,8 +671,7 @@
             <button type="button" onclick="navigateTo('master')" class="btn">🔍 Master Search</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
-            <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
-            <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
+            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync to GitHub</button>
             <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
             <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
         </div>
@@ -717,6 +713,7 @@
             <button type="button" onclick="navigateTo('inventory', 'Café')" class="btn">☕ Café Inventory</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
+            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync to GitHub</button>
             <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
             <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
         </div>
@@ -799,8 +796,7 @@
             <button type="button" onclick="navigateTo('inventory', 'Café')" class="btn">☕ Café Inventory</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
-            <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
-            <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
+            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync to GitHub</button>
             <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
             <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
         </div>
@@ -872,8 +868,7 @@
             <button type="button" onclick="navigateTo('master')" class="btn">🔍 Master Search</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
-            <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
-            <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
+            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync to GitHub</button>
             <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
             <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
         </div>
@@ -985,8 +980,7 @@
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
-            <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
-            <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
+            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync to GitHub</button>
             <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
             <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
         </div>
@@ -1040,8 +1034,7 @@
             <button type="button" onclick="navigateTo('cafe-totals')" class="btn">📈 Bar vs Storage Summary</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
-            <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
-            <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
+            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync to GitHub</button>
             <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
             <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
         </div>
@@ -1292,9 +1285,22 @@
             return;
         }
 
+        const dataStr = JSON.stringify(appData, null, 2);
+        
+        // 1. Download local JSON backup file
+        const blob = new Blob([dataStr], { type: "application/json" });
+        const urlLocal = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = urlLocal;
+        link.download = GITHUB_CONFIG.path;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(urlLocal);
+
+        // 2. Direct Sync to GitHub Repository File "inventory_data.json"
         const url = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
-        const contentStr = JSON.stringify(appData, null, 2);
-        const encodedContent = btoa(unescape(encodeURIComponent(contentStr)));
+        const encodedContent = btoa(unescape(encodeURIComponent(dataStr)));
 
         try {
             let sha = null;
@@ -1323,8 +1329,8 @@
             });
 
             if (putRes.ok) {
-                recordLog("☁️ Successfully auto-synced save file to GitHub repository");
-                alert("Inventory saved locally and synced directly to GitHub!");
+                recordLog(`☁️ Saved local backup & synced to GitHub (${GITHUB_CONFIG.path})`);
+                alert(`Saved locally and synced directly to GitHub file "${GITHUB_CONFIG.path}"!`);
             } else {
                 const errJson = await putRes.json();
                 alert(`GitHub Sync Failed: ${errJson.message || 'Check your GitHub Token permissions'}`);
@@ -1344,7 +1350,7 @@
             });
 
             if (!res.ok) {
-                alert("Failed to fetch inventory from GitHub. Please verify repository availability or GitHub Token.");
+                alert(`Failed to fetch ${GITHUB_CONFIG.path} from GitHub. Check repository access or token.`);
                 return;
             }
 
@@ -1390,8 +1396,8 @@
                 });
 
                 await autoSaveData();
-                recordLog("☁️ Loaded latest inventory sync from GitHub repository");
-                alert("Loaded inventory file from GitHub successfully!");
+                recordLog(`☁️ Loaded sync file "${GITHUB_CONFIG.path}" from GitHub repository`);
+                alert(`Loaded latest "${GITHUB_CONFIG.path}" from GitHub successfully!`);
             }
         } catch (err) {
             alert(`Error loading from GitHub: ${err.message}`);
@@ -2127,23 +2133,6 @@
         refreshAllViews();
     }
 
-    function exportToFile() {
-        const dataStr = JSON.stringify(appData, null, 2);
-        const blob = new Blob([dataStr], { type: "application/json" });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        const dateTag = new Date().toISOString().split('T')[0];
-        
-        link.href = url;
-        link.download = `inventory_backup_${dateTag}.json`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-
-        exportToFileGitHub();
-    }
-
     function exportToExcel() {
         const dateTag = new Date().toISOString().split('T')[0];
         const fullTimeStr = getFormattedTimestamp();
@@ -2258,68 +2247,6 @@
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
-    }
-
-    function triggerFileInput() {
-        document.getElementById('fileImporter').click();
-    }
-
-    function importFromFile(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            try {
-                const loadedData = JSON.parse(event.target.result);
-                if (loadedData && loadedData.inventory) {
-                    saveSnapshotForUndo();
-                    appData = loadedData;
-                    
-                    appData.inventory = appData.inventory.filter(i => i.category === 'Café');
-                    if (appData.deliveries) appData.deliveries = appData.deliveries.filter(d => d.category === 'Café');
-
-                    appData.inventory.forEach(item => {
-                        if (!item.batches) {
-                            const oldQty = item.qty !== undefined ? item.qty : 0;
-                            const oldDate = item.addedDate || new Date().toISOString().split('T')[0];
-                            const oldSource = item.sourceNote || "In-House";
-                            item.batches = [{
-                                batchId: 'b_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
-                                addedDate: oldDate,
-                                lastUpdated: oldDate,
-                                initQty: oldQty,
-                                remQty: oldQty,
-                                usedQty: 0,
-                                unit: item.unit || 'Pcs',
-                                location: "Bar",
-                                sourceNote: oldSource
-                            }];
-                            delete item.qty;
-                            delete item.addedDate;
-                        } else {
-                            item.batches.forEach(b => {
-                                if (!b.unit) b.unit = item.unit || 'Pcs';
-                                if (!b.location) b.location = "Bar";
-                                if (b.initQty === undefined) b.initQty = b.remQty || 0;
-                                if (b.usedQty === undefined) b.usedQty = Math.max(0, b.initQty - (b.remQty || 0));
-                                if (!b.lastUpdated) b.lastUpdated = b.addedDate || new Date().toISOString().split('T')[0];
-                            });
-                        }
-                        sortItemBatches(item);
-                    });
-
-                    autoSaveData();
-                    alert("Café Inventory file loaded successfully!");
-                } else {
-                    alert("Invalid JSON data format. File must contain valid inventory structure.");
-                }
-            } catch (err) {
-                alert("Error reading file: " + err.message);
-            }
-        };
-        reader.readAsText(file);
-        e.target.value = '';
     }
 
     function navigateTo(page, category = null) {
