@@ -640,8 +640,8 @@
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
-            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Export Excel</button>
-            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
         </div>
     </header>
 
@@ -686,8 +686,8 @@
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
-            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Export Excel</button>
-            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
         </div>
     </header>
 
@@ -758,8 +758,8 @@
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
-            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Export Excel</button>
-            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
         </div>
     </header>
 
@@ -904,8 +904,8 @@
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
-            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Export Excel</button>
-            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
         </div>
     </header>
 
@@ -1001,8 +1001,8 @@
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
             <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
-            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Export Excel</button>
-            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
         </div>
     </header>
 
@@ -1866,9 +1866,11 @@
         URL.revokeObjectURL(url);
     }
 
-    // EXPORT TO EXCEL WITH AUTOMATED FORMULAS AND STYLED TABLES (.xls)
+    // EXPORT TO EXCEL MULTI-TAB WORKBOOK WITH FORMULAS & FULL DATES (.xls XML)
     function exportToExcel() {
         const dateTag = new Date().toISOString().split('T')[0];
+        const fullTimeStr = getFormattedTimestamp();
+
         let xml = `<?xml version="1.0"?><?mso-application progid="Excel.Sheet"?>
         <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
          xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -1876,11 +1878,18 @@
          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
          <Styles>
           <Style ss:ID="Header"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#8C7B6B" ss:Pattern="Solid"/></Style>
-          <Style ss:ID="SubHeader"><Font ss:Bold="1"/><Interior ss:Color="#EAE6E1" ss:Pattern="Solid"/></Style>
-          <Style ss:ID="Bold"><Font ss:Bold="1"/></Style>
+          <Style ss:ID="Title"><Font ss:Bold="1" ss:Size="12"/><Interior ss:Color="#EAE6E1" ss:Pattern="Solid"/></Style>
+          <Style ss:ID="SubHeader"><Font ss:Bold="1"/><Interior ss:Color="#F3F0EC" ss:Pattern="Solid"/></Style>
          </Styles>
+
+         <!-- WORKSHEET 1: INVENTORY SUMMARY -->
          <Worksheet ss:Name="Inventory Summary">
           <Table>
+           <Row ss:StyleID="Title">
+            <Cell><Data ss:Type="String">QuadLink Inventory Audit Report</Data></Cell>
+            <Cell><Data ss:Type="String">Export Date: ${fullTimeStr}</Data></Cell>
+           </Row>
+           <Row></Row>
            <Row ss:StyleID="Header">
             <Cell><Data ss:Type="String">Category</Data></Cell>
             <Cell><Data ss:Type="String">Subcategory</Data></Cell>
@@ -1888,14 +1897,19 @@
             <Cell><Data ss:Type="String">Unit</Data></Cell>
             <Cell><Data ss:Type="String">Remaining Stock</Data></Cell>
             <Cell><Data ss:Type="String">Used Stock</Data></Cell>
-            <Cell><Data ss:Type="String">Initial Stock Formula</Data></Cell>
+            <Cell><Data ss:Type="String">Initial Stock (Formula)</Data></Cell>
+            <Cell><Data ss:Type="String">Earliest Batch Date</Data></Cell>
+            <Cell><Data ss:Type="String">Last Updated Date</Data></Cell>
            </Row>`;
 
-        let rowIndex = 2;
+        let rowIndex = 4;
         appData.inventory.forEach(item => {
             const totalRem = getItemTotalQty(item);
             const totalUsed = getItemTotalUsed(item);
             const unitStr = getItemActiveUnit(item);
+            const earliestDate = getItemActiveBatchDate(item);
+            const lastUpdate = item.lastUpdated || dateTag;
+
             xml += `
            <Row>
             <Cell><Data ss:Type="String">${item.category}</Data></Cell>
@@ -1905,6 +1919,8 @@
             <Cell><Data ss:Type="Number">${totalRem}</Data></Cell>
             <Cell><Data ss:Type="Number">${totalUsed}</Data></Cell>
             <Cell ss:Formula="=RC[-2]+RC[-1]"><Data ss:Type="Number">${totalRem + totalUsed}</Data></Cell>
+            <Cell><Data ss:Type="String">${earliestDate}</Data></Cell>
+            <Cell><Data ss:Type="String">${lastUpdate}</Data></Cell>
            </Row>`;
             rowIndex++;
         });
@@ -1915,22 +1931,27 @@
             <Cell><Data ss:Type="String"></Data></Cell>
             <Cell><Data ss:Type="String"></Data></Cell>
             <Cell><Data ss:Type="String"></Data></Cell>
-            <Cell ss:Formula="=SUM(E2:E${rowIndex-1})"><Data ss:Type="Number">0</Data></Cell>
-            <Cell ss:Formula="=SUM(F2:F${rowIndex-1})"><Data ss:Type="Number">0</Data></Cell>
-            <Cell ss:Formula="=SUM(G2:G${rowIndex-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell ss:Formula="=SUM(E4:E${rowIndex-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell ss:Formula="=SUM(F4:F${rowIndex-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell ss:Formula="=SUM(G4:G${rowIndex-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
            </Row>
           </Table>
          </Worksheet>
+
+         <!-- WORKSHEET 2: DETAILED BATCH BREAKDOWN -->
          <Worksheet ss:Name="Batch Breakdown">
           <Table>
            <Row ss:StyleID="Header">
             <Cell><Data ss:Type="String">Item Name</Data></Cell>
             <Cell><Data ss:Type="String">Category</Data></Cell>
-            <Cell><Data ss:Type="String">Batch Date</Data></Cell>
+            <Cell><Data ss:Type="String">Batch Entry Date</Data></Cell>
+            <Cell><Data ss:Type="String">Batch Last Updated</Data></Cell>
             <Cell><Data ss:Type="String">Source</Data></Cell>
             <Cell><Data ss:Type="String">Initial Qty</Data></Cell>
             <Cell><Data ss:Type="String">Remaining Qty</Data></Cell>
-            <Cell><Data ss:Type="String">Used Qty Formula</Data></Cell>
+            <Cell><Data ss:Type="String">Used Qty (Formula)</Data></Cell>
             <Cell><Data ss:Type="String">Unit</Data></Cell>
            </Row>`;
 
@@ -1942,6 +1963,7 @@
             <Cell><Data ss:Type="String">${item.name}</Data></Cell>
             <Cell><Data ss:Type="String">${item.category}</Data></Cell>
             <Cell><Data ss:Type="String">${b.addedDate}</Data></Cell>
+            <Cell><Data ss:Type="String">${b.lastUpdated || b.addedDate}</Data></Cell>
             <Cell><Data ss:Type="String">${b.sourceNote || 'In-House'}</Data></Cell>
             <Cell><Data ss:Type="Number">${initQty}</Data></Cell>
             <Cell><Data ss:Type="Number">${b.remQty}</Data></Cell>
@@ -1954,10 +1976,12 @@
         xml += `
           </Table>
          </Worksheet>
+
+         <!-- WORKSHEET 3: MARKED OUT PASTRIES LOG -->
          <Worksheet ss:Name="Marked Out Pastries">
           <Table>
            <Row ss:StyleID="Header">
-            <Cell><Data ss:Type="String">Date</Data></Cell>
+            <Cell><Data ss:Type="String">Marked Out Date</Data></Cell>
             <Cell><Data ss:Type="String">Pastry Item Name</Data></Cell>
             <Cell><Data ss:Type="String">Qty Marked Out</Data></Cell>
             <Cell><Data ss:Type="String">Unit</Data></Cell>
@@ -1978,36 +2002,86 @@
         xml += `
           </Table>
          </Worksheet>
+
+         <!-- WORKSHEET 4: DELIVERIES LOG -->
+         <Worksheet ss:Name="Deliveries Log">
+          <Table>
+           <Row ss:StyleID="Header">
+            <Cell><Data ss:Type="String">Delivery Date</Data></Cell>
+            <Cell><Data ss:Type="String">Item Name</Data></Cell>
+            <Cell><Data ss:Type="String">Category</Data></Cell>
+            <Cell><Data ss:Type="String">Subcategory</Data></Cell>
+            <Cell><Data ss:Type="String">Supplier</Data></Cell>
+            <Cell><Data ss:Type="String">Qty</Data></Cell>
+            <Cell><Data ss:Type="String">Unit</Data></Cell>
+           </Row>`;
+
+        (appData.deliveries || []).forEach(d => {
+            xml += `
+           <Row>
+            <Cell><Data ss:Type="String">${d.deliveryDate}</Data></Cell>
+            <Cell><Data ss:Type="String">${d.name}</Data></Cell>
+            <Cell><Data ss:Type="String">${d.category}</Data></Cell>
+            <Cell><Data ss:Type="String">${d.subcategory}</Data></Cell>
+            <Cell><Data ss:Type="String">${d.supplier}</Data></Cell>
+            <Cell><Data ss:Type="Number">${d.qty}</Data></Cell>
+            <Cell><Data ss:Type="String">${d.unit}</Data></Cell>
+           </Row>`;
+        });
+
+        xml += `
+          </Table>
+         </Worksheet>
         </Workbook>`;
 
         const blob = new Blob([xml], { type: "application/vnd.ms-excel" });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = `inventory_excel_${dateTag}.xls`;
+        link.download = `inventory_excel_detailed_${dateTag}.xls`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
     }
 
-    // EXPORT DIRECTLY TO GOOGLE SHEETS READY FORMAT (.csv)
+    // EXPORT TO GOOGLE SHEETS READY FORMAT WITH DETAILED DATE COLUMNS (.csv)
     function exportToGoogleSheets() {
         const dateTag = new Date().toISOString().split('T')[0];
-        let csvContent = "Category,Subcategory,Item Name,Unit,Remaining Stock,Used Stock,Initial Total Stock (Formula)\n";
+        const fullTimeStr = getFormattedTimestamp();
+
+        let csvContent = `Report Title: QuadLink Inventory Report,Generated Date: ${fullTimeStr}\n\n`;
+        csvContent += "Category,Subcategory,Item Name,Unit,Remaining Stock,Used Stock,Initial Stock (Formula),Earliest Batch Date,Last Updated Date\n";
 
         appData.inventory.forEach((item, index) => {
             const totalRem = getItemTotalQty(item);
             const totalUsed = getItemTotalUsed(item);
             const unitStr = getItemActiveUnit(item);
-            const rowNum = index + 2;
+            const earliestDate = getItemActiveBatchDate(item);
+            const lastUpdate = item.lastUpdated || dateTag;
+            
+            // Formula row index offset considering header rows
+            const rowNum = index + 5; 
             const formula = `"=E${rowNum}+F${rowNum}"`;
             
-            csvContent += `"${item.category}","${item.subcategory}","${item.name}","${unitStr}",${totalRem},${totalUsed},${formula}\n`;
+            csvContent += `"${item.category}","${item.subcategory}","${item.name}","${unitStr}",${totalRem},${totalUsed},${formula},"${earliestDate}","${lastUpdate}"\n`;
+        });
+
+        csvContent += "\n--- DETAILED BATCH BREAKDOWN ---\n";
+        csvContent += "Item Name,Category,Batch Entry Date,Batch Last Updated,Source,Initial Qty,Remaining Qty,Used Qty (Formula),Unit\n";
+
+        let batchRowOffset = appData.inventory.length + 8;
+        appData.inventory.forEach(item => {
+            (item.batches || []).forEach(b => {
+                const initQty = b.initQty !== undefined ? b.initQty : b.remQty;
+                const formula = `"=F${batchRowOffset}-G${batchRowOffset}"`;
+                csvContent += `"${item.name}","${item.category}","${b.addedDate}","${b.lastUpdated || b.addedDate}","${b.sourceNote || 'In-House'}",${initQty},${b.remQty},${formula},"${b.unit || item.unit}"\n`;
+                batchRowOffset++;
+            });
         });
 
         csvContent += "\n--- MARKED OUT PASTRIES HISTORY ---\n";
-        csvContent += "Date,Pastry Item Name,Qty Marked Out,Unit,Reason\n";
+        csvContent += "Marked Out Date,Pastry Item Name,Qty Marked Out,Unit,Reason\n";
 
         (appData.markedOutPastries || []).forEach(mo => {
             csvContent += `"${mo.date}","${mo.itemName}",${mo.qty},"${mo.unit}","${mo.reason}"\n`;
@@ -2017,7 +2091,7 @@
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = `google_sheets_inventory_${dateTag}.csv`;
+        link.download = `google_sheets_inventory_detailed_${dateTag}.csv`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
