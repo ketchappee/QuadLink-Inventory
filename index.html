@@ -203,29 +203,6 @@
         .netflix-card h3 { font-size: 1.1rem; font-weight: 700; }
         .netflix-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
 
-        .summary-kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .kpi-card {
-            background: var(--clear-trans-medium);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--clear-border);
-            border-radius: 18px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            box-shadow: var(--glass-shadow);
-        }
-
-        .kpi-card-title { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-        .kpi-card-value { font-size: 1.8rem; font-weight: 800; color: var(--brand-color); }
-        .kpi-card-value.used { color: var(--danger); }
-
         header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
         header h2 { font-size: 1.35rem; font-weight: 700; color: var(--text-main); }
 
@@ -260,6 +237,50 @@
         button.gsheet-btn { color: #0f9d58; background: rgba(15, 157, 88, 0.18); border-color: rgba(15, 157, 88, 0.4); font-weight: 700; }
         button.edit-btn { color: var(--warning); background: rgba(217, 160, 107, 0.15); border-color: rgba(217, 160, 107, 0.3); }
 
+        .filter-toggle-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.65);
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--clear-border);
+            cursor: pointer;
+        }
+
+        .dashboard-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .dash-card-btn {
+            background: var(--clear-trans-medium);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--clear-border);
+            border-radius: 14px;
+            padding: 12px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .dash-card-btn:hover { background: var(--clear-trans-hover); }
+        .dash-card-btn.active {
+            background: var(--brand-color);
+            color: #fff;
+            border-color: var(--brand-color);
+        }
+        .dash-card-icon { font-size: 1.1rem; }
+        .dash-card-title { font-size: 0.78rem; font-weight: 700; }
+
         .glass-card {
             background: var(--clear-trans-medium);
             backdrop-filter: blur(20px);
@@ -269,6 +290,163 @@
             padding: 20px;
             margin-bottom: 20px;
         }
+
+        .sub-accordion-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .sub-accordion-card {
+            background: var(--clear-trans-medium);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            border: 1px solid var(--clear-border);
+            box-shadow: var(--glass-shadow);
+            overflow: hidden;
+            transition: border-color 0.2s ease;
+        }
+        .sub-accordion-card:hover { border-color: var(--brand-color); }
+
+        .sub-accordion-header {
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.4);
+            transition: background 0.2s ease;
+        }
+        .sub-accordion-header:hover { background: rgba(255, 255, 255, 0.65); }
+        
+        .sub-accordion-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: rgba(140, 123, 107, 0.15);
+            color: var(--brand-color);
+            padding: 3px 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(140, 123, 107, 0.25);
+        }
+
+        .sub-accordion-arrow {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .sub-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s ease;
+            padding: 0 16px;
+        }
+
+        .sub-accordion-content.open {
+            max-height: 2000px;
+            padding: 12px 16px 18px 16px;
+        }
+
+        .sub-accordion-card.active .sub-accordion-arrow {
+            transform: rotate(180deg);
+        }
+
+        .batch-action-bar {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--clear-border);
+            border-radius: 14px;
+            padding: 10px 16px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .batch-info { font-size: 0.78rem; font-weight: 700; color: var(--text-main); }
+        .batch-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+        .search-bar-container { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .search-input-wrapper { position: relative; flex: 1; min-width: 220px; }
+        .search-input-wrapper input { width: 100%; padding-left: 36px; }
+        .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.85rem; color: var(--text-muted); pointer-events: none; }
+
+        .category-section-header {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 24px 0 10px 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 14px; }
+        .input-group { display: flex; flex-direction: column; gap: 5px; }
+        .input-group label { font-size: 0.65rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; }
+
+        .subcategory-input-wrapper, .qty-input-wrapper { display: flex; gap: 5px; align-items: center; }
+        .subcategory-input-wrapper select { flex: 1; min-width: 0; }
+        .qty-input-wrapper input { flex: 1; min-width: 0; width: 55%; }
+        .qty-input-wrapper select { width: 45%; min-width: 70px; flex-shrink: 0; }
+
+        .btn-del-sub {
+            background: rgba(217, 107, 107, 0.15);
+            color: var(--danger);
+            border: 1px solid rgba(217, 107, 107, 0.3);
+            border-radius: 10px;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        .btn-del-sub:hover { background: rgba(217, 107, 107, 0.3); }
+
+        input, select {
+            background: rgba(255, 255, 255, 0.65);
+            border: 1px solid var(--clear-border);
+            color: var(--text-main);
+            padding: 9px 12px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            outline: none;
+            backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+        }
+        input:focus, select:focus { border-color: var(--brand-color); background: rgba(255, 255, 255, 0.95); }
+        select option { background: #fff; color: #111; }
+
+        .action-cell-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: nowrap;
+        }
+
+        .select-transfer {
+            padding: 6px 8px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid var(--clear-border);
+            color: var(--text-main);
+            cursor: pointer;
+            max-width: 130px;
+        }
+
+        .row-checkbox { width: 15px; height: 15px; cursor: pointer; accent-color: var(--brand-color); }
 
         .table-container { 
             background: var(--clear-trans-medium);
@@ -285,6 +463,12 @@
         th, td { padding: 12px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.35); font-size: 0.8rem; white-space: nowrap; }
         th { background: rgba(255, 255, 255, 0.3); color: var(--text-muted); font-weight: 700; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.6px; }
 
+        .qty-control { display: flex; align-items: center; gap: 5px; }
+        .btn-qty { width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--clear-border); background: rgba(255, 255, 255, 0.6); cursor: pointer; font-weight: 600; font-size: 0.75rem; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .btn-qty:hover { background: var(--brand-color); color: #fff; border-color: var(--brand-color); }
+
+        .unit-label { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); margin-left: 2px; }
+
         .used-badge-red {
             display: inline-block;
             background: rgba(217, 107, 107, 0.2);
@@ -300,6 +484,119 @@
             color: #C0392B;
             font-weight: 700;
         }
+
+        .waste-tag {
+            display: inline-block;
+            background: rgba(217, 107, 107, 0.2);
+            color: var(--danger);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 5px;
+            border: 1px solid rgba(217, 107, 107, 0.3);
+            text-transform: uppercase;
+        }
+
+        .delivery-note-tag {
+            display: inline-block;
+            background: rgba(140, 123, 107, 0.2);
+            color: var(--brand-color);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 5px;
+            margin-left: 4px;
+            border: 1px solid rgba(140, 123, 107, 0.3);
+            text-transform: uppercase;
+        }
+
+        .inhouse-note-tag {
+            display: inline-block;
+            background: rgba(107, 155, 126, 0.2);
+            color: var(--success);
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 5px;
+            margin-left: 4px;
+            border: 1px solid rgba(107, 155, 126, 0.3);
+            text-transform: uppercase;
+        }
+
+        .fifo-batch-tag {
+            display: inline-block;
+            background: rgba(217, 160, 107, 0.25);
+            color: #5C3D1E;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 5px;
+            margin-left: 4px;
+            border: 1px solid rgba(217, 160, 107, 0.4);
+        }
+
+        .btn-delete-x {
+            background: rgba(217, 107, 107, 0.15);
+            color: var(--danger);
+            border: 1px solid rgba(217, 107, 107, 0.3);
+            border-radius: 7px;
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+        .btn-delete-x:hover { background: rgba(217, 107, 107, 0.3); }
+
+        .log-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .log-section-title { font-size: 0.9rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
+        .log-controls { display: flex; align-items: center; gap: 10px; }
+        .select-all-label { font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 5px; cursor: pointer; }
+
+        button.btn-clear-selected {
+            background: rgba(217, 107, 107, 0.15);
+            color: var(--danger);
+            border: 1px solid rgba(217, 107, 107, 0.3);
+            padding: 5px 10px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+        button.btn-clear-selected:hover { background: rgba(217, 107, 107, 0.25); }
+
+        .log-list { list-style: none; display: flex; flex-direction: column; gap: 6px; max-height: 200px; overflow-y: auto; padding-right: 4px; }
+        .log-item { 
+            background: rgba(255, 255, 255, 0.35); 
+            border: 1px solid var(--clear-border); 
+            border-radius: 10px; 
+            padding: 8px 12px; 
+            font-size: 0.75rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            gap: 10px;
+        }
+        .log-item-left { display: flex; align-items: center; gap: 8px; }
+        .log-checkbox { width: 14px; height: 14px; cursor: pointer; accent-color: var(--brand-color); }
+        .log-date { font-weight: 600; color: var(--text-muted); font-size: 0.68rem; white-space: nowrap; }
+
+        .batch-breakdown-row { background: rgba(255, 255, 255, 0.2); }
+        .batch-subtable { width: 100%; margin: 8px 0; font-size: 0.73rem; }
+        .batch-subtable th { font-size: 0.62rem; background: rgba(0,0,0,0.03); }
+        .batch-subtable td { padding: 6px 10px; }
     </style>
 </head>
 <body>
@@ -326,9 +623,9 @@
         <p>Aesthetic minimalist stock management with isolated batch tracking & full audit history monitoring.</p>
         <div class="hero-action-group">
             <button type="button" class="btn-proceed" onclick="navigateTo('menu')">📂 Menu Inventory</button>
-            <button type="button" class="btn-proceed secondary" onclick="navigateTo('totals')">📊 Totals Dashboard</button>
             <button type="button" class="btn-proceed secondary" onclick="navigateTo('markedout')">🥐 Marked Out Pastries</button>
             <button type="button" class="btn-proceed secondary" onclick="navigateTo('deliveries')">🚚 Deliveries Inventory</button>
+            <button type="button" class="btn-proceed secondary" onclick="navigateTo('master')">🔍 Master Search List</button>
         </div>
     </div>
 </section>
@@ -339,7 +636,6 @@
         <h2>📂 Menu Inventory</h2>
         <div class="action-btns">
             <button type="button" onclick="navigateTo('home')" class="btn">🏠 Home</button>
-            <button type="button" onclick="navigateTo('totals')" class="btn">📊 Totals Summary</button>
             <button type="button" onclick="navigateTo('master')" class="btn">🔍 Master Search</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
@@ -354,89 +650,455 @@
         <div class="netflix-cards-grid">
             <div class="netflix-card" onclick="navigateTo('inventory', 'Café')">
                 <div class="netflix-card-icon">☕</div>
+                <div class="netflix-badge-tag">Inventory</div>
                 <h3>Café</h3>
                 <p>Espresso beans, milks, syrups, and daily consumables.</p>
             </div>
-            <div class="netflix-card" onclick="navigateTo('totals')">
-                <div class="netflix-card-icon">📊</div>
-                <h3>Totals Dashboard</h3>
-                <p>View grand total remaining stock and overall product usage.</p>
-            </div>
             <div class="netflix-card" onclick="navigateTo('markedout')">
                 <div class="netflix-card-icon">🥐</div>
+                <div class="netflix-badge-tag">Waste Log</div>
                 <h3>Marked Out Pastries</h3>
                 <p>Track expired, sampled, or damaged pastry waste & deduct stock.</p>
             </div>
             <div class="netflix-card" onclick="navigateTo('inventory', 'Community')">
                 <div class="netflix-card-icon">🤝</div>
+                <div class="netflix-badge-tag">Inventory</div>
                 <h3>Community</h3>
                 <p>Entertainment sets, furniture, seating, and electronics.</p>
+            </div>
+            <div class="netflix-card" onclick="navigateTo('inventory', 'Housekeeping')">
+                <div class="netflix-card-icon">🧹</div>
+                <div class="netflix-badge-tag">Inventory</div>
+                <h3>Housekeeping</h3>
+                <p>Cleaning chemicals, linens, equipment, and supplies.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- TOTAL STOCKS & USAGE SUMMARY TAB -->
-<section id="view-totals" class="page-view">
+<!-- MARKED OUT PASTRIES PAGE -->
+<section id="view-markedout" class="page-view">
     <header>
-        <h2>📊 Total Stocks & Product Usage Summary</h2>
+        <h2>🥐 Marked Out Pastries (Waste & Sample Logging)</h2>
         <div class="action-btns">
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
+            <button type="button" onclick="navigateTo('inventory', 'Café')" class="btn">☕ Café Inventory</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
+            <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
+            <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
             <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
             <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
         </div>
     </header>
 
-    <div class="summary-kpi-grid">
-        <div class="kpi-card">
-            <span class="kpi-card-title">Total Active Products</span>
-            <span class="kpi-card-value" id="kpiTotalProducts">0</span>
-        </div>
-        <div class="kpi-card">
-            <span class="kpi-card-title">Total Remaining Stock Units</span>
-            <span class="kpi-card-value" id="kpiTotalRemaining">0</span>
-        </div>
-        <div class="kpi-card">
-            <span class="kpi-card-title">Total Product Stock Used</span>
-            <span class="kpi-card-value used" id="kpiTotalUsed">0</span>
-        </div>
+    <div class="glass-card">
+        <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); display: block; margin-bottom: 12px;">🥐 Log Marked Out Pastry (Auto-Deducts from Café Inventory)</span>
+        <form id="markedOutForm" onsubmit="addMarkedOutPastry(event)">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Select Pastry Item</label>
+                    <div class="subcategory-input-wrapper">
+                        <select id="moItemSelect" onchange="handleMarkedOutSelectChange(this)"></select>
+                        <input type="text" id="moCustomInput" placeholder="Enter custom pastry name..." style="display: none; flex: 1;">
+                        <button type="button" id="moToggleBtn" class="btn" onclick="toggleCustomPastryMode(true)" style="padding: 0 10px; font-size: 0.72rem;">+ Custom</button>
+                        <button type="button" class="btn-del-sub" onclick="deleteSelectedPastryFromDropdown()" title="Delete Selected Pastry Item Entirely">✕</button>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Marked Out Reason</label>
+                    <select id="moReason" required>
+                        <option value="Expired / End of Day Waste">Expired / End of Day Waste</option>
+                        <option value="Sampling / Staff Consumption">Sampling / Staff Consumption</option>
+                        <option value="Damaged / Dropped">Damaged / Dropped</option>
+                        <option value="Quality Control Reject">Quality Control Reject</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Quantity Marked Out</label>
+                    <input type="number" id="moQty" placeholder="1" min="1" required>
+                </div>
+                <div class="input-group">
+                    <label>Marked Out Date</label>
+                    <input type="date" id="moDate" required>
+                </div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button type="submit" class="btn primary">🔴 Mark Out Pastry & Update Stock</button>
+                <button type="button" class="btn danger-btn" onclick="deleteSelectedPastryFromDropdown()">🗑️ Delete Pastry Item Entirely</button>
+            </div>
+        </form>
     </div>
 
     <div class="glass-card">
-        <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">📂 Totals Breakdown by Subcategory Group</div>
+        <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">📋 Marked Out Pastries Audit History</div>
         <div class="table-container" style="box-shadow: none; border: none; margin-bottom: 0;">
             <table>
                 <thead>
                     <tr>
-                        <th>Subcategory Group</th>
-                        <th>Main Category</th>
-                        <th>Product Count</th>
-                        <th>Total Stock Remaining</th>
-                        <th>Total Stock Used</th>
+                        <th>Date</th>
+                        <th>Pastry Item Name</th>
+                        <th>Qty Marked Out</th>
+                        <th>Reason</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
-                <tbody id="totalsTableBody"></tbody>
+                <tbody id="markedOutTableBody"></tbody>
             </table>
         </div>
     </div>
 </section>
 
-<!-- (OTHER PAGES REMAIN INTACT) -->
-<section id="view-markedout" class="page-view"></section>
-<section id="view-deliveries" class="page-view"></section>
-<section id="view-master" class="page-view"></section>
-<section id="view-inventory" class="page-view"></section>
+<!-- DELIVERIES PAGE -->
+<section id="view-deliveries" class="page-view">
+    <header>
+        <h2>🚚 Deliveries Dashboard</h2>
+        <div class="action-btns">
+            <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
+            <button type="button" onclick="navigateTo('master')" class="btn">🔍 Master Search</button>
+            <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
+            <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
+            <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
+        </div>
+    </header>
+
+    <div class="dashboard-nav-grid">
+        <div class="dash-card-btn active" id="dashNav-ALL" onclick="filterDeliveryDashboard('ALL')">
+            <div class="dash-card-icon">📦</div>
+            <div class="dash-card-title">All Categories</div>
+        </div>
+        <div class="dash-card-btn" id="dashNav-Café" onclick="filterDeliveryDashboard('Café')">
+            <div class="dash-card-icon">☕</div>
+            <div class="dash-card-title">Café</div>
+        </div>
+        <div class="dash-card-btn" id="dashNav-Community" onclick="filterDeliveryDashboard('Community')">
+            <div class="dash-card-icon">🤝</div>
+            <div class="dash-card-title">Community</div>
+        </div>
+        <div class="dash-card-btn" id="dashNav-Housekeeping" onclick="filterDeliveryDashboard('Housekeeping')">
+            <div class="dash-card-icon">🧹</div>
+            <div class="dash-card-title">Housekeeping</div>
+        </div>
+    </div>
+
+    <div class="glass-card" style="padding: 14px 18px;">
+        <div class="search-bar-container">
+            <div class="search-input-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="deliverySearchInput" placeholder="Search delivery items or suppliers..." oninput="renderDeliveriesTable()">
+            </div>
+            <label class="filter-toggle-label">
+                <input type="checkbox" id="hideOldDeliveriesToggle" onchange="toggleHideOldItems(this.checked)"> 👁️ Hide 0 Qty / Old Deliveries
+            </label>
+        </div>
+    </div>
+
+    <div class="glass-card">
+        <form id="deliveryForm" onsubmit="addDelivery(event)">
+            <input type="hidden" id="editingDeliveryId" value="">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Target Category</label>
+                    <select id="delCategory" required onchange="updateDeliverySubcategoryDropdown(this.value)">
+                        <option value="Café">Café</option>
+                        <option value="Community">Community</option>
+                        <option value="Housekeeping">Housekeeping</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Subcategory</label>
+                    <div class="subcategory-input-wrapper">
+                        <select id="delSubcategory" required onchange="handleDeliverySubcategoryChange(this)"></select>
+                        <button type="button" class="btn-del-sub" onclick="deleteDeliverySubcategory()" title="Delete subcategory">✕</button>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Item Name</label>
+                    <input type="text" id="delItemName" placeholder="e.g. Beans Batch" required>
+                </div>
+                <div class="input-group">
+                    <label>Supplier</label>
+                    <div class="subcategory-input-wrapper">
+                        <select id="delSupplier" required onchange="handleSupplierChange(this)">
+                            <option value="JAMBI">JAMBI</option>
+                            <option value="YARDSTICK">YARDSTICK</option>
+                            <option value="NIMO">NIMO</option>
+                            <option value="KUKIDO">KUKIDO</option>
+                            <option value="CUSTOM">+ Add Custom...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Qty & Unit</label>
+                    <div class="qty-input-wrapper">
+                        <input type="number" id="delQty" placeholder="0" min="1" required>
+                        <select id="delUnit" required>
+                            <option value="Pcs">Pcs</option>
+                            <option value="Box">Box</option>
+                            <option value="Case">Case</option>
+                            <option value="Kg">Kg</option>
+                            <option value="L">L</option>
+                            <option value="Pack">Pack</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Delivery Date</label>
+                    <input type="date" id="delDate" required>
+                </div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <button type="submit" id="delSubmitBtn" class="btn primary">+ Schedule Delivery (Auto-Syncs to Inventory)</button>
+                <button type="button" id="delCancelEditBtn" class="btn" style="display: none;" onclick="cancelDeliveryEdit()">Cancel Edit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- BATCH ACTION BAR FOR DELIVERIES -->
+    <div id="delBatchBar" class="batch-action-bar" style="display: none;">
+        <span class="batch-info" id="delBatchCount">0 selected</span>
+        <div class="batch-controls">
+            <select id="delBatchTarget" class="select-transfer" style="max-width: 170px;">
+                <option value="">Transfer / Copy...</option>
+                <optgroup label="Move To">
+                    <option value="MOVE_Café">☕ Move to Café</option>
+                    <option value="MOVE_Community">🤝 Move to Community</option>
+                    <option value="MOVE_Housekeeping">🧹 Move to Housekeeping</option>
+                </optgroup>
+                <optgroup label="Copy To">
+                    <option value="COPY_Café">☕ Copy to Café</option>
+                    <option value="COPY_Community">🤝 Copy to Community</option>
+                    <option value="COPY_Housekeeping">🧹 Copy to Housekeeping</option>
+                </optgroup>
+            </select>
+            <button type="button" class="btn primary" onclick="executeBatchAction('DELIVERY')" style="padding: 6px 12px; font-size: 0.75rem;">Apply</button>
+            <button type="button" class="btn-clear-selected" onclick="deleteSelectedDeliveries()">🗑️ Delete Selected</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 36px; text-align: center;"><input type="checkbox" id="delSelectAll" class="row-checkbox" onchange="toggleSelectAllPage(this, '.del-row-cb')"></th>
+                    <th>Item Name</th>
+                    <th>Category / Subcategory</th>
+                    <th>Supplier</th>
+                    <th>Qty & Unit</th>
+                    <th>Delivery Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="deliveriesTable"></tbody>
+        </table>
+    </div>
+</section>
+
+<!-- MASTER SEARCH PAGE -->
+<section id="view-master" class="page-view">
+    <header>
+        <h2>🔍 Search & Overview</h2>
+        <div class="action-btns">
+            <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
+            <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
+            <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
+            <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
+        </div>
+    </header>
+
+    <div class="glass-card">
+        <div class="search-bar-container">
+            <div class="search-input-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Search across all inventories..." oninput="renderMasterTables()">
+            </div>
+            <select id="categoryFilter" onchange="renderMasterTables()" style="min-width: 140px;">
+                <option value="ALL">All Categories</option>
+                <option value="Café">Café</option>
+                <option value="Community">Community</option>
+                <option value="Housekeeping">Housekeeping</option>
+            </select>
+            <label class="filter-toggle-label">
+                <input type="checkbox" id="hideOldMasterToggle" onchange="toggleHideOldItems(this.checked)"> 👁️ Hide Depleted (0 Stock) Items
+            </label>
+        </div>
+    </div>
+
+    <div id="noResultsMsg" style="display: none;" class="glass-card">
+        <p style="text-align: center; color: var(--text-muted); font-weight: 500;">No matching inventory items found.</p>
+    </div>
+
+    <div id="sec-Café">
+        <div class="category-section-header">☕ Café Inventory</div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Subcategory</th>
+                        <th>Total Qty</th>
+                        <th>Total Used</th>
+                        <th>Active Batches</th>
+                        <th>Earliest Batch Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-Café"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="sec-Community">
+        <div class="category-section-header">🤝 Community Inventory</div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Subcategory</th>
+                        <th>Total Qty</th>
+                        <th>Total Used</th>
+                        <th>Active Batches</th>
+                        <th>Earliest Batch Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-Community"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="sec-Housekeeping">
+        <div class="category-section-header">🧹 Housekeeping Inventory</div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Subcategory</th>
+                        <th>Total Qty</th>
+                        <th>Total Used</th>
+                        <th>Active Batches</th>
+                        <th>Earliest Batch Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-Housekeeping"></tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- CATEGORY SINGLE INVENTORY PAGE -->
+<section id="view-inventory" class="page-view">
+    <header>
+        <h2 id="currentTitle">☕ Café Inventory</h2>
+        <div class="action-btns">
+            <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
+            <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
+            <button type="button" onclick="triggerFileInput()" class="btn load-file-btn">📂 Load File</button>
+            <button type="button" onclick="exportToFile()" class="btn save-file-btn">💾 Save File</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
+        </div>
+    </header>
+
+    <div class="glass-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+            <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-main);">➕ Quick Entry / Add Batch</span>
+            <label class="filter-toggle-label">
+                <input type="checkbox" id="hideOldInventoryToggle" onchange="toggleHideOldItems(this.checked)"> 👁️ Hide Depleted (0 Stock) Items
+            </label>
+        </div>
+        <form id="itemForm" onsubmit="addItem(event)">
+            <input type="hidden" id="editingItemId" value="">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Subcategory</label>
+                    <div class="subcategory-input-wrapper">
+                        <select id="itemSubcategory" required onchange="handleSubcategoryChange(this)"></select>
+                        <button type="button" class="btn-del-sub" onclick="deleteCurrentSubcategory()" title="Delete subcategory">✕</button>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Item Name</label>
+                    <input type="text" id="itemName" placeholder="e.g. Espresso Beans" required>
+                </div>
+                <div class="input-group">
+                    <label>Source Note</label>
+                    <select id="itemSourceNote" required>
+                        <option value="In-House">In-House</option>
+                        <option value="Delivery">Delivery</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>New Batch Qty & Unit</label>
+                    <div class="qty-input-wrapper">
+                        <input type="number" id="itemQty" placeholder="0" min="0">
+                        <select id="itemUnit" required>
+                            <option value="Pcs">Pcs</option>
+                            <option value="Box">Box</option>
+                            <option value="Case">Case</option>
+                            <option value="Kg">Kg</option>
+                            <option value="L">L</option>
+                            <option value="Pack">Pack</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Batch / Entry Date (Backdate Support)</label>
+                    <input type="date" id="itemAddedDate" required>
+                </div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <button type="submit" id="itemSubmitBtn" class="btn primary">+ Add Item / New Batch</button>
+                <button type="button" id="itemCancelEditBtn" class="btn" style="display: none;" onclick="cancelItemEdit()">Cancel Edit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- SUBCATEGORY ACCORDION TABS CONTAINER -->
+    <div id="subAccordionContainer" class="sub-accordion-container">
+        <!-- Rendered dynamically via renderTable() -->
+    </div>
+
+    <div class="glass-card">
+        <div class="log-header">
+            <div class="log-section-title">🕒 Activity History & Audit Monitoring</div>
+            <div class="log-controls">
+                <label class="select-all-label">
+                    <input type="checkbox" id="selectAllLogs" onchange="toggleSelectAllLogs(this)"> Select All
+                </label>
+                <button type="button" class="btn-clear-selected" onclick="deleteSelectedLogs()">🗑️ Delete</button>
+            </div>
+        </div>
+        <ul class="log-list" id="auditLogList">
+            <li class="log-item"><span>No modifications recorded yet.</span></li>
+        </ul>
+    </div>
+</section>
 
 <script>
     let currentDeliveryFilter = 'ALL';
     let hideOldItemsEnabled = false;
+
+    // STORE OPEN/CLOSED ACCORDION TAB STATES PER CATEGORY
+    let openAccordionSubcategories = {};
+
+    // GLOBAL STATE HISTORY UNDO STACK (MAX 30 STEPS)
+    let stateHistory = [];
+    const MAX_UNDO_LEVELS = 30;
 
     let defaultSubcategories = {
         'Café': ['Beans', 'Milk', 'Pastries', 'Syrups & Flavorings', 'Retail', 'Cups & Packaging', 'Consumables & Others'],
         'Community': ['Entertainment & Games', 'Furniture & Seating', 'Electronics & AV', 'General Supplies'],
         'Housekeeping': ['Cleaning Supplies', 'Linens & Towels', 'Tools & Equipment', 'Restroom Supplies']
     };
+
+    const initialPastryItems = ["Clubhouse", "Tuna Melt", "Spam Aioli", "Grilled Cheese"];
 
     let appData = JSON.parse(localStorage.getItem('cafe_inventory_data')) || {
         categories: defaultSubcategories,
@@ -450,7 +1112,10 @@
                 subcategory: "Beans", 
                 unit: "Kg",
                 lastUpdated: new Date().toISOString().split('T')[0],
-                batches: [{ batchId: "b1", addedDate: "2026-09-01", lastUpdated: "2026-09-01", initQty: 10, remQty: 2, usedQty: 8, unit: "Kg", sourceNote: "In-House" }]
+                batches: [
+                    { batchId: "b1", addedDate: "2026-09-01", lastUpdated: "2026-09-01", initQty: 10, remQty: 2, usedQty: 8, unit: "Kg", sourceNote: "In-House" },
+                    { batchId: "b2", addedDate: "2026-09-05", lastUpdated: "2026-09-05", initQty: 10, remQty: 10, usedQty: 0, unit: "Kg", sourceNote: "Delivery" }
+                ]
             },
             { 
                 id: 2, 
@@ -459,13 +1124,132 @@
                 subcategory: "Milk", 
                 unit: "Case",
                 lastUpdated: new Date().toISOString().split('T')[0],
-                batches: [{ batchId: "b3", addedDate: "2026-08-25", lastUpdated: "2026-08-25", initQty: 5, remQty: 3, usedQty: 2, unit: "Case", sourceNote: "Delivery" }]
+                batches: [
+                    { batchId: "b3", addedDate: "2026-08-25", lastUpdated: "2026-08-25", initQty: 2, remQty: 2, usedQty: 0, unit: "Case", sourceNote: "Delivery" }
+                ]
+            },
+            {
+                id: 3,
+                name: "Butter Croissant",
+                category: "Café",
+                subcategory: "Pastries",
+                unit: "Pcs",
+                lastUpdated: new Date().toISOString().split('T')[0],
+                batches: [
+                    { batchId: "b4", addedDate: "2026-09-06", lastUpdated: "2026-09-06", initQty: 15, remQty: 15, usedQty: 0, unit: "Pcs", sourceNote: "Delivery" }
+                ]
             }
         ],
-        deliveries: [],
+        deliveries: [
+            { id: 101, name: "Specialty Espresso Batch", category: "Café", subcategory: "Beans", supplier: "YARDSTICK", qty: 10, unit: "Kg", deliveryDate: "2026-09-10" }
+        ],
         markedOutPastries: [],
         logs: []
     };
+
+    if (!appData.categories) appData.categories = JSON.parse(JSON.stringify(defaultSubcategories));
+    if (!appData.categories['Café'].includes('Pastries')) appData.categories['Café'].unshift('Pastries');
+    if (!appData.categories['Café'].includes('Retail')) appData.categories['Café'].push('Retail');
+    if (!appData.suppliers) appData.suppliers = ['JAMBI', 'YARDSTICK', 'NIMO', 'KUKIDO', 'MMB', 'LALAMOVE'];
+    if (!appData.deliveries) appData.deliveries = [];
+    if (!appData.markedOutPastries) appData.markedOutPastries = [];
+    if (!appData.lastUpdatedTimestamp) appData.lastUpdatedTimestamp = Date.now();
+
+    initialPastryItems.forEach((pName, index) => {
+        const exists = appData.inventory.some(i => i.category === 'Café' && i.name.toLowerCase().trim() === pName.toLowerCase().trim());
+        if (!exists) {
+            appData.inventory.push({
+                id: Date.now() + index + 10,
+                name: pName,
+                category: "Café",
+                subcategory: "Pastries",
+                unit: "Pcs",
+                lastUpdated: new Date().toISOString().split('T')[0],
+                batches: []
+            });
+        }
+    });
+
+    appData.inventory.forEach(item => {
+        if (!item.subcategory) item.subcategory = "General";
+        if (!item.unit) item.unit = "Pcs";
+        if (!item.lastUpdated) item.lastUpdated = new Date().toISOString().split('T')[0];
+        if (!item.batches || !Array.isArray(item.batches)) {
+            const oldQty = item.qty !== undefined ? item.qty : 0;
+            const oldDate = item.addedDate || new Date().toISOString().split('T')[0];
+            const oldSource = item.sourceNote || "In-House";
+            item.batches = [{
+                batchId: 'b_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+                addedDate: oldDate,
+                lastUpdated: oldDate,
+                initQty: oldQty,
+                remQty: oldQty,
+                usedQty: 0,
+                unit: item.unit || 'Pcs',
+                sourceNote: oldSource
+            }];
+            delete item.qty;
+            delete item.addedDate;
+            delete item.sourceNote;
+        } else {
+            item.batches.forEach(b => {
+                if (!b.unit) b.unit = item.unit || 'Pcs';
+                if (b.initQty === undefined) b.initQty = b.remQty || 0;
+                if (b.usedQty === undefined) b.usedQty = Math.max(0, b.initQty - (b.remQty || 0));
+                if (!b.lastUpdated) b.lastUpdated = b.addedDate || new Date().toISOString().split('T')[0];
+            });
+        }
+        sortItemBatches(item);
+    });
+
+    if (appData.logs && Array.isArray(appData.logs)) {
+        appData.logs.forEach((log, index) => {
+            if (!log.id) log.id = 'log_' + Date.now() + '_' + index;
+        });
+    }
+
+    let currentCategory = 'Café';
+    document.getElementById('itemAddedDate').value = new Date().toISOString().split('T')[0];
+    document.getElementById('delDate').value = new Date().toISOString().split('T')[0];
+    document.getElementById('moDate').value = new Date().toISOString().split('T')[0];
+
+    function toggleHideOldItems(isChecked) {
+        hideOldItemsEnabled = isChecked;
+        const t1 = document.getElementById('hideOldInventoryToggle');
+        const t2 = document.getElementById('hideOldMasterToggle');
+        const t3 = document.getElementById('hideOldDeliveriesToggle');
+        if (t1) t1.checked = isChecked;
+        if (t2) t2.checked = isChecked;
+        if (t3) t3.checked = isChecked;
+        refreshAllViews();
+    }
+
+    function saveSnapshotForUndo() {
+        stateHistory.push(JSON.stringify(appData));
+        if (stateHistory.length > MAX_UNDO_LEVELS) {
+            stateHistory.shift();
+        }
+    }
+
+    async function undoLastAction() {
+        if (stateHistory.length === 0) {
+            alert("No actions available to undo.");
+            return;
+        }
+        const previousState = stateHistory.pop();
+        appData = JSON.parse(previousState);
+        appData.lastUpdatedTimestamp = Date.now();
+        recordLog("↩️ Triggered Undo Command (Restored previous inventory state)");
+        localStorage.setItem('cafe_inventory_data', JSON.stringify(appData));
+        refreshAllViews();
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && (e.key.toLowerCase() === 'u' || e.key.toLowerCase() === 'z')) {
+            e.preventDefault();
+            undoLastAction();
+        }
+    });
 
     function getItemTotalQty(item) {
         if (!item.batches) return 0;
@@ -477,60 +1261,1561 @@
         return item.batches.reduce((sum, b) => sum + (b.usedQty || 0), 0);
     }
 
-    function renderTotalsSummary() {
-        const tbody = document.getElementById('totalsTableBody');
+    function getItemActiveUnit(item) {
+        if (!item.batches || item.batches.length === 0) return item.unit || 'Pcs';
+        sortItemBatches(item);
+        const activeBatch = item.batches.find(b => b.remQty > 0);
+        if (activeBatch && activeBatch.unit) return activeBatch.unit;
+        const lastBatch = item.batches[item.batches.length - 1];
+        return (lastBatch && lastBatch.unit) ? lastBatch.unit : (item.unit || 'Pcs');
+    }
+
+    function getItemActiveBatchDate(item) {
+        if (!item.batches || item.batches.length === 0) return 'N/A';
+        sortItemBatches(item);
+        const activeBatch = item.batches.find(b => b.remQty > 0);
+        return activeBatch ? activeBatch.addedDate : item.batches[item.batches.length - 1].addedDate;
+    }
+
+    function sortItemBatches(item) {
+        if (!item.batches) return;
+        item.batches.sort((a, b) => new Date(a.addedDate) - new Date(b.addedDate));
+    }
+
+    function consumeFIFOStock(item, amountToConsume) {
+        sortItemBatches(item);
+        let remainingToDeduct = amountToConsume;
+        const todayStr = new Date().toISOString().split('T')[0];
+        item.lastUpdated = todayStr;
+        let detailedLogs = [];
+
+        for (let batch of item.batches) {
+            if (batch.remQty > 0) {
+                batch.lastUpdated = todayStr;
+                const batchUnit = batch.unit || item.unit || 'Pcs';
+                if (batch.initQty === undefined) batch.initQty = batch.remQty;
+                if (batch.usedQty === undefined) batch.usedQty = 0;
+
+                if (batch.remQty >= remainingToDeduct) {
+                    batch.remQty -= remainingToDeduct;
+                    batch.usedQty += remainingToDeduct;
+                    detailedLogs.push(`Deducted ${remainingToDeduct} ${batchUnit} from Batch [${batch.addedDate}] (Remaining: ${batch.remQty} ${batchUnit}, Total Used: ${batch.usedQty} ${batchUnit})`);
+                    remainingToDeduct = 0;
+                    break;
+                } else {
+                    const deductedFromThisBatch = batch.remQty;
+                    remainingToDeduct -= batch.remQty;
+                    batch.usedQty += batch.remQty;
+                    batch.remQty = 0;
+                    detailedLogs.push(`Depleted entire Batch [${batch.addedDate}] (-${deductedFromThisBatch} ${batchUnit}, Total Used: ${batch.usedQty} ${batchUnit})`);
+                }
+            }
+        }
+        return detailedLogs;
+    }
+
+    function addFIFOStock(item, qty, dateStr, sourceNoteStr, batchUnitStr) {
+        if (!item.batches) item.batches = [];
+        const unitToUse = batchUnitStr || item.unit || 'Pcs';
+        const todayStr = new Date().toISOString().split('T')[0];
+        item.lastUpdated = todayStr;
+
+        item.batches.push({
+            batchId: 'b_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+            addedDate: dateStr,
+            lastUpdated: todayStr,
+            initQty: qty,
+            remQty: qty,
+            usedQty: 0,
+            unit: unitToUse,
+            sourceNote: sourceNoteStr
+        });
+        item.unit = unitToUse;
+        sortItemBatches(item);
+    }
+
+    function refreshAllViews() {
+        renderTable();
+        renderMasterTables();
+        renderDeliveriesTable();
+        renderMarkedOutTable();
+        updateMarkedOutDropdown();
+        renderLogs();
+        updateBatchBarVisibility();
+    }
+
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'cafe_inventory_data' && e.newValue) {
+            appData = JSON.parse(e.newValue);
+            refreshAllViews();
+        }
+    });
+
+    function updateSupplierDropdown() {
+        const select = document.getElementById('delSupplier');
+        if (!select) return;
+        const currentVal = select.value;
+        select.innerHTML = '';
+        appData.suppliers.forEach(supp => {
+            const opt = document.createElement('option');
+            opt.value = supp;
+            opt.innerText = supp;
+            select.appendChild(opt);
+        });
+        const customOpt = document.createElement('option');
+        customOpt.value = 'CUSTOM';
+        customOpt.innerText = '+ Add Custom...';
+        select.appendChild(customOpt);
+        if (currentVal) select.value = currentVal;
+    }
+
+    async function handleSupplierChange(selectEl) {
+        if (selectEl.value === 'CUSTOM') {
+            const customVal = prompt("Enter custom supplier name:");
+            if (customVal && customVal.trim() !== '') {
+                saveSnapshotForUndo();
+                const suppName = customVal.trim().toUpperCase();
+                if (!appData.suppliers.includes(suppName)) appData.suppliers.push(suppName);
+                await autoSaveData();
+                updateSupplierDropdown();
+                selectEl.value = suppName;
+            } else {
+                updateSupplierDropdown();
+                selectEl.value = appData.suppliers[0];
+            }
+        }
+    }
+
+    function filterDeliveryDashboard(cat) {
+        currentDeliveryFilter = cat;
+        document.querySelectorAll('.dash-card-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(`dashNav-${cat}`).classList.add('active');
+        if (cat !== 'ALL') {
+            document.getElementById('delCategory').value = cat;
+            updateDeliverySubcategoryDropdown(cat);
+        }
+        renderDeliveriesTable();
+    }
+
+    function updateSubcategoryDropdown(cat) {
+        const select = document.getElementById('itemSubcategory');
+        if (!select) return;
+        const currentVal = select.value;
+        select.innerHTML = '';
+        if (!appData.categories[cat]) appData.categories[cat] = [];
+        const subs = appData.categories[cat];
+        subs.forEach(sub => {
+            const opt = document.createElement('option');
+            opt.value = sub;
+            opt.innerText = sub;
+            select.appendChild(opt);
+        });
+        const customOpt = document.createElement('option');
+        customOpt.value = 'CUSTOM';
+        customOpt.innerText = '+ Add Custom...';
+        select.appendChild(customOpt);
+        if (currentVal && (subs.includes(currentVal) || currentVal === 'CUSTOM')) {
+            select.value = currentVal;
+        } else if (subs.length > 0) {
+            select.value = subs[0];
+        }
+    }
+
+    function updateDeliverySubcategoryDropdown(cat) {
+        const select = document.getElementById('delSubcategory');
+        if (!select) return;
+        const currentVal = select.value;
+        select.innerHTML = '';
+        if (!appData.categories[cat]) appData.categories[cat] = [];
+        const subs = appData.categories[cat];
+        subs.forEach(sub => {
+            const opt = document.createElement('option');
+            opt.value = sub;
+            opt.innerText = sub;
+            select.appendChild(opt);
+        });
+        const customOpt = document.createElement('option');
+        customOpt.value = 'CUSTOM';
+        customOpt.innerText = '+ Add Custom...';
+        select.appendChild(customOpt);
+        if (currentVal && (subs.includes(currentVal) || currentVal === 'CUSTOM')) {
+            select.value = currentVal;
+        } else if (subs.length > 0) {
+            select.value = subs[0];
+        }
+    }
+
+    function toggleCustomPastryMode(isCustom) {
+        const selectEl = document.getElementById('moItemSelect');
+        const customInput = document.getElementById('moCustomInput');
+        const toggleBtn = document.getElementById('moToggleBtn');
+
+        if (isCustom) {
+            selectEl.style.display = 'none';
+            customInput.style.display = 'block';
+            customInput.value = '';
+            customInput.focus();
+            toggleBtn.innerText = '📋 List';
+            toggleBtn.setAttribute('onclick', 'toggleCustomPastryMode(false)');
+        } else {
+            selectEl.style.display = 'block';
+            customInput.style.display = 'none';
+            toggleBtn.innerText = '+ Custom';
+            toggleBtn.setAttribute('onclick', 'toggleCustomPastryMode(true)');
+            if (selectEl.options.length > 0) selectEl.selectedIndex = 0;
+        }
+    }
+
+    function updateMarkedOutDropdown() {
+        const select = document.getElementById('moItemSelect');
+        if (!select) return;
+        const previousVal = select.value;
+        select.innerHTML = '';
+
+        const pastries = appData.inventory.filter(i => i.category === 'Café' && (i.subcategory === 'Pastries' || i.subcategory === 'Pastry'));
+        
+        if (pastries.length > 0) {
+            pastries.forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p.id;
+                opt.innerText = p.name;
+                select.appendChild(opt);
+            });
+        }
+
+        const customOpt = document.createElement('option');
+        customOpt.value = 'CUSTOM';
+        customOpt.innerText = '➕ Add Custom Pastry Name...';
+        select.appendChild(customOpt);
+
+        if (previousVal && Array.from(select.options).some(opt => opt.value === previousVal)) {
+            select.value = previousVal;
+        } else if (select.options.length > 0) {
+            select.selectedIndex = 0;
+        }
+    }
+
+    function handleMarkedOutSelectChange(selectEl) {
+        if (selectEl.value === 'CUSTOM') {
+            toggleCustomPastryMode(true);
+        }
+    }
+
+    async function deleteSelectedPastryFromDropdown() {
+        const selectEl = document.getElementById('moItemSelect');
+        const selectedVal = selectEl.value;
+
+        if (!selectedVal || selectedVal === 'CUSTOM' || document.getElementById('moCustomInput').style.display === 'block') {
+            alert("Please select a valid pastry item from the dropdown list to delete.");
+            return;
+        }
+
+        const itemId = parseInt(selectedVal);
+        const item = appData.inventory.find(i => i.id === itemId);
+
+        if (item && confirm(`Are you sure you want to completely delete "${item.name}" from the pastry inventory list?`)) {
+            await deleteItem(itemId);
+        }
+    }
+
+    async function handleSubcategoryChange(selectEl) {
+        if (selectEl.value === 'CUSTOM') {
+            const customVal = prompt(`Enter new subcategory for ${currentCategory}:`);
+            if (customVal && customVal.trim() !== '') {
+                saveSnapshotForUndo();
+                const subName = customVal.trim();
+                if (!appData.categories[currentCategory].includes(subName)) appData.categories[currentCategory].push(subName);
+                await autoSaveData();
+                updateSubcategoryDropdown(currentCategory);
+                selectEl.value = subName;
+            } else {
+                updateSubcategoryDropdown(currentCategory);
+            }
+        }
+    }
+
+    async function handleDeliverySubcategoryChange(selectEl) {
+        const targetCat = document.getElementById('delCategory').value;
+        if (selectEl.value === 'CUSTOM') {
+            const customVal = prompt(`Enter new subcategory for ${targetCat}:`);
+            if (customVal && customVal.trim() !== '') {
+                saveSnapshotForUndo();
+                const subName = customVal.trim();
+                if (!appData.categories[targetCat].includes(subName)) appData.categories[targetCat].push(subName);
+                await autoSaveData();
+                updateDeliverySubcategoryDropdown(targetCat);
+                selectEl.value = subName;
+            } else {
+                updateDeliverySubcategoryDropdown(targetCat);
+            }
+        }
+    }
+
+    async function addMarkedOutPastry(e) {
+        e.preventDefault();
+        const selectEl = document.getElementById('moItemSelect');
+        const customInput = document.getElementById('moCustomInput');
+        const isCustomMode = customInput.style.display === 'block';
+
+        let itemId = null;
+        let itemName = "";
+
+        if (isCustomMode) {
+            itemName = customInput.value.trim();
+            if (!itemName) {
+                alert("Please enter a custom pastry name.");
+                return;
+            }
+        } else {
+            const selectedValue = selectEl.value;
+            if (selectedValue === 'CUSTOM') {
+                toggleCustomPastryMode(true);
+                return;
+            }
+            if (!selectedValue) {
+                alert("Please select or enter a valid pastry item.");
+                return;
+            }
+            itemId = parseInt(selectedValue);
+        }
+
+        const reason = document.getElementById('moReason').value;
+        const qty = parseInt(document.getElementById('moQty').value);
+        const dateStr = document.getElementById('moDate').value;
+
+        saveSnapshotForUndo();
+
+        let item = itemId ? appData.inventory.find(i => i.id === itemId) : null;
+
+        if (!item) {
+            if (!itemName && selectEl.options[selectEl.selectedIndex]) {
+                itemName = selectEl.options[selectEl.selectedIndex].text;
+            }
+            
+            let existingItem = appData.inventory.find(i => i.category === 'Café' && i.name.toLowerCase().trim() === itemName.toLowerCase());
+            if (existingItem) {
+                item = existingItem;
+            } else {
+                item = {
+                    id: Date.now(),
+                    name: itemName,
+                    category: "Café",
+                    subcategory: "Pastries",
+                    unit: "Pcs",
+                    lastUpdated: new Date().toISOString().split('T')[0],
+                    batches: []
+                };
+                appData.inventory.push(item);
+                recordLog(`Added new pastry item "${itemName}" to Café Inventory.`);
+            }
+        }
+
+        const totalAvailable = getItemTotalQty(item);
+        if (totalAvailable < qty) {
+            if (!confirm(`Insufficient stock (${totalAvailable} available). Proceed to mark out anyway?`)) {
+                return;
+            }
+        }
+
+        consumeFIFOStock(item, qty);
+        const unitStr = getItemActiveUnit(item);
+
+        appData.markedOutPastries.unshift({
+            id: Date.now(),
+            itemId: item.id,
+            itemName: item.name,
+            qty: qty,
+            unit: unitStr,
+            reason: reason,
+            date: dateStr
+        });
+
+        recordLog(`🥐 Marked out <span class="used-text-red">-${qty} ${unitStr}</span> of "${item.name}" (Reason: ${reason}).`);
+        
+        document.getElementById('moQty').value = '';
+        customInput.value = '';
+        toggleCustomPastryMode(false);
+        
+        await autoSaveData();
+        refreshAllViews();
+    }
+
+    async function deleteMarkedOutEntry(moId) {
+        if (!confirm("Delete this marked out record? (Note: Stock will not be automatically restored)")) return;
+        saveSnapshotForUndo();
+        appData.markedOutPastries = appData.markedOutPastries.filter(m => m.id !== moId);
+        recordLog(`Deleted marked out pastry record.`);
+        await autoSaveData();
+        refreshAllViews();
+    }
+
+    function renderMarkedOutTable() {
+        const tbody = document.getElementById('markedOutTableBody');
         if (!tbody) return;
         tbody.innerHTML = '';
 
-        let globalTotalProducts = appData.inventory.length;
-        let globalTotalRemaining = 0;
-        let globalTotalUsed = 0;
+        const list = appData.markedOutPastries || [];
+        if (list.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 16px;">No marked out pastries logged yet.</td></tr>`;
+            return;
+        }
 
-        const subTotals = {};
-
-        appData.inventory.forEach(item => {
-            const sub = item.subcategory || 'General';
-            const cat = item.category || 'General';
-            const rem = getItemTotalQty(item);
-            const used = getItemTotalUsed(item);
-
-            globalTotalRemaining += rem;
-            globalTotalUsed += used;
-
-            if (!subTotals[sub]) {
-                subTotals[sub] = { category: cat, count: 0, totalRem: 0, totalUsed: 0 };
-            }
-            subTotals[sub].count += 1;
-            subTotals[sub].totalRem += rem;
-            subTotals[sub].totalUsed += used;
-        });
-
-        document.getElementById('kpiTotalProducts').innerText = globalTotalProducts;
-        document.getElementById('kpiTotalRemaining').innerText = globalTotalRemaining;
-        document.getElementById('kpiTotalUsed').innerText = globalTotalUsed;
-
-        Object.keys(subTotals).forEach(subGroup => {
-            const data = subTotals[subGroup];
+        list.forEach(mo => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td><strong>📂 ${subGroup}</strong></td>
-                <td>${data.category}</td>
-                <td>${data.count} product(s)</td>
-                <td><strong>${data.totalRem}</strong> units</td>
-                <td><span class="used-badge-red">-${data.totalUsed} units</span></td>
+                <td><strong>${mo.date}</strong></td>
+                <td>• ${mo.itemName}</td>
+                <td><strong class="used-text-red">-${mo.qty}</strong> <span class="unit-label">${mo.unit}</span></td>
+                <td><span class="waste-tag">${mo.reason}</span></td>
+                <td>
+                    <button type="button" class="btn-delete-x" onclick="deleteMarkedOutEntry(${mo.id})" title="Delete Record">✕</button>
+                </td>
             `;
             tbody.appendChild(tr);
         });
     }
 
-    function navigateTo(page, category = null) {
-        document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
-        const target = document.getElementById(`view-${page}`);
-        if (target) target.classList.add('active');
-        if (page === 'totals') renderTotalsSummary();
+    async function deleteCurrentSubcategory() {
+        const selectEl = document.getElementById('itemSubcategory');
+        const selectedSub = selectEl.value;
+        if (!selectedSub || selectedSub === 'CUSTOM') return;
+        if (!confirm(`Delete subcategory "${selectedSub}"?`)) return;
+        saveSnapshotForUndo();
+        appData.categories[currentCategory] = appData.categories[currentCategory].filter(s => s !== selectedSub);
+        recordLog(`Deleted subcategory [${selectedSub}] from ${currentCategory}`);
+        await autoSaveData();
+        updateSubcategoryDropdown(currentCategory);
     }
 
-    renderTotalsSummary();
+    async function deleteDeliverySubcategory() {
+        const catSelect = document.getElementById('delCategory');
+        const subSelect = document.getElementById('delSubcategory');
+        const selectedCat = catSelect.value;
+        const selectedSub = subSelect.value;
+        if (!selectedSub || selectedSub === 'CUSTOM') return;
+        if (!confirm(`Delete subcategory "${selectedSub}" from ${selectedCat}?`)) return;
+        saveSnapshotForUndo();
+        appData.categories[selectedCat] = appData.categories[selectedCat].filter(s => s !== selectedCat);
+        recordLog(`Deleted subcategory [${selectedSub}] from ${selectedCat}`);
+        await autoSaveData();
+        updateDeliverySubcategoryDropdown(selectedCat);
+    }
+
+    function toggleAccordion(headerEl) {
+        const card = headerEl.parentElement;
+        const content = card.querySelector('.sub-accordion-content');
+        const subName = card.dataset.subName;
+        const isOpen = card.classList.contains('active');
+
+        card.classList.toggle('active', !isOpen);
+        if (!isOpen) {
+            content.classList.add('open');
+            if (!openAccordionSubcategories[currentCategory]) openAccordionSubcategories[currentCategory] = {};
+            openAccordionSubcategories[currentCategory][subName] = true;
+        } else {
+            content.classList.remove('open');
+            if (openAccordionSubcategories[currentCategory]) {
+                openAccordionSubcategories[currentCategory][subName] = false;
+            }
+        }
+    }
+
+    function toggleBatchBreakdown(itemId) {
+        const tr = document.getElementById(`batchRow-${itemId}`);
+        if (tr) {
+            tr.style.display = (tr.style.display === 'none') ? 'table-row' : 'none';
+        }
+    }
+
+    function toggleSelectAllPage(masterCb, childSelector) {
+        document.querySelectorAll(childSelector).forEach(cb => cb.checked = masterCb.checked);
+        updateBatchBarVisibility();
+    }
+
+    function updateBatchBarVisibility() {
+        const delCbs = document.querySelectorAll('.del-row-cb:checked');
+        const delBar = document.getElementById('delBatchBar');
+        const delCount = document.getElementById('delBatchCount');
+        if (delBar) {
+            if (delCbs.length > 0) {
+                delBar.style.display = 'flex';
+                delCount.innerText = `${delCbs.length} selected`;
+            } else {
+                delBar.style.display = 'none';
+                const sa = document.getElementById('delSelectAll');
+                if (sa) sa.checked = false;
+            }
+        }
+    }
+
+    async function executeBatchAction(sourceType) {
+        let actionVal = document.getElementById('delBatchTarget').value;
+        let checkedBoxes = document.querySelectorAll('.del-row-cb:checked');
+
+        if (!actionVal || checkedBoxes.length === 0) {
+            alert("Please select a transfer destination and at least one item.");
+            return;
+        }
+
+        saveSnapshotForUndo();
+        const itemIds = Array.from(checkedBoxes).map(cb => parseInt(cb.value));
+        itemIds.forEach(id => processItemAction(id, actionVal, sourceType));
+        await autoSaveData();
+    }
+
+    async function handleRowDropdownAction(itemId, actionVal, sourceType) {
+        if (!actionVal) return;
+        saveSnapshotForUndo();
+        processItemAction(itemId, actionVal, sourceType);
+        await autoSaveData();
+    }
+
+    function processItemAction(itemId, actionVal, currentSourceType) {
+        const isCopy = actionVal.startsWith('COPY_');
+        const targetName = actionVal.replace('MOVE_', '').replace('COPY_', '');
+        const dateNow = new Date().toISOString().split('T')[0];
+
+        if (currentSourceType === 'DELIVERY') {
+            const del = appData.deliveries.find(d => d.id === itemId);
+            if (!del) return;
+            if (targetName === 'DELIVERIES') return;
+
+            const targetSubcategory = (appData.categories[targetName] && appData.categories[targetName].length > 0) ? appData.categories[targetName][0] : 'General';
+            const existingItem = appData.inventory.find(i => i.category === targetName && i.name.toLowerCase().trim() === del.name.toLowerCase().trim());
+
+            const batchDate = del.deliveryDate || dateNow;
+
+            if (existingItem) {
+                addFIFOStock(existingItem, del.qty, batchDate, "Delivery", del.unit);
+            } else {
+                const newItem = {
+                    id: Date.now() + Math.random(),
+                    name: del.name,
+                    category: targetName,
+                    subcategory: del.subcategory || targetSubcategory,
+                    unit: del.unit,
+                    lastUpdated: dateNow,
+                    batches: []
+                };
+                addFIFOStock(newItem, del.qty, batchDate, "Delivery", del.unit);
+                appData.inventory.push(newItem);
+            }
+
+            if (!isCopy) {
+                appData.deliveries = appData.deliveries.filter(d => d.id !== itemId);
+                recordLog(`Processed delivery "${del.name}" into ${targetName} FIFO batch queue`);
+            } else {
+                recordLog(`Copied delivery "${del.name}" to ${targetName} FIFO batch queue`);
+            }
+        }
+    }
+
+    async function deleteSelectedDeliveries() {
+        const checked = document.querySelectorAll('.del-row-cb:checked');
+        if (checked.length === 0) return;
+        if (!confirm(`Delete ${checked.length} delivery record(s)?`)) return;
+
+        saveSnapshotForUndo();
+        const ids = Array.from(checked).map(cb => parseInt(cb.value));
+        appData.deliveries = appData.deliveries.filter(d => !ids.includes(d.id));
+        recordLog(`Deleted ${ids.length} delivery record(s)`);
+        await autoSaveData();
+    }
+
+    function getFormattedTimestamp() {
+        const now = new Date();
+        return `${now.toISOString().split('T')[0]} ${now.toTimeString().split(' ')[0].substring(0, 5)}`;
+    }
+
+    function recordLog(details) {
+        appData.logs.unshift({ id: 'log_' + Date.now(), timestamp: getFormattedTimestamp(), details });
+        if (appData.logs.length > 40) appData.logs.pop();
+    }
+
+    function toggleSelectAllLogs(mainCb) {
+        document.querySelectorAll('.log-checkbox').forEach(cb => cb.checked = mainCb.checked);
+    }
+
+    async function deleteSelectedLogs() {
+        const checked = document.querySelectorAll('.log-checkbox:checked');
+        if (checked.length === 0) return;
+
+        saveSnapshotForUndo();
+        const ids = Array.from(checked).map(cb => cb.value);
+        appData.logs = appData.logs.filter(l => !ids.includes(String(l.id)));
+        await autoSaveData();
+    }
+
+    async function autoSaveData() {
+        appData.lastUpdatedTimestamp = Date.now();
+        localStorage.setItem('cafe_inventory_data', JSON.stringify(appData));
+        refreshAllViews();
+    }
+
+    function exportToFile() {
+        const dataStr = JSON.stringify(appData, null, 2);
+        const blob = new Blob([dataStr], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        const dateTag = new Date().toISOString().split('T')[0];
+        
+        link.href = url;
+        link.download = `inventory_backup_${dateTag}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+
+    // HELPER: GROUP ITEMS BY SUBCATEGORY CLEANLY
+    function getGroupedInventoryBySubcategory() {
+        const grouped = {};
+        const categories = Object.keys(appData.categories);
+
+        categories.forEach(cat => {
+            const subs = appData.categories[cat] || [];
+            subs.forEach(sub => {
+                grouped[sub] = [];
+            });
+        });
+
+        appData.inventory.forEach(item => {
+            const sub = item.subcategory || 'General';
+            if (!grouped[sub]) grouped[sub] = [];
+            grouped[sub].push(item);
+        });
+
+        return grouped;
+    }
+
+    // EXPORT TO EXCEL ISOLATED & ORGANIZED BY SUBCATEGORIES (.xls XML)
+    function exportToExcel() {
+        const dateTag = new Date().toISOString().split('T')[0];
+        const fullTimeStr = getFormattedTimestamp();
+
+        let xml = `<?xml version="1.0"?><?mso-application progid="Excel.Sheet"?>
+        <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+         xmlns:o="urn:schemas-microsoft-com:office:office"
+         xmlns:x="urn:schemas-microsoft-com:office:excel"
+         xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+         <Styles>
+          <Style ss:ID="Header"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#8C7B6B" ss:Pattern="Solid"/></Style>
+          <Style ss:ID="Title"><Font ss:Bold="1" ss:Size="12"/><Interior ss:Color="#EAE6E1" ss:Pattern="Solid"/></Style>
+          <Style ss:ID="GroupHeader"><Font ss:Bold="1" ss:Size="11" ss:Color="#5C3D1E"/><Interior ss:Color="#F0ECE7" ss:Pattern="Solid"/></Style>
+          <Style ss:ID="SubHeader"><Font ss:Bold="1"/><Interior ss:Color="#F8F6F4" ss:Pattern="Solid"/></Style>
+         </Styles>
+
+         <!-- WORKSHEET 1: ORGANIZED INVENTORY BY SUBCATEGORY -->
+         <Worksheet ss:Name="Inventory Summary">
+          <Table>
+           <Row ss:StyleID="Title">
+            <Cell><Data ss:Type="String">QuadLink Inventory Audit Report (Organized)</Data></Cell>
+            <Cell><Data ss:Type="String">Export Date: ${fullTimeStr}</Data></Cell>
+           </Row>
+           <Row></Row>`;
+
+        const grouped = getGroupedInventoryBySubcategory();
+        let currentExcelRow = 3;
+
+        Object.keys(grouped).forEach(subGroup => {
+            const items = grouped[subGroup];
+            if (!items || items.length === 0) return;
+
+            xml += `
+           <Row ss:StyleID="GroupHeader">
+            <Cell><Data ss:Type="String">📂 GROUP: ${subGroup.toUpperCase()} ONLY (${items.length} items)</Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+           </Row>
+           <Row ss:StyleID="Header">
+            <Cell><Data ss:Type="String">Item Name</Data></Cell>
+            <Cell><Data ss:Type="String">Subcategory</Data></Cell>
+            <Cell><Data ss:Type="String">Main Category</Data></Cell>
+            <Cell><Data ss:Type="String">Unit</Data></Cell>
+            <Cell><Data ss:Type="String">Remaining Stock</Data></Cell>
+            <Cell><Data ss:Type="String">Used Stock</Data></Cell>
+            <Cell><Data ss:Type="String">Initial Total (Formula)</Data></Cell>
+            <Cell><Data ss:Type="String">Batch Entry Date</Data></Cell>
+            <Cell><Data ss:Type="String">Last Updated Date</Data></Cell>
+           </Row>`;
+
+            currentExcelRow += 2;
+            let groupStartRow = currentExcelRow;
+
+            items.forEach(item => {
+                const totalRem = getItemTotalQty(item);
+                const totalUsed = getItemTotalUsed(item);
+                const unitStr = getItemActiveUnit(item);
+                const earliestDate = getItemActiveBatchDate(item);
+                const lastUpdate = item.lastUpdated || dateTag;
+
+                xml += `
+           <Row>
+            <Cell><Data ss:Type="String">${item.name}</Data></Cell>
+            <Cell><Data ss:Type="String">${item.subcategory}</Data></Cell>
+            <Cell><Data ss:Type="String">${item.category}</Data></Cell>
+            <Cell><Data ss:Type="String">${unitStr}</Data></Cell>
+            <Cell><Data ss:Type="Number">${totalRem}</Data></Cell>
+            <Cell><Data ss:Type="Number">${totalUsed}</Data></Cell>
+            <Cell ss:Formula="=RC[-2]+RC[-1]"><Data ss:Type="Number">${totalRem + totalUsed}</Data></Cell>
+            <Cell><Data ss:Type="String">${earliestDate}</Data></Cell>
+            <Cell><Data ss:Type="String">${lastUpdate}</Data></Cell>
+           </Row>`;
+                currentExcelRow++;
+            });
+
+            xml += `
+           <Row ss:StyleID="SubHeader">
+            <Cell><Data ss:Type="String">SUBTOTAL (${subGroup.toUpperCase()} ONLY)</Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell ss:Formula="=SUM(E${groupStartRow}:E${currentExcelRow-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell ss:Formula="=SUM(F${groupStartRow}:F${currentExcelRow-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell ss:Formula="=SUM(G${groupStartRow}:G${currentExcelRow-1})"><Data ss:Type="Number">0</Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+           </Row>
+           <Row></Row>`;
+            currentExcelRow += 2;
+        });
+
+        xml += `
+          </Table>
+         </Worksheet>
+
+         <!-- WORKSHEET 2: BATCH BREAKDOWN (GROUPED BY SUBCATEGORY) -->
+         <Worksheet ss:Name="Batch Breakdown">
+          <Table>
+           <Row ss:StyleID="Title">
+            <Cell><Data ss:Type="String">Detailed Batch Ledger (Grouped by Subcategory)</Data></Cell>
+           </Row>
+           <Row></Row>`;
+
+        Object.keys(grouped).forEach(subGroup => {
+            const items = grouped[subGroup];
+            if (!items || items.length === 0) return;
+
+            xml += `
+           <Row ss:StyleID="GroupHeader">
+            <Cell><Data ss:Type="String">📂 ${subGroup.toUpperCase()} BATCHES ONLY</Data></Cell>
+           </Row>
+           <Row ss:StyleID="Header">
+            <Cell><Data ss:Type="String">Item Name</Data></Cell>
+            <Cell><Data ss:Type="String">Subcategory</Data></Cell>
+            <Cell><Data ss:Type="String">Batch Entry Date</Data></Cell>
+            <Cell><Data ss:Type="String">Batch Last Updated</Data></Cell>
+            <Cell><Data ss:Type="String">Source</Data></Cell>
+            <Cell><Data ss:Type="String">Initial Qty</Data></Cell>
+            <Cell><Data ss:Type="String">Remaining Qty</Data></Cell>
+            <Cell><Data ss:Type="String">Used Qty Formula</Data></Cell>
+            <Cell><Data ss:Type="String">Unit</Data></Cell>
+           </Row>`;
+
+            items.forEach(item => {
+                (item.batches || []).forEach(b => {
+                    const initQty = b.initQty !== undefined ? b.initQty : b.remQty;
+                    xml += `
+           <Row>
+            <Cell><Data ss:Type="String">${item.name}</Data></Cell>
+            <Cell><Data ss:Type="String">${item.subcategory}</Data></Cell>
+            <Cell><Data ss:Type="String">${b.addedDate}</Data></Cell>
+            <Cell><Data ss:Type="String">${b.lastUpdated || b.addedDate}</Data></Cell>
+            <Cell><Data ss:Type="String">${b.sourceNote || 'In-House'}</Data></Cell>
+            <Cell><Data ss:Type="Number">${initQty}</Data></Cell>
+            <Cell><Data ss:Type="Number">${b.remQty}</Data></Cell>
+            <Cell ss:Formula="=RC[-2]-RC[-1]"><Data ss:Type="Number">${initQty - b.remQty}</Data></Cell>
+            <Cell><Data ss:Type="String">${b.unit || item.unit}</Data></Cell>
+           </Row>`;
+                });
+            });
+
+            xml += `<Row></Row>`;
+        });
+
+        xml += `
+          </Table>
+         </Worksheet>
+
+         <!-- WORKSHEET 3: MARKED OUT PASTRIES LOG -->
+         <Worksheet ss:Name="Marked Out Pastries">
+          <Table>
+           <Row ss:StyleID="Header">
+            <Cell><Data ss:Type="String">Marked Out Date</Data></Cell>
+            <Cell><Data ss:Type="String">Pastry Item Name</Data></Cell>
+            <Cell><Data ss:Type="String">Qty Marked Out</Data></Cell>
+            <Cell><Data ss:Type="String">Unit</Data></Cell>
+            <Cell><Data ss:Type="String">Reason</Data></Cell>
+           </Row>`;
+
+        (appData.markedOutPastries || []).forEach(mo => {
+            xml += `
+           <Row>
+            <Cell><Data ss:Type="String">${mo.date}</Data></Cell>
+            <Cell><Data ss:Type="String">${mo.itemName}</Data></Cell>
+            <Cell><Data ss:Type="Number">${mo.qty}</Data></Cell>
+            <Cell><Data ss:Type="String">${mo.unit}</Data></Cell>
+            <Cell><Data ss:Type="String">${mo.reason}</Data></Cell>
+           </Row>`;
+        });
+
+        xml += `
+          </Table>
+         </Worksheet>
+        </Workbook>`;
+
+        const blob = new Blob([xml], { type: "application/vnd.ms-excel" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `inventory_excel_organized_${dateTag}.xls`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+
+    // EXPORT TO GOOGLE SHEETS ISOLATED BY SUBCATEGORIES (.csv)
+    function exportToGoogleSheets() {
+        const dateTag = new Date().toISOString().split('T')[0];
+        const fullTimeStr = getFormattedTimestamp();
+
+        let csvContent = `Report Title: QuadLink Inventory Report (Grouped & Isolated),Generated Date: ${fullTimeStr}\n\n`;
+
+        const grouped = getGroupedInventoryBySubcategory();
+        let currentRowIndex = 4;
+
+        Object.keys(grouped).forEach(subGroup => {
+            const items = grouped[subGroup];
+            if (!items || items.length === 0) return;
+
+            csvContent += `\n--- SUBCATEGORY GROUP: ${subGroup.toUpperCase()} ONLY ---\n`;
+            csvContent += "Item Name,Subcategory,Main Category,Unit,Remaining Stock,Used Stock,Initial Stock (Formula),Earliest Batch Date,Last Updated Date\n";
+            currentRowIndex += 3;
+
+            items.forEach(item => {
+                const totalRem = getItemTotalQty(item);
+                const totalUsed = getItemTotalUsed(item);
+                const unitStr = getItemActiveUnit(item);
+                const earliestDate = getItemActiveBatchDate(item);
+                const lastUpdate = item.lastUpdated || dateTag;
+                
+                const formula = `"=E${currentRowIndex}+F${currentRowIndex}"`;
+                csvContent += `"${item.name}","${item.subcategory}","${item.category}","${unitStr}",${totalRem},${totalUsed},${formula},"${earliestDate}","${lastUpdate}"\n`;
+                currentRowIndex++;
+            });
+        });
+
+        csvContent += "\n--- MARKED OUT PASTRIES LOG ---\n";
+        csvContent += "Marked Out Date,Pastry Item Name,Qty Marked Out,Unit,Reason\n";
+
+        (appData.markedOutPastries || []).forEach(mo => {
+            csvContent += `"${mo.date}","${mo.itemName}",${mo.qty},"${mo.unit}","${mo.reason}"\n`;
+        });
+
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `google_sheets_inventory_organized_${dateTag}.csv`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+
+    function triggerFileInput() {
+        document.getElementById('fileImporter').click();
+    }
+
+    function importFromFile(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            try {
+                const loadedData = JSON.parse(event.target.result);
+                if (loadedData && loadedData.inventory) {
+                    saveSnapshotForUndo();
+                    appData = loadedData;
+                    
+                    appData.inventory.forEach(item => {
+                        if (!item.batches) {
+                            const oldQty = item.qty !== undefined ? item.qty : 0;
+                            const oldDate = item.addedDate || new Date().toISOString().split('T')[0];
+                            const oldSource = item.sourceNote || "In-House";
+                            item.batches = [{
+                                batchId: 'b_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+                                addedDate: oldDate,
+                                lastUpdated: oldDate,
+                                initQty: oldQty,
+                                remQty: oldQty,
+                                usedQty: 0,
+                                unit: item.unit || 'Pcs',
+                                sourceNote: oldSource
+                            }];
+                            delete item.qty;
+                            delete item.addedDate;
+                        } else {
+                            item.batches.forEach(b => {
+                                if (!b.unit) b.unit = item.unit || 'Pcs';
+                                if (b.initQty === undefined) b.initQty = b.remQty || 0;
+                                if (b.usedQty === undefined) b.usedQty = Math.max(0, b.initQty - (b.remQty || 0));
+                                if (!b.lastUpdated) b.lastUpdated = b.addedDate || new Date().toISOString().split('T')[0];
+                            });
+                        }
+                        sortItemBatches(item);
+                    });
+
+                    autoSaveData();
+                    alert("Inventory file loaded successfully!");
+                } else {
+                    alert("Invalid JSON data format. File must contain valid inventory structure.");
+                }
+            } catch (err) {
+                alert("Error reading file: " + err.message);
+            }
+        };
+        reader.readAsText(file);
+        e.target.value = '';
+    }
+
+    function navigateTo(page, category = null) {
+        const active = document.querySelector('.page-view.active');
+        const target = document.getElementById(`view-${page}`);
+        const backBtn = document.getElementById('backBtn');
+
+        if (page === 'inventory' || page === 'markedout') {
+            if (backBtn) { backBtn.style.display = 'inline-flex'; backBtn.setAttribute('onclick', "navigateTo('menu')"); }
+        } else {
+            if (backBtn) backBtn.style.display = 'none';
+        }
+
+        if (active === target) {
+            if (category) switchCategory(category);
+            if (page === 'master') renderMasterTables();
+            if (page === 'deliveries') { updateSupplierDropdown(); renderDeliveriesTable(); }
+            if (page === 'markedout') { updateMarkedOutDropdown(); renderMarkedOutTable(); }
+            return;
+        }
+
+        if (active) {
+            active.style.opacity = '0';
+            setTimeout(() => {
+                active.classList.remove('active');
+                openTarget(target, category, page);
+            }, 200);
+        } else {
+            openTarget(target, category, page);
+        }
+    }
+
+    function openTarget(target, category, page) {
+        if (category) switchCategory(category);
+        if (page === 'master') renderMasterTables();
+        if (page === 'deliveries') { updateSupplierDropdown(); renderDeliveriesTable(); }
+        if (page === 'markedout') { updateMarkedOutDropdown(); renderMarkedOutTable(); }
+        target.classList.add('active');
+        target.style.opacity = '1';
+    }
+
+    function switchCategory(cat) {
+        currentCategory = cat;
+        const icons = { Café: '☕', Community: '🤝', Housekeeping: '🧹' };
+        document.getElementById('currentTitle').innerText = `${icons[cat]} ${cat} Inventory`;
+        updateSubcategoryDropdown(cat);
+        renderTable();
+    }
+
+    function editInventoryItem(id) {
+        const item = appData.inventory.find(i => i.id === id);
+        if (!item) return;
+        if (item.category !== currentCategory) switchCategory(item.category);
+
+        const activeUnit = getItemActiveUnit(item);
+
+        document.getElementById('editingItemId').value = item.id;
+        document.getElementById('itemName').value = item.name;
+        document.getElementById('itemSubcategory').value = item.subcategory || 'General';
+        document.getElementById('itemQty').value = '';
+        document.getElementById('itemQty').placeholder = "Optional: Add new batch Qty";
+        document.getElementById('itemUnit').value = activeUnit;
+
+        document.getElementById('itemSubmitBtn').innerText = '💾 Update Item Metadata / Add Batch';
+        document.getElementById('itemCancelEditBtn').style.display = 'inline-flex';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function cancelItemEdit() {
+        document.getElementById('editingItemId').value = '';
+        document.getElementById('itemName').value = '';
+        document.getElementById('itemQty').value = '';
+        document.getElementById('itemQty').placeholder = "0";
+        document.getElementById('itemSubmitBtn').innerText = '+ Add Item / New Batch';
+        document.getElementById('itemCancelEditBtn').style.display = 'none';
+    }
+
+    function editDeliveryRecord(id) {
+        const del = appData.deliveries.find(d => d.id === id);
+        if (!del) return;
+        if (currentDeliveryFilter !== 'ALL' && currentDeliveryFilter !== del.category) filterDeliveryDashboard('ALL');
+
+        document.getElementById('editingDeliveryId').value = del.id;
+        document.getElementById('delCategory').value = del.category;
+        updateDeliverySubcategoryDropdown(del.category);
+        document.getElementById('delSubcategory').value = del.subcategory || '';
+        document.getElementById('delItemName').value = del.name;
+        document.getElementById('delSupplier').value = del.supplier || 'JAMBI';
+        document.getElementById('delQty').value = del.qty;
+        document.getElementById('delUnit').value = del.unit || 'Pcs';
+        document.getElementById('delDate').value = del.deliveryDate;
+
+        document.getElementById('delSubmitBtn').innerText = '💾 Save Changes';
+        document.getElementById('delCancelEditBtn').style.display = 'inline-flex';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function cancelDeliveryEdit() {
+        document.getElementById('editingDeliveryId').value = '';
+        document.getElementById('delItemName').value = '';
+        document.getElementById('delQty').value = '';
+        document.getElementById('delSubmitBtn').innerText = '+ Schedule Delivery';
+        document.getElementById('delCancelEditBtn').style.display = 'none';
+    }
+
+    async function addItem(e) {
+        e.preventDefault();
+        saveSnapshotForUndo();
+
+        const editingId = document.getElementById('editingItemId').value;
+        const name = document.getElementById('itemName').value.trim();
+        const subcategory = document.getElementById('itemSubcategory').value;
+        const sourceNote = document.getElementById('itemSourceNote').value;
+        const qtyVal = document.getElementById('itemQty').value;
+        const qty = qtyVal !== '' ? parseInt(qtyVal) : 0;
+        const unit = document.getElementById('itemUnit').value;
+        const addedDate = document.getElementById('itemAddedDate').value;
+        const todayStr = new Date().toISOString().split('T')[0];
+
+        if (editingId) {
+            const item = appData.inventory.find(i => i.id === parseInt(editingId));
+            if (item) {
+                const prevName = item.name;
+                item.name = name;
+                item.category = currentCategory;
+                item.subcategory = subcategory;
+                item.unit = unit;
+                item.lastUpdated = todayStr;
+
+                if (qty > 0) {
+                    addFIFOStock(item, qty, addedDate, sourceNote, unit);
+                    recordLog(`Updated item "${prevName}" details & added batch +${qty} ${unit} (Date: ${addedDate})`);
+                } else {
+                    recordLog(`Updated item metadata for "${prevName}" (Renamed/Subcategory changed)`);
+                }
+            }
+            cancelItemEdit();
+        } else {
+            let existingItem = appData.inventory.find(i => i.category === currentCategory && i.name.toLowerCase().trim() === name.toLowerCase());
+            if (existingItem) {
+                if (qty > 0) {
+                    addFIFOStock(existingItem, qty, addedDate, sourceNote, unit);
+                    recordLog(`Added new batch (${qty} ${unit}, Date: ${addedDate}) into FIFO queue for "${name}"`);
+                } else {
+                    alert("Please specify a quantity greater than 0 for new stock batches.");
+                    return;
+                }
+            } else {
+                if (qty <= 0) {
+                    alert("Please enter an initial quantity for new items.");
+                    return;
+                }
+                const newItem = {
+                    id: Date.now(),
+                    name: name,
+                    category: currentCategory,
+                    subcategory: subcategory,
+                    unit: unit,
+                    lastUpdated: todayStr,
+                    batches: []
+                };
+                addFIFOStock(newItem, qty, addedDate, sourceNote, unit);
+                appData.inventory.push(newItem);
+                recordLog(`Created new FIFO item "${name}" with initial batch of ${qty} ${unit} (Date: ${addedDate})`);
+            }
+            document.getElementById('itemName').value = '';
+            document.getElementById('itemQty').value = '';
+        }
+        await autoSaveData();
+    }
+
+    async function addDelivery(e) {
+        e.preventDefault();
+        saveSnapshotForUndo();
+
+        const editingId = document.getElementById('editingDeliveryId').value;
+        const category = document.getElementById('delCategory').value;
+        const subcategory = document.getElementById('delSubcategory').value;
+        const name = document.getElementById('delItemName').value.trim();
+        const supplier = document.getElementById('delSupplier').value;
+        const qty = parseInt(document.getElementById('delQty').value);
+        const unit = document.getElementById('delUnit').value;
+        const deliveryDate = document.getElementById('delDate').value;
+
+        if (editingId) {
+            const del = appData.deliveries.find(d => d.id === parseInt(editingId));
+            if (del) {
+                del.name = name;
+                del.category = category;
+                del.subcategory = subcategory;
+                del.supplier = supplier;
+                del.qty = qty;
+                del.unit = unit;
+                del.deliveryDate = deliveryDate;
+                recordLog(`Re-edited delivery "${name}"`);
+            }
+            cancelDeliveryEdit();
+        } else {
+            appData.deliveries.unshift({ id: Date.now(), name, category, subcategory, supplier, qty, unit, deliveryDate });
+
+            const existingItem = appData.inventory.find(i => i.category === category && i.name.toLowerCase().trim() === name.toLowerCase());
+            if (existingItem) {
+                addFIFOStock(existingItem, qty, deliveryDate, "Delivery", unit);
+            } else {
+                const newItem = {
+                    id: Date.now() + Math.random() + 1,
+                    name: name,
+                    category: category,
+                    subcategory: subcategory || 'General',
+                    unit: unit,
+                    lastUpdated: new Date().toISOString().split('T')[0],
+                    batches: []
+                };
+                addFIFOStock(newItem, qty, deliveryDate, "Delivery", unit);
+                appData.inventory.push(newItem);
+            }
+
+            recordLog(`Scheduled delivery "${name}" & auto-added to ${category} FIFO batch timeline`);
+            document.getElementById('delItemName').value = '';
+            document.getElementById('delQty').value = '';
+        }
+        await autoSaveData();
+        refreshAllViews();
+    }
+
+    async function deleteItem(id) {
+        const item = appData.inventory.find(i => i.id === id);
+        if (item && confirm(`Delete item "${item.name}" and all its associated FIFO batches across all views?`)) {
+            saveSnapshotForUndo();
+            appData.inventory = appData.inventory.filter(i => i.id !== id);
+            
+            appData.deliveries = appData.deliveries.filter(d => !(d.category === item.category && d.name.toLowerCase().trim() === item.name.toLowerCase().trim()));
+
+            recordLog(`Deleted item "${item.name}" across all page views`);
+            await autoSaveData();
+        }
+    }
+
+    async function deleteDeliveryItem(id) {
+        const del = appData.deliveries.find(d => d.id === id);
+        if (del && confirm(`Delete delivery "${del.name}" across all views?`)) {
+            saveSnapshotForUndo();
+            appData.deliveries = appData.deliveries.filter(d => d.id !== id);
+            recordLog(`Deleted delivery "${del.name}"`);
+            await autoSaveData();
+        }
+    }
+
+    async function editSpecificBatch(itemId, batchId) {
+        const item = appData.inventory.find(i => i.id === itemId);
+        if (!item) return;
+        const batch = item.batches.find(b => b.batchId === batchId);
+        if (!batch) return;
+
+        const newQtyStr = prompt(`Audit Adjustment for "${item.name}" Batch (${batch.addedDate}):\nEnter new remaining quantity:`, batch.remQty);
+        if (newQtyStr !== null && newQtyStr.trim() !== '') {
+            const newQty = parseInt(newQtyStr);
+            if (!isNaN(newQty) && newQty >= 0) {
+                saveSnapshotForUndo();
+                const oldQty = batch.remQty;
+                const todayStr = new Date().toISOString().split('T')[0];
+                batch.remQty = newQty;
+                if (batch.initQty === undefined) batch.initQty = oldQty;
+                batch.usedQty = Math.max(0, batch.initQty - newQty);
+                batch.lastUpdated = todayStr;
+                item.lastUpdated = todayStr;
+
+                recordLog(`Audited Batch (${batch.addedDate}) for "${item.name}": Adjusted Qty from ${oldQty} to ${newQty} ${batch.unit || item.unit}`);
+                await autoSaveData();
+            } else {
+                alert("Please enter a valid numeric quantity.");
+            }
+        }
+    }
+
+    async function deleteBatch(itemId, batchId) {
+        const item = appData.inventory.find(i => i.id === itemId);
+        if (item && item.batches) {
+            if (confirm("Delete this specific batch across all page views?")) {
+                saveSnapshotForUndo();
+                item.batches = item.batches.filter(b => b.batchId !== batchId);
+                item.lastUpdated = new Date().toISOString().split('T')[0];
+                recordLog(`Deleted batch from "${item.name}"`);
+                await autoSaveData();
+            }
+        }
+    }
+
+    async function updateQty(id, delta) {
+        const item = appData.inventory.find(i => i.id === id);
+        if (!item) return;
+
+        const activeUnit = getItemActiveUnit(item);
+        const oldTotal = getItemTotalQty(item);
+
+        if (delta < 0) {
+            const deductQty = Math.abs(delta);
+            if (oldTotal < deductQty) {
+                alert(`Insufficient overall stock. Total available: ${oldTotal} ${activeUnit}`);
+                return;
+            }
+            saveSnapshotForUndo();
+            const deductionDetails = consumeFIFOStock(item, deductQty);
+            const newTotal = getItemTotalQty(item);
+            const totalUsed = getItemTotalUsed(item);
+            
+            const detailStr = deductionDetails.length > 0 ? ` Details: [${deductionDetails.join(' | ')}]` : '';
+            recordLog(`🔻 Decreased <span class="used-text-red">-${deductQty} ${activeUnit}</span> from "${item.name}". Total on hand went from ${oldTotal} to ${newTotal} ${activeUnit}. <span class="used-text-red">(Total Used to Date: ${totalUsed} ${activeUnit})</span>.${detailStr}`);
+        } else {
+            saveSnapshotForUndo();
+            const todayStr = new Date().toISOString().split('T')[0];
+            addFIFOStock(item, delta, todayStr, "In-House", activeUnit);
+            const newTotal = getItemTotalQty(item);
+            recordLog(`🟢 Increased +${delta} ${activeUnit} to "${item.name}". Total on hand went from ${oldTotal} to ${newTotal} ${activeUnit}.`);
+        }
+
+        await autoSaveData();
+    }
+
+    function renderDeliveriesTable() {
+        const tbody = document.getElementById('deliveriesTable');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        const query = (document.getElementById('deliverySearchInput')?.value || '').toLowerCase().trim();
+
+        let list = appData.deliveries || [];
+        if (currentDeliveryFilter !== 'ALL') list = list.filter(d => d.category === currentDeliveryFilter);
+        if (query) list = list.filter(d => d.name.toLowerCase().includes(query) || d.supplier.toLowerCase().includes(query));
+        if (hideOldItemsEnabled) list = list.filter(d => d.qty > 0);
+
+        if (list.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 20px;">No active delivery records found.</td></tr>`;
+            return;
+        }
+
+        list.forEach(del => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td style="text-align: center;"><input type="checkbox" class="row-checkbox del-row-cb" value="${del.id}" onchange="updateBatchBarVisibility()"></td>
+                <td><strong>• ${del.name}</strong></td>
+                <td>${del.category} <span style="font-size:0.7rem; color: var(--text-muted);">(${del.subcategory})</span></td>
+                <td><span class="delivery-note-tag">${del.supplier}</span></td>
+                <td><strong>${del.qty}</strong> <span class="unit-label">${del.unit}</span></td>
+                <td>${del.deliveryDate}</td>
+                <td>
+                    <div class="action-cell-wrapper">
+                        <button type="button" class="btn edit-btn" onclick="editDeliveryRecord(${del.id})" style="padding: 5px 8px; font-size: 0.72rem;">✏️ Re-Edit</button>
+                        <select class="select-transfer" onchange="handleRowDropdownAction(${del.id}, this.value, 'DELIVERY')">
+                            <option value="">Move/Copy...</option>
+                            <optgroup label="Move To FIFO Queue">
+                                <option value="MOVE_Café">☕ Café</option>
+                                <option value="MOVE_Community">🤝 Community</option>
+                                <option value="MOVE_Housekeeping">🧹 Housekeeping</option>
+                            </optgroup>
+                            <optgroup label="Copy To FIFO Queue">
+                                <option value="COPY_Café">☕ Café</option>
+                                <option value="COPY_Community">🤝 Community</option>
+                                <option value="COPY_Housekeeping">🧹 Housekeeping</option>
+                            </optgroup>
+                        </select>
+                        <button type="button" class="btn-delete-x" onclick="deleteDeliveryItem(${del.id})" title="Delete">✕</button>
+                    </div>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function renderMasterTables() {
+        const query = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
+        const catFilter = document.getElementById('categoryFilter')?.value || 'ALL';
+        const categories = ['Café', 'Community', 'Housekeeping'];
+        let total = 0;
+
+        categories.forEach(cat => {
+            const sec = document.getElementById(`sec-${cat}`);
+            const tbody = document.getElementById(`tbody-${cat}`);
+            if (!sec || !tbody) return;
+            tbody.innerHTML = '';
+
+            if (catFilter !== 'ALL' && catFilter !== cat) {
+                sec.style.display = 'none';
+                return;
+            }
+
+            let items = appData.inventory.filter(i => i.category === cat);
+            if (query) items = items.filter(i => i.name.toLowerCase().includes(query) || i.subcategory.toLowerCase().includes(query));
+            if (hideOldItemsEnabled) items = items.filter(i => getItemTotalQty(i) > 0);
+
+            if (items.length === 0) {
+                sec.style.display = 'none';
+            } else {
+                sec.style.display = 'block';
+                total += items.length;
+                items.forEach(item => {
+                    sortItemBatches(item);
+                    const totalQty = getItemTotalQty(item);
+                    const totalUsed = getItemTotalUsed(item);
+                    const activeUnit = getItemActiveUnit(item);
+                    const activeBatchesCount = item.batches ? item.batches.filter(b => b.remQty > 0).length : 0;
+                    const earliestDate = (item.batches && item.batches.length > 0) ? item.batches[0].addedDate : 'N/A';
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>• ${item.name}</td>
+                        <td>${item.subcategory}</td>
+                        <td>
+                            <div class="qty-control">
+                                <button type="button" class="btn-qty" onclick="updateQty(${item.id}, -1)">-</button>
+                                <span style="font-weight: 600; min-width: 20px; text-align: center;">${totalQty}</span>
+                                <button type="button" class="btn-qty" onclick="updateQty(${item.id}, 1)">+</button>
+                                <span class="unit-label">${activeUnit}</span>
+                            </div>
+                        </td>
+                        <td><span class="used-badge-red">-${totalUsed} ${activeUnit}</span></td>
+                        <td><span class="fifo-batch-tag">${activeBatchesCount} Active Batch(es)</span></td>
+                        <td><span style="font-size: 0.75rem; font-weight:600; color: var(--text-muted);">${earliestDate}</span></td>
+                        <td>
+                            <div class="action-cell-wrapper">
+                                <button type="button" class="btn edit-btn" onclick="navigateTo('inventory', '${item.category}'); setTimeout(() => editInventoryItem(${item.id}), 80);" style="padding: 5px 8px; font-size: 0.72rem;">✏️ Edit Metadata / + Batch</button>
+                                <button type="button" class="btn-delete-x" onclick="deleteItem(${item.id})" title="Delete">✕</button>
+                            </div>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+        });
+
+        const noRes = document.getElementById('noResultsMsg');
+        if (noRes) noRes.style.display = (total === 0) ? 'block' : 'none';
+    }
+
+    function renderTable() {
+        const container = document.getElementById('subAccordionContainer');
+        if (!container) return;
+        container.innerHTML = '';
+
+        let items = appData.inventory.filter(i => i.category === currentCategory);
+        if (hideOldItemsEnabled) items = items.filter(i => getItemTotalQty(i) > 0);
+
+        const subcategories = appData.categories[currentCategory] || [];
+
+        if (subcategories.length === 0 && items.length === 0) {
+            container.innerHTML = `<div class="glass-card" style="text-align: center; color: var(--text-muted); padding: 20px;">No active items registered for ${currentCategory}.</div>`;
+            return;
+        }
+
+        const grouped = {};
+        subcategories.forEach(sub => grouped[sub] = []);
+        items.forEach(i => {
+            const sub = i.subcategory || 'General';
+            if (!grouped[sub]) grouped[sub] = [];
+            grouped[sub].push(i);
+        });
+
+        if (!openAccordionSubcategories[currentCategory]) {
+            openAccordionSubcategories[currentCategory] = {};
+        }
+
+        Object.keys(grouped).forEach((subGroup, index) => {
+            const subItems = grouped[subGroup];
+            if (hideOldItemsEnabled && subItems.length === 0) return;
+
+            let isExplicitlySet = openAccordionSubcategories[currentCategory][subGroup] !== undefined;
+            let isOpen = isExplicitlySet ? openAccordionSubcategories[currentCategory][subGroup] : (index === 0);
+
+            const card = document.createElement('div');
+            card.className = isOpen ? 'sub-accordion-card active' : 'sub-accordion-card';
+            card.dataset.subName = subGroup;
+
+            const header = document.createElement('div');
+            header.className = 'sub-accordion-header';
+            header.setAttribute('onclick', 'toggleAccordion(this)');
+            header.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span>📂 ${subGroup}</span>
+                    <span class="sub-accordion-badge">${subItems.length} active items</span>
+                </div>
+                <span class="sub-accordion-arrow">▼</span>
+            `;
+
+            const content = document.createElement('div');
+            content.className = isOpen ? 'sub-accordion-content open' : 'sub-accordion-content';
+
+            if (subItems.length === 0) {
+                content.innerHTML = `<p style="padding: 10px 4px; font-size: 0.78rem; color: var(--text-muted);">No active items in this subcategory.</p>`;
+            } else {
+                let tableHtml = `
+                    <div class="table-container" style="margin-bottom: 0; box-shadow: none; border: none; background: transparent;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th>Total On Hand</th>
+                                    <th>Total Used</th>
+                                    <th>FIFO Active Status</th>
+                                    <th>Batches</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+
+                subItems.forEach(item => {
+                    sortItemBatches(item);
+                    const totalQty = getItemTotalQty(item);
+                    const totalUsed = getItemTotalUsed(item);
+                    const activeUnit = getItemActiveUnit(item);
+                    const activeBatchesCount = item.batches ? item.batches.filter(b => b.remQty > 0).length : 0;
+
+                    let displayBatches = item.batches || [];
+                    if (hideOldItemsEnabled) displayBatches = displayBatches.filter(b => b.remQty > 0);
+
+                    tableHtml += `
+                        <tr>
+                            <td><strong>• ${item.name}</strong></td>
+                            <td>
+                                <div class="qty-control">
+                                    <button type="button" class="btn-qty" onclick="updateQty(${item.id}, -1)">-</button>
+                                    <span style="font-weight: 700; min-width: 24px; text-align: center;">${totalQty}</span>
+                                    <button type="button" class="btn-qty" onclick="updateQty(${item.id}, 1)">+</button>
+                                    <span class="unit-label">${activeUnit}</span>
+                                </div>
+                            </td>
+                            <td><span class="used-badge-red">-${totalUsed} ${activeUnit}</span></td>
+                            <td><span class="fifo-batch-tag">${activeBatchesCount} Active Batch(es)</span></td>
+                            <td>
+                                <button type="button" class="btn" onclick="toggleBatchBreakdown(${item.id})" style="padding: 4px 8px; font-size: 0.7rem;">📋 View FIFO Batches (${displayBatches.length})</button>
+                            </td>
+                            <td>
+                                <div class="action-cell-wrapper">
+                                    <button type="button" class="btn edit-btn" onclick="editInventoryItem(${item.id})" style="padding: 5px 8px; font-size: 0.72rem;">✏️ Edit Metadata / + Batch</button>
+                                    <button type="button" class="btn-delete-x" onclick="deleteItem(${item.id})" title="Delete Item">✕</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id="batchRow-${item.id}" class="batch-breakdown-row" style="display: none;">
+                            <td colspan="6" style="padding: 10px 20px;">
+                                <div style="font-size:0.75rem; font-weight:700; margin-bottom:6px; color:var(--brand-color);">📦 FIFO Batches Ledger (Monitored Chronologically):</div>
+                                <table class="batch-subtable">
+                                    <thead>
+                                        <tr>
+                                            <th>Batch Date (Old)</th>
+                                            <th>Updated Date (New)</th>
+                                            <th>Initial Qty</th>
+                                            <th>Remaining Stock</th>
+                                            <th>Used / Consumed</th>
+                                            <th>Unit</th>
+                                            <th>Source</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                    `;
+
+                    displayBatches.forEach(b => {
+                        const isDepleted = b.remQty === 0;
+                        const statusBadge = isDepleted 
+                            ? `<span style="color:var(--danger); font-weight:700;">Depleted</span>` 
+                            : `<span style="color:var(--success); font-weight:700;">Active Queue</span>`;
+                        const srcTag = b.sourceNote === 'Delivery' ? `<span class="delivery-note-tag">Delivery</span>` : `<span class="inhouse-note-tag">In-House</span>`;
+
+                        const bUsed = b.usedQty !== undefined ? b.usedQty : Math.max(0, (b.initQty || b.remQty) - b.remQty);
+
+                        tableHtml += `
+                            <tr>
+                                <td><strong>${b.addedDate}</strong></td>
+                                <td><span style="font-size:0.7rem; color:var(--text-muted);">${b.lastUpdated || item.lastUpdated || b.addedDate}</span></td>
+                                <td>${b.initQty !== undefined ? b.initQty : b.remQty} ${b.unit || item.unit}</td>
+                                <td><strong>${b.remQty}</strong> ${b.unit || item.unit}</td>
+                                <td><span class="used-text-red">-${bUsed} ${b.unit || item.unit}</span></td>
+                                <td><span class="unit-label">${b.unit || item.unit}</span></td>
+                                <td>${srcTag}</td>
+                                <td>${statusBadge}</td>
+                                <td>
+                                    <div style="display:flex; gap:4px; align-items:center;">
+                                        <button type="button" class="btn edit-btn" style="padding:2px 6px; font-size:0.65rem;" onclick="editSpecificBatch(${item.id}, '${b.batchId}')">✏️ Adjust Batch</button>
+                                        <button type="button" class="btn-delete-x" style="width:22px; height:22px; font-size:0.65rem;" onclick="deleteBatch(${item.id}, '${b.batchId}')" title="Delete Batch">✕</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    tableHtml += `
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                tableHtml += `</tbody></table></div>`;
+                content.innerHTML = tableHtml;
+            }
+
+            card.appendChild(header);
+            card.appendChild(content);
+            container.appendChild(card);
+        });
+    }
+
+    function renderLogs() {
+        const logList = document.getElementById('auditLogList');
+        if (!logList) return;
+        logList.innerHTML = '';
+        if (!appData.logs || appData.logs.length === 0) {
+            logList.innerHTML = `<li class="log-item"><span>No modifications recorded yet.</span></li>`;
+            return;
+        }
+        appData.logs.forEach(log => {
+            const li = document.createElement('li');
+            li.className = 'log-item';
+            li.innerHTML = `
+                <div class="log-item-left">
+                    <input type="checkbox" class="log-checkbox" value="${log.id}">
+                    <span>${log.details}</span>
+                </div>
+                <span class="log-date">${log.timestamp}</span>
+            `;
+            logList.appendChild(li);
+        });
+    }
+
+    navigateTo('home');
+    switchCategory('Café');
+    updateDeliverySubcategoryDropdown('Café');
+    updateSupplierDropdown();
+    refreshAllViews();
 </script>
+
 </body>
 </html>
