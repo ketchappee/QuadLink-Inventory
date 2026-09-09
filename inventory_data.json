@@ -18,1215 +18,7 @@
   },
   "inventory": [
     {
-      "id": 1788916091097.9448,
-      "name": "TAKE IT",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916091098_bd1kk",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 10,
-          "remQty": 10,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_mtczf",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 10,
-          "remQty": 10,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_7tyhy",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 10,
-          "remQty": 10,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521876_nvs1p",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 10,
-          "remQty": 10,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788916105417.746,
-      "name": "DAIRY CADBURY",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916105417_l2qie",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_zpetg",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_73c1d",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521876_d2m46",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788916390322.4443,
-      "name": "SPRITE",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916390322_98y00",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_kvhkw",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_lef4n",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_zeu80",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788916390322.0977,
-      "name": "COKE REGULAR",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916390322_fjjs3",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_eqlr4",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_nhon8",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_tsjoo",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788916390322.4749,
-      "name": "COKE ZERO",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916390322_00641",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_ge1pg",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_o4osq",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_jjcnh",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788916390322.436,
-      "name": "ROYAL",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916390322_endse",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_42k31",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_ygznl",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_a1au5",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 24,
-          "remQty": 24,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788916390322.3604,
-      "name": "VITA COCO SMALL",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Case",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916390322_p32j1",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 2,
-          "remQty": 2,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_r5a06",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 2,
-          "remQty": 2,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_2hpkp",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 2,
-          "remQty": 2,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_m5hlm",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 2,
-          "remQty": 2,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788916390322.967,
-      "name": "VITA COCO BIG",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Case",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916390322_9i3ps",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_le95v",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_5braw",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_ctl8a",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788916390322.9895,
-      "name": "TICTAC MINTS",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Box",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916390322_0oodp",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Box",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_g439p",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Box",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_3ws5s",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Box",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_5agzq",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Box",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788916390322.7686,
-      "name": "LOACKER",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Box",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916390322_y91gm",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Box",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_7t7dy",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Box",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_6k2lt",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Box",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_ws9ve",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Box",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788916390322.2212,
-      "name": "LAY'S CHEESE",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Case",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916390322_hkw5n",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_md1j2",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_27fiy",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_53kcg",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788916390322.3245,
-      "name": "LAY'S SOUR CREAM",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Case",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916390322_hntgr",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_w95s9",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_7cwj5",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_faa3g",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788916390322.289,
-      "name": "LAY'S ORIGINAL",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Case",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916390322_ed3ub",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_tpai1",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_ezhmr",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_27fvx",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Case",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788916390322.282,
-      "name": "CLOUD 9 CLASSIC",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916390322_6bj0k",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 12,
-          "remQty": 12,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_mu57f",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 12,
-          "remQty": 12,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_jmso7",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 12,
-          "remQty": 12,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_bm9gp",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 12,
-          "remQty": 12,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788916390322.4084,
-      "name": "FITBAR",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916390322_39vps",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 12,
-          "remQty": 12,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_pm5cl",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 12,
-          "remQty": 12,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_xk8qh",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 12,
-          "remQty": 12,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_8gbn0",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 12,
-          "remQty": 12,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788916390322.6824,
-      "name": "SNICKERS",
-      "category": "Café",
-      "subcategory": "RETAIL",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788916390322_v96rr",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 12,
-          "remQty": 12,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788918141859_p19zb",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 12,
-          "remQty": 12,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_xrz9g",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 12,
-          "remQty": 12,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521876_s1jpz",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 12,
-          "remQty": 12,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788918141858.104,
-      "name": "SQUEEZEE BOTTLE",
-      "category": "Café",
-      "subcategory": "BAR",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788918141858_ix1qg",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 5,
-          "remQty": 5,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287403_ieppo",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 5,
-          "remQty": 5,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_el00y",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 5,
-          "remQty": 5,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788918141858.5593,
-      "name": "STAINLESS MIXING BOWL 30cm",
-      "category": "Café",
-      "subcategory": "BAR",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788918141858_c1rp3",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287403_ejo93",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_5owfn",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788918141859.084,
-      "name": "ARLA NATURAL MOZZARELLA",
-      "category": "Café",
-      "subcategory": "BAR",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788918141859_gw9ov",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 10,
-          "remQty": 10,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287403_o8wn7",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 10,
-          "remQty": 10,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_bvwpj",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 10,
-          "remQty": 10,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788918141859.7793,
-      "name": "EDEN CHEESE SLICED BY 10",
-      "category": "Café",
-      "subcategory": "BAR",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788918141859_36zik",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 10,
-          "remQty": 10,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_oyqns",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 10,
-          "remQty": 10,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_e0l9w",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 10,
-          "remQty": 10,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788918141859.7046,
-      "name": "MOLINERA WHITE TRUFFLE OLIVE OIL",
-      "category": "Café",
-      "subcategory": "BAR",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788918141859_49snq",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_asjhc",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_lrdlb",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788918141859.6572,
-      "name": "POTATO CHIPS",
-      "category": "Café",
-      "subcategory": "BAR",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788918141859_4lfsn",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 30,
-          "remQty": 30,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_otiyn",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 30,
-          "remQty": 30,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_vkkat",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 30,
-          "remQty": 30,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788918141859.6582,
-      "name": "RAM SWEET PICKLE RELISH",
-      "category": "Café",
-      "subcategory": "BAR",
-      "unit": "Pcs",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788918141859_h0r5b",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 2,
-          "remQty": 2,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_gh8nq",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 2,
-          "remQty": 2,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_2pbch",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 2,
-          "remQty": 2,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788918141859.44,
-      "name": "LEA & PERRINS WORCESTERSHIRE",
-      "category": "Café",
-      "subcategory": "BAR",
-      "unit": "Bottle/s",
-      "lastUpdated": "2026-09-09",
-      "batches": [
-        {
-          "batchId": "b_1788918141859_n47cq",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Bottle/s",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920287404_05azb",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Bottle/s",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_skla6",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Bottle/s",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        }
-      ]
-    },
-    {
-      "id": 1788920287402.0566,
+      "id": 1788920564376.4626,
       "name": "GILCO ALMOND MILK  ( 1 CASE )",
       "category": "Café",
       "subcategory": "MILK",
@@ -1234,18 +26,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287402_kch5o",
-          "addedDate": "2026-07-17",
-          "lastUpdated": "2026-09-09",
-          "initQty": 12,
-          "remQty": 12,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521874_u5sbj",
+          "batchId": "b_1788920564376_wsod6",
           "addedDate": "2026-07-17",
           "lastUpdated": "2026-09-09",
           "initQty": 12,
@@ -1258,7 +39,7 @@
       ]
     },
     {
-      "id": 1788920287402.7026,
+      "id": 1788920564377.8545,
       "name": "SANTOKU KNIFE",
       "category": "Café",
       "subcategory": "BAR",
@@ -1266,18 +47,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287402_4bsix",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 2,
-          "remQty": 2,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521874_34opu",
+          "batchId": "b_1788920564377_olsmu",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 2,
@@ -1290,7 +60,7 @@
       ]
     },
     {
-      "id": 1788920287402.9055,
+      "id": 1788920564377.6367,
       "name": "THICK WHITE CHOPPING BOARD",
       "category": "Café",
       "subcategory": "BAR",
@@ -1298,18 +68,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287402_t30am",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 2,
-          "remQty": 2,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521874_eb6ns",
+          "batchId": "b_1788920564377_84aj2",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 2,
@@ -1322,7 +81,7 @@
       ]
     },
     {
-      "id": 1788920287402.0144,
+      "id": 1788920564377.5574,
       "name": "COFFEE TAMPER NEEDLES DISTRIBUTOR WOOD HANDLE",
       "category": "Café",
       "subcategory": "BAR",
@@ -1330,18 +89,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287402_82m6e",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521874_d96hj",
+          "batchId": "b_1788920564377_ai68p",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 1,
@@ -1354,7 +102,7 @@
       ]
     },
     {
-      "id": 1788920287403.6685,
+      "id": 1788920564377.606,
       "name": "CUPPA CALIBRATED ESPRESSO TAMPER 58mm",
       "category": "Café",
       "subcategory": "BAR",
@@ -1362,18 +110,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_i7n1b",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521874_1k0nd",
+          "batchId": "b_1788920564377_w28hs",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 1,
@@ -1386,7 +123,7 @@
       ]
     },
     {
-      "id": 1788920287403.4355,
+      "id": 1788920564377.987,
       "name": "CUPPA CALIBRATED ESPRESSO TAMPER 51mm",
       "category": "Café",
       "subcategory": "BAR",
@@ -1394,18 +131,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_9f7kf",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521874_t1o4f",
+          "batchId": "b_1788920564377_1ddq4",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 1,
@@ -1418,7 +144,7 @@
       ]
     },
     {
-      "id": 1788920287403.7422,
+      "id": 1788920564377.0242,
       "name": "COFFEE BRUSH",
       "category": "Café",
       "subcategory": "BAR",
@@ -1426,18 +152,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_fhv9p",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521874_a2dcl",
+          "batchId": "b_1788920564377_8ave8",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 1,
@@ -1450,7 +165,7 @@
       ]
     },
     {
-      "id": 1788920287403.3103,
+      "id": 1788920564377.2493,
       "name": "LARGE DISPOSABLE FILTER",
       "category": "Café",
       "subcategory": "BAR",
@@ -1458,18 +173,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_11fon",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pack",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_85aks",
+          "batchId": "b_1788920564377_n255y",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 1,
@@ -1482,7 +186,7 @@
       ]
     },
     {
-      "id": 1788920287403.1453,
+      "id": 1788920564377.2866,
       "name": "WIRE WHISK 12 inch",
       "category": "Café",
       "subcategory": "BAR",
@@ -1490,18 +194,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_05wzr",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 2,
-          "remQty": 2,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_0p30b",
+          "batchId": "b_1788920564377_838cl",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 2,
@@ -1514,7 +207,7 @@
       ]
     },
     {
-      "id": 1788920287403.1572,
+      "id": 1788920564377.9739,
       "name": "WIRE WHISK 10 inch",
       "category": "Café",
       "subcategory": "BAR",
@@ -1522,18 +215,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_lip0h",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 2,
-          "remQty": 2,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_h2h18",
+          "batchId": "b_1788920564377_a4vhp",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 2,
@@ -1546,7 +228,7 @@
       ]
     },
     {
-      "id": 1788920287403.017,
+      "id": 1788920564377.9373,
       "name": "COFFEE ORGANIZER",
       "category": "Café",
       "subcategory": "BAR",
@@ -1554,18 +236,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_vibn8",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_fkssc",
+          "batchId": "b_1788920564377_sb98j",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 1,
@@ -1578,7 +249,7 @@
       ]
     },
     {
-      "id": 1788920287403.6907,
+      "id": 1788920564377.4285,
       "name": "STRAW HOLDER STAINLESS",
       "category": "Café",
       "subcategory": "BAR",
@@ -1586,18 +257,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_m9b3i",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_02q4j",
+          "batchId": "b_1788920564377_9vczk",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 1,
@@ -1610,7 +270,7 @@
       ]
     },
     {
-      "id": 1788920287403.0435,
+      "id": 1788920564377.4011,
       "name": "8oz PAPER CUPS ( 25 pcs )",
       "category": "Café",
       "subcategory": "BAR",
@@ -1618,18 +278,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_8mouk",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 5,
-          "remQty": 5,
-          "usedQty": 0,
-          "unit": "Pack",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_hp9xu",
+          "batchId": "b_1788920564377_sxakd",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 5,
@@ -1642,7 +291,7 @@
       ]
     },
     {
-      "id": 1788920287403.3555,
+      "id": 1788920564377.4053,
       "name": "WHITE PAPER BAG  ( 500 PCS )",
       "category": "Café",
       "subcategory": "BAR",
@@ -1650,18 +299,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_8g8mm",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pack",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_qrxqg",
+          "batchId": "b_1788920564377_ho2kd",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 1,
@@ -1674,7 +312,7 @@
       ]
     },
     {
-      "id": 1788920287403.7603,
+      "id": 1788920564377.2087,
       "name": "KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( LARGE )",
       "category": "Café",
       "subcategory": "BAR",
@@ -1682,18 +320,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_zy2p1",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 8,
-          "remQty": 8,
-          "usedQty": 0,
-          "unit": "Pack",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_mam4w",
+          "batchId": "b_1788920564377_qjnev",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 8,
@@ -1706,7 +333,7 @@
       ]
     },
     {
-      "id": 1788920287403.7263,
+      "id": 1788920564377.2668,
       "name": "KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( MEDIUM )",
       "category": "Café",
       "subcategory": "BAR",
@@ -1714,18 +341,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_0a47c",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 8,
-          "remQty": 8,
-          "usedQty": 0,
-          "unit": "Pack",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_754bn",
+          "batchId": "b_1788920564377_lb5vp",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 8,
@@ -1738,7 +354,7 @@
       ]
     },
     {
-      "id": 1788920287403.3164,
+      "id": 1788920564377.3645,
       "name": "KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( SMALL )",
       "category": "Café",
       "subcategory": "BAR",
@@ -1746,18 +362,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_06pfy",
-          "addedDate": "2026-07-31",
-          "lastUpdated": "2026-09-09",
-          "initQty": 8,
-          "remQty": 8,
-          "usedQty": 0,
-          "unit": "Pack",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_2g826",
+          "batchId": "b_1788920564377_wtblc",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
           "initQty": 8,
@@ -1770,7 +375,7 @@
       ]
     },
     {
-      "id": 1788920287403.275,
+      "id": 1788920564377.2285,
       "name": "VINYL DISPOSABLE GLOVES BLACK",
       "category": "Café",
       "subcategory": "BAR",
@@ -1778,18 +383,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_m6sl8",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Box",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_yg7iq",
+          "batchId": "b_1788920564377_945bn",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 1,
@@ -1802,7 +396,7 @@
       ]
     },
     {
-      "id": 1788920287403.9458,
+      "id": 1788920564377.7769,
       "name": "FOLDING STOOL",
       "category": "Café",
       "subcategory": "BAR",
@@ -1810,18 +404,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_v99ev",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_ylbjx",
+          "batchId": "b_1788920564377_jiup6",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 1,
@@ -1834,7 +417,7 @@
       ]
     },
     {
-      "id": 1788920287403.3105,
+      "id": 1788920564377.0623,
       "name": "CLING WRAP",
       "category": "Café",
       "subcategory": "BAR",
@@ -1842,18 +425,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_4l1h4",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 1,
-          "remQty": 1,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_dwilo",
+          "batchId": "b_1788920564377_i7r9g",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 1,
@@ -1866,7 +438,7 @@
       ]
     },
     {
-      "id": 1788920287403.0671,
+      "id": 1788920564377.984,
       "name": "PLASTIC DOME LIDS ( NO LOGO )",
       "category": "Café",
       "subcategory": "BAR",
@@ -1874,18 +446,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_d7vht",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 50,
-          "remQty": 50,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_n0614",
+          "batchId": "b_1788920564377_uhvsl",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 50,
@@ -1898,7 +459,7 @@
       ]
     },
     {
-      "id": 1788920287403.2312,
+      "id": 1788920564377.4102,
       "name": "PLASTIC FLAT LIDS W/ HOLE ( NO LOGO )",
       "category": "Café",
       "subcategory": "BAR",
@@ -1906,18 +467,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_9l8yw",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 50,
-          "remQty": 50,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_83lv3",
+          "batchId": "b_1788920564377_i8zxv",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 50,
@@ -1930,7 +480,7 @@
       ]
     },
     {
-      "id": 1788920287403.341,
+      "id": 1788920564377.291,
       "name": "16 OZ PLASTIC CUPS ( NO LOGO )",
       "category": "Café",
       "subcategory": "BAR",
@@ -1938,18 +488,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_8nmnj",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 50,
-          "remQty": 50,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_vqm8n",
+          "batchId": "b_1788920564377_pi89i",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 50,
@@ -1962,7 +501,7 @@
       ]
     },
     {
-      "id": 1788920287403.507,
+      "id": 1788920564377.9478,
       "name": "FROTHER",
       "category": "Café",
       "subcategory": "BAR",
@@ -1970,18 +509,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_6b376",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 2,
-          "remQty": 2,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_4634s",
+          "batchId": "b_1788920564377_sh18p",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 2,
@@ -1994,7 +522,7 @@
       ]
     },
     {
-      "id": 1788920287403.057,
+      "id": 1788920564377.3108,
       "name": "CAN OPENER",
       "category": "Café",
       "subcategory": "BAR",
@@ -2002,18 +530,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_mrkrz",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 2,
-          "remQty": 2,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_ziwkw",
+          "batchId": "b_1788920564377_qtgjv",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 2,
@@ -2026,7 +543,7 @@
       ]
     },
     {
-      "id": 1788920287403.476,
+      "id": 1788920564377.2463,
       "name": "BREAD KNIFE",
       "category": "Café",
       "subcategory": "BAR",
@@ -2034,18 +551,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_yxn1w",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 2,
-          "remQty": 2,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_ssrx2",
+          "batchId": "b_1788920564377_op1b3",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 2,
@@ -2058,7 +564,7 @@
       ]
     },
     {
-      "id": 1788920287403.039,
+      "id": 1788920564377.6807,
       "name": "BAR SPOON",
       "category": "Café",
       "subcategory": "BAR",
@@ -2066,18 +572,7 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920287403_8sb9c",
-          "addedDate": "2026-08-06",
-          "lastUpdated": "2026-09-09",
-          "initQty": 2,
-          "remQty": 2,
-          "usedQty": 0,
-          "unit": "Pcs",
-          "location": "Storage",
-          "sourceNote": "Delivery"
-        },
-        {
-          "batchId": "b_1788920521875_asj8h",
+          "batchId": "b_1788920564377_b86ev",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 2,
@@ -2090,15 +585,519 @@
       ]
     },
     {
-      "id": 1788920521874.9404,
-      "name": "KIRKLAND SOY MILK",
+      "id": 1788920564377.6128,
+      "name": "SQUEEZEE BOTTLE",
       "category": "Café",
       "subcategory": "BAR",
       "unit": "Pcs",
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920521874_zx1hh",
+          "batchId": "b_1788920564377_x0177",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 5,
+          "remQty": 5,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.7017,
+      "name": "STAINLESS MIXING BOWL 30cm",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_zbb91",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.142,
+      "name": "ARLA NATURAL MOZZARELLA",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_fspg6",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 10,
+          "remQty": 10,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.7039,
+      "name": "EDEN CHEESE SLICED BY 10",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_zpxgb",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 10,
+          "remQty": 10,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.6267,
+      "name": "MOLINERA WHITE TRUFFLE OLIVE OIL",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_7ohpx",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.3035,
+      "name": "POTATO CHIPS",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_0dzbw",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 30,
+          "remQty": 30,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.3076,
+      "name": "RAM SWEET PICKLE RELISH",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_4a3wm",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.587,
+      "name": "LEA & PERRINS WORCESTERSHIRE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Bottle/s",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_jeigc",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Bottle/s",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.8289,
+      "name": "SPRITE",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_vx6rc",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.216,
+      "name": "COKE REGULAR",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_yqt1k",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.724,
+      "name": "COKE ZERO",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_umihq",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.8853,
+      "name": "ROYAL",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_zgdar",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.8442,
+      "name": "VITA COCO SMALL",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_j3xb7",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.3325,
+      "name": "VITA COCO BIG",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_gf4ki",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.299,
+      "name": "TICTAC MINTS",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Box",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_0sd9y",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Box",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.7524,
+      "name": "LOACKER",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Box",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_7ld0u",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Box",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.4316,
+      "name": "LAY'S CHEESE",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_xnpzh",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.4094,
+      "name": "LAY'S SOUR CREAM",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_bq10x",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.3408,
+      "name": "LAY'S ORIGINAL",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_88t1g",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.6401,
+      "name": "CLOUD 9 CLASSIC",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_hgwi7",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.3845,
+      "name": "FITBAR",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_fzdgi",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.1013,
+      "name": "SNICKERS",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_1rbv8",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.4673,
+      "name": "TAKE IT",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_oqk17",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 10,
+          "remQty": 10,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920564377.6152,
+      "name": "DAIRY CADBURY",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920564377_vant6",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920628938.8262,
+      "name": "KIRKLAND SOY MILK",
+      "category": "Café",
+      "subcategory": "MILK",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920628938_g23s7",
           "addedDate": "2026-07-17",
           "lastUpdated": "2026-09-09",
           "initQty": 24,
@@ -2111,15 +1110,15 @@
       ]
     },
     {
-      "id": 1788920521874.6565,
+      "id": 1788920628938.5044,
       "name": "OATSIDE MILK",
       "category": "Café",
-      "subcategory": "BAR",
+      "subcategory": "MILK",
       "unit": "Pcs",
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920521874_bocaz",
+          "batchId": "b_1788920628938_49xl4",
           "addedDate": "2026-07-17",
           "lastUpdated": "2026-09-09",
           "initQty": 30,
@@ -2132,15 +1131,15 @@
       ]
     },
     {
-      "id": 1788920521874.4622,
+      "id": 1788920628938.809,
       "name": "EMBORG FULL CREAM MILK ( 12PCS )",
       "category": "Café",
-      "subcategory": "BAR",
+      "subcategory": "MILK",
       "unit": "Pcs",
       "lastUpdated": "2026-09-09",
       "batches": [
         {
-          "batchId": "b_1788920521874_f1q8w",
+          "batchId": "b_1788920628938_irnog",
           "addedDate": "2026-07-17",
           "lastUpdated": "2026-09-09",
           "initQty": 60,
@@ -2155,204 +1154,204 @@
   ],
   "logs": [
     {
-      "id": "log_1788920521876",
+      "id": "log_1788920628938",
+      "timestamp": "2026-09-09 10:23",
+      "details": "🚚 Transferred delivery \"EMBORG FULL CREAM MILK ( 12PCS )\" (60 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788920628938",
+      "timestamp": "2026-09-09 10:23",
+      "details": "🚚 Transferred delivery \"OATSIDE MILK\" (30 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788920628938",
+      "timestamp": "2026-09-09 10:23",
+      "details": "🚚 Transferred delivery \"KIRKLAND SOY MILK\" (24 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788920621978",
+      "timestamp": "2026-09-09 10:23",
+      "details": "Updated delivery shipment details for \"OATSIDE MILK\""
+    },
+    {
+      "id": "log_1788920616722",
+      "timestamp": "2026-09-09 10:23",
+      "details": "Updated delivery shipment details for \"KIRKLAND SOY MILK\""
+    },
+    {
+      "id": "log_1788920611083",
+      "timestamp": "2026-09-09 10:23",
+      "details": "Updated delivery shipment details for \"EMBORG FULL CREAM MILK ( 12PCS )\""
+    },
+    {
+      "id": "log_1788920593386",
+      "timestamp": "2026-09-09 10:23",
+      "details": "Deleted item \"EMBORG FULL CREAM MILK ( 12PCS )\" across all page views"
+    },
+    {
+      "id": "log_1788920591090",
+      "timestamp": "2026-09-09 10:23",
+      "details": "Deleted item \"OATSIDE MILK\" across all page views"
+    },
+    {
+      "id": "log_1788920589105",
+      "timestamp": "2026-09-09 10:23",
+      "details": "Deleted item \"KIRKLAND SOY MILK\" across all page views"
+    },
+    {
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"DAIRY CADBURY\" (24 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521876",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"TAKE IT\" (10 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521876",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"SNICKERS\" (12 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"FITBAR\" (12 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"CLOUD 9 CLASSIC\" (12 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"LAY'S ORIGINAL\" (1 Case) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"LAY'S SOUR CREAM\" (1 Case) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"LAY'S CHEESE\" (1 Case) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"LOACKER\" (1 Box) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"TICTAC MINTS\" (1 Box) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"VITA COCO BIG\" (1 Case) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"VITA COCO SMALL\" (2 Case) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"ROYAL\" (24 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"COKE ZERO\" (24 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"COKE REGULAR\" (24 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"SPRITE\" (24 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"LEA & PERRINS WORCESTERSHIRE\" (1 Bottle/s) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"RAM SWEET PICKLE RELISH\" (2 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"POTATO CHIPS\" (30 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"MOLINERA WHITE TRUFFLE OLIVE OIL\" (1 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"EDEN CHEESE SLICED BY 10\" (10 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"ARLA NATURAL MOZZARELLA\" (10 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"STAINLESS MIXING BOWL 30cm\" (1 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"SQUEEZEE BOTTLE\" (5 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"BAR SPOON\" (2 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"BREAD KNIFE\" (2 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"CAN OPENER\" (2 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"FROTHER\" (2 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"16 OZ PLASTIC CUPS ( NO LOGO )\" (50 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"PLASTIC FLAT LIDS W/ HOLE ( NO LOGO )\" (50 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920521875",
+      "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"PLASTIC DOME LIDS ( NO LOGO )\" (50 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920521875",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"CLING WRAP\" (1 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920521875",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"FOLDING STOOL\" (1 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920521875",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"VINYL DISPOSABLE GLOVES BLACK\" (1 Box) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920521875",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( SMALL )\" (8 Pack) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920521875",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( MEDIUM )\" (8 Pack) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920521875",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( LARGE )\" (8 Pack) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920521875",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"WHITE PAPER BAG  ( 500 PCS )\" (1 Pack) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920521875",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"8oz PAPER CUPS ( 25 pcs )\" (5 Pack) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920521875",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"STRAW HOLDER STAINLESS\" (1 Pcs) directly into Café Storage stock."
     }
   ],
   "deliveries": [
@@ -2360,7 +1359,7 @@
       "id": 1788920467517,
       "name": "KIRKLAND SOY MILK",
       "category": "Café",
-      "subcategory": "BAR",
+      "subcategory": "MILK",
       "supplier": "JAMBI",
       "initQty": 24,
       "remQty": 24,
@@ -2373,7 +1372,7 @@
       "id": 1788920442891,
       "name": "OATSIDE MILK",
       "category": "Café",
-      "subcategory": "BAR",
+      "subcategory": "MILK",
       "supplier": "JAMBI",
       "initQty": 30,
       "remQty": 30,
@@ -2386,7 +1385,7 @@
       "id": 1788920373131,
       "name": "EMBORG FULL CREAM MILK ( 12PCS )",
       "category": "Café",
-      "subcategory": "BAR",
+      "subcategory": "MILK",
       "supplier": "JAMBI",
       "initQty": 60,
       "remQty": 60,
@@ -3068,5 +2067,5 @@
     "LALAMOVE"
   ],
   "markedOutPastries": [],
-  "lastUpdatedTimestamp": 1788920521876
+  "lastUpdatedTimestamp": 1788920628938
 }
