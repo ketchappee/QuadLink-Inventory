@@ -4,7 +4,8 @@
       "Pastries",
       "RETAIL",
       "BAR",
-      "MILK"
+      "MILK",
+      "Retail"
     ],
     "Community": [
       "General"
@@ -1371,13 +1372,194 @@
           "sourceNote": "Delivery"
         }
       ]
+    },
+    {
+      "id": 1788922606396.78,
+      "name": "PAPER CUP CARRIER/HOLDER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788922606396_l4xrh",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788922606396.9668,
+      "name": "BAR MAT 60cm",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788922606396_armnt",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 6,
+          "remQty": 6,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788922606396.1199,
+      "name": "BAR MAT 45cm",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788922606396_tv0g2",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 6,
+          "remQty": 6,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788922606396.3318,
+      "name": "BOTTLE CAN OPENER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788922606396_89we5",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 3,
+          "remQty": 3,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788922606396.4673,
+      "name": "MICROFIBER TOWEL ( BROWN )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788922606396_r5r2b",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788922606396.1118,
+      "name": "MICROFIBER TOWEL ( WHITE )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788922606396_1vimp",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     }
   ],
   "logs": [
     {
-      "id": "log_1788921538304",
-      "timestamp": "2026-09-09 10:38",
-      "details": "☁️ Saved local backup & synced to GitHub (inventory_data.json)"
+      "id": "log_1788922606396",
+      "timestamp": "2026-09-09 10:56",
+      "details": "🚚 Transferred delivery \"MICROFIBER TOWEL ( WHITE )\" (2 Pack) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788922606396",
+      "timestamp": "2026-09-09 10:56",
+      "details": "🚚 Transferred delivery \"MICROFIBER TOWEL ( BROWN )\" (2 Pack) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788922606396",
+      "timestamp": "2026-09-09 10:56",
+      "details": "🚚 Transferred delivery \"BOTTLE CAN OPENER\" (3 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788922606396",
+      "timestamp": "2026-09-09 10:56",
+      "details": "🚚 Transferred delivery \"BAR MAT 45cm\" (6 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788922606396",
+      "timestamp": "2026-09-09 10:56",
+      "details": "🚚 Transferred delivery \"BAR MAT 60cm\" (6 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788922606396",
+      "timestamp": "2026-09-09 10:56",
+      "details": "🚚 Transferred delivery \"PAPER CUP CARRIER/HOLDER\" (2 Pack) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788922538142",
+      "timestamp": "2026-09-09 10:55",
+      "details": "📦 Logged delivery shipment for \"PAPER CUP CARRIER/HOLDER\" (2 Pack). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922519258",
+      "timestamp": "2026-09-09 10:55",
+      "details": "📦 Logged delivery shipment for \"BAR MAT 60cm\" (6 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922511366",
+      "timestamp": "2026-09-09 10:55",
+      "details": "📦 Logged delivery shipment for \"BAR MAT 45cm\" (6 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922294348",
+      "timestamp": "2026-09-09 10:51",
+      "details": "📦 Logged delivery shipment for \"BOTTLE CAN OPENER\" (3 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922280580",
+      "timestamp": "2026-09-09 10:51",
+      "details": "📦 Logged delivery shipment for \"MICROFIBER TOWEL ( BROWN )\" (2 Pack). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922266908",
+      "timestamp": "2026-09-09 10:51",
+      "details": "📦 Logged delivery shipment for \"MICROFIBER TOWEL ( WHITE )\" (2 Pack). Flagged as pending for Storage."
     },
     {
       "id": "log_1788921527263",
@@ -1518,64 +1700,87 @@
       "id": "log_1788920621978",
       "timestamp": "2026-09-09 10:23",
       "details": "Updated delivery shipment details for \"OATSIDE MILK\""
-    },
-    {
-      "id": "log_1788920616722",
-      "timestamp": "2026-09-09 10:23",
-      "details": "Updated delivery shipment details for \"KIRKLAND SOY MILK\""
-    },
-    {
-      "id": "log_1788920611083",
-      "timestamp": "2026-09-09 10:23",
-      "details": "Updated delivery shipment details for \"EMBORG FULL CREAM MILK ( 12PCS )\""
-    },
-    {
-      "id": "log_1788920593386",
-      "timestamp": "2026-09-09 10:23",
-      "details": "Deleted item \"EMBORG FULL CREAM MILK ( 12PCS )\" across all page views"
-    },
-    {
-      "id": "log_1788920591090",
-      "timestamp": "2026-09-09 10:23",
-      "details": "Deleted item \"OATSIDE MILK\" across all page views"
-    },
-    {
-      "id": "log_1788920589105",
-      "timestamp": "2026-09-09 10:23",
-      "details": "Deleted item \"KIRKLAND SOY MILK\" across all page views"
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"DAIRY CADBURY\" (24 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"TAKE IT\" (10 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"SNICKERS\" (12 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"FITBAR\" (12 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"CLOUD 9 CLASSIC\" (12 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"LAY'S ORIGINAL\" (1 Case) directly into Café Storage stock."
     }
   ],
   "deliveries": [
+    {
+      "id": 1788922538142,
+      "name": "PAPER CUP CARRIER/HOLDER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pack",
+      "deliveryDate": "2026-07-31",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788922519258,
+      "name": "BAR MAT 60cm",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 6,
+      "remQty": 6,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-31",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788922511366,
+      "name": "BAR MAT 45cm",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 6,
+      "remQty": 6,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-31",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788922294348,
+      "name": "BOTTLE CAN OPENER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 3,
+      "remQty": 3,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-31",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788922280579,
+      "name": "MICROFIBER TOWEL ( BROWN )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pack",
+      "deliveryDate": "2026-07-31",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788922266908,
+      "name": "MICROFIBER TOWEL ( WHITE )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pack",
+      "deliveryDate": "2026-07-31",
+      "transferredToStorage": true
+    },
     {
       "id": 1788921506188,
       "name": "CUP ORGANIZER",
@@ -2431,5 +2636,5 @@
     "LALAMOVE"
   ],
   "markedOutPastries": [],
-  "lastUpdatedTimestamp": 1788921527263
+  "lastUpdatedTimestamp": 1788922606396
 }
