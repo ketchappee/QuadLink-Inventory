@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QuadLink Cafe — Specialty Inventory System</title>
+  <title>QuadLink Cafe — Specialty FIFO Inventory System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
   
   <style>
-    /* Palette Variables */
     :root {
       --bg-dark: #120e0c;
       --bg-card: rgba(28, 22, 19, 0.65);
@@ -303,7 +302,7 @@
       border-color: var(--text-gold);
     }
 
-    .subpage { padding: 80px 40px 50px; max-width: 1380px; margin: 0 auto; }
+    .subpage { padding: 80px 40px 50px; max-width: 1400px; margin: 0 auto; }
 
     .subpage-header {
       margin-bottom: 20px;
@@ -369,6 +368,7 @@
     .date-badge-current { font-size: 0.72rem; font-weight: 700; color: var(--text-main); background: rgba(226, 176, 120, 0.15); border: 1px solid rgba(226, 176, 120, 0.3); padding: 2px 6px; border-radius: 4px; }
     .date-badge-previous { font-size: 0.68rem; color: #d4a373; background: rgba(188, 108, 37, 0.12); border: 1px solid rgba(188, 108, 37, 0.25); padding: 1px 5px; border-radius: 3px; }
 
+    .fifo-tag { font-size: 0.68rem; background: rgba(56, 239, 125, 0.15); border: 1px solid rgba(56, 239, 125, 0.3); color: #38ef7d; padding: 1px 5px; border-radius: 3px; font-weight: 700; }
     .tag-badge { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 16px; font-size: 0.7rem; font-weight: 600; }
     .tag-house { background: rgba(212, 163, 115, 0.2); color: var(--text-gold); border: 1px solid rgba(212, 163, 115, 0.4); }
     .tag-storage { background: rgba(82, 121, 110, 0.25); color: #a3b18a; border: 1px solid rgba(82, 121, 110, 0.4); }
@@ -380,7 +380,7 @@
 </head>
 <body>
 
-  <!-- Top Right Header GitHub Buttons & Status Badge -->
+  <!-- Top Right Header GitHub Sync Bar -->
   <div class="github-sync-bar">
     <span class="github-status-badge" id="sync-status">⚡ Sync Ready</span>
     <button class="btn btn-github" onclick="toggleGithubModal()">⚙ Config</button>
@@ -409,9 +409,9 @@
   <!-- 1. MAIN WELCOME PAGE -->
   <div id="main-page" class="page active">
     <div class="welcome-card">
-      <span style="font-size: 0.8rem; letter-spacing: 3px; color: var(--accent-espresso); font-weight: 700;">Specialty Operations</span>
+      <span style="font-size: 0.8rem; letter-spacing: 3px; color: var(--accent-espresso); font-weight: 700;">Specialty FIFO Operations</span>
       <h1 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; margin: 15px 0;">QuadLink Cafe</h1>
-      <p style="color: var(--text-muted); margin-bottom: 30px;">Precision Barista & Storage Management System</p>
+      <p style="color: var(--text-muted); margin-bottom: 30px;">Precision Barista Storage & Usage Sync System</p>
       <button class="btn" onclick="navigateTo('home-page')">Enter Dashboard</button>
     </div>
   </div>
@@ -482,9 +482,9 @@
       <div class="form-group">
         <label>Unit</label>
         <select id="cafe-item-unit" required>
+          <option value="PCS">PCS (Pieces)</option>
           <option value="L">L (Liters)</option>
           <option value="KG">KG (Kilograms)</option>
-          <option value="PCS">PCS (Pieces)</option>
           <option value="BOTTLE">BOTTLE</option>
           <option value="PACK">PACK</option>
           <option value="BOX">BOX</option>
@@ -493,18 +493,13 @@
       </div>
 
       <div class="form-group">
-        <label>Delivered Stock Qty</label>
-        <input type="number" id="cafe-item-delivered" min="0" value="10" required />
-      </div>
-
-      <div class="form-group">
-        <label>Bar Storage Qty</label>
-        <input type="number" id="cafe-item-barstorage" min="0" value="5" required />
-      </div>
-
-      <div class="form-group">
-        <label>Record Usage</label>
+        <label>Record Bar Usage</label>
         <input type="number" id="cafe-item-used" min="0" value="0" required />
+      </div>
+
+      <div class="form-group">
+        <label>Bar Storage Allocated</label>
+        <input type="number" id="cafe-item-barstorage" min="0" value="14" required />
       </div>
 
       <div class="form-group">
@@ -512,7 +507,7 @@
         <input type="date" id="cafe-item-date" required />
       </div>
 
-      <button type="submit" class="btn">Update Bar & Delivery Stock</button>
+      <button type="submit" class="btn">Update Bar Usage (FIFO Sync)</button>
     </form>
 
     <div class="table-container">
@@ -529,7 +524,7 @@
             <th>Bar Storage</th>
             <th>Usage</th>
             <th>Remaining Bar Stock</th>
-            <th>Date History</th>
+            <th>FIFO Date History</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -567,7 +562,7 @@
             <th>Usage</th>
             <th>Remaining Stock</th>
             <th>Stock Accuracy</th>
-            <th>Date History</th>
+            <th>FIFO Batch Dates</th>
           </tr>
         </thead>
         <tbody id="stocks-summary-table-body"></tbody>
@@ -643,7 +638,7 @@
   <div id="delivery-inventory-page" class="page subpage">
     <button class="btn btn-nav-topleft" onclick="navigateTo('home-page')">← Home</button>
     <div class="subpage-header">
-      <h2 style="font-family: 'Playfair Display', serif; color: var(--text-gold);">Delivery Inventory</h2>
+      <h2 style="font-family: 'Playfair Display', serif; color: var(--text-gold);">Delivery Inventory (FIFO Storage)</h2>
       <button class="btn btn-delete" onclick="promptDeleteSelected('delivery')">🗑 Delete Selected</button>
     </div>
 
@@ -656,7 +651,6 @@
       <button class="tab-btn" onclick="setCategoryFilter('delivery', 'HISTORY', this)">📜 HISTORY</button>
     </div>
 
-    <!-- REMOVED INITIAL BAR STORAGE FROM THIS FORM -->
     <form class="form-container" id="delivery-form" onsubmit="handleDeliverySubmit(event)">
       <div class="form-group">
         <label>Category</label>
@@ -682,9 +676,9 @@
       <div class="form-group">
         <label>Unit</label>
         <select id="del-item-unit" required>
+          <option value="PCS">PCS (Pieces)</option>
           <option value="L">L (Liters)</option>
           <option value="KG">KG (Kilograms)</option>
-          <option value="PCS">PCS (Pieces)</option>
           <option value="BOTTLE">BOTTLE</option>
           <option value="PACK">PACK</option>
           <option value="BOX">BOX</option>
@@ -693,8 +687,8 @@
       </div>
 
       <div class="form-group">
-        <label>Delivered Stock Qty</label>
-        <input type="number" id="del-item-qty" min="1" value="10" required />
+        <label>Delivered Stock Qty (Batch)</label>
+        <input type="number" id="del-item-qty" min="1" value="60" required />
       </div>
 
       <div class="form-group">
@@ -702,7 +696,7 @@
         <input type="date" id="del-item-date" required />
       </div>
 
-      <button type="submit" class="btn">Receive Delivery</button>
+      <button type="submit" class="btn">Receive FIFO Delivery Batch</button>
     </form>
 
     <div class="table-container">
@@ -718,8 +712,8 @@
             <th>Storage Stock</th>
             <th>Bar Storage</th>
             <th>Usage</th>
-            <th>Remaining</th>
-            <th>Date History</th>
+            <th>Remaining Stock</th>
+            <th>FIFO Batch Date</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -729,17 +723,52 @@
   </div>
 
   <script>
+    // Advanced FIFO Interconnected Data Structure
     let inventoryStore = [
-      { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveredQty: 48, barStorage: 20, usedQty: 12, date: '2026-09-09', previousDate: '2026-09-02', editing: false, selected: false },
-      { id: 2, category: 'MILK', name: 'Oat Milk', unit: 'L', deliveredQty: 24, barStorage: 10, usedQty: 6, date: '2026-09-08', previousDate: '2026-09-01', editing: false, selected: false },
-      { id: 3, category: 'BAR', name: 'Espresso Blend', unit: 'KG', deliveredQty: 25, barStorage: 10, usedQty: 6, date: '2026-09-05', previousDate: '2026-08-28', editing: false, selected: false },
-      { id: 4, category: 'BAR', name: 'Matcha Powder', unit: 'KG', deliveredQty: 10, barStorage: 4, usedQty: 2, date: '2026-09-01', previousDate: '2026-08-20', editing: false, selected: false },
-      { id: 5, category: 'PASTRIES', name: 'Butter Croissant', unit: 'PCS', deliveredQty: 30, barStorage: 15, usedQty: 8, date: '2026-09-09', previousDate: '2026-09-03', editing: false, selected: false }
+      {
+        id: 1,
+        category: 'MILK',
+        name: 'Whole Milk',
+        unit: 'PCS',
+        barStorage: 20,
+        usedQty: 14,
+        editing: false,
+        selected: false,
+        batches: [
+          { batchId: 101, qty: 60, date: '2026-09-02' }
+        ]
+      },
+      {
+        id: 2,
+        category: 'MILK',
+        name: 'Oat Milk',
+        unit: 'PCS',
+        barStorage: 10,
+        usedQty: 6,
+        editing: false,
+        selected: false,
+        batches: [
+          { batchId: 102, qty: 24, date: '2026-09-01' }
+        ]
+      },
+      {
+        id: 3,
+        category: 'BAR',
+        name: 'Espresso Blend',
+        unit: 'KG',
+        barStorage: 10,
+        usedQty: 6,
+        editing: false,
+        selected: false,
+        batches: [
+          { batchId: 103, qty: 25, date: '2026-08-28' }
+        ]
+      }
     ];
 
     let historyLogs = [
-      { id: 1, module: 'cafe', category: 'MILK', itemName: 'Whole Milk', action: 'Usage Recorded', oldDate: '2026-09-02', newDate: '2026-09-09', detail: 'Usage: +12 L | Storage Remaining: 36 L | Bar Remaining: 8 L' },
-      { id: 2, module: 'delivery', category: 'BAR', itemName: 'Espresso Blend', action: 'Delivery Received', oldDate: '2026-08-28', newDate: '2026-09-05', detail: 'Delivered: +25 KG | Storage Stock: 19 KG' }
+      { id: 1, module: 'delivery', category: 'MILK', itemName: 'Whole Milk', action: 'FIFO Delivery Received', oldDate: 'Initial', newDate: '2026-09-02', detail: 'Received batch of 60 PCS into Storage' },
+      { id: 2, module: 'cafe', category: 'MILK', itemName: 'Whole Milk', action: 'Usage Recorded', oldDate: '2026-09-02', newDate: '2026-09-09', detail: 'Bar Usage: 14 PCS | Storage Remaining: 46 PCS | Bar Remaining: 6 PCS' }
     ];
 
     let markedOutPastries = [
@@ -765,12 +794,31 @@
       await loadFromGithub(true);
     });
 
+    /* FIFO Helper Computations */
+    function getTotalDeliveredQty(item) {
+      if (!item.batches || item.batches.length === 0) return 0;
+      return item.batches.reduce((sum, b) => sum + b.qty, 0);
+    }
+
     function calculateStorageStock(item) {
-      return Math.max(0, item.deliveredQty - item.usedQty);
+      const totalDelivered = getTotalDeliveredQty(item);
+      return Math.max(0, totalDelivered - item.usedQty);
     }
 
     function calculateRemainingBarStock(item) {
       return Math.max(0, item.barStorage - item.usedQty);
+    }
+
+    function getOldestBatchDate(item) {
+      if (!item.batches || item.batches.length === 0) return 'No Date';
+      const sorted = [...item.batches].sort((a, b) => new Date(a.date) - new Date(b.date));
+      return sorted[0].date;
+    }
+
+    function getNewestBatchDate(item) {
+      if (!item.batches || item.batches.length === 0) return 'No Date';
+      const sorted = [...item.batches].sort((a, b) => new Date(b.date) - new Date(a.date));
+      return sorted[0].date;
     }
 
     function clearHistoryLogs() {
@@ -806,7 +854,7 @@
         const putRes = await fetch(apiUrl, {
           method: 'PUT',
           headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: 'Auto-sync cafe inventory', content: contentEncoded, ...(sha && { sha }) })
+          body: JSON.stringify({ message: 'Auto-sync FIFO cafe inventory', content: contentEncoded, ...(sha && { sha }) })
         });
 
         if (putRes.ok) updateSyncBadge('✅ Auto-Saved to GitHub');
@@ -861,25 +909,28 @@
       });
     }
 
-    function renderDateCardUI(currentDate, previousDate) {
-      const prevHtml = previousDate ? `<span class="date-badge-previous">Prev: ${previousDate}</span>` : '<span style="font-size:0.68rem; color:var(--text-muted);">Initial</span>';
-      return `<div style="display:flex; flex-direction:column; gap:3px;"><span class="date-badge-current">Current: ${currentDate}</span>${prevHtml}</div>`;
+    function renderFifoDateCardUI(item) {
+      const oldest = getOldestBatchDate(item);
+      const newest = getNewestBatchDate(item);
+      return `
+        <div style="display:flex; flex-direction:column; gap:3px;">
+          <span class="date-badge-current">Oldest Batch: ${oldest}</span>
+          ${oldest !== newest ? `<span class="date-badge-previous">Latest Delivery: ${newest}</span>` : ''}
+          <span class="fifo-tag">FIFO Active</span>
+        </div>
+      `;
     }
 
     function quickAdjustUsage(id, delta) {
       const item = inventoryStore.find(i => i.id === id);
       if (item) {
         const today = new Date().toISOString().split('T')[0];
-        const oldDate = item.date;
-        if (item.date !== today) {
-          item.previousDate = item.date;
-          item.date = today;
-        }
+        const oldDate = getOldestBatchDate(item);
         item.usedQty = Math.max(0, item.usedQty + delta);
         
         const storageRem = calculateStorageStock(item);
         const barRem = calculateRemainingBarStock(item);
-        logHistoryEntry('cafe', item.category, item.name, 'Quick Adjust', oldDate, today, `Usage: ${item.usedQty} ${item.unit} | Storage Rem: ${storageRem} | Bar Rem: ${barRem}`);
+        logHistoryEntry('cafe', item.category, item.name, 'FIFO Adjust', oldDate, today, `Usage: ${item.usedQty} ${item.unit} | Storage Rem: ${storageRem} ${item.unit} | Bar Rem: ${barRem} ${item.unit}`);
         
         renderAllTables();
         saveToGithub();
@@ -898,26 +949,18 @@
       const item = inventoryStore.find(i => i.id === id);
       if (item) {
         const nameVal = document.getElementById(`inline-name-${id}`).value.trim();
-        const deliveredVal = parseInt(document.getElementById(`inline-del-${id}`).value) || 0;
         const barStorageVal = parseInt(document.getElementById(`inline-bar-${id}`).value) || 0;
         const usedVal = parseInt(document.getElementById(`inline-used-${id}`).value) || 0;
-        const dateVal = document.getElementById(`inline-date-${id}`).value;
 
-        const oldDate = item.date;
+        const oldDate = getOldestBatchDate(item);
         if (nameVal) item.name = nameVal;
-        item.deliveredQty = deliveredVal;
         item.barStorage = barStorageVal;
         item.usedQty = usedVal;
-
-        if (dateVal && dateVal !== item.date) {
-          item.previousDate = item.date;
-          item.date = dateVal;
-        }
         item.editing = false;
 
         const storageRem = calculateStorageStock(item);
         const barRem = calculateRemainingBarStock(item);
-        logHistoryEntry('cafe', item.category, item.name, 'Item Updated', oldDate, item.date, `Delivered: ${deliveredVal} | Storage Rem: ${storageRem} | Bar Storage: ${barStorageVal} | Usage: ${usedVal} ${item.unit}`);
+        logHistoryEntry('cafe', item.category, item.name, 'FIFO Item Edit', oldDate, new Date().toISOString().split('T')[0], `Storage Rem: ${storageRem} ${item.unit} | Bar Storage: ${barStorageVal} | Usage: ${usedVal} ${item.unit}`);
 
         renderAllTables();
         saveToGithub();
@@ -937,6 +980,7 @@
       if (activeCafeFilter !== 'ALL') items = items.filter(i => i.category.toUpperCase() === activeCafeFilter.toUpperCase());
 
       items.forEach(item => {
+        const totalDelivered = getTotalDeliveredQty(item);
         const storageStock = calculateStorageStock(item);
         const barRemaining = calculateRemainingBarStock(item);
         const remClass = barRemaining <= 3 ? 'low-remaining' : 'high-remaining';
@@ -949,12 +993,12 @@
               <td><strong>${item.category}</strong></td>
               <td><input type="text" id="inline-name-${item.id}" class="inline-input" value="${item.name}" /></td>
               <td><span class="unit-pill">${item.unit}</span></td>
-              <td><input type="number" id="inline-del-${item.id}" class="inline-input" value="${item.deliveredQty}" style="width:65px;" /></td>
+              <td><strong>${totalDelivered}</strong> ${item.unit}</td>
               <td><strong>${storageStock} ${item.unit}</strong></td>
               <td><input type="number" id="inline-bar-${item.id}" class="inline-input" value="${item.barStorage}" style="width:65px;" /></td>
               <td><input type="number" id="inline-used-${item.id}" class="inline-input" value="${item.usedQty}" style="width:65px;" /></td>
               <td><strong class="${remClass}">${barRemaining} ${item.unit}</strong></td>
-              <td><input type="date" id="inline-date-${item.id}" class="inline-input" value="${item.date}" /></td>
+              <td>${renderFifoDateCardUI(item)}</td>
               <td style="display:flex; gap:4px;">
                 <button class="btn-save-inline" onclick="saveInlineEdit(${item.id})">💾 Save</button>
                 <button class="btn-delete" onclick="toggleInlineEdit(${item.id})">Cancel</button>
@@ -969,7 +1013,7 @@
               <td><strong>${item.category}</strong></td>
               <td>${item.name}</td>
               <td><span class="unit-pill">${item.unit}</span></td>
-              <td><strong>${item.deliveredQty}</strong> ${item.unit}</td>
+              <td><strong>${totalDelivered}</strong> ${item.unit}</td>
               <td><strong style="color:var(--text-gold);">${storageStock}</strong> ${item.unit}</td>
               <td><strong>${item.barStorage}</strong> ${item.unit}</td>
               <td>
@@ -980,7 +1024,7 @@
                 </div>
               </td>
               <td><strong class="${remClass}">${barRemaining} ${item.unit}</strong></td>
-              <td>${renderDateCardUI(item.date, item.previousDate)}</td>
+              <td>${renderFifoDateCardUI(item)}</td>
               <td style="display:flex; gap:4px;">
                 <button class="btn-edit" onclick="toggleInlineEdit(${item.id})">✏ Edit</button>
                 <button class="btn-delete" onclick="promptDeleteSingle(${item.id}, 'cafe')">Remove</button>
@@ -1004,6 +1048,7 @@
       if (activeDeliveryFilter !== 'ALL') items = items.filter(i => i.category.toUpperCase() === activeDeliveryFilter.toUpperCase());
 
       items.forEach(item => {
+        const totalDelivered = getTotalDeliveredQty(item);
         const storageStock = calculateStorageStock(item);
         const barRemaining = calculateRemainingBarStock(item);
         const remClass = barRemaining <= 3 ? 'low-remaining' : 'high-remaining';
@@ -1015,12 +1060,12 @@
             <td><strong>${item.category}</strong></td>
             <td>${item.name}</td>
             <td><span class="unit-pill">${item.unit}</span></td>
-            <td><strong>${item.deliveredQty}</strong> ${item.unit}</td>
+            <td><strong>${totalDelivered}</strong> ${item.unit}</td>
             <td><strong style="color:var(--text-gold);">${storageStock}</strong> ${item.unit}</td>
             <td><strong>${item.barStorage}</strong> ${item.unit}</td>
             <td>${item.usedQty} ${item.unit}</td>
             <td><strong class="${remClass}">${barRemaining} ${item.unit}</strong></td>
-            <td>${renderDateCardUI(item.date, item.previousDate)}</td>
+            <td>${renderFifoDateCardUI(item)}</td>
             <td><button class="btn-delete" onclick="promptDeleteSingle(${item.id}, 'delivery')">Remove</button></td>
           </tr>
         `;
@@ -1040,6 +1085,7 @@
       if (activeSummaryFilter !== 'ALL') items = items.filter(i => i.category.toUpperCase() === activeSummaryFilter.toUpperCase());
 
       items.forEach(item => {
+        const totalDelivered = getTotalDeliveredQty(item);
         const storageStock = calculateStorageStock(item);
         const barRemaining = calculateRemainingBarStock(item);
         const accuracy = item.barStorage > 0 ? ((barRemaining / item.barStorage) * 100).toFixed(0) + '%' : '100%';
@@ -1049,13 +1095,13 @@
             <td><strong>${item.category}</strong></td>
             <td>${item.name}</td>
             <td><span class="unit-pill">${item.unit}</span></td>
-            <td><strong>${item.deliveredQty}</strong> ${item.unit}</td>
+            <td><strong>${totalDelivered}</strong> ${item.unit}</td>
             <td><strong style="color:var(--text-gold);">${storageStock}</strong> ${item.unit}</td>
             <td><strong>${item.barStorage}</strong> ${item.unit}</td>
             <td>${item.usedQty} ${item.unit}</td>
             <td><strong class="${barRemaining <= 3 ? 'low-remaining' : 'high-remaining'}">${barRemaining} ${item.unit}</strong></td>
             <td style="color:#94d2bd; font-weight:700;">${accuracy}</td>
-            <td>${renderDateCardUI(item.date, item.previousDate)}</td>
+            <td>${renderFifoDateCardUI(item)}</td>
           </tr>
         `;
       });
@@ -1119,26 +1165,33 @@
 
       const name = document.getElementById('cafe-item-name').value.trim();
       const unit = document.getElementById('cafe-item-unit').value;
-      const deliveredQty = parseInt(document.getElementById('cafe-item-delivered').value) || 0;
-      const barStorage = parseInt(document.getElementById('cafe-item-barstorage').value) || 0;
       const usedQty = parseInt(document.getElementById('cafe-item-used').value) || 0;
+      const barStorage = parseInt(document.getElementById('cafe-item-barstorage').value) || 0;
       const date = document.getElementById('cafe-item-date').value;
 
       let item = inventoryStore.find(i => i.name.toLowerCase() === name.toLowerCase());
 
       if (item) {
-        const oldDate = item.date;
-        if (item.date !== date) item.previousDate = item.date;
-        item.deliveredQty += deliveredQty;
-        item.barStorage += barStorage;
+        const oldDate = getOldestBatchDate(item);
         item.usedQty += usedQty;
-        item.date = date;
-
+        item.barStorage = Math.max(item.barStorage, barStorage);
+        
         const storageRem = calculateStorageStock(item);
-        logHistoryEntry('cafe', category, name, 'Stock Updated', oldDate, date, `Delivered: +${deliveredQty} | Storage Rem: ${storageRem} ${unit} | Bar Storage: ${item.barStorage} | Usage: +${usedQty} ${unit}`);
+        const barRem = calculateRemainingBarStock(item);
+        logHistoryEntry('cafe', category, name, 'Usage Recorded', oldDate, date, `Bar Usage: +${usedQty} ${unit} | Storage Rem: ${storageRem} ${unit} | Bar Rem: ${barRem} ${unit}`);
       } else {
-        inventoryStore.push({ id: Date.now(), category, name, unit, deliveredQty, barStorage, usedQty, date, previousDate: null, editing: false, selected: false });
-        logHistoryEntry('cafe', category, name, 'New Cafe Item', null, date, `Added ${name} | Delivered: ${deliveredQty} | Bar Storage: ${barStorage} | Usage: ${usedQty} ${unit}`);
+        inventoryStore.push({
+          id: Date.now(),
+          category,
+          name,
+          unit,
+          barStorage: barStorage || 14,
+          usedQty,
+          editing: false,
+          selected: false,
+          batches: [{ batchId: Date.now(), qty: 60, date }]
+        });
+        logHistoryEntry('cafe', category, name, 'New Item Added', null, date, `Added ${name} | Initial Batch 60 ${unit} | Bar Usage: ${usedQty} ${unit}`);
       }
 
       document.getElementById('cafe-item-name').value = '';
@@ -1160,20 +1213,27 @@
       let item = inventoryStore.find(i => i.name.toLowerCase() === name.toLowerCase());
 
       if (item) {
-        const oldDate = item.date;
-        if (item.date !== date) item.previousDate = item.date;
-        item.deliveredQty += deliveredQty;
-        item.date = date;
-
+        const oldDate = getOldestBatchDate(item);
+        item.batches.push({ batchId: Date.now(), qty: deliveredQty, date });
         const storageRem = calculateStorageStock(item);
-        logHistoryEntry('delivery', category, name, 'Delivery Received', oldDate, date, `Delivered: +${deliveredQty} ${unit} | Storage Rem: ${storageRem} ${unit}`);
+        logHistoryEntry('delivery', category, name, 'FIFO Delivery Received', oldDate, date, `Received batch +${deliveredQty} ${unit} | Storage Rem: ${storageRem} ${unit}`);
       } else {
-        inventoryStore.push({ id: Date.now(), category, name, unit, deliveredQty, barStorage: 0, usedQty: 0, date, previousDate: null, editing: false, selected: false });
-        logHistoryEntry('delivery', category, name, 'New Delivery Stock', null, date, `Received ${deliveredQty} ${unit} into storage`);
+        inventoryStore.push({
+          id: Date.now(),
+          category,
+          name,
+          unit,
+          barStorage: 14,
+          usedQty: 0,
+          editing: false,
+          selected: false,
+          batches: [{ batchId: Date.now(), qty: deliveredQty, date }]
+        });
+        logHistoryEntry('delivery', category, name, 'New FIFO Batch', null, date, `Received initial batch ${deliveredQty} ${unit} into Storage`);
       }
 
       document.getElementById('del-item-name').value = '';
-      document.getElementById('del-item-qty').value = '10';
+      document.getElementById('del-item-qty').value = '60';
       renderAllTables();
       saveToGithub();
     }
