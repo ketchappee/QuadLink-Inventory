@@ -6,7 +6,7 @@
       "name": "EMBORG FULL CREAM MILK",
       "unit": "PCS",
       "barStorage": 14,
-      "usedQty": 10,
+      "usedQty": 15,
       "editing": false,
       "selected": false,
       "batches": [
@@ -30,6 +30,56 @@
     }
   ],
   "historyLogs": [
+    {
+      "id": 1788933750695,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 15 PCS | Storage Rem: 45 PCS | Bar Rem: 0 PCS"
+    },
+    {
+      "id": 1788933750503,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 14 PCS | Storage Rem: 46 PCS | Bar Rem: 0 PCS"
+    },
+    {
+      "id": 1788933750311,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 13 PCS | Storage Rem: 47 PCS | Bar Rem: 1 PCS"
+    },
+    {
+      "id": 1788933749783,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 12 PCS | Storage Rem: 48 PCS | Bar Rem: 2 PCS"
+    },
+    {
+      "id": 1788933749446,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 11 PCS | Storage Rem: 49 PCS | Bar Rem: 3 PCS"
+    },
     {
       "id": 1788933749095,
       "module": "cafe",
@@ -151,5 +201,5 @@
       "detail": "Received initial batch 60 PCS into Storage"
     }
   ],
-  "lastUpdated": "2026-09-09T06:02:29.096Z"
+  "lastUpdated": "2026-09-09T06:02:30.696Z"
 }
