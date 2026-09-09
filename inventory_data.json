@@ -4,8 +4,7 @@
       "Pastries",
       "RETAIL",
       "BAR",
-      "MILK",
-      "Retail"
+      "MILK"
     ],
     "Community": [
       "General"
@@ -47,6 +46,28 @@
           "unit": "Pcs",
           "location": "Storage",
           "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_7tyhy",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 10,
+          "remQty": 10,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521876_nvs1p",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 10,
+          "remQty": 10,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
         }
       ]
     },
@@ -71,6 +92,28 @@
         },
         {
           "batchId": "b_1788918141859_zpetg",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_73c1d",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521876_d2m46",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 24,
@@ -111,6 +154,28 @@
           "unit": "Pcs",
           "location": "Storage",
           "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_lef4n",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_zeu80",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
         }
       ]
     },
@@ -135,6 +200,28 @@
         },
         {
           "batchId": "b_1788918141859_eqlr4",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_nhon8",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_tsjoo",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 24,
@@ -175,6 +262,28 @@
           "unit": "Pcs",
           "location": "Storage",
           "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_o4osq",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_jjcnh",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
         }
       ]
     },
@@ -199,6 +308,28 @@
         },
         {
           "batchId": "b_1788918141859_42k31",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_ygznl",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_a1au5",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 24,
@@ -239,6 +370,28 @@
           "unit": "Case",
           "location": "Storage",
           "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_2hpkp",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_m5hlm",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
         }
       ]
     },
@@ -263,6 +416,28 @@
         },
         {
           "batchId": "b_1788918141859_le95v",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_5braw",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_ctl8a",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 1,
@@ -303,6 +478,28 @@
           "unit": "Box",
           "location": "Storage",
           "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_3ws5s",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Box",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_5agzq",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Box",
+          "location": "Storage",
+          "sourceNote": "Delivery"
         }
       ]
     },
@@ -327,6 +524,28 @@
         },
         {
           "batchId": "b_1788918141859_7t7dy",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Box",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_6k2lt",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Box",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_ws9ve",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 1,
@@ -367,6 +586,28 @@
           "unit": "Case",
           "location": "Storage",
           "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_27fiy",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_53kcg",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
         }
       ]
     },
@@ -391,6 +632,28 @@
         },
         {
           "batchId": "b_1788918141859_w95s9",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_7cwj5",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_faa3g",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 1,
@@ -431,6 +694,28 @@
           "unit": "Case",
           "location": "Storage",
           "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_ezhmr",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_27fvx",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
         }
       ]
     },
@@ -455,6 +740,28 @@
         },
         {
           "batchId": "b_1788918141859_mu57f",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_jmso7",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_bm9gp",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 12,
@@ -495,6 +802,28 @@
           "unit": "Pcs",
           "location": "Storage",
           "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_xk8qh",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_8gbn0",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
         }
       ]
     },
@@ -527,6 +856,28 @@
           "unit": "Pcs",
           "location": "Storage",
           "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_xrz9g",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521876_s1jpz",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
         }
       ]
     },
@@ -540,6 +891,28 @@
       "batches": [
         {
           "batchId": "b_1788918141858_ix1qg",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 5,
+          "remQty": 5,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287403_ieppo",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 5,
+          "remQty": 5,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_el00y",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 5,
@@ -569,6 +942,28 @@
           "unit": "Pcs",
           "location": "Storage",
           "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287403_ejo93",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_5owfn",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
         }
       ]
     },
@@ -582,6 +977,28 @@
       "batches": [
         {
           "batchId": "b_1788918141859_gw9ov",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 10,
+          "remQty": 10,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287403_o8wn7",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 10,
+          "remQty": 10,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_bvwpj",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 10,
@@ -611,6 +1028,28 @@
           "unit": "Pcs",
           "location": "Storage",
           "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_oyqns",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 10,
+          "remQty": 10,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_e0l9w",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 10,
+          "remQty": 10,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
         }
       ]
     },
@@ -624,6 +1063,28 @@
       "batches": [
         {
           "batchId": "b_1788918141859_49snq",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_asjhc",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_lrdlb",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 1,
@@ -653,6 +1114,28 @@
           "unit": "Pcs",
           "location": "Storage",
           "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_otiyn",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 30,
+          "remQty": 30,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_vkkat",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 30,
+          "remQty": 30,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
         }
       ]
     },
@@ -666,6 +1149,28 @@
       "batches": [
         {
           "batchId": "b_1788918141859_h0r5b",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_gh8nq",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_2pbch",
           "addedDate": "2026-08-06",
           "lastUpdated": "2026-09-09",
           "initQty": 2,
@@ -695,213 +1200,1201 @@
           "unit": "Bottle/s",
           "location": "Storage",
           "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920287404_05azb",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Bottle/s",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_skla6",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Bottle/s",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287402.0566,
+      "name": "GILCO ALMOND MILK  ( 1 CASE )",
+      "category": "Café",
+      "subcategory": "MILK",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287402_kch5o",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521874_u5sbj",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287402.7026,
+      "name": "SANTOKU KNIFE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287402_4bsix",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521874_34opu",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287402.9055,
+      "name": "THICK WHITE CHOPPING BOARD",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287402_t30am",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521874_eb6ns",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287402.0144,
+      "name": "COFFEE TAMPER NEEDLES DISTRIBUTOR WOOD HANDLE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287402_82m6e",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521874_d96hj",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.6685,
+      "name": "CUPPA CALIBRATED ESPRESSO TAMPER 58mm",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_i7n1b",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521874_1k0nd",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.4355,
+      "name": "CUPPA CALIBRATED ESPRESSO TAMPER 51mm",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_9f7kf",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521874_t1o4f",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.7422,
+      "name": "COFFEE BRUSH",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_fhv9p",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521874_a2dcl",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.3103,
+      "name": "LARGE DISPOSABLE FILTER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_11fon",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_85aks",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.1453,
+      "name": "WIRE WHISK 12 inch",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_05wzr",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_0p30b",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.1572,
+      "name": "WIRE WHISK 10 inch",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_lip0h",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_h2h18",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.017,
+      "name": "COFFEE ORGANIZER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_vibn8",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_fkssc",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.6907,
+      "name": "STRAW HOLDER STAINLESS",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_m9b3i",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_02q4j",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.0435,
+      "name": "8oz PAPER CUPS ( 25 pcs )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_8mouk",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 5,
+          "remQty": 5,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_hp9xu",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 5,
+          "remQty": 5,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.3555,
+      "name": "WHITE PAPER BAG  ( 500 PCS )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_8g8mm",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_qrxqg",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.7603,
+      "name": "KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( LARGE )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_zy2p1",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 8,
+          "remQty": 8,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_mam4w",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 8,
+          "remQty": 8,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.7263,
+      "name": "KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( MEDIUM )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_0a47c",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 8,
+          "remQty": 8,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_754bn",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 8,
+          "remQty": 8,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.3164,
+      "name": "KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( SMALL )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_06pfy",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 8,
+          "remQty": 8,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_2g826",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 8,
+          "remQty": 8,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.275,
+      "name": "VINYL DISPOSABLE GLOVES BLACK",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Box",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_m6sl8",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Box",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_yg7iq",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Box",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.9458,
+      "name": "FOLDING STOOL",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_v99ev",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_ylbjx",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.3105,
+      "name": "CLING WRAP",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_4l1h4",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_dwilo",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.0671,
+      "name": "PLASTIC DOME LIDS ( NO LOGO )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_d7vht",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 50,
+          "remQty": 50,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_n0614",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 50,
+          "remQty": 50,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.2312,
+      "name": "PLASTIC FLAT LIDS W/ HOLE ( NO LOGO )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_9l8yw",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 50,
+          "remQty": 50,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_83lv3",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 50,
+          "remQty": 50,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.341,
+      "name": "16 OZ PLASTIC CUPS ( NO LOGO )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_8nmnj",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 50,
+          "remQty": 50,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_vqm8n",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 50,
+          "remQty": 50,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.507,
+      "name": "FROTHER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_6b376",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_4634s",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.057,
+      "name": "CAN OPENER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_mrkrz",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_ziwkw",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.476,
+      "name": "BREAD KNIFE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_yxn1w",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_ssrx2",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920287403.039,
+      "name": "BAR SPOON",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920287403_8sb9c",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788920521875_asj8h",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920521874.9404,
+      "name": "KIRKLAND SOY MILK",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920521874_zx1hh",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920521874.6565,
+      "name": "OATSIDE MILK",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920521874_bocaz",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-09",
+          "initQty": 30,
+          "remQty": 30,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788920521874.4622,
+      "name": "EMBORG FULL CREAM MILK ( 12PCS )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788920521874_f1q8w",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-09",
+          "initQty": 60,
+          "remQty": 60,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
         }
       ]
     }
   ],
   "logs": [
     {
-      "id": "log_1788920265868",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"SANTOKU KNIFE\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521876",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"DAIRY CADBURY\" (24 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920263383",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"THICK WHITE CHOPPING BOARD\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521876",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"TAKE IT\" (10 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920261231",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"COFFEE TAMPER NEEDLES DISTRIBUTOR WOOD HANDLE\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521876",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"SNICKERS\" (12 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920259076",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"CUPPA CALIBRATED ESPRESSO TAMPER 58mm\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"FITBAR\" (12 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920257123",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"CUPPA CALIBRATED ESPRESSO TAMPER 51mm\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"CLOUD 9 CLASSIC\" (12 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920253653",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"COFFEE BRUSH\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"LAY'S ORIGINAL\" (1 Case) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920250307",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"LARGE DISPOSABLE FILTER\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"LAY'S SOUR CREAM\" (1 Case) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920246461",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"WIRE WHISK 12 inch\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"LAY'S CHEESE\" (1 Case) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920244621",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"WIRE WHISK 10 inch\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"LOACKER\" (1 Box) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920241740",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"COFFEE ORGANIZER\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"TICTAC MINTS\" (1 Box) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920239164",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"STRAW HOLDER STAINLESS\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"VITA COCO BIG\" (1 Case) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920237271",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"8oz PAPER CUPS ( 25 pcs )\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"VITA COCO SMALL\" (2 Case) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920234187",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"WHITE PAPER BAG  ( 500 PCS )\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"ROYAL\" (24 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920230072",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( LARGE )\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"COKE ZERO\" (24 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920228294",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( MEDIUM )\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"COKE REGULAR\" (24 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788920225833",
-      "timestamp": "2026-09-09 10:17",
-      "details": "📅 Changed delivery date for \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( SMALL )\" from [2026-08-06] to [2026-07-31]"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"SPRITE\" (24 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788919570339",
-      "timestamp": "2026-09-09 10:06",
-      "details": "Updated delivery shipment details for \"GILCO ALMOND MILK  ( 1 CASE )\""
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"LEA & PERRINS WORCESTERSHIRE\" (1 Bottle/s) directly into Café Storage stock."
     },
     {
-      "id": "log_1788919541740",
-      "timestamp": "2026-09-09 10:05",
-      "details": "📦 Logged delivery shipment for \"GILCO ALMOND MILK  ( 1 CASE )\" (12 Pcs). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"RAM SWEET PICKLE RELISH\" (2 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788919450761",
-      "timestamp": "2026-09-09 10:04",
-      "details": "📦 Logged delivery shipment for \"SANTOKU KNIFE\" (2 Pcs). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"POTATO CHIPS\" (30 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788919445658",
-      "timestamp": "2026-09-09 10:04",
-      "details": "📦 Logged delivery shipment for \"THICK WHITE CHOPPING BOARD\" (2 Pcs). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"MOLINERA WHITE TRUFFLE OLIVE OIL\" (1 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788919433285",
-      "timestamp": "2026-09-09 10:03",
-      "details": "📦 Logged delivery shipment for \"COFFEE TAMPER NEEDLES DISTRIBUTOR WOOD HANDLE\" (1 Pcs). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"EDEN CHEESE SLICED BY 10\" (10 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788919392578",
-      "timestamp": "2026-09-09 10:03",
-      "details": "📦 Logged delivery shipment for \"CUPPA CALIBRATED ESPRESSO TAMPER 58mm\" (1 Pcs). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"ARLA NATURAL MOZZARELLA\" (10 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788919387411",
-      "timestamp": "2026-09-09 10:03",
-      "details": "📦 Logged delivery shipment for \"CUPPA CALIBRATED ESPRESSO TAMPER 51mm\" (1 Pcs). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"STAINLESS MIXING BOWL 30cm\" (1 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788919354474",
-      "timestamp": "2026-09-09 10:02",
-      "details": "📦 Logged delivery shipment for \"COFFEE BRUSH\" (1 Pcs). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"SQUEEZEE BOTTLE\" (5 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788919162389",
-      "timestamp": "2026-09-09 09:59",
-      "details": "☁️ Saved local backup & synced to GitHub (inventory_data.json)"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"BAR SPOON\" (2 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788919157591",
-      "timestamp": "2026-09-09 09:59",
-      "details": "📦 Logged delivery shipment for \"LARGE DISPOSABLE FILTER\" (1 Pack). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"BREAD KNIFE\" (2 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788918960356",
-      "timestamp": "2026-09-09 09:56",
-      "details": "📦 Logged delivery shipment for \"WIRE WHISK 12 inch\" (2 Pcs). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"CAN OPENER\" (2 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788918952219",
-      "timestamp": "2026-09-09 09:55",
-      "details": "📦 Logged delivery shipment for \"WIRE WHISK 10 inch\" (2 Pcs). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"FROTHER\" (2 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788918928053",
-      "timestamp": "2026-09-09 09:55",
-      "details": "☁️ Saved local backup & synced to GitHub (inventory_data.json)"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"16 OZ PLASTIC CUPS ( NO LOGO )\" (50 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788918919947",
-      "timestamp": "2026-09-09 09:55",
-      "details": "Updated delivery shipment details for \"STRAW HOLDER STAINLESS\""
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"PLASTIC FLAT LIDS W/ HOLE ( NO LOGO )\" (50 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788918908106",
-      "timestamp": "2026-09-09 09:55",
-      "details": "📦 Logged delivery shipment for \"COFFEE ORGANIZER\" (1 Pcs). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"PLASTIC DOME LIDS ( NO LOGO )\" (50 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788918893941",
-      "timestamp": "2026-09-09 09:54",
-      "details": "📦 Logged delivery shipment for \"STRAW HOLDER STAINLESS\" (1 Pack). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"CLING WRAP\" (1 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788918873044",
-      "timestamp": "2026-09-09 09:54",
-      "details": "📦 Logged delivery shipment for \"8oz PAPER CUPS ( 25 pcs )\" (5 Pack). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"FOLDING STOOL\" (1 Pcs) directly into Café Storage stock."
     },
     {
-      "id": "log_1788918843052",
-      "timestamp": "2026-09-09 09:54",
-      "details": "📦 Logged delivery shipment for \"WHITE PAPER BAG  ( 500 PCS )\" (1 Pack). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"VINYL DISPOSABLE GLOVES BLACK\" (1 Box) directly into Café Storage stock."
     },
     {
-      "id": "log_1788918795222",
-      "timestamp": "2026-09-09 09:53",
-      "details": "Updated delivery shipment details for \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( LARGE )\""
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( SMALL )\" (8 Pack) directly into Café Storage stock."
     },
     {
-      "id": "log_1788918761048",
-      "timestamp": "2026-09-09 09:52",
-      "details": "☁️ Saved local backup & synced to GitHub (inventory_data.json)"
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( MEDIUM )\" (8 Pack) directly into Café Storage stock."
     },
     {
-      "id": "log_1788918747121",
-      "timestamp": "2026-09-09 09:52",
-      "details": "📦 Logged delivery shipment for \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( LARGE ) )\" (8 Pack). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( LARGE )\" (8 Pack) directly into Café Storage stock."
     },
     {
-      "id": "log_1788918735378",
-      "timestamp": "2026-09-09 09:52",
-      "details": "📦 Logged delivery shipment for \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( MEDIUM )\" (8 Pack). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"WHITE PAPER BAG  ( 500 PCS )\" (1 Pack) directly into Café Storage stock."
     },
     {
-      "id": "log_1788918725457",
-      "timestamp": "2026-09-09 09:52",
-      "details": "📦 Logged delivery shipment for \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( SMALL )\" (8 Pack). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"8oz PAPER CUPS ( 25 pcs )\" (5 Pack) directly into Café Storage stock."
     },
     {
-      "id": "log_1788918669494",
-      "timestamp": "2026-09-09 09:51",
-      "details": "📦 Logged delivery shipment for \"VINYL DISPOSABLE GLOVES BLACK\" (1 Box). Flagged as pending for Storage."
+      "id": "log_1788920521875",
+      "timestamp": "2026-09-09 10:22",
+      "details": "🚚 Transferred delivery \"STRAW HOLDER STAINLESS\" (1 Pcs) directly into Café Storage stock."
     }
   ],
   "deliveries": [
+    {
+      "id": 1788920467517,
+      "name": "KIRKLAND SOY MILK",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 24,
+      "remQty": 24,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788920442891,
+      "name": "OATSIDE MILK",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 30,
+      "remQty": 30,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788920373131,
+      "name": "EMBORG FULL CREAM MILK ( 12PCS )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 60,
+      "remQty": 60,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17",
+      "transferredToStorage": true
+    },
     {
       "id": 1788919541740,
       "name": "GILCO ALMOND MILK  ( 1 CASE )",
@@ -913,7 +2406,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-07-17",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788919450761,
@@ -926,7 +2419,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788919445658,
@@ -939,7 +2432,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788919433285,
@@ -952,7 +2445,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788919392578,
@@ -965,7 +2458,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788919387411,
@@ -978,7 +2471,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788919354474,
@@ -991,7 +2484,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788919157591,
@@ -1004,7 +2497,7 @@
       "usedQty": 0,
       "unit": "Pack",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918960356,
@@ -1017,7 +2510,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918952219,
@@ -1030,7 +2523,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918908106,
@@ -1043,7 +2536,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918893941,
@@ -1056,7 +2549,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918873044,
@@ -1069,7 +2562,7 @@
       "usedQty": 0,
       "unit": "Pack",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918843052,
@@ -1082,7 +2575,7 @@
       "usedQty": 0,
       "unit": "Pack",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918747121,
@@ -1095,7 +2588,7 @@
       "usedQty": 0,
       "unit": "Pack",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918735378,
@@ -1108,7 +2601,7 @@
       "usedQty": 0,
       "unit": "Pack",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918725457,
@@ -1121,7 +2614,7 @@
       "usedQty": 0,
       "unit": "Pack",
       "deliveryDate": "2026-07-31",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918669494,
@@ -1134,7 +2627,7 @@
       "usedQty": 0,
       "unit": "Box",
       "deliveryDate": "2026-08-06",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918637947,
@@ -1147,7 +2640,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-08-06",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918627435,
@@ -1160,7 +2653,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-08-06",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918617117,
@@ -1173,7 +2666,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-08-06",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918597154,
@@ -1186,7 +2679,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-08-06",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918560748,
@@ -1199,7 +2692,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-08-06",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918526595,
@@ -1212,7 +2705,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-08-06",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918517307,
@@ -1225,7 +2718,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-08-06",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918509162,
@@ -1238,7 +2731,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-08-06",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918493346,
@@ -1251,7 +2744,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-08-06",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788918134699,
@@ -1575,5 +3068,5 @@
     "LALAMOVE"
   ],
   "markedOutPastries": [],
-  "lastUpdatedTimestamp": 1788920265868
+  "lastUpdatedTimestamp": 1788920521876
 }
