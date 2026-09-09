@@ -13,6 +13,20 @@
       "editing": false,
       "editingDelivery": false,
       "selected": false
+    },
+    {
+      "id": 1788932490890,
+      "category": "MILK",
+      "name": "EMBORG",
+      "unit": "PCS",
+      "deliveredQty": 92,
+      "barStorage": 92,
+      "usedQty": 46,
+      "date": "2026-08-28",
+      "previousDate": null,
+      "editing": false,
+      "editingDelivery": false,
+      "selected": false
     }
   ],
   "markedOutPastries": [
@@ -27,6 +41,16 @@
     }
   ],
   "historyLogs": [
+    {
+      "id": 1788932490890,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG",
+      "action": "New Cafe Item",
+      "oldDate": "Initial Input",
+      "newDate": "2026-08-28",
+      "detail": "Initial Bar Usage set to 46 PCS"
+    },
     {
       "id": 1788932467240,
       "module": "delivery",
@@ -198,5 +222,5 @@
       "detail": "Received initial 60 PCS"
     }
   ],
-  "lastUpdated": "2026-09-09T05:41:07.241Z"
+  "lastUpdated": "2026-09-09T05:41:30.892Z"
 }
