@@ -369,6 +369,9 @@
     .date-badge-previous { font-size: 0.68rem; color: #d4a373; background: rgba(188, 108, 37, 0.12); border: 1px solid rgba(188, 108, 37, 0.25); padding: 1px 5px; border-radius: 3px; }
 
     .fifo-tag { font-size: 0.68rem; background: rgba(56, 239, 125, 0.15); border: 1px solid rgba(56, 239, 125, 0.3); color: #38ef7d; padding: 1px 5px; border-radius: 3px; font-weight: 700; }
+    .log-in-tag { font-size: 0.7rem; background: rgba(56, 239, 125, 0.2); border: 1px solid rgba(56, 239, 125, 0.4); color: #38ef7d; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
+    .log-out-tag { font-size: 0.7rem; background: rgba(220, 53, 69, 0.2); border: 1px solid rgba(220, 53, 69, 0.4); color: #ff9999; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
+
     .tag-badge { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 16px; font-size: 0.7rem; font-weight: 600; }
     .tag-house { background: rgba(212, 163, 115, 0.2); color: var(--text-gold); border: 1px solid rgba(212, 163, 115, 0.4); }
     .tag-storage { background: rgba(82, 121, 110, 0.25); color: #a3b18a; border: 1px solid rgba(82, 121, 110, 0.4); }
@@ -394,7 +397,7 @@
     </div>
   </div>
 
-  <!-- ANIMATED CONFIRMATION DELETE POPUP MODAL -->
+  <!-- CONFIRMATION DELETE POPUP MODAL -->
   <div class="modal-overlay" id="delete-modal">
     <div class="modal-box">
       <h3 style="color: #ff8585; font-family: 'Playfair Display', serif; margin-bottom: 10px;">Confirm Deletion</h3>
@@ -476,7 +479,7 @@
 
       <div class="form-group">
         <label>Item Name</label>
-        <input type="text" id="cafe-item-name" placeholder="e.g., Oat Milk (Oatly)" required />
+        <input type="text" id="cafe-item-name" placeholder="e.g., Whole Milk" required />
       </div>
 
       <div class="form-group">
@@ -493,7 +496,7 @@
       </div>
 
       <div class="form-group">
-        <label>Record Bar Usage</label>
+        <label>Record Bar Usage (OUT)</label>
         <input type="number" id="cafe-item-used" min="0" value="0" required />
       </div>
 
@@ -522,7 +525,7 @@
             <th>Delivered Stock</th>
             <th>Storage Stock</th>
             <th>Bar Storage</th>
-            <th>Usage</th>
+            <th>Total Usage</th>
             <th>Remaining Bar Stock</th>
             <th>FIFO Date History</th>
             <th>Actions</th>
@@ -559,7 +562,7 @@
             <th>Delivered Stock</th>
             <th>Storage Stock</th>
             <th>Bar Storage</th>
-            <th>Usage</th>
+            <th>Total Usage</th>
             <th>Remaining Stock</th>
             <th>Stock Accuracy</th>
             <th>FIFO Batch Dates</th>
@@ -638,7 +641,7 @@
   <div id="delivery-inventory-page" class="page subpage">
     <button class="btn btn-nav-topleft" onclick="navigateTo('home-page')">← Home</button>
     <div class="subpage-header">
-      <h2 style="font-family: 'Playfair Display', serif; color: var(--text-gold);">Delivery Inventory (FIFO Storage)</h2>
+      <h2 style="font-family: 'Playfair Display', serif; color: var(--text-gold);">Delivery Inventory (Storage Room)</h2>
       <button class="btn btn-delete" onclick="promptDeleteSelected('delivery')">🗑 Delete Selected</button>
     </div>
 
@@ -651,6 +654,7 @@
       <button class="tab-btn" onclick="setCategoryFilter('delivery', 'HISTORY', this)">📜 HISTORY</button>
     </div>
 
+    <!-- CLEANED DELIVERY FORM (ONLY RECEIVED QTY) -->
     <form class="form-container" id="delivery-form" onsubmit="handleDeliverySubmit(event)">
       <div class="form-group">
         <label>Category</label>
@@ -687,7 +691,7 @@
       </div>
 
       <div class="form-group">
-        <label>Delivered Stock Qty (Batch)</label>
+        <label>Received Qty (IN)</label>
         <input type="number" id="del-item-qty" min="1" value="60" required />
       </div>
 
@@ -696,7 +700,7 @@
         <input type="date" id="del-item-date" required />
       </div>
 
-      <button type="submit" class="btn">Receive FIFO Delivery Batch</button>
+      <button type="submit" class="btn">Receive Delivery (IN)</button>
     </form>
 
     <div class="table-container">
@@ -711,7 +715,7 @@
             <th>Delivered Stock</th>
             <th>Storage Stock</th>
             <th>Bar Storage</th>
-            <th>Usage</th>
+            <th>Total Usage</th>
             <th>Remaining Stock</th>
             <th>FIFO Batch Date</th>
             <th>Actions</th>
@@ -723,7 +727,6 @@
   </div>
 
   <script>
-    // Advanced FIFO Interconnected Data Structure
     let inventoryStore = [
       {
         id: 1,
@@ -767,8 +770,8 @@
     ];
 
     let historyLogs = [
-      { id: 1, module: 'delivery', category: 'MILK', itemName: 'Whole Milk', action: 'FIFO Delivery Received', oldDate: 'Initial', newDate: '2026-09-02', detail: 'Received batch of 60 PCS into Storage' },
-      { id: 2, module: 'cafe', category: 'MILK', itemName: 'Whole Milk', action: 'Usage Recorded', oldDate: '2026-09-02', newDate: '2026-09-09', detail: 'Bar Usage: 14 PCS | Storage Remaining: 46 PCS | Bar Remaining: 6 PCS' }
+      { id: 1, type: 'IN', module: 'delivery', category: 'MILK', itemName: 'Whole Milk', action: 'Delivery Received (IN)', oldDate: 'Initial', newDate: '2026-09-02', detail: 'Received +60 PCS | Total Delivered: 60 PCS | Storage Rem: 60 PCS | Bar Rem: 20 PCS' },
+      { id: 2, type: 'OUT', module: 'cafe', category: 'MILK', itemName: 'Whole Milk', action: 'Usage Recorded (OUT)', oldDate: '2026-09-02', newDate: '2026-09-09', detail: 'Used 14 PCS | Total Usage: 14 PCS | Storage Rem: 46 PCS | Bar Rem: 6 PCS' }
     ];
 
     let markedOutPastries = [
@@ -794,7 +797,7 @@
       await loadFromGithub(true);
     });
 
-    /* FIFO Helper Computations */
+    /* Calculations */
     function getTotalDeliveredQty(item) {
       if (!item.batches || item.batches.length === 0) return 0;
       return item.batches.reduce((sum, b) => sum + b.qty, 0);
@@ -829,7 +832,7 @@
       }
     }
 
-    /* GITHUB SYNC */
+    /* GitHub Auto Sync */
     async function saveToGithub(silent = true) {
       const owner = localStorage.getItem('gh_owner');
       const repo = localStorage.getItem('gh_repo');
@@ -896,9 +899,11 @@
       document.getElementById('sync-status').innerText = text;
     }
 
-    function logHistoryEntry(module, category, itemName, action, oldDate, newDate, detail) {
+    /* Log History Entry Function */
+    function logHistoryEntry(type, module, category, itemName, action, oldDate, newDate, detail) {
       historyLogs.unshift({
         id: Date.now(),
+        type: type || 'LOG',
         module,
         category: (category || 'BAR').toUpperCase(),
         itemName,
@@ -928,9 +933,11 @@
         const oldDate = getOldestBatchDate(item);
         item.usedQty = Math.max(0, item.usedQty + delta);
         
+        const totalDel = getTotalDeliveredQty(item);
         const storageRem = calculateStorageStock(item);
         const barRem = calculateRemainingBarStock(item);
-        logHistoryEntry('cafe', item.category, item.name, 'FIFO Adjust', oldDate, today, `Usage: ${item.usedQty} ${item.unit} | Storage Rem: ${storageRem} ${item.unit} | Bar Rem: ${barRem} ${item.unit}`);
+        
+        logHistoryEntry('OUT', 'cafe', item.category, item.name, 'Quick Bar Adjust', oldDate, today, `Usage: ${item.usedQty} ${item.unit} | Storage Rem: ${storageRem} ${item.unit} | Bar Rem: ${barRem} ${item.unit}`);
         
         renderAllTables();
         saveToGithub();
@@ -958,9 +965,11 @@
         item.usedQty = usedVal;
         item.editing = false;
 
+        const totalDel = getTotalDeliveredQty(item);
         const storageRem = calculateStorageStock(item);
         const barRem = calculateRemainingBarStock(item);
-        logHistoryEntry('cafe', item.category, item.name, 'FIFO Item Edit', oldDate, new Date().toISOString().split('T')[0], `Storage Rem: ${storageRem} ${item.unit} | Bar Storage: ${barStorageVal} | Usage: ${usedVal} ${item.unit}`);
+        
+        logHistoryEntry('LOG', 'cafe', item.category, item.name, 'Item Updated', oldDate, new Date().toISOString().split('T')[0], `Delivered: ${totalDel} ${item.unit} | Usage: ${usedVal} ${item.unit} | Storage Rem: ${storageRem} ${item.unit} | Bar Rem: ${barRem} ${item.unit}`);
 
         renderAllTables();
         saveToGithub();
@@ -1126,13 +1135,14 @@
       `;
 
       logs.forEach(log => {
+        const typeBadge = log.type === 'IN' ? `<span class="log-in-tag">IN</span>` : (log.type === 'OUT' ? `<span class="log-out-tag">OUT</span>` : `<span class="tag-badge tag-house">LOG</span>`);
         tbody.innerHTML += `
           <tr>
-            <td>-</td>
-            <td><span class="tag-badge tag-house">${log.action}</span></td>
+            <td>${typeBadge}</td>
+            <td><strong>${log.action}</strong></td>
             <td><strong>${log.category}</strong></td>
             <td>${log.itemName}</td>
-            <td colspan="6" style="color:var(--text-muted);">${log.detail}</td>
+            <td colspan="6" style="color:var(--text-muted); font-size:0.8rem;">${log.detail}</td>
             <td><span class="date-badge-current">${log.newDate}</span></td>
             <td>-</td>
           </tr>
@@ -1176,9 +1186,11 @@
         item.usedQty += usedQty;
         item.barStorage = Math.max(item.barStorage, barStorage);
         
+        const totalDel = getTotalDeliveredQty(item);
         const storageRem = calculateStorageStock(item);
         const barRem = calculateRemainingBarStock(item);
-        logHistoryEntry('cafe', category, name, 'Usage Recorded', oldDate, date, `Bar Usage: +${usedQty} ${unit} | Storage Rem: ${storageRem} ${unit} | Bar Rem: ${barRem} ${unit}`);
+
+        logHistoryEntry('OUT', 'cafe', category, name, 'Usage Recorded (OUT)', oldDate, date, `Used ${usedQty} ${unit} | Total Usage: ${item.usedQty} ${unit} | Storage Rem: ${storageRem} ${unit} | Bar Rem: ${barRem} ${unit}`);
       } else {
         inventoryStore.push({
           id: Date.now(),
@@ -1191,7 +1203,10 @@
           selected: false,
           batches: [{ batchId: Date.now(), qty: 60, date }]
         });
-        logHistoryEntry('cafe', category, name, 'New Item Added', null, date, `Added ${name} | Initial Batch 60 ${unit} | Bar Usage: ${usedQty} ${unit}`);
+        
+        const storageRem = 60 - usedQty;
+        const barRem = (barStorage || 14) - usedQty;
+        logHistoryEntry('OUT', 'cafe', category, name, 'New Item Usage (OUT)', null, date, `Used ${usedQty} ${unit} | Total Delivered: 60 ${unit} | Storage Rem: ${storageRem} ${unit} | Bar Rem: ${barRem} ${unit}`);
       }
 
       document.getElementById('cafe-item-name').value = '';
@@ -1200,6 +1215,7 @@
       saveToGithub();
     }
 
+    /* Cleaned Delivery Input Handler */
     function handleDeliverySubmit(e) {
       e.preventDefault();
       let category = document.getElementById('del-cat-select').value;
@@ -1207,16 +1223,20 @@
 
       const name = document.getElementById('del-item-name').value.trim();
       const unit = document.getElementById('del-item-unit').value;
-      const deliveredQty = parseInt(document.getElementById('del-item-qty').value) || 0;
+      const receivedQty = parseInt(document.getElementById('del-item-qty').value) || 0;
       const date = document.getElementById('del-item-date').value;
 
       let item = inventoryStore.find(i => i.name.toLowerCase() === name.toLowerCase());
 
       if (item) {
         const oldDate = getOldestBatchDate(item);
-        item.batches.push({ batchId: Date.now(), qty: deliveredQty, date });
+        item.batches.push({ batchId: Date.now(), qty: receivedQty, date });
+        
+        const totalDel = getTotalDeliveredQty(item);
         const storageRem = calculateStorageStock(item);
-        logHistoryEntry('delivery', category, name, 'FIFO Delivery Received', oldDate, date, `Received batch +${deliveredQty} ${unit} | Storage Rem: ${storageRem} ${unit}`);
+        const barRem = calculateRemainingBarStock(item);
+
+        logHistoryEntry('IN', 'delivery', category, name, 'Delivery Received (IN)', oldDate, date, `Received +${receivedQty} ${unit} | Total Delivered: ${totalDel} ${unit} | Storage Rem: ${storageRem} ${unit} | Bar Rem: ${barRem} ${unit}`);
       } else {
         inventoryStore.push({
           id: Date.now(),
@@ -1227,9 +1247,10 @@
           usedQty: 0,
           editing: false,
           selected: false,
-          batches: [{ batchId: Date.now(), qty: deliveredQty, date }]
+          batches: [{ batchId: Date.now(), qty: receivedQty, date }]
         });
-        logHistoryEntry('delivery', category, name, 'New FIFO Batch', null, date, `Received initial batch ${deliveredQty} ${unit} into Storage`);
+
+        logHistoryEntry('IN', 'delivery', category, name, 'New Delivery Stock (IN)', null, date, `Received +${receivedQty} ${unit} | Total Delivered: ${receivedQty} ${unit} | Storage Rem: ${receivedQty} ${unit} | Bar Rem: 14 ${unit}`);
       }
 
       document.getElementById('del-item-name').value = '';
@@ -1247,7 +1268,7 @@
       const date = document.getElementById('pastry-date').value;
 
       markedOutPastries.push({ id: Date.now(), name, unit, qty, reason, date, selected: false });
-      logHistoryEntry('pastry', 'PASTRIES', name, 'Marked Out', null, date, `Marked out ${qty} ${unit} (${reason})`);
+      logHistoryEntry('OUT', 'pastry', 'PASTRIES', name, 'Marked Out (OUT)', null, date, `Marked out ${qty} ${unit} (${reason})`);
       document.getElementById('pastry-item-name').value = '';
       renderMarkedOutPastries();
       saveToGithub();
