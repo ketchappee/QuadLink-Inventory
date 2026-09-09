@@ -4,7 +4,8 @@
       "Pastries",
       "RETAIL",
       "BAR",
-      "MILK"
+      "MILK",
+      "Retail"
     ],
     "Community": [
       "General"
@@ -700,6 +701,86 @@
   ],
   "logs": [
     {
+      "id": "log_1788920265868",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"SANTOKU KNIFE\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
+      "id": "log_1788920263383",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"THICK WHITE CHOPPING BOARD\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
+      "id": "log_1788920261231",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"COFFEE TAMPER NEEDLES DISTRIBUTOR WOOD HANDLE\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
+      "id": "log_1788920259076",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"CUPPA CALIBRATED ESPRESSO TAMPER 58mm\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
+      "id": "log_1788920257123",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"CUPPA CALIBRATED ESPRESSO TAMPER 51mm\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
+      "id": "log_1788920253653",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"COFFEE BRUSH\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
+      "id": "log_1788920250307",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"LARGE DISPOSABLE FILTER\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
+      "id": "log_1788920246461",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"WIRE WHISK 12 inch\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
+      "id": "log_1788920244621",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"WIRE WHISK 10 inch\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
+      "id": "log_1788920241740",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"COFFEE ORGANIZER\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
+      "id": "log_1788920239164",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"STRAW HOLDER STAINLESS\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
+      "id": "log_1788920237271",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"8oz PAPER CUPS ( 25 pcs )\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
+      "id": "log_1788920234187",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"WHITE PAPER BAG  ( 500 PCS )\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
+      "id": "log_1788920230072",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( LARGE )\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
+      "id": "log_1788920228294",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( MEDIUM )\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
+      "id": "log_1788920225833",
+      "timestamp": "2026-09-09 10:17",
+      "details": "📅 Changed delivery date for \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( SMALL )\" from [2026-08-06] to [2026-07-31]"
+    },
+    {
       "id": "log_1788919570339",
       "timestamp": "2026-09-09 10:06",
       "details": "Updated delivery shipment details for \"GILCO ALMOND MILK  ( 1 CASE )\""
@@ -818,86 +899,6 @@
       "id": "log_1788918669494",
       "timestamp": "2026-09-09 09:51",
       "details": "📦 Logged delivery shipment for \"VINYL DISPOSABLE GLOVES BLACK\" (1 Box). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788918637947",
-      "timestamp": "2026-09-09 09:50",
-      "details": "📦 Logged delivery shipment for \"FOLDING STOOL\" (1 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788918627435",
-      "timestamp": "2026-09-09 09:50",
-      "details": "📦 Logged delivery shipment for \"CLING WRAP\" (1 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788918617117",
-      "timestamp": "2026-09-09 09:50",
-      "details": "📦 Logged delivery shipment for \"PLASTIC DOME LIDS ( NO LOGO )\" (50 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788918597155",
-      "timestamp": "2026-09-09 09:49",
-      "details": "📦 Logged delivery shipment for \"PLASTIC FLAT LIDS W/ HOLE ( NO LOGO )\" (50 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788918560748",
-      "timestamp": "2026-09-09 09:49",
-      "details": "📦 Logged delivery shipment for \"16 OZ PLASTIC CUPS ( NO LOGO )\" (50 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788918526595",
-      "timestamp": "2026-09-09 09:48",
-      "details": "📦 Logged delivery shipment for \"FROTHER\" (2 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788918517307",
-      "timestamp": "2026-09-09 09:48",
-      "details": "📦 Logged delivery shipment for \"CAN OPENER\" (2 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788918509162",
-      "timestamp": "2026-09-09 09:48",
-      "details": "📦 Logged delivery shipment for \"BREAD KNIFE\" (2 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788918493346",
-      "timestamp": "2026-09-09 09:48",
-      "details": "📦 Logged delivery shipment for \"BAR SPOON\" (2 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788918468715",
-      "timestamp": "2026-09-09 09:47",
-      "details": "↩️ Triggered Undo Command (Restored previous inventory state)"
-    },
-    {
-      "id": "log_1788918358938",
-      "timestamp": "2026-09-09 09:45",
-      "details": "↩️ Triggered Undo Command (Restored previous inventory state)"
-    },
-    {
-      "id": "log_1788918297513",
-      "timestamp": "2026-09-09 09:44",
-      "details": "↩️ Triggered Undo Command (Restored previous inventory state)"
-    },
-    {
-      "id": "log_1788918199614",
-      "timestamp": "2026-09-09 09:43",
-      "details": "↩️ Triggered Undo Command (Restored previous inventory state)"
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"DAIRY CADBURY\" (24 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"TAKE IT\" (10 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"SNICKERS\" (12 Pcs) directly into Café Storage stock."
     }
   ],
   "deliveries": [
@@ -924,7 +925,7 @@
       "remQty": 2,
       "usedQty": 0,
       "unit": "Pcs",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -937,7 +938,7 @@
       "remQty": 2,
       "usedQty": 0,
       "unit": "Pcs",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -950,7 +951,7 @@
       "remQty": 1,
       "usedQty": 0,
       "unit": "Pcs",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -963,7 +964,7 @@
       "remQty": 1,
       "usedQty": 0,
       "unit": "Pcs",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -976,7 +977,7 @@
       "remQty": 1,
       "usedQty": 0,
       "unit": "Pcs",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -989,7 +990,7 @@
       "remQty": 1,
       "usedQty": 0,
       "unit": "Pcs",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -1002,7 +1003,7 @@
       "remQty": 1,
       "usedQty": 0,
       "unit": "Pack",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -1015,7 +1016,7 @@
       "remQty": 2,
       "usedQty": 0,
       "unit": "Pcs",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -1028,7 +1029,7 @@
       "remQty": 2,
       "usedQty": 0,
       "unit": "Pcs",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -1041,7 +1042,7 @@
       "remQty": 1,
       "usedQty": 0,
       "unit": "Pcs",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -1054,7 +1055,7 @@
       "remQty": 1,
       "usedQty": 0,
       "unit": "Pcs",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -1067,7 +1068,7 @@
       "remQty": 5,
       "usedQty": 0,
       "unit": "Pack",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -1080,7 +1081,7 @@
       "remQty": 1,
       "usedQty": 0,
       "unit": "Pack",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -1093,7 +1094,7 @@
       "remQty": 8,
       "usedQty": 0,
       "unit": "Pack",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -1106,7 +1107,7 @@
       "remQty": 8,
       "usedQty": 0,
       "unit": "Pack",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -1119,7 +1120,7 @@
       "remQty": 8,
       "usedQty": 0,
       "unit": "Pack",
-      "deliveryDate": "2026-08-06",
+      "deliveryDate": "2026-07-31",
       "transferredToStorage": false
     },
     {
@@ -1574,5 +1575,5 @@
     "LALAMOVE"
   ],
   "markedOutPastries": [],
-  "lastUpdatedTimestamp": 1788919570339
+  "lastUpdatedTimestamp": 1788920265868
 }
