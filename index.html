@@ -461,18 +461,6 @@
             flex-wrap: wrap;
         }
 
-        .select-transfer {
-            padding: 6px 8px;
-            font-size: 0.72rem;
-            font-weight: 600;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.75);
-            border: 1px solid var(--clear-border);
-            color: var(--text-main);
-            cursor: pointer;
-            max-width: 130px;
-        }
-
         .row-checkbox { width: 15px; height: 15px; cursor: pointer; accent-color: var(--brand-color); }
 
         .table-container { 
@@ -514,28 +502,6 @@
             color: #1F618D;
             font-weight: 800;
             padding: 2px 7px;
-            border-radius: 6px;
-            border: 1px solid rgba(41, 128, 185, 0.35);
-            font-size: 0.7rem;
-        }
-
-        .status-tag-pending {
-            display: inline-block;
-            background: rgba(217, 160, 107, 0.25);
-            color: #8C5B2B;
-            font-weight: 800;
-            padding: 3px 8px;
-            border-radius: 6px;
-            border: 1px solid rgba(217, 160, 107, 0.5);
-            font-size: 0.7rem;
-        }
-
-        .status-tag-synced {
-            display: inline-block;
-            background: rgba(41, 128, 185, 0.18);
-            color: #1F618D;
-            font-weight: 800;
-            padding: 3px 8px;
             border-radius: 6px;
             border: 1px solid rgba(41, 128, 185, 0.35);
             font-size: 0.7rem;
@@ -686,7 +652,6 @@
         }
         .inline-date-btn:hover { background: var(--brand-color); color: #fff; }
 
-        /* Mobile Adjustments */
         @media (max-width: 768px) {
             .navbar { padding: 8px 12px; }
             .action-btns { overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
@@ -1013,7 +978,6 @@
     <div id="delBatchBar" class="batch-action-bar" style="display: none;">
         <span class="batch-info" id="delBatchCount">0 selected</span>
         <div class="batch-controls">
-            <button type="button" class="btn primary" onclick="transferSelectedDeliveriesToStorage()" style="padding: 6px 12px; font-size: 0.75rem;">📦 Transfer Selected to Storage</button>
             <button type="button" class="btn-clear-selected" onclick="deleteSelectedDeliveries()">🗑️ Delete Selected</button>
         </div>
     </div>
@@ -1029,7 +993,7 @@
                     <th>Initial Qty</th>
                     <th>Remaining Stock</th>
                     <th>Total Used</th>
-                    <th>Storage Status</th>
+                    <th>Storage Location Tag</th>
                     <th>Delivery Date</th>
                     <th>Action</th>
                 </tr>
@@ -1138,8 +1102,8 @@
                 <div class="input-group">
                     <label>Source Note</label>
                     <select id="itemSourceNote" required>
-                        <option value="In-House">In-House</option>
-                        <option value="Delivery">Delivery</option>
+                        <option value="In-House">In-House Stock</option>
+                        <option value="Delivery">Delivery Stock</option>
                     </select>
                 </div>
                 <div class="input-group">
@@ -1232,14 +1196,14 @@
                 unit: "Case",
                 lastUpdated: new Date().toISOString().split('T')[0],
                 batches: [
-                    { batchId: "b3", addedDate: "2026-08-25", lastUpdated: "2026-08-25", initQty: 5, remQty: 2, usedQty: 1, unit: "Case", location: "Bar", sourceNote: "Delivery" },
+                    { batchId: "b3", addedDate: "2026-08-25", lastUpdated: "2026-08-25", initQty: 5, remQty: 2, usedQty: 1, unit: "Case", location: "Bar", sourceNote: "In-House" },
                     { batchId: "b4", addedDate: "2026-08-28", lastUpdated: "2026-08-28", initQty: 5, remQty: 3, usedQty: 0, unit: "Case", location: "Storage", sourceNote: "Delivery" }
                 ]
             }
         ],
         deliveries: [
-            { id: 101, name: "Espresso Beans", category: "Café", subcategory: "Beans", supplier: "YARDSTICK", initQty: 10, remQty: 10, usedQty: 0, unit: "Kg", deliveryDate: "2026-09-05", transferredToStorage: true },
-            { id: 102, name: "Oat Milk", category: "Café", subcategory: "Milk", supplier: "JAMBI", initQty: 3, remQty: 3, usedQty: 0, unit: "Case", deliveryDate: "2026-08-28", transferredToStorage: true }
+            { id: 101, name: "Espresso Beans", category: "Café", subcategory: "Beans", supplier: "YARDSTICK", initQty: 10, remQty: 10, usedQty: 0, unit: "Kg", deliveryDate: "2026-09-05", locationTag: "Storage" },
+            { id: 102, name: "Oat Milk", category: "Café", subcategory: "Milk", supplier: "JAMBI", initQty: 3, remQty: 3, usedQty: 0, unit: "Case", deliveryDate: "2026-08-28", locationTag: "Storage" }
         ],
         markedOutPastries: [],
         logs: []
@@ -1261,7 +1225,7 @@
         if (del.initQty === undefined) del.initQty = del.qty !== undefined ? del.qty : 0;
         if (del.remQty === undefined) del.remQty = del.qty !== undefined ? del.qty : del.initQty;
         if (del.usedQty === undefined) del.usedQty = Math.max(0, del.initQty - del.remQty);
-        if (del.transferredToStorage === undefined) del.transferredToStorage = false;
+        del.locationTag = "Storage";
     });
 
     appData.inventory.forEach(item => {
@@ -1271,7 +1235,6 @@
         if (!item.batches || !Array.isArray(item.batches)) {
             const oldQty = item.qty !== undefined ? item.qty : 0;
             const oldDate = item.addedDate || new Date().toISOString().split('T')[0];
-            const oldSource = item.sourceNote || "In-House";
             item.batches = [{
                 batchId: 'b_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
                 addedDate: oldDate,
@@ -1281,7 +1244,7 @@
                 usedQty: 0,
                 unit: item.unit || 'Bottle/s',
                 location: "Bar",
-                sourceNote: oldSource
+                sourceNote: "In-House"
             }];
             delete item.qty;
             delete item.addedDate;
@@ -1290,6 +1253,7 @@
             item.batches.forEach(b => {
                 if (!b.unit) b.unit = item.unit || 'Bottle/s';
                 if (!b.location) b.location = "Bar";
+                if (!b.sourceNote) b.sourceNote = "In-House";
                 if (b.initQty === undefined) b.initQty = b.remQty || 0;
                 if (b.usedQty === undefined) b.usedQty = Math.max(0, b.initQty - (b.remQty || 0));
                 if (!b.lastUpdated) b.lastUpdated = b.addedDate || new Date().toISOString().split('T')[0];
@@ -1410,14 +1374,13 @@
                     if (del.initQty === undefined) del.initQty = del.qty !== undefined ? del.qty : 0;
                     if (del.remQty === undefined) del.remQty = del.qty !== undefined ? del.qty : del.initQty;
                     if (del.usedQty === undefined) del.usedQty = Math.max(0, del.initQty - del.remQty);
-                    if (del.transferredToStorage === undefined) del.transferredToStorage = false;
+                    del.locationTag = "Storage";
                 });
 
                 appData.inventory.forEach(item => {
                     if (!item.batches) {
                         const oldQty = item.qty !== undefined ? item.qty : 0;
                         const oldDate = item.addedDate || new Date().toISOString().split('T')[0];
-                        const oldSource = item.sourceNote || "In-House";
                         item.batches = [{
                             batchId: 'b_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
                             addedDate: oldDate,
@@ -1427,7 +1390,7 @@
                             usedQty: 0,
                             unit: item.unit || 'Bottle/s',
                             location: "Bar",
-                            sourceNote: oldSource
+                            sourceNote: "In-House"
                         }];
                         delete item.qty;
                         delete item.addedDate;
@@ -1435,6 +1398,7 @@
                         item.batches.forEach(b => {
                             if (!b.unit) b.unit = item.unit || 'Bottle/s';
                             if (!b.location) b.location = "Bar";
+                            if (!b.sourceNote) b.sourceNote = "In-House";
                             if (b.initQty === undefined) b.initQty = b.remQty || 0;
                             if (b.usedQty === undefined) b.usedQty = Math.max(0, b.initQty - (b.remQty || 0));
                             if (!b.lastUpdated) b.lastUpdated = b.addedDate || new Date().toISOString().split('T')[0];
@@ -1607,7 +1571,7 @@
             usedQty: 0,
             unit: unitToUse,
             location: locToUse,
-            sourceNote: sourceNoteStr
+            sourceNote: sourceNoteStr || "In-House"
         });
         item.unit = unitToUse;
         sortItemBatches(item);
@@ -2113,56 +2077,6 @@
         }
     }
 
-    async function pushSingleDeliveryToStorage(delId) {
-        saveSnapshotForUndo();
-        transferDeliveryToStorageInternal(delId);
-        await autoSaveData();
-        refreshAllViews();
-    }
-
-    async function transferSelectedDeliveriesToStorage() {
-        const checkedBoxes = document.querySelectorAll('.del-row-cb:checked');
-        if (checkedBoxes.length === 0) return;
-
-        saveSnapshotForUndo();
-        const ids = Array.from(checkedBoxes).map(cb => parseInt(cb.value));
-        ids.forEach(id => transferDeliveryToStorageInternal(id));
-        await autoSaveData();
-        refreshAllViews();
-    }
-
-    function transferDeliveryToStorageInternal(delId) {
-        const del = appData.deliveries.find(d => d.id === delId);
-        if (!del) return;
-
-        const dateNow = new Date().toISOString().split('T')[0];
-        const targetSubcategory = del.subcategory || ((appData.categories['Café'] && appData.categories['Café'].length > 0) ? appData.categories['Café'][0] : 'General');
-        
-        const transferQty = del.remQty > 0 ? del.remQty : del.initQty;
-        const batchDate = del.deliveryDate || dateNow;
-
-        let existingItem = appData.inventory.find(i => i.category === 'Café' && i.name.toLowerCase().trim() === del.name.toLowerCase().trim());
-
-        if (existingItem) {
-            addFIFOStock(existingItem, transferQty, batchDate, "Delivery", del.unit, "Storage");
-        } else {
-            const newItem = {
-                id: Date.now() + Math.random(),
-                name: del.name,
-                category: 'Café',
-                subcategory: targetSubcategory,
-                unit: del.unit,
-                lastUpdated: dateNow,
-                batches: []
-            };
-            addFIFOStock(newItem, transferQty, batchDate, "Delivery", del.unit, "Storage");
-            appData.inventory.push(newItem);
-        }
-
-        del.transferredToStorage = true;
-        recordLog(`🚚 Transferred delivery "${del.name}" (${transferQty} ${del.unit}) directly into Café Storage stock.`);
-    }
-
     async function deleteSelectedDeliveries() {
         const checked = document.querySelectorAll('.del-row-cb:checked');
         if (checked.length === 0) return;
@@ -2458,7 +2372,7 @@
         const name = document.getElementById('itemName').value.trim();
         const subcategory = document.getElementById('itemSubcategory').value;
         const locationStr = document.getElementById('itemLocation').value;
-        const sourceNote = document.getElementById('itemSourceNote').value;
+        const sourceNote = document.getElementById('itemSourceNote').value || "In-House";
         const qtyVal = document.getElementById('itemQty').value;
         const qty = qtyVal !== '' ? parseInt(qtyVal) : 0;
         const unit = document.getElementById('itemUnit').value;
@@ -2477,7 +2391,8 @@
 
                 if (qty > 0) {
                     addFIFOStock(item, qty, addedDate, sourceNote, unit, locationStr);
-                    recordLog(`Updated item "${prevName}" details & added batch +${qty} ${unit} to ${locationStr} (Date: ${addedDate})`);
+                    syncDeductionToDeliveries(name, qty);
+                    recordLog(`Updated item "${prevName}" details & added batch +${qty} ${unit} to ${locationStr} (${sourceNote}). Auto-synced delivery usage.`);
                 } else {
                     recordLog(`Updated item metadata for "${prevName}" (Renamed/Subcategory changed)`);
                 }
@@ -2488,7 +2403,8 @@
             if (existingItem) {
                 if (qty > 0) {
                     addFIFOStock(existingItem, qty, addedDate, sourceNote, unit, locationStr);
-                    recordLog(`Added new batch (${qty} ${unit}, Location: ${locationStr}, Date: ${addedDate}) into FIFO queue for "${name}"`);
+                    syncDeductionToDeliveries(name, qty);
+                    recordLog(`Added batch (+${qty} ${unit}, Location: ${locationStr}, ${sourceNote}) to "${name}". Auto-deducted corresponding stock from Delivery Inventory.`);
                 } else {
                     alert("Please specify a quantity greater than 0 for new stock batches.");
                     return;
@@ -2508,8 +2424,9 @@
                     batches: []
                 };
                 addFIFOStock(newItem, qty, addedDate, sourceNote, unit, locationStr);
+                syncDeductionToDeliveries(name, qty);
                 appData.inventory.push(newItem);
-                recordLog(`Created new FIFO item "${name}" with initial batch of ${qty} ${unit} in ${locationStr} (Date: ${addedDate})`);
+                recordLog(`Created new Café Inventory item "${name}" with initial batch of ${qty} ${unit} in ${locationStr} (${sourceNote}). Auto-deducted corresponding delivery stock.`);
             }
             document.getElementById('itemName').value = '';
             document.getElementById('itemQty').value = '';
@@ -2541,6 +2458,7 @@
                 del.remQty = Math.max(0, qty - del.usedQty);
                 del.unit = unit;
                 del.deliveryDate = deliveryDate;
+                del.locationTag = "Storage";
                 recordLog(`Updated delivery shipment details for "${name}"`);
             }
             cancelDeliveryEdit();
@@ -2556,10 +2474,10 @@
                 usedQty: 0, 
                 unit, 
                 deliveryDate,
-                transferredToStorage: false
+                locationTag: "Storage"
             });
 
-            recordLog(`📦 Logged delivery shipment for "${name}" (${qty} ${unit}). Flagged as pending for Storage.`);
+            recordLog(`📦 Logged delivery shipment for "${name}" (${qty} ${unit}). Kept in Delivery Inventory and tagged as Storage Stock.`);
             document.getElementById('delItemName').value = '';
             document.getElementById('delQty').value = '';
         }
@@ -2657,8 +2575,9 @@
             saveSnapshotForUndo();
             const todayStr = new Date().toISOString().split('T')[0];
             addFIFOStock(item, delta, todayStr, "In-House", activeUnit, "Bar");
+            syncDeductionToDeliveries(item.name, delta);
             const newTotal = getItemTotalQty(item);
-            recordLog(`🟢 Increased +${delta} ${activeUnit} to "${item.name}" in Bar Stock. Total on hand went from ${oldTotal} to ${newTotal} ${activeUnit}.`);
+            recordLog(`🟢 Increased +${delta} ${activeUnit} to "${item.name}" in Bar Stock. Auto-deducted corresponding delivery stock. Total on hand: ${newTotal} ${activeUnit}.`);
         }
 
         await autoSaveData();
@@ -2684,14 +2603,7 @@
             const usedQty = del.usedQty !== undefined ? del.usedQty : 0;
             const qtyStatusClass = remQty === 0 ? 'used-text-red' : '';
 
-            const isTransferred = del.transferredToStorage;
-            const statusBadge = isTransferred 
-                ? `<span class="status-tag-synced">📦 In Storage</span>` 
-                : `<span class="status-tag-pending">⏳ Pending Transfer</span>`;
-
-            const transferBtn = !isTransferred 
-                ? `<button type="button" class="btn primary" onclick="pushSingleDeliveryToStorage(${del.id})" style="padding: 5px 8px; font-size: 0.72rem;">🚚 Transfer to Storage</button>` 
-                : `<button type="button" class="btn" disabled style="padding: 5px 8px; font-size: 0.72rem; opacity: 0.6; cursor: default;">✓ Added</button>`;
+            const statusBadge = `<span class="location-tag-storage">📦 Storage Stock</span>`;
 
             const tr = document.createElement('tr');
             tr.innerHTML = `
@@ -2710,7 +2622,6 @@
                 </td>
                 <td>
                     <div class="action-cell-wrapper">
-                        ${transferBtn}
                         <button type="button" class="btn edit-btn" onclick="editDeliveryRecord(${del.id})" style="padding: 5px 8px; font-size: 0.72rem;">✏️ Edit Details</button>
                         <button type="button" class="btn-delete-x" onclick="deleteDeliveryItem(${del.id})" title="Delete">✕</button>
                     </div>
@@ -2895,7 +2806,7 @@
                                             <th>Remaining Stock</th>
                                             <th>Used / Consumed</th>
                                             <th>Unit</th>
-                                            <th>Source</th>
+                                            <th>Stock Type Tag</th>
                                             <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
@@ -2908,7 +2819,7 @@
                         const statusBadge = isDepleted 
                             ? `<span style="color:var(--danger); font-weight:700;">Depleted</span>` 
                             : `<span style="color:var(--success); font-weight:700;">Active Queue</span>`;
-                        const srcTag = b.sourceNote === 'Delivery' ? `<span class="delivery-note-tag">Delivery</span>` : `<span class="inhouse-note-tag">In-House</span>`;
+                        const srcTag = `<span class="inhouse-note-tag">☕ In-House Stock</span>`;
                         const locBadge = b.location === 'Bar' ? `<span class="location-tag-bar">☕ Bar</span>` : `<span class="location-tag-storage">📦 Storage</span>`;
 
                         const bUsed = b.usedQty !== undefined ? b.usedQty : Math.max(0, (b.initQty || b.remQty) - b.remQty);
