@@ -472,7 +472,7 @@
     /* 3. SUBPAGES LAYOUT */
     .subpage {
       padding: 80px 40px 50px;
-      max-width: 1350px;
+      max-width: 1380px;
       margin: 0 auto;
     }
 
@@ -657,7 +657,7 @@
       gap: 6px;
     }
 
-    /* BEFORE & AFTER DATE HISTORY SMALL SHOW NOTES */
+    /* BEFORE & AFTER DATE HISTORY CARDS */
     .date-history-card {
       display: flex;
       flex-direction: column;
@@ -699,6 +699,12 @@
       color: var(--text-gold);
       letter-spacing: 1px;
       font-size: 0.8rem;
+    }
+
+    .history-detail-text {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.45;
     }
 
     .tag-badge {
@@ -936,6 +942,7 @@
       <button class="tab-btn" onclick="setCategoryFilter('summary', 'BAR', this)">BAR ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('summary', 'RETAIL', this)">RETAIL ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('summary', 'PASTRIES', this)">PASTRIES ONLY</button>
+      <button class="tab-btn tab-btn-history" onclick="setCategoryFilter('summary', 'HISTORY', this)">📜 HISTORY</button>
     </div>
 
     <div class="table-container">
@@ -1123,8 +1130,9 @@
     ];
 
     let historyLogs = [
-      { id: 1, module: 'cafe', category: 'MILK', itemName: 'Whole Milk', action: 'Usage Recorded', oldDate: '2026-09-02', newDate: '2026-09-09', detail: 'Bar Usage updated to 12 L' },
-      { id: 2, module: 'delivery', category: 'BAR', itemName: 'Espresso Blend', action: 'Delivery Received', oldDate: '2026-08-28', newDate: '2026-09-05', detail: 'Delivered Stock +25 KG' }
+      { id: 1, module: 'cafe', category: 'MILK', itemName: 'Whole Milk', action: 'Usage Recorded', oldDate: '2026-09-02', newDate: '2026-09-09', detail: 'Bar Usage updated to 12 L | Remaining: 8 L' },
+      { id: 2, module: 'delivery', category: 'BAR', itemName: 'Espresso Blend', action: 'Delivery Received', oldDate: '2026-08-28', newDate: '2026-09-05', detail: 'Delivered Stock: +25 KG | Storage Stock: 15 KG' },
+      { id: 3, module: 'pastry', category: 'PASTRIES', itemName: 'Butter Croissant', action: 'Marked Out', oldDate: '2026-09-03', newDate: '2026-09-09', detail: 'Marked out 2 PCS (Reason: Expired / Day-Old)' }
     ];
 
     let markedOutPastries = [
@@ -1253,7 +1261,7 @@
       historyLogs.unshift({
         id: Date.now(),
         module,
-        category: category.toUpperCase(),
+        category: (category || 'GENERAL').toUpperCase(),
         itemName,
         action,
         oldDate: oldDate || 'Initial Input',
@@ -1296,8 +1304,12 @@
     function promptDeleteSingle(id, type) {
       pendingDeleteAction = () => {
         if (type === 'cafe' || type === 'delivery') {
+          const item = inventoryStore.find(i => i.id === id);
+          if (item) logHistoryEntry(type, item.category, item.name, 'Item Removed', item.date, item.date, `Item removed from inventory system`);
           inventoryStore = inventoryStore.filter(i => i.id !== id);
         } else if (type === 'pastry') {
+          const pastry = markedOutPastries.find(p => p.id === id);
+          if (pastry) logHistoryEntry('pastry', 'PASTRIES', pastry.name, 'Marked-Out Item Removed', pastry.date, pastry.date, `Pastry record deleted`);
           markedOutPastries = markedOutPastries.filter(p => p.id !== id);
         }
         renderAllTables();
@@ -1323,8 +1335,14 @@
 
       pendingDeleteAction = () => {
         if (type === 'cafe' || type === 'delivery') {
+          inventoryStore.filter(i => i.selected).forEach(item => {
+            logHistoryEntry(type, item.category, item.name, 'Bulk Delete', item.date, item.date, `Removed via bulk selection`);
+          });
           inventoryStore = inventoryStore.filter(i => !i.selected);
         } else if (type === 'pastry') {
+          markedOutPastries.filter(p => p.selected).forEach(p => {
+            logHistoryEntry('pastry', 'PASTRIES', p.name, 'Bulk Delete Pastry', p.date, p.date, `Removed via bulk selection`);
+          });
           markedOutPastries = markedOutPastries.filter(p => !p.selected);
         }
         renderAllTables();
@@ -1429,12 +1447,14 @@
       if (item) {
         const today = new Date().toISOString().split('T')[0];
         const oldDate = item.date;
+        const oldUsed = item.usedQty;
         if (item.date !== today) {
           item.previousDate = item.date;
           item.date = today;
         }
         item.usedQty = Math.max(0, item.usedQty + delta);
-        logHistoryEntry('cafe', item.category, item.name, 'Quick Adjustment', oldDate, today, `Usage adjusted to ${item.usedQty} ${item.unit}`);
+        const newRem = calculateRemaining(item);
+        logHistoryEntry('cafe', item.category, item.name, 'Quick Adjust', oldDate, today, `Usage: ${oldUsed} ➔ ${item.usedQty} ${item.unit} | Live Remaining: ${newRem} ${item.unit}`);
         renderAllTables();
         saveToGithub();
       }
@@ -1468,7 +1488,8 @@
             item.date = dateVal;
           }
           item.editing = false;
-          logHistoryEntry('cafe', item.category, item.name, 'Pre-Edit Changed', oldDate, item.date, `Bar Storage: ${barStorageVal}, Usage: ${usedVal}`);
+          const rem = calculateRemaining(item);
+          logHistoryEntry('cafe', item.category, item.name, 'Pre-Edit Saved', oldDate, item.date, `Bar Storage: ${barStorageVal} | Usage: ${usedVal} | Remaining: ${rem} ${item.unit}`);
         } else if (type === 'delivery') {
           const delVal = parseInt(document.getElementById(`inline-del-${id}`).value) || 0;
           const barStorageVal = parseInt(document.getElementById(`inline-del-barstorage-${id}`).value) || 0;
@@ -1481,18 +1502,22 @@
             item.date = dateVal;
           }
           item.editingDelivery = false;
-          logHistoryEntry('delivery', item.category, item.name, 'Stock Pre-Edit', oldDate, item.date, `Delivered: ${delVal}, Bar Storage: ${barStorageVal}`);
+          const storage = calculateStorageStock(item);
+          logHistoryEntry('delivery', item.category, item.name, 'Storage Pre-Edit', oldDate, item.date, `Delivered: ${delVal} | Storage Stock: ${storage} | Bar Storage: ${barStorageVal} ${item.unit}`);
         }
         renderAllTables();
         saveToGithub();
       }
     }
 
-    /* GROUPED HISTORY RENDERER */
+    /* DETAILED GLOBAL HISTORY RENDERER */
     function renderGroupedHistory(module, tbody) {
-      const logs = historyLogs.filter(l => l.module === module);
+      let logs = historyLogs;
+      if (module === 'cafe') logs = historyLogs.filter(l => l.module === 'cafe' || l.module === 'pastry');
+      else if (module === 'delivery') logs = historyLogs.filter(l => l.module === 'delivery');
+
       if (logs.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; color: var(--text-muted); padding: 30px;">No history logs recorded yet.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; color: var(--text-muted); padding: 30px;">No detailed history logs recorded yet.</td></tr>`;
         return;
       }
 
@@ -1501,7 +1526,7 @@
       categories.forEach(c => grouped[c] = []);
 
       logs.forEach(log => {
-        const catKey = log.category.toUpperCase();
+        const catKey = (log.category || 'BAR').toUpperCase();
         if (!grouped[catKey]) grouped[catKey] = [];
         grouped[catKey].push(log);
       });
@@ -1510,7 +1535,7 @@
         if (grouped[cat] && grouped[cat].length > 0) {
           tbody.innerHTML += `
             <tr class="history-category-row">
-              <td colspan="11">📌 ${cat} HISTORY LOGS</td>
+              <td colspan="11">📌 ${cat} HISTORY LOGS & TRANSFERS</td>
             </tr>
           `;
 
@@ -1521,11 +1546,11 @@
                 <td><span class="tag-badge tag-house">${log.action}</span></td>
                 <td><strong>${log.category}</strong></td>
                 <td>${log.itemName}</td>
-                <td colspan="4">${log.detail}</td>
+                <td colspan="4" class="history-detail-text"><strong>Detail:</strong> ${log.detail}</td>
                 <td>
                   <div class="date-history-card">
-                    <span class="date-badge-current">New: ${log.newDate}</span>
-                    <span class="date-badge-previous">Old: ${log.oldDate}</span>
+                    <span class="date-badge-current">New Date: ${log.newDate}</span>
+                    <span class="date-badge-previous">Old Date: ${log.oldDate}</span>
                   </div>
                 </td>
                 <td>-</td>
@@ -1678,6 +1703,11 @@
       const tbody = document.getElementById('stocks-summary-table-body');
       tbody.innerHTML = '';
 
+      if (activeSummaryFilter === 'HISTORY') {
+        renderGroupedHistory('summary', tbody);
+        return;
+      }
+
       let items = getSortedInventory();
       if (activeSummaryFilter !== 'ALL') {
         items = items.filter(i => i.category.toUpperCase() === activeSummaryFilter.toUpperCase());
@@ -1744,7 +1774,8 @@
         item.usedQty += usedQty;
         item.unit = unit;
         item.date = date;
-        logHistoryEntry('cafe', category, name, 'Usage Recorded', oldDate, date, `Added ${usedQty} ${unit} usage`);
+        const rem = calculateRemaining(item);
+        logHistoryEntry('cafe', category, name, 'Usage Recorded', oldDate, date, `Bar Usage: +${usedQty} ${unit} | Live Remaining: ${rem} ${unit}`);
       } else {
         inventoryStore.push({ id: Date.now(), category, name, unit, deliveredQty: usedQty, barStorage: usedQty, usedQty: usedQty, date, previousDate: null, editing: false, editingDelivery: false, selected: false });
         logHistoryEntry('cafe', category, name, 'New Item Added', null, date, `Initial usage set to ${usedQty} ${unit}`);
@@ -1774,10 +1805,12 @@
         item.deliveredQty += deliveredQty;
         item.unit = unit;
         item.date = date;
-        logHistoryEntry('delivery', category, name, 'Delivery Received', oldDate, date, `Received +${deliveredQty} ${unit}`);
+        const storage = calculateStorageStock(item);
+        logHistoryEntry('delivery', category, name, 'Delivery Received', oldDate, date, `Delivered: +${deliveredQty} ${unit} | Available Storage: ${storage} ${unit}`);
       } else {
-        inventoryStore.push({ id: Date.now(), category, name, unit, deliveredQty: deliveredQty, barStorage: Math.floor(deliveredQty * 0.4), usedQty: 0, date, previousDate: null, editing: false, editingDelivery: false, selected: false });
-        logHistoryEntry('delivery', category, name, 'New Stock Entry', null, date, `Received initial ${deliveredQty} ${unit}`);
+        const barStorage = Math.floor(deliveredQty * 0.4);
+        inventoryStore.push({ id: Date.now(), category, name, unit, deliveredQty: deliveredQty, barStorage: barStorage, usedQty: 0, date, previousDate: null, editing: false, editingDelivery: false, selected: false });
+        logHistoryEntry('delivery', category, name, 'New Stock Entry', null, date, `Received ${deliveredQty} ${unit} | Transferred ${barStorage} ${unit} to Bar`);
       }
 
       document.getElementById('del-item-name').value = '';
@@ -1795,6 +1828,7 @@
       const date = document.getElementById('pastry-date').value;
 
       markedOutPastries.push({ id: Date.now(), name, unit, qty, reason, date, selected: false });
+      logHistoryEntry('pastry', 'PASTRIES', name, 'Marked Out', null, date, `Marked out ${qty} ${unit} (Reason: ${reason})`);
       document.getElementById('pastry-item-name').value = '';
       document.getElementById('pastry-qty').value = '1';
       renderMarkedOutPastries();
