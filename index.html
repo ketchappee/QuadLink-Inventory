@@ -45,50 +45,6 @@
       background-attachment: fixed;
     }
 
-    /* MOUSE POINTER POP ANIMATION CONTAINER & KEYFRAMES */
-    .mouse-pop-ring {
-      position: fixed;
-      pointer-events: none;
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--accent-espresso);
-      border-radius: 50%;
-      transform: translate(-50%, -50%) scale(0.3);
-      animation: popRipple 0.5s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
-      z-index: 9999;
-      box-shadow: 0 0 10px rgba(212, 163, 115, 0.6);
-    }
-
-    @keyframes popRipple {
-      0% {
-        opacity: 0.9;
-        transform: translate(-50%, -50%) scale(0.3);
-      }
-      50% {
-        opacity: 0.6;
-        transform: translate(-50%, -50%) scale(1.6);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(2.4);
-      }
-    }
-
-    /* INTERACTIVE POP HOVER/CLICK EFFECT FOR BUTTONS AND CARDS */
-    .btn, .tab-btn, .btn-delete, .btn-github, .btn-nav-topleft {
-      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                  box-shadow 0.2s ease, 
-                  background 0.2s ease;
-    }
-
-    .btn:hover, .btn-github:hover, .btn-nav-topleft:hover {
-      transform: scale(1.06);
-    }
-
-    .btn:active, .tab-btn:active, .btn-delete:active, .btn-github:active {
-      transform: scale(0.92) !important;
-    }
-
     .page {
       display: none;
       min-height: 100vh;
@@ -106,21 +62,35 @@
       background: linear-gradient(135deg, #bc6c25 0%, #a45a1b 100%);
       color: #fff;
       border: none;
-      padding: 12px 24px;
-      font-size: 0.9rem;
+      padding: 10px 18px;
+      font-size: 0.85rem;
       font-weight: 600;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(188, 108, 37, 0.25);
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(188, 108, 37, 0.2);
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
+    .btn:hover {
+      background: linear-gradient(135deg, #d4a373 0%, #bc6c25 100%);
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Small Compact GitHub Buttons */
     .btn-github {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(38, 30, 25, 0.8);
       border: 1px solid var(--border-accent);
       color: var(--text-gold);
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      border-radius: 6px;
     }
 
     .btn-github:hover {
@@ -132,56 +102,56 @@
       background: rgba(220, 53, 69, 0.15);
       color: #ff8585;
       border: 1px solid rgba(220, 53, 69, 0.3);
-      padding: 6px 14px;
+      padding: 5px 10px;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 500;
+      transition: all 0.2s ease;
     }
 
     .btn-delete:hover {
       background: #dc3545;
       color: #fff;
       border-color: #dc3545;
-      transform: scale(1.05);
     }
 
     .btn-nav-topleft {
       position: absolute;
-      top: 24px;
-      left: 30px;
+      top: 20px;
+      left: 20px;
       z-index: 100;
       background: rgba(28, 22, 19, 0.8);
       border: 1px solid var(--border-subtle);
       backdrop-filter: blur(8px);
       color: var(--text-main);
-      padding: 8px 18px;
-      font-size: 0.85rem;
+      padding: 6px 14px;
+      font-size: 0.8rem;
       border-radius: 20px;
     }
 
-    /* GitHub Sync Bar */
+    /* GitHub Top Right Header (STAYS AT TOP, DOES NOT SCROLL WITH PAGE) */
     .github-sync-bar {
-      position: fixed;
+      position: absolute;
       top: 20px;
       right: 20px;
-      z-index: 1000;
+      z-index: 100;
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
     }
 
     .github-modal {
       display: none;
-      position: fixed;
-      top: 70px;
+      position: absolute;
+      top: 60px;
       right: 20px;
-      z-index: 1001;
+      z-index: 101;
       background: var(--bg-card);
       border: 1px solid var(--border-accent);
       border-radius: 12px;
-      padding: 20px;
-      width: 320px;
+      padding: 16px;
+      width: 290px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.8);
     }
 
@@ -190,8 +160,8 @@
     }
 
     .github-modal h3 {
-      font-size: 1rem;
-      margin-bottom: 12px;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
       color: var(--text-gold);
     }
 
@@ -200,10 +170,10 @@
       background: rgba(18, 14, 12, 0.8);
       border: 1px solid var(--border-subtle);
       color: var(--text-main);
-      padding: 8px 12px;
+      padding: 8px 10px;
       border-radius: 6px;
-      font-size: 0.85rem;
-      margin-bottom: 10px;
+      font-size: 0.8rem;
+      margin-bottom: 8px;
     }
 
     /* 1. MAIN WELCOME PAGE */
@@ -252,9 +222,9 @@
       line-height: 1.6;
     }
 
-    /* 2. HOME SELECTION PAGE (NETFLIX DESIGN SELECTION WITH POP ANIMATION) */
+    /* 2. HOME SELECTION PAGE (NETFLIX DESIGN SELECTION) */
     #home-page {
-      padding: 100px 40px 50px;
+      padding: 90px 40px 50px;
       align-items: center;
     }
 
@@ -290,7 +260,7 @@
       position: relative;
       overflow: hidden;
       border: 1px solid var(--border-subtle);
-      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+      transition: transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1), 
                   box-shadow 0.35s ease,
                   border-color 0.35s ease;
       box-shadow: 0 8px 20px rgba(0,0,0,0.4);
@@ -319,19 +289,15 @@
     .card-delivery .card-bg { background: linear-gradient(135deg, #3b3022, #b08968); }
 
     .card:hover {
-      transform: scale(1.1) translateY(-8px);
+      transform: scale(1.08) translateY(-8px);
       border-color: var(--text-gold);
-      box-shadow: var(--shadow-netflix), 0 0 25px rgba(226, 176, 120, 0.35);
+      box-shadow: var(--shadow-netflix), 0 0 25px rgba(226, 176, 120, 0.3);
       z-index: 10;
-    }
-
-    .card:active {
-      transform: scale(0.98) translateY(0);
     }
 
     .card:hover .card-bg {
       opacity: 0.75;
-      transform: scale(1.12);
+      transform: scale(1.1);
       filter: saturate(1.2);
     }
 
@@ -358,88 +324,84 @@
 
     /* 3. SUBPAGES LAYOUT */
     .subpage {
-      padding: 90px 40px 50px;
+      padding: 80px 40px 50px;
       max-width: 1280px;
       margin: 0 auto;
     }
 
     .subpage-header {
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 15px;
+      padding-bottom: 12px;
     }
 
     .subpage h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
+      font-size: 2rem;
       color: var(--text-gold);
       font-weight: 600;
     }
 
-    /* TAB FILTER SYSTEM WITH POP EFFECTS */
+    /* TAB FILTER SYSTEM */
     .tab-bar {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       overflow-x: auto;
       margin-bottom: 20px;
-      padding-bottom: 8px;
+      padding-bottom: 6px;
     }
 
     .tab-btn {
       background: rgba(38, 30, 25, 0.6);
       border: 1px solid var(--border-subtle);
       color: var(--text-muted);
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-size: 0.85rem;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
+      transition: all 0.2s ease;
     }
 
     .tab-btn.active, .tab-btn:hover {
       background: var(--accent-espresso);
       color: #120e0c;
       border-color: var(--accent-espresso);
-      box-shadow: 0 4px 15px rgba(212, 163, 115, 0.3);
-      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(212, 163, 115, 0.25);
     }
 
-    /* ROLL & POP ANIMATION FOR TABLE ROWS */
+    /* ROLL ANIMATION FOR TABLE ROWS */
     @keyframes rollInPop {
       0% {
         opacity: 0;
-        transform: translateY(20px) scale(0.95);
-      }
-      60% {
-        transform: translateY(-2px) scale(1.01);
+        transform: translateY(15px);
       }
       100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
       }
     }
 
     .animated-table-body tr {
-      animation: rollInPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-      transition: transform 0.2s ease, background 0.2s ease;
+      animation: rollInPop 0.3s ease forwards;
     }
 
     .animated-table-body tr:hover td {
       background: rgba(212, 163, 115, 0.05);
     }
 
-    /* Dynamic Forms & Controls */
+    /* Forms */
     .form-container {
       background: var(--surface-glass);
       backdrop-filter: blur(10px);
-      padding: 24px;
-      border-radius: 16px;
-      margin-bottom: 30px;
+      padding: 20px;
+      border-radius: 14px;
+      margin-bottom: 25px;
       border: 1px solid var(--border-subtle);
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
+      gap: 14px;
       align-items: flex-end;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
@@ -447,13 +409,13 @@
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
       flex: 1;
-      min-width: 160px;
+      min-width: 150px;
     }
 
     .form-group label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.8px;
@@ -464,24 +426,23 @@
       background: rgba(18, 14, 12, 0.7);
       border: 1px solid var(--border-subtle);
       color: var(--text-main);
-      padding: 12px 14px;
-      border-radius: 8px;
-      font-size: 0.9rem;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
       outline: none;
-      transition: border-color 0.2s ease, transform 0.2s ease;
+      transition: border-color 0.2s ease;
     }
 
     .form-group input:focus, .form-group select:focus {
       border-color: var(--accent-espresso);
-      transform: scale(1.01);
     }
 
-    /* Table Styling */
+    /* Tables */
     .table-container {
       background: var(--surface-glass);
       backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 20px;
+      border-radius: 14px;
+      padding: 16px;
       border: 1px solid var(--border-subtle);
       overflow-x: auto;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -493,10 +454,10 @@
     }
 
     th, td {
-      padding: 16px 18px;
+      padding: 14px 16px;
       text-align: left;
       border-bottom: 1px solid var(--border-subtle);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     th {
@@ -515,9 +476,9 @@
     .tag-badge {
       display: inline-flex;
       align-items: center;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 16px;
+      font-size: 0.7rem;
       font-weight: 600;
       letter-spacing: 0.5px;
     }
@@ -537,9 +498,9 @@
     .unit-pill {
       background: rgba(212, 180, 150, 0.1);
       border: 1px solid var(--border-subtle);
-      padding: 2px 8px;
+      padding: 2px 6px;
       border-radius: 4px;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--accent-espresso);
       font-weight: 700;
     }
@@ -553,25 +514,26 @@
       .subpage { padding: 80px 20px 30px; }
       .card { width: 100%; height: 160px; }
       .profile-title { font-size: 1.8rem; }
+      .github-sync-bar { top: 12px; right: 12px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating GitHub Control Sync Panel -->
+  <!-- Top Right Header GitHub Buttons (Anchored, non-scrolling) -->
   <div class="github-sync-bar">
-    <button class="btn btn-github" onclick="toggleGithubModal()">⚙ GitHub Config</button>
-    <button class="btn btn-github" onclick="saveToGithub()">💾 Save Sync File</button>
-    <button class="btn btn-github" onclick="loadFromGithub()">🔄 Load Sync File</button>
-  </div>
+    <button class="btn btn-github" onclick="toggleGithubModal()">⚙ Config</button>
+    <button class="btn btn-github" onclick="saveToGithub()">💾 Save Sync</button>
+    <button class="btn btn-github" onclick="loadFromGithub()">🔄 Load Sync</button>
 
-  <!-- GitHub Settings Modal -->
-  <div class="github-modal" id="github-modal">
-    <h3>GitHub Repository Settings</h3>
-    <input type="text" id="gh-owner" placeholder="GitHub Username / Owner" />
-    <input type="text" id="gh-repo" placeholder="Repository Name" />
-    <input type="password" id="gh-token" placeholder="Personal Access Token (PAT)" />
-    <button class="btn" style="width: 100%; justify-content: center;" onclick="saveGithubConfig()">Save Settings</button>
+    <!-- GitHub Settings Modal -->
+    <div class="github-modal" id="github-modal">
+      <h3>GitHub Settings</h3>
+      <input type="text" id="gh-owner" placeholder="GitHub Username / Owner" />
+      <input type="text" id="gh-repo" placeholder="Repository Name" />
+      <input type="password" id="gh-token" placeholder="Personal Access Token (PAT)" />
+      <button class="btn" style="width: 100%; justify-content: center; margin-top: 4px;" onclick="saveGithubConfig()">Save Settings</button>
+    </div>
   </div>
 
   <!-- 1. MAIN WELCOME PAGE -->
@@ -888,41 +850,6 @@
   </div>
 
   <script>
-    // MOUSE POINTER POP ANIMATION LOGIC
-    let lastPopTime = 0;
-    document.addEventListener('mousemove', (e) => {
-      const now = Date.now();
-      // Throttle ring generation to every 60ms for smooth performance
-      if (now - lastPopTime > 60) {
-        createPointerPop(e.clientX, e.clientY);
-        lastPopTime = now;
-      }
-    });
-
-    document.addEventListener('click', (e) => {
-      // Trigger a larger pop ring on click
-      createPointerPop(e.clientX, e.clientY, true);
-    });
-
-    function createPointerPop(x, y, isClick = false) {
-      const ring = document.createElement('div');
-      ring.className = 'mouse-pop-ring';
-      ring.style.left = `${x}px`;
-      ring.style.top = `${y}px`;
-
-      if (isClick) {
-        ring.style.width = '35px';
-        ring.style.height = '35px';
-        ring.style.borderColor = '#e2b078';
-      }
-
-      document.body.appendChild(ring);
-
-      setTimeout(() => {
-        ring.remove();
-      }, 500);
-    }
-
     // Data Stores
     let inventoryStore = [
       { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveryQty: 48, usedQty: 12, date: '2026-09-09' },
@@ -980,7 +907,7 @@
       const token = localStorage.getItem('gh_token');
 
       if (!owner || !repo || !token) {
-        alert('Please configure your GitHub credentials in "⚙ GitHub Config" first.');
+        alert('Please configure your GitHub credentials in "⚙ Config" first.');
         toggleGithubModal();
         return;
       }
@@ -1041,7 +968,7 @@
       const token = localStorage.getItem('gh_token');
 
       if (!owner || !repo || !token) {
-        alert('Please configure your GitHub credentials in "⚙ GitHub Config" first.');
+        alert('Please configure your GitHub credentials in "⚙ Config" first.');
         toggleGithubModal();
         return;
       }
