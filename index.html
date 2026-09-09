@@ -55,7 +55,7 @@
       z-index: -2;
     }
 
-    /* Subtle Dark Tint Overlay for Optimal Contrast */
+    /* Dark Tint Overlay */
     body::after {
       content: "";
       position: fixed;
@@ -104,7 +104,7 @@
       transform: scale(0.96);
     }
 
-    /* Small Compact GitHub Buttons */
+    /* Small Quick Action Buttons */
     .btn-github {
       background: rgba(28, 22, 19, 0.65);
       backdrop-filter: blur(10px);
@@ -120,13 +120,67 @@
       color: #120e0c;
     }
 
+    .btn-edit {
+      background: rgba(212, 180, 150, 0.2);
+      color: var(--text-gold);
+      border: 1px solid var(--border-accent);
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .btn-edit:hover {
+      background: var(--accent-espresso);
+      color: #120e0c;
+    }
+
+    .btn-save-inline {
+      background: rgba(56, 239, 125, 0.2);
+      color: #38ef7d;
+      border: 1px solid rgba(56, 239, 125, 0.4);
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .btn-save-inline:hover {
+      background: #38ef7d;
+      color: #120e0c;
+    }
+
+    .btn-qty-adj {
+      background: rgba(212, 180, 150, 0.15);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-gold);
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+
+    .btn-qty-adj:hover {
+      background: var(--accent-espresso);
+      color: #120e0c;
+    }
+
     .btn-delete {
       background: rgba(220, 53, 69, 0.2);
       backdrop-filter: blur(6px);
       color: #ff9999;
       border: 1px solid rgba(220, 53, 69, 0.4);
-      padding: 5px 10px;
-      border-radius: 6px;
+      padding: 4px 8px;
+      border-radius: 4px;
       cursor: pointer;
       font-size: 0.75rem;
       font-weight: 500;
@@ -420,7 +474,7 @@
       background: rgba(212, 163, 115, 0.1);
     }
 
-    /* Forms with Transparent Glass */
+    /* Forms */
     .form-container {
       background: var(--surface-glass);
       backdrop-filter: blur(14px);
@@ -466,7 +520,7 @@
       border-color: var(--accent-espresso);
     }
 
-    /* Transparent Table Styling */
+    /* Tables */
     .table-container {
       background: var(--surface-glass);
       backdrop-filter: blur(14px);
@@ -483,7 +537,7 @@
     }
 
     th, td {
-      padding: 14px 16px;
+      padding: 12px 14px;
       text-align: left;
       border-bottom: 1px solid var(--border-subtle);
       font-size: 0.85rem;
@@ -500,6 +554,23 @@
 
     tr:last-child td {
       border-bottom: none;
+    }
+
+    /* Inline Edit Styling */
+    .inline-input {
+      background: rgba(18, 14, 12, 0.8);
+      border: 1px solid var(--accent-espresso);
+      color: #fff;
+      padding: 4px 6px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      width: 100%;
+    }
+
+    .inline-qty-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .tag-badge {
@@ -686,11 +757,11 @@
             <th>Category</th>
             <th>Item Name</th>
             <th>Unit</th>
-            <th>Bar Usage</th>
+            <th>Bar Usage (Pre-Edit)</th>
             <th>Remaining Stock</th>
             <th>Accuracy</th>
             <th>Last Updated</th>
-            <th>Action</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody id="cafe-inventory-table-body" class="animated-table-body"></tbody>
@@ -881,11 +952,11 @@
   <script>
     // Data Stores
     let inventoryStore = [
-      { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveryQty: 48, usedQty: 12, date: '2026-09-09' },
-      { id: 2, category: 'MILK', name: 'Oat Milk', unit: 'L', deliveryQty: 24, usedQty: 6, date: '2026-09-09' },
-      { id: 3, category: 'BAR', name: 'Espresso Blend', unit: 'KG', deliveryQty: 25, usedQty: 6, date: '2026-09-09' },
-      { id: 4, category: 'BAR', name: 'Matcha Powder', unit: 'KG', deliveryQty: 10, usedQty: 2, date: '2026-09-09' },
-      { id: 5, category: 'PASTRIES', name: 'Butter Croissant', unit: 'PCS', deliveryQty: 30, usedQty: 8, date: '2026-09-09' }
+      { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveryQty: 48, usedQty: 12, date: '2026-09-09', editing: false },
+      { id: 2, category: 'MILK', name: 'Oat Milk', unit: 'L', deliveryQty: 24, usedQty: 6, date: '2026-09-09', editing: false },
+      { id: 3, category: 'BAR', name: 'Espresso Blend', unit: 'KG', deliveryQty: 25, usedQty: 6, date: '2026-09-09', editing: false },
+      { id: 4, category: 'BAR', name: 'Matcha Powder', unit: 'KG', deliveryQty: 10, usedQty: 2, date: '2026-09-09', editing: false },
+      { id: 5, category: 'PASTRIES', name: 'Butter Croissant', unit: 'PCS', deliveryQty: 30, usedQty: 8, date: '2026-09-09', editing: false }
     ];
 
     let markedOutPastries = [
@@ -902,7 +973,7 @@
       document.getElementById('pastry-date').value = today;
       document.getElementById('del-item-date').value = today;
 
-      // Load Github settings from local memory if existing
+      // Load Github settings
       document.getElementById('gh-owner').value = localStorage.getItem('gh_owner') || '';
       document.getElementById('gh-repo').value = localStorage.getItem('gh_repo') || '';
       document.getElementById('gh-token').value = localStorage.getItem('gh_token') || '';
@@ -910,7 +981,7 @@
       renderAllTables();
     });
 
-    // Github Modal & Configuration Functions
+    // Github Modal Functions
     function toggleGithubModal() {
       const modal = document.getElementById('github-modal');
       modal.classList.toggle('active');
@@ -929,7 +1000,7 @@
       toggleGithubModal();
     }
 
-    // GITHUB SAVE SYNC FUNCTION
+    // GITHUB SAVE SYNC
     async function saveToGithub() {
       const owner = localStorage.getItem('gh_owner');
       const repo = localStorage.getItem('gh_repo');
@@ -990,7 +1061,7 @@
       }
     }
 
-    // GITHUB LOAD SYNC FUNCTION
+    // GITHUB LOAD SYNC
     async function loadFromGithub() {
       const owner = localStorage.getItem('gh_owner');
       const repo = localStorage.getItem('gh_repo');
@@ -1071,6 +1142,41 @@
       return [...inventoryStore].sort((a, b) => a.category.localeCompare(b.category));
     }
 
+    // PRE-EDIT / QUICK ADJUST FUNCTIONS
+    function quickAdjustUsage(id, delta) {
+      const item = inventoryStore.find(i => i.id === id);
+      if (item) {
+        item.usedQty = Math.max(0, item.usedQty + delta);
+        item.date = new Date().toISOString().split('T')[0];
+        renderAllTables();
+      }
+    }
+
+    function toggleInlineEdit(id) {
+      const item = inventoryStore.find(i => i.id === id);
+      if (item) {
+        item.editing = !item.editing;
+        renderCafeInventory();
+      }
+    }
+
+    function saveInlineEdit(id) {
+      const item = inventoryStore.find(i => i.id === id);
+      if (item) {
+        const catVal = document.getElementById(`inline-cat-${id}`).value.trim().toUpperCase();
+        const nameVal = document.getElementById(`inline-name-${id}`).value.trim();
+        const unitVal = document.getElementById(`inline-unit-${id}`).value;
+        const usedVal = parseInt(document.getElementById(`inline-used-${id}`).value) || 0;
+
+        if (nameVal) item.name = nameVal;
+        if (catVal) item.category = catVal;
+        item.unit = unitVal;
+        item.usedQty = usedVal;
+        item.editing = false;
+        renderAllTables();
+      }
+    }
+
     function renderCafeInventory() {
       const tbody = document.getElementById('cafe-inventory-table-body');
       tbody.innerHTML = '';
@@ -1084,20 +1190,61 @@
         const remaining = item.deliveryQty - item.usedQty;
         const accuracy = item.deliveryQty > 0 ? ((remaining / item.deliveryQty) * 100).toFixed(0) + '%' : '100%';
 
-        const row = `
-          <tr style="animation-delay: ${index * 0.05}s">
-            <td><span class="tag-badge tag-house">In-House Stock</span></td>
-            <td><strong>${item.category}</strong></td>
-            <td>${item.name}</td>
-            <td><span class="unit-pill">${item.unit}</span></td>
-            <td>${item.usedQty} ${item.unit}</td>
-            <td><strong>${remaining} ${item.unit}</strong></td>
-            <td class="accuracy-indicator">${accuracy}</td>
-            <td>${item.date}</td>
-            <td><button class="btn-delete" onclick="deleteInventoryItem(${item.id})">Remove</button></td>
-          </tr>
-        `;
-        tbody.innerHTML += row;
+        if (item.editing) {
+          // Inline Pre-Edit Form Row
+          const editRow = `
+            <tr>
+              <td><span class="tag-badge tag-house">In-House</span></td>
+              <td><input type="text" id="inline-cat-${item.id}" class="inline-input" value="${item.category}" /></td>
+              <td><input type="text" id="inline-name-${item.id}" class="inline-input" value="${item.name}" /></td>
+              <td>
+                <select id="inline-unit-${item.id}" class="inline-input">
+                  <option value="L" ${item.unit==='L'?'selected':''}>L</option>
+                  <option value="KG" ${item.unit==='KG'?'selected':''}>KG</option>
+                  <option value="PCS" ${item.unit==='PCS'?'selected':''}>PCS</option>
+                  <option value="BOTTLE" ${item.unit==='BOTTLE'?'selected':''}>BOTTLE</option>
+                  <option value="PACK" ${item.unit==='PACK'?'selected':''}>PACK</option>
+                  <option value="BOX" ${item.unit==='BOX'?'selected':''}>BOX</option>
+                  <option value="CASE" ${item.unit==='CASE'?'selected':''}>CASE</option>
+                </select>
+              </td>
+              <td><input type="number" id="inline-used-${item.id}" class="inline-input" value="${item.usedQty}" style="width: 70px;" /></td>
+              <td><strong>${remaining} ${item.unit}</strong></td>
+              <td class="accuracy-indicator">${accuracy}</td>
+              <td>${item.date}</td>
+              <td style="display: flex; gap: 4px;">
+                <button class="btn-save-inline" onclick="saveInlineEdit(${item.id})">💾 Save</button>
+                <button class="btn-delete" onclick="toggleInlineEdit(${item.id})">Cancel</button>
+              </td>
+            </tr>
+          `;
+          tbody.innerHTML += editRow;
+        } else {
+          // Standard Row with Pre-Edit Quick Buttons (+ / - / Edit)
+          const row = `
+            <tr style="animation-delay: ${index * 0.05}s">
+              <td><span class="tag-badge tag-house">In-House Stock</span></td>
+              <td><strong>${item.category}</strong></td>
+              <td>${item.name}</td>
+              <td><span class="unit-pill">${item.unit}</span></td>
+              <td>
+                <div class="inline-qty-box">
+                  <button class="btn-qty-adj" onclick="quickAdjustUsage(${item.id}, -1)">-</button>
+                  <span><strong>${item.usedQty}</strong> ${item.unit}</span>
+                  <button class="btn-qty-adj" onclick="quickAdjustUsage(${item.id}, 1)">+</button>
+                </div>
+              </td>
+              <td><strong>${remaining} ${item.unit}</strong></td>
+              <td class="accuracy-indicator">${accuracy}</td>
+              <td>${item.date}</td>
+              <td style="display: flex; gap: 4px;">
+                <button class="btn-edit" onclick="toggleInlineEdit(${item.id})">✏ Edit</button>
+                <button class="btn-delete" onclick="deleteInventoryItem(${item.id})">Remove</button>
+              </td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        }
       });
     }
 
@@ -1203,7 +1350,8 @@
           unit: unit,
           deliveryQty: 0,
           usedQty: usedQty,
-          date: date
+          date: date,
+          editing: false
         });
       }
 
@@ -1238,7 +1386,8 @@
           unit: unit,
           deliveryQty: deliveryQty,
           usedQty: 0,
-          date: date
+          date: date,
+          editing: false
         });
       }
 
