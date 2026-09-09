@@ -700,6 +700,26 @@
   ],
   "logs": [
     {
+      "id": "log_1788919157591",
+      "timestamp": "2026-09-09 09:59",
+      "details": "📦 Logged delivery shipment for \"LARGE DISPOSABLE FILTER\" (1 Pack). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918960356",
+      "timestamp": "2026-09-09 09:56",
+      "details": "📦 Logged delivery shipment for \"WIRE WHISK 12 inch\" (2 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918952219",
+      "timestamp": "2026-09-09 09:55",
+      "details": "📦 Logged delivery shipment for \"WIRE WHISK 10 inch\" (2 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918928053",
+      "timestamp": "2026-09-09 09:55",
+      "details": "☁️ Saved local backup & synced to GitHub (inventory_data.json)"
+    },
+    {
       "id": "log_1788918919947",
       "timestamp": "2026-09-09 09:55",
       "details": "Updated delivery shipment details for \"STRAW HOLDER STAINLESS\""
@@ -878,29 +898,48 @@
       "id": "log_1788918141859",
       "timestamp": "2026-09-09 09:42",
       "details": "🚚 Transferred delivery \"VITA COCO SMALL\" (2 Case) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"ROYAL\" (24 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"COKE ZERO\" (24 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"COKE REGULAR\" (24 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"SPRITE\" (24 Pcs) directly into Café Storage stock."
     }
   ],
   "deliveries": [
+    {
+      "id": 1788919157591,
+      "name": "LARGE DISPOSABLE FILTER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Pack",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918960356,
+      "name": "WIRE WHISK 12 inch",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918952219,
+      "name": "WIRE WHISK 10 inch",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
     {
       "id": 1788918908106,
       "name": "COFFEE ORGANIZER",
@@ -1444,5 +1483,5 @@
     "LALAMOVE"
   ],
   "markedOutPastries": [],
-  "lastUpdatedTimestamp": 1788918919947
+  "lastUpdatedTimestamp": 1788919157591
 }
