@@ -1599,14 +1599,23 @@
             subMap[s] = { count: 0, bar: 0, storage: 0, rem: 0, used: 0 };
         });
 
+        // Track products present in Café Inventory
+        const cafeItemNames = new Set();
+
         cafeItems.forEach(item => {
+            cafeItemNames.add(item.name.toLowerCase().trim());
             const sub = item.subcategory || 'General';
             const barQty = getItemBarQty(item);
-            const storageQty = getItemStorageQty(item);
-            const totalRem = getItemTotalQty(item);
-            const totalUsed = getItemTotalUsed(item);
+            
+            // Cross-sync storage stock calculation from matching delivery logs
+            const matchingDeliveries = (appData.deliveries || []).filter(d => d.name.toLowerCase().trim() === item.name.toLowerCase().trim());
+            const deliveryStorageQty = matchingDeliveries.reduce((sum, d) => sum + (d.remQty !== undefined ? d.remQty : d.initQty), 0);
+            const storageQty = getItemStorageQty(item) + deliveryStorageQty;
+
+            const totalRem = barQty + storageQty;
+            const totalUsed = getItemTotalUsed(item) + matchingDeliveries.reduce((sum, d) => sum + (d.usedQty || 0), 0);
             const unitStr = getItemActiveUnit(item);
-            const activeBatchesCount = item.batches ? item.batches.filter(b => b.remQty > 0).length : 0;
+            const activeBatchesCount = (item.batches ? item.batches.filter(b => b.remQty > 0).length : 0) + matchingDeliveries.filter(d => d.remQty > 0).length;
 
             grandBarStock += barQty;
             grandStorageStock += storageQty;
@@ -1637,7 +1646,47 @@
             itemTbody.appendChild(trItem);
         });
 
-        document.getElementById('cafeKpiTotalProducts').innerText = cafeItems.length;
+        // Include items in Delivery Inventory that are not yet manually added to Café Inventory
+        (appData.deliveries || []).forEach(del => {
+            if (!cafeItemNames.has(del.name.toLowerCase().trim())) {
+                const sub = del.subcategory || 'General';
+                const barQty = 0;
+                const storageQty = del.remQty !== undefined ? del.remQty : del.initQty;
+                const totalRem = storageQty;
+                const totalUsed = del.usedQty || 0;
+                const unitStr = del.unit || 'Bottle/s';
+
+                grandStorageStock += storageQty;
+                grandRemaining += totalRem;
+                grandUsed += totalUsed;
+
+                if (!subMap[sub]) {
+                    subMap[sub] = { count: 0, bar: 0, storage: 0, rem: 0, used: 0 };
+                }
+                subMap[sub].count += 1;
+                subMap[sub].storage += storageQty;
+                subMap[sub].rem += totalRem;
+                subMap[sub].used += totalUsed;
+
+                const trItem = document.createElement('tr');
+                trItem.innerHTML = `
+                    <td><strong>• ${del.name}</strong> <span class="delivery-note-tag">Storage Only</span></td>
+                    <td>${del.subcategory}</td>
+                    <td><span class="location-tag-bar">0 ${unitStr}</span></td>
+                    <td><span class="location-tag-storage">${storageQty} ${unitStr}</span></td>
+                    <td><strong>${totalRem}</strong> <span class="unit-label">${unitStr}</span></td>
+                    <td><span class="used-badge-red">-${totalUsed} ${unitStr}</span></td>
+                    <td><strong>${del.initQty}</strong> <span class="unit-label">${unitStr}</span></td>
+                    <td><span class="unit-label">${unitStr}</span></td>
+                    <td><span class="fifo-batch-tag">1 Active Delivery Batch</span></td>
+                `;
+                itemTbody.appendChild(trItem);
+            }
+        });
+
+        const totalProductCount = cafeItems.length + Array.from(new Set((appData.deliveries || []).map(d => d.name.toLowerCase().trim()))).filter(name => !cafeItemNames.has(name)).length;
+
+        document.getElementById('cafeKpiTotalProducts').innerText = totalProductCount;
         document.getElementById('cafeKpiBarStock').innerText = grandBarStock;
         document.getElementById('cafeKpiStorageStock').innerText = grandStorageStock;
         document.getElementById('cafeKpiTotalRemaining').innerText = grandRemaining;
