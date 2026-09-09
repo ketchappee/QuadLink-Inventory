@@ -45,6 +45,50 @@
       background-attachment: fixed;
     }
 
+    /* MOUSE POINTER POP ANIMATION CONTAINER & KEYFRAMES */
+    .mouse-pop-ring {
+      position: fixed;
+      pointer-events: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--accent-espresso);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0.3);
+      animation: popRipple 0.5s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+      z-index: 9999;
+      box-shadow: 0 0 10px rgba(212, 163, 115, 0.6);
+    }
+
+    @keyframes popRipple {
+      0% {
+        opacity: 0.9;
+        transform: translate(-50%, -50%) scale(0.3);
+      }
+      50% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.6);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2.4);
+      }
+    }
+
+    /* INTERACTIVE POP HOVER/CLICK EFFECT FOR BUTTONS AND CARDS */
+    .btn, .tab-btn, .btn-delete, .btn-github, .btn-nav-topleft {
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                  box-shadow 0.2s ease, 
+                  background 0.2s ease;
+    }
+
+    .btn:hover, .btn-github:hover, .btn-nav-topleft:hover {
+      transform: scale(1.06);
+    }
+
+    .btn:active, .tab-btn:active, .btn-delete:active, .btn-github:active {
+      transform: scale(0.92) !important;
+    }
+
     .page {
       display: none;
       min-height: 100vh;
@@ -67,17 +111,10 @@
       font-weight: 600;
       border-radius: 8px;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       box-shadow: 0 4px 15px rgba(188, 108, 37, 0.25);
       display: inline-flex;
       align-items: center;
       gap: 8px;
-    }
-
-    .btn:hover {
-      background: linear-gradient(135deg, #d4a373 0%, #bc6c25 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(212, 163, 115, 0.4);
     }
 
     .btn-github {
@@ -100,13 +137,13 @@
       cursor: pointer;
       font-size: 0.8rem;
       font-weight: 500;
-      transition: all 0.2s ease;
     }
 
     .btn-delete:hover {
       background: #dc3545;
       color: #fff;
       border-color: #dc3545;
+      transform: scale(1.05);
     }
 
     .btn-nav-topleft {
@@ -123,13 +160,7 @@
       border-radius: 20px;
     }
 
-    .btn-nav-topleft:hover {
-      background: var(--accent-espresso);
-      color: #120e0c;
-      border-color: var(--accent-espresso);
-    }
-
-    /* GitHub Top Right Floating Sync Bar */
+    /* GitHub Sync Bar */
     .github-sync-bar {
       position: fixed;
       top: 20px;
@@ -221,7 +252,7 @@
       line-height: 1.6;
     }
 
-    /* 2. HOME SELECTION PAGE (NETFLIX DESIGN SELECTION) */
+    /* 2. HOME SELECTION PAGE (NETFLIX DESIGN SELECTION WITH POP ANIMATION) */
     #home-page {
       padding: 100px 40px 50px;
       align-items: center;
@@ -259,9 +290,9 @@
       position: relative;
       overflow: hidden;
       border: 1px solid var(--border-subtle);
-      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
-                  box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
-                  border-color 0.4s ease;
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                  box-shadow 0.35s ease,
+                  border-color 0.35s ease;
       box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     }
 
@@ -288,15 +319,19 @@
     .card-delivery .card-bg { background: linear-gradient(135deg, #3b3022, #b08968); }
 
     .card:hover {
-      transform: scale(1.08) translateY(-10px);
+      transform: scale(1.1) translateY(-8px);
       border-color: var(--text-gold);
-      box-shadow: var(--shadow-netflix), 0 0 25px rgba(226, 176, 120, 0.25);
+      box-shadow: var(--shadow-netflix), 0 0 25px rgba(226, 176, 120, 0.35);
       z-index: 10;
+    }
+
+    .card:active {
+      transform: scale(0.98) translateY(0);
     }
 
     .card:hover .card-bg {
       opacity: 0.75;
-      transform: scale(1.1);
+      transform: scale(1.12);
       filter: saturate(1.2);
     }
 
@@ -341,7 +376,7 @@
       font-weight: 600;
     }
 
-    /* TAB FILTER SYSTEM WITH ROLL ANIMATION */
+    /* TAB FILTER SYSTEM WITH POP EFFECTS */
     .tab-bar {
       display: flex;
       gap: 10px;
@@ -360,7 +395,6 @@
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
     .tab-btn.active, .tab-btn:hover {
@@ -368,22 +402,31 @@
       color: #120e0c;
       border-color: var(--accent-espresso);
       box-shadow: 0 4px 15px rgba(212, 163, 115, 0.3);
+      transform: scale(1.05);
     }
 
-    /* ROLL ANIMATION FOR TABLE ROWS */
-    @keyframes rollIn {
+    /* ROLL & POP ANIMATION FOR TABLE ROWS */
+    @keyframes rollInPop {
       0% {
         opacity: 0;
-        transform: translateY(20px) rotateX(-15deg);
+        transform: translateY(20px) scale(0.95);
+      }
+      60% {
+        transform: translateY(-2px) scale(1.01);
       }
       100% {
         opacity: 1;
-        transform: translateY(0) rotateX(0deg);
+        transform: translateY(0) scale(1);
       }
     }
 
     .animated-table-body tr {
-      animation: rollIn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+      animation: rollInPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .animated-table-body tr:hover td {
+      background: rgba(212, 163, 115, 0.05);
     }
 
     /* Dynamic Forms & Controls */
@@ -425,11 +468,12 @@
       border-radius: 8px;
       font-size: 0.9rem;
       outline: none;
-      transition: border-color 0.2s ease;
+      transition: border-color 0.2s ease, transform 0.2s ease;
     }
 
     .form-group input:focus, .form-group select:focus {
       border-color: var(--accent-espresso);
+      transform: scale(1.01);
     }
 
     /* Table Styling */
@@ -466,10 +510,6 @@
 
     tr:last-child td {
       border-bottom: none;
-    }
-
-    tr:hover td {
-      background: rgba(212, 163, 115, 0.03);
     }
 
     .tag-badge {
@@ -848,6 +888,41 @@
   </div>
 
   <script>
+    // MOUSE POINTER POP ANIMATION LOGIC
+    let lastPopTime = 0;
+    document.addEventListener('mousemove', (e) => {
+      const now = Date.now();
+      // Throttle ring generation to every 60ms for smooth performance
+      if (now - lastPopTime > 60) {
+        createPointerPop(e.clientX, e.clientY);
+        lastPopTime = now;
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      // Trigger a larger pop ring on click
+      createPointerPop(e.clientX, e.clientY, true);
+    });
+
+    function createPointerPop(x, y, isClick = false) {
+      const ring = document.createElement('div');
+      ring.className = 'mouse-pop-ring';
+      ring.style.left = `${x}px`;
+      ring.style.top = `${y}px`;
+
+      if (isClick) {
+        ring.style.width = '35px';
+        ring.style.height = '35px';
+        ring.style.borderColor = '#e2b078';
+      }
+
+      document.body.appendChild(ring);
+
+      setTimeout(() => {
+        ring.remove();
+      }, 500);
+    }
+
     // Data Stores
     let inventoryStore = [
       { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveryQty: 48, usedQty: 12, date: '2026-09-09' },
@@ -920,11 +995,9 @@
       };
 
       const contentString = JSON.stringify(payloadData, null, 2);
-      // Correct Base64 encoding for Unicode characters
       const contentEncoded = btoa(unescape(encodeURIComponent(contentString)));
 
       try {
-        // Step 1: Check if inventory_data.json already exists to obtain its file SHA
         let sha = null;
         const getRes = await fetch(apiUrl, {
           headers: { 'Authorization': `token ${token}` }
@@ -935,7 +1008,6 @@
           sha = fileData.sha;
         }
 
-        // Step 2: PUT request to create or update inventory_data.json
         const body = {
           message: 'Update cafe inventory_data.json via QuadLink Cafe Web System',
           content: contentEncoded,
@@ -984,7 +1056,6 @@
 
         if (response.ok) {
           const fileData = await response.json();
-          // Correct Base64 decoding for Unicode characters
           const decodedContent = decodeURIComponent(escape(atob(fileData.content)));
           const parsedData = JSON.parse(decodedContent);
 
