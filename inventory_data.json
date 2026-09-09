@@ -5,7 +5,7 @@
       "category": "MILK",
       "name": "EMBORG FULL CREAM MILK",
       "unit": "PCS",
-      "usedQty": 0,
+      "usedQty": 12,
       "editing": false,
       "selected": false,
       "batches": [
@@ -29,6 +29,17 @@
     }
   ],
   "historyLogs": [
+    {
+      "id": 1788935320137,
+      "type": "OUT",
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "Usage Recorded (OUT)",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-08-28",
+      "detail": "Used 12 PCS | Total Usage: 12 PCS | Storage Rem: 48 PCS | Storage Accuracy: 80%"
+    },
     {
       "id": 1788935249957,
       "type": "IN",
@@ -584,5 +595,5 @@
       "detail": "Received initial batch 60 PCS into Storage"
     }
   ],
-  "lastUpdated": "2026-09-09T06:27:29.958Z"
+  "lastUpdated": "2026-09-09T06:28:40.138Z"
 }
