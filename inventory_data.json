@@ -47,6 +47,17 @@
       "lastUpdated": "2026-09-09",
       "batches": [
         {
+          "batchId": "b_1788921527263_7lmyk",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-09",
+          "initQty": 3,
+          "remQty": 3,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
           "batchId": "b_1788920564377_olsmu",
           "addedDate": "2026-07-31",
           "lastUpdated": "2026-09-09",
@@ -1150,9 +1161,314 @@
           "sourceNote": "Delivery"
         }
       ]
+    },
+    {
+      "id": 1788921527263.9548,
+      "name": "CUP ORGANIZER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788921527263_bx4wn",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788921527263.8584,
+      "name": "CALIBRATED FOOD THERMOMETER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788921527263_f1cod",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788921527263.3157,
+      "name": "SMALL WIRE WHISK",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788921527263_81v18",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 3,
+          "remQty": 3,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788921527263.2556,
+      "name": "WATER PITCHER 2L",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788921527263_vyyfh",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788921527263.5684,
+      "name": "DOUBLE WALLED ESPRESSO SHOT GLASS",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788921527263_02l5w",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 3,
+          "remQty": 3,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788921527263.6484,
+      "name": "MEASURING PITCHER 5L",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788921527263_btton",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788921527263.269,
+      "name": "DOUBLE JIGGER MEASURING CUP",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788921527263_wmlwt",
+          "addedDate": "2026-07-31",
+          "lastUpdated": "2026-09-09",
+          "initQty": 4,
+          "remQty": 4,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788921527263.419,
+      "name": "EVIAN ( 24 pcs )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Case",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788921527263_53v2d",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-09",
+          "initQty": 3,
+          "remQty": 3,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788921527263.7773,
+      "name": "PERRIER ( 24 pcs )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Case",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788921527263_h5amo",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-09",
+          "initQty": 3,
+          "remQty": 3,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
+    },
+    {
+      "id": 1788921527263.2256,
+      "name": "WOODEN STIRRER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pack",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788921527263_x4ayf",
+          "addedDate": "2026-07-17",
+          "lastUpdated": "2026-09-09",
+          "initQty": 7,
+          "remQty": 7,
+          "usedQty": 0,
+          "unit": "Pack",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     }
   ],
   "logs": [
+    {
+      "id": "log_1788921527263",
+      "timestamp": "2026-09-09 10:38",
+      "details": "🚚 Transferred delivery \"WOODEN STIRRER\" (7 Pack) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788921527263",
+      "timestamp": "2026-09-09 10:38",
+      "details": "🚚 Transferred delivery \"PERRIER ( 24 pcs )\" (3 Case) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788921527263",
+      "timestamp": "2026-09-09 10:38",
+      "details": "🚚 Transferred delivery \"EVIAN ( 24 pcs )\" (3 Case) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788921527263",
+      "timestamp": "2026-09-09 10:38",
+      "details": "🚚 Transferred delivery \"SANTOKU KNIFE\" (3 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788921527263",
+      "timestamp": "2026-09-09 10:38",
+      "details": "🚚 Transferred delivery \"DOUBLE JIGGER MEASURING CUP\" (4 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788921527263",
+      "timestamp": "2026-09-09 10:38",
+      "details": "🚚 Transferred delivery \"MEASURING PITCHER 5L\" (1 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788921527263",
+      "timestamp": "2026-09-09 10:38",
+      "details": "🚚 Transferred delivery \"DOUBLE WALLED ESPRESSO SHOT GLASS\" (3 Pack) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788921527263",
+      "timestamp": "2026-09-09 10:38",
+      "details": "🚚 Transferred delivery \"WATER PITCHER 2L\" (2 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788921527263",
+      "timestamp": "2026-09-09 10:38",
+      "details": "🚚 Transferred delivery \"SMALL WIRE WHISK\" (3 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788921527263",
+      "timestamp": "2026-09-09 10:38",
+      "details": "🚚 Transferred delivery \"CALIBRATED FOOD THERMOMETER\" (2 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788921527263",
+      "timestamp": "2026-09-09 10:38",
+      "details": "🚚 Transferred delivery \"CUP ORGANIZER\" (1 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788921506188",
+      "timestamp": "2026-09-09 10:38",
+      "details": "📦 Logged delivery shipment for \"CUP ORGANIZER\" (1 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788921495996",
+      "timestamp": "2026-09-09 10:38",
+      "details": "📦 Logged delivery shipment for \"CALIBRATED FOOD THERMOMETER\" (2 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788921476891",
+      "timestamp": "2026-09-09 10:37",
+      "details": "📦 Logged delivery shipment for \"SMALL WIRE WHISK\" (3 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788920941026",
+      "timestamp": "2026-09-09 10:29",
+      "details": "📦 Logged delivery shipment for \"WATER PITCHER 2L\" (2 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788920927194",
+      "timestamp": "2026-09-09 10:28",
+      "details": "📦 Logged delivery shipment for \"DOUBLE WALLED ESPRESSO SHOT GLASS\" (3 Pack). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788920889818",
+      "timestamp": "2026-09-09 10:28",
+      "details": "📦 Logged delivery shipment for \"MEASURING PITCHER 5L\" (1 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788920872987",
+      "timestamp": "2026-09-09 10:27",
+      "details": "📦 Logged delivery shipment for \"DOUBLE JIGGER MEASURING CUP\" (4 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788920833900",
+      "timestamp": "2026-09-09 10:27",
+      "details": "☁️ Saved local backup & synced to GitHub (inventory_data.json)"
+    },
     {
       "id": "log_1788920827388",
       "timestamp": "2026-09-09 10:27",
@@ -1257,104 +1573,100 @@
       "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"LAY'S SOUR CREAM\" (1 Case) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"LAY'S CHEESE\" (1 Case) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"LOACKER\" (1 Box) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"TICTAC MINTS\" (1 Box) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"VITA COCO BIG\" (1 Case) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"VITA COCO SMALL\" (2 Case) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"ROYAL\" (24 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"COKE ZERO\" (24 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"COKE REGULAR\" (24 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"SPRITE\" (24 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"LEA & PERRINS WORCESTERSHIRE\" (1 Bottle/s) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"RAM SWEET PICKLE RELISH\" (2 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"POTATO CHIPS\" (30 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"MOLINERA WHITE TRUFFLE OLIVE OIL\" (1 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"EDEN CHEESE SLICED BY 10\" (10 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"ARLA NATURAL MOZZARELLA\" (10 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"STAINLESS MIXING BOWL 30cm\" (1 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"SQUEEZEE BOTTLE\" (5 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"BAR SPOON\" (2 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"BREAD KNIFE\" (2 Pcs) directly into Café Storage stock."
     }
   ],
   "deliveries": [
+    {
+      "id": 1788921506188,
+      "name": "CUP ORGANIZER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-31",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788921495996,
+      "name": "CALIBRATED FOOD THERMOMETER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-31",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788921476891,
+      "name": "SMALL WIRE WHISK",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 3,
+      "remQty": 3,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-31",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788920941026,
+      "name": "WATER PITCHER 2L",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-31",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788920927194,
+      "name": "DOUBLE WALLED ESPRESSO SHOT GLASS",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 3,
+      "remQty": 3,
+      "usedQty": 0,
+      "unit": "Pack",
+      "deliveryDate": "2026-07-31",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788920889818,
+      "name": "MEASURING PITCHER 5L",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-31",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788920872987,
+      "name": "DOUBLE JIGGER MEASURING CUP",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 4,
+      "remQty": 4,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-31",
+      "transferredToStorage": true
+    },
     {
       "id": 1788920827388,
       "name": "SANTOKU KNIFE",
@@ -1366,7 +1678,7 @@
       "usedQty": 0,
       "unit": "Pcs",
       "deliveryDate": "2026-07-17",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788920806058,
@@ -1379,7 +1691,7 @@
       "usedQty": 0,
       "unit": "Case",
       "deliveryDate": "2026-07-17",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788920788219,
@@ -1392,7 +1704,7 @@
       "usedQty": 0,
       "unit": "Case",
       "deliveryDate": "2026-07-17",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788920735019,
@@ -1405,7 +1717,7 @@
       "usedQty": 0,
       "unit": "Pack",
       "deliveryDate": "2026-07-17",
-      "transferredToStorage": false
+      "transferredToStorage": true
     },
     {
       "id": 1788920467517,
@@ -2119,5 +2431,5 @@
     "LALAMOVE"
   ],
   "markedOutPastries": [],
-  "lastUpdatedTimestamp": 1788920827388
+  "lastUpdatedTimestamp": 1788921527263
 }
