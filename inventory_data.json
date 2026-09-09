@@ -4,8 +4,7 @@
       "Pastries",
       "RETAIL",
       "BAR",
-      "MILK",
-      "Retail"
+      "MILK"
     ],
     "Community": [
       "General"
@@ -17,195 +16,1373 @@
       "Restroom Supplies"
     ]
   },
-  "inventory": [],
-  "logs": [
+  "inventory": [
     {
-      "id": "log_1788851758644",
-      "timestamp": "2026-09-08 15:15",
-      "details": "Deleted delivery \"DAIRY CADBURY\""
+      "id": 1788916091097.9448,
+      "name": "TAKE IT",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916091098_bd1kk",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 10,
+          "remQty": 10,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_mtczf",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 10,
+          "remQty": 10,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788851745349",
-      "timestamp": "2026-09-08 15:15",
-      "details": "🗑️ Cleared out all 1 items in subcategory [RETAIL]"
+      "id": 1788916105417.746,
+      "name": "DAIRY CADBURY",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916105417_l2qie",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_zpetg",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788849251360",
-      "timestamp": "2026-09-08 14:34",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 14 to 13 Pcs. <span class=\"used-text-red\">(Total Used to Date: 11 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788916390322.4443,
+      "name": "SPRITE",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916390322_98y00",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_kvhkw",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788849250943",
-      "timestamp": "2026-09-08 14:34",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 15 to 14 Pcs. <span class=\"used-text-red\">(Total Used to Date: 10 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788916390322.0977,
+      "name": "COKE REGULAR",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916390322_fjjs3",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_eqlr4",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788849250552",
-      "timestamp": "2026-09-08 14:34",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 16 to 15 Pcs. <span class=\"used-text-red\">(Total Used to Date: 9 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788916390322.4749,
+      "name": "COKE ZERO",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916390322_00641",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_ge1pg",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788849250207",
-      "timestamp": "2026-09-08 14:34",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 17 to 16 Pcs. <span class=\"used-text-red\">(Total Used to Date: 8 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788916390322.436,
+      "name": "ROYAL",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916390322_endse",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_42k31",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 24,
+          "remQty": 24,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788849249552",
-      "timestamp": "2026-09-08 14:34",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 18 to 17 Pcs. <span class=\"used-text-red\">(Total Used to Date: 7 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788916390322.3604,
+      "name": "VITA COCO SMALL",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916390322_p32j1",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_r5a06",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788849249224",
-      "timestamp": "2026-09-08 14:34",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 19 to 18 Pcs. <span class=\"used-text-red\">(Total Used to Date: 6 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788916390322.967,
+      "name": "VITA COCO BIG",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916390322_9i3ps",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_le95v",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788849248896",
-      "timestamp": "2026-09-08 14:34",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 20 to 19 Pcs. <span class=\"used-text-red\">(Total Used to Date: 5 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788916390322.9895,
+      "name": "TICTAC MINTS",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Box",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916390322_0oodp",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Box",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_g439p",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Box",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788849248560",
-      "timestamp": "2026-09-08 14:34",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 21 to 20 Pcs. <span class=\"used-text-red\">(Total Used to Date: 4 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788916390322.7686,
+      "name": "LOACKER",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Box",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916390322_y91gm",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Box",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_7t7dy",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Box",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788849248208",
-      "timestamp": "2026-09-08 14:34",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 22 to 21 Pcs. <span class=\"used-text-red\">(Total Used to Date: 3 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788916390322.2212,
+      "name": "LAY'S CHEESE",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916390322_hkw5n",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_md1j2",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788849247872",
-      "timestamp": "2026-09-08 14:34",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 23 to 22 Pcs. <span class=\"used-text-red\">(Total Used to Date: 2 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788916390322.3245,
+      "name": "LAY'S SOUR CREAM",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916390322_hntgr",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_w95s9",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788849247544",
-      "timestamp": "2026-09-08 14:34",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 24 to 23 Pcs. <span class=\"used-text-red\">(Total Used to Date: 1 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788916390322.289,
+      "name": "LAY'S ORIGINAL",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Case",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916390322_ed3ub",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_tpai1",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Case",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788849237666",
-      "timestamp": "2026-09-08 14:33",
-      "details": "Copied delivery \"DAIRY CADBURY\" to Café Storage FIFO queue"
+      "id": 1788916390322.282,
+      "name": "CLOUD 9 CLASSIC",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916390322_6bj0k",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_mu57f",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788849226735",
-      "timestamp": "2026-09-08 14:33",
-      "details": "🗑️ Cleared out all 1 items in subcategory [RETAIL]"
+      "id": 1788916390322.4084,
+      "name": "FITBAR",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916390322_39vps",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_pm5cl",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788849219314",
-      "timestamp": "2026-09-08 14:33",
-      "details": "Scheduled delivery \"DAIRY CADBURY\" & auto-added to Café Storage FIFO queue"
+      "id": 1788916390322.6824,
+      "name": "SNICKERS",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788916390322_v96rr",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        },
+        {
+          "batchId": "b_1788918141859_p19zb",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 12,
+          "remQty": 12,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788849204065",
-      "timestamp": "2026-09-08 14:33",
-      "details": "Deleted 1 delivery record(s)"
+      "id": 1788918141858.104,
+      "name": "SQUEEZEE BOTTLE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788918141858_ix1qg",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 5,
+          "remQty": 5,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788847824320",
-      "timestamp": "2026-09-08 14:10",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 14 to 13 Pcs. <span class=\"used-text-red\">(Total Used to Date: 11 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788918141858.5593,
+      "name": "STAINLESS MIXING BOWL 30cm",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788918141858_c1rp3",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788847823953",
-      "timestamp": "2026-09-08 14:10",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 15 to 14 Pcs. <span class=\"used-text-red\">(Total Used to Date: 10 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788918141859.084,
+      "name": "ARLA NATURAL MOZZARELLA",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788918141859_gw9ov",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 10,
+          "remQty": 10,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788847823496",
-      "timestamp": "2026-09-08 14:10",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 16 to 15 Pcs. <span class=\"used-text-red\">(Total Used to Date: 9 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788918141859.7793,
+      "name": "EDEN CHEESE SLICED BY 10",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788918141859_36zik",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 10,
+          "remQty": 10,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788847823217",
-      "timestamp": "2026-09-08 14:10",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 17 to 16 Pcs. <span class=\"used-text-red\">(Total Used to Date: 8 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788918141859.7046,
+      "name": "MOLINERA WHITE TRUFFLE OLIVE OIL",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788918141859_49snq",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788847822944",
-      "timestamp": "2026-09-08 14:10",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 18 to 17 Pcs. <span class=\"used-text-red\">(Total Used to Date: 7 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788918141859.6572,
+      "name": "POTATO CHIPS",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788918141859_4lfsn",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 30,
+          "remQty": 30,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788847822727",
-      "timestamp": "2026-09-08 14:10",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 19 to 18 Pcs. <span class=\"used-text-red\">(Total Used to Date: 6 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
+      "id": 1788918141859.6582,
+      "name": "RAM SWEET PICKLE RELISH",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Pcs",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788918141859_h0r5b",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 2,
+          "remQty": 2,
+          "usedQty": 0,
+          "unit": "Pcs",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     },
     {
-      "id": "log_1788847822495",
-      "timestamp": "2026-09-08 14:10",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 20 to 19 Pcs. <span class=\"used-text-red\">(Total Used to Date: 5 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
-    },
-    {
-      "id": "log_1788847822272",
-      "timestamp": "2026-09-08 14:10",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 21 to 20 Pcs. <span class=\"used-text-red\">(Total Used to Date: 4 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
-    },
-    {
-      "id": "log_1788847822064",
-      "timestamp": "2026-09-08 14:10",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 22 to 21 Pcs. <span class=\"used-text-red\">(Total Used to Date: 3 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
-    },
-    {
-      "id": "log_1788847821817",
-      "timestamp": "2026-09-08 14:10",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 23 to 22 Pcs. <span class=\"used-text-red\">(Total Used to Date: 2 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
-    },
-    {
-      "id": "log_1788847821568",
-      "timestamp": "2026-09-08 14:10",
-      "details": "🔻 Decreased <span class=\"used-text-red\">-1 Pcs</span> from \"DAIRY CADBURY\". Total on hand went from 24 to 23 Pcs. <span class=\"used-text-red\">(Total Used to Date: 1 Pcs)</span>. Details: [Deducted 1 Pcs from Storage Batch [2026-08-06]]"
-    },
-    {
-      "id": "log_1788847814128",
-      "timestamp": "2026-09-08 14:10",
-      "details": "Deleted delivery \"DAIRY CADBURY\""
-    },
-    {
-      "id": "log_1788847806177",
-      "timestamp": "2026-09-08 14:10",
-      "details": "Deleted batch from \"DAIRY CADBURY\""
-    },
-    {
-      "id": "log_1788847779972",
-      "timestamp": "2026-09-08 14:09",
-      "details": "Scheduled delivery \"DAIRY CADBURY\" & auto-added to Café Storage FIFO queue"
-    },
-    {
-      "id": "log_1788847708683",
-      "timestamp": "2026-09-08 14:08",
-      "details": "Scheduled delivery \"DAIRY CADBURY\" & auto-added to Café Storage FIFO queue"
-    },
-    {
-      "id": "log_1788847257121",
-      "timestamp": "2026-09-08 14:00",
-      "details": "🗑️ Cleared out all 4 items in subcategory [Pastries]"
-    },
-    {
-      "id": "log_1788847246396",
-      "timestamp": "2026-09-08 14:00",
-      "details": "☁️ Loaded sync file \"inventory_data.json\" from GitHub repository"
-    },
-    {
-      "id": "log_1788846213123",
-      "timestamp": "2026-09-08 13:43",
-      "details": "Deleted marked out pastry record."
-    },
-    {
-      "id": "log_1788846210865",
-      "timestamp": "2026-09-08 13:43",
-      "details": "Deleted marked out pastry record."
-    },
-    {
-      "id": "log_1788846161084",
-      "timestamp": "2026-09-08 13:42",
-      "details": "🗑️ Cleared out all 4 items in subcategory [Pastries]"
+      "id": 1788918141859.44,
+      "name": "LEA & PERRINS WORCESTERSHIRE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "unit": "Bottle/s",
+      "lastUpdated": "2026-09-09",
+      "batches": [
+        {
+          "batchId": "b_1788918141859_n47cq",
+          "addedDate": "2026-08-06",
+          "lastUpdated": "2026-09-09",
+          "initQty": 1,
+          "remQty": 1,
+          "usedQty": 0,
+          "unit": "Bottle/s",
+          "location": "Storage",
+          "sourceNote": "Delivery"
+        }
+      ]
     }
   ],
-  "deliveries": [],
+  "logs": [
+    {
+      "id": "log_1788918747121",
+      "timestamp": "2026-09-09 09:52",
+      "details": "📦 Logged delivery shipment for \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( LARGE ) )\" (8 Pack). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918735378",
+      "timestamp": "2026-09-09 09:52",
+      "details": "📦 Logged delivery shipment for \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( MEDIUM )\" (8 Pack). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918725457",
+      "timestamp": "2026-09-09 09:52",
+      "details": "📦 Logged delivery shipment for \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( SMALL )\" (8 Pack). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918669494",
+      "timestamp": "2026-09-09 09:51",
+      "details": "📦 Logged delivery shipment for \"VINYL DISPOSABLE GLOVES BLACK\" (1 Box). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918637947",
+      "timestamp": "2026-09-09 09:50",
+      "details": "📦 Logged delivery shipment for \"FOLDING STOOL\" (1 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918627435",
+      "timestamp": "2026-09-09 09:50",
+      "details": "📦 Logged delivery shipment for \"CLING WRAP\" (1 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918617117",
+      "timestamp": "2026-09-09 09:50",
+      "details": "📦 Logged delivery shipment for \"PLASTIC DOME LIDS ( NO LOGO )\" (50 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918597155",
+      "timestamp": "2026-09-09 09:49",
+      "details": "📦 Logged delivery shipment for \"PLASTIC FLAT LIDS W/ HOLE ( NO LOGO )\" (50 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918560748",
+      "timestamp": "2026-09-09 09:49",
+      "details": "📦 Logged delivery shipment for \"16 OZ PLASTIC CUPS ( NO LOGO )\" (50 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918526595",
+      "timestamp": "2026-09-09 09:48",
+      "details": "📦 Logged delivery shipment for \"FROTHER\" (2 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918517307",
+      "timestamp": "2026-09-09 09:48",
+      "details": "📦 Logged delivery shipment for \"CAN OPENER\" (2 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918509162",
+      "timestamp": "2026-09-09 09:48",
+      "details": "📦 Logged delivery shipment for \"BREAD KNIFE\" (2 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918493346",
+      "timestamp": "2026-09-09 09:48",
+      "details": "📦 Logged delivery shipment for \"BAR SPOON\" (2 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918468715",
+      "timestamp": "2026-09-09 09:47",
+      "details": "↩️ Triggered Undo Command (Restored previous inventory state)"
+    },
+    {
+      "id": "log_1788918358938",
+      "timestamp": "2026-09-09 09:45",
+      "details": "↩️ Triggered Undo Command (Restored previous inventory state)"
+    },
+    {
+      "id": "log_1788918297513",
+      "timestamp": "2026-09-09 09:44",
+      "details": "↩️ Triggered Undo Command (Restored previous inventory state)"
+    },
+    {
+      "id": "log_1788918199614",
+      "timestamp": "2026-09-09 09:43",
+      "details": "↩️ Triggered Undo Command (Restored previous inventory state)"
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"DAIRY CADBURY\" (24 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"TAKE IT\" (10 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"SNICKERS\" (12 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"FITBAR\" (12 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"CLOUD 9 CLASSIC\" (12 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"LAY'S ORIGINAL\" (1 Case) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"LAY'S SOUR CREAM\" (1 Case) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"LAY'S CHEESE\" (1 Case) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"LOACKER\" (1 Box) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"TICTAC MINTS\" (1 Box) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"VITA COCO BIG\" (1 Case) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"VITA COCO SMALL\" (2 Case) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"ROYAL\" (24 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"COKE ZERO\" (24 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"COKE REGULAR\" (24 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"SPRITE\" (24 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"LEA & PERRINS WORCESTERSHIRE\" (1 Bottle/s) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"RAM SWEET PICKLE RELISH\" (2 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"POTATO CHIPS\" (30 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"MOLINERA WHITE TRUFFLE OLIVE OIL\" (1 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"EDEN CHEESE SLICED BY 10\" (10 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"ARLA NATURAL MOZZARELLA\" (10 Pcs) directly into Café Storage stock."
+    },
+    {
+      "id": "log_1788918141859",
+      "timestamp": "2026-09-09 09:42",
+      "details": "🚚 Transferred delivery \"STAINLESS MIXING BOWL 30cm\" (1 Pcs) directly into Café Storage stock."
+    }
+  ],
+  "deliveries": [
+    {
+      "id": 1788918747121,
+      "name": "KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( LARGE ) )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 8,
+      "remQty": 8,
+      "usedQty": 0,
+      "unit": "Pack",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918735378,
+      "name": "KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( MEDIUM )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 8,
+      "remQty": 8,
+      "usedQty": 0,
+      "unit": "Pack",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918725457,
+      "name": "KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( SMALL )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 8,
+      "remQty": 8,
+      "usedQty": 0,
+      "unit": "Pack",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918669494,
+      "name": "VINYL DISPOSABLE GLOVES BLACK",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Box",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918637947,
+      "name": "FOLDING STOOL",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918627435,
+      "name": "CLING WRAP",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918617117,
+      "name": "PLASTIC DOME LIDS ( NO LOGO )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 50,
+      "remQty": 50,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918597154,
+      "name": "PLASTIC FLAT LIDS W/ HOLE ( NO LOGO )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 50,
+      "remQty": 50,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918560748,
+      "name": "16 OZ PLASTIC CUPS ( NO LOGO )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 50,
+      "remQty": 50,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918526595,
+      "name": "FROTHER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918517307,
+      "name": "CAN OPENER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918509162,
+      "name": "BREAD KNIFE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918493346,
+      "name": "BAR SPOON",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918134699,
+      "name": "SQUEEZEE BOTTLE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 5,
+      "remQty": 5,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788918113128,
+      "name": "STAINLESS MIXING BOWL 30cm",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788917884107,
+      "name": "ARLA NATURAL MOZZARELLA",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 10,
+      "remQty": 10,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788917863740,
+      "name": "EDEN CHEESE SLICED BY 10",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 10,
+      "remQty": 10,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788917849519,
+      "name": "MOLINERA WHITE TRUFFLE OLIVE OIL",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788917828827,
+      "name": "POTATO CHIPS",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 30,
+      "remQty": 30,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788917816725,
+      "name": "RAM SWEET PICKLE RELISH",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788917799034,
+      "name": "LEA & PERRINS WORCESTERSHIRE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Bottle/s",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788916380698,
+      "name": "SPRITE",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 24,
+      "remQty": 24,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788916357380,
+      "name": "COKE REGULAR",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 24,
+      "remQty": 24,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788916338098,
+      "name": "COKE ZERO",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 24,
+      "remQty": 24,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788916333707,
+      "name": "ROYAL",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 24,
+      "remQty": 24,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788916317290,
+      "name": "VITA COCO SMALL",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788916304748,
+      "name": "VITA COCO BIG",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788916279428,
+      "name": "TICTAC MINTS",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Box",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788916261785,
+      "name": "LOACKER",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Box",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788916247682,
+      "name": "LAY'S CHEESE",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788916234995,
+      "name": "LAY'S SOUR CREAM",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788916227259,
+      "name": "LAY'S ORIGINAL",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Case",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788916182829,
+      "name": "CLOUD 9 CLASSIC",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 12,
+      "remQty": 12,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788916171681,
+      "name": "FITBAR",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 12,
+      "remQty": 12,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788916161260,
+      "name": "SNICKERS",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 12,
+      "remQty": 12,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788852013381,
+      "name": "TAKE IT",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 10,
+      "remQty": 10,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    },
+    {
+      "id": 1788851807253,
+      "name": "DAIRY CADBURY",
+      "category": "Café",
+      "subcategory": "RETAIL",
+      "supplier": "JAMBI",
+      "initQty": 24,
+      "remQty": 24,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": true
+    }
+  ],
   "suppliers": [
     "JAMBI",
     "YARDSTICK",
@@ -215,5 +1392,5 @@
     "LALAMOVE"
   ],
   "markedOutPastries": [],
-  "lastUpdatedTimestamp": 1788851758644
+  "lastUpdatedTimestamp": 1788918747121
 }
