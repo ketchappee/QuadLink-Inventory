@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QuadLink Cafe — Specialty FIFO Inventory System</title>
+  <title>QuadLink Cafe — Specialty Inventory System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
@@ -496,13 +496,8 @@
       </div>
 
       <div class="form-group">
-        <label>Record Bar Usage (OUT)</label>
+        <label>Record Usage (OUT)</label>
         <input type="number" id="cafe-item-used" min="0" value="0" required />
-      </div>
-
-      <div class="form-group">
-        <label>Bar Storage Allocated</label>
-        <input type="number" id="cafe-item-barstorage" min="0" value="14" required />
       </div>
 
       <div class="form-group">
@@ -510,7 +505,7 @@
         <input type="date" id="cafe-item-date" required />
       </div>
 
-      <button type="submit" class="btn">Update Bar Usage (Auto-Deduct Storage)</button>
+      <button type="submit" class="btn">Update Usage (Auto-Deduct Storage)</button>
     </form>
 
     <div class="table-container">
@@ -524,9 +519,7 @@
             <th>Unit</th>
             <th>Delivered Stock</th>
             <th>Storage Stock</th>
-            <th>Bar Storage</th>
             <th>Total Usage</th>
-            <th>Remaining Bar Stock</th>
             <th>FIFO Date History</th>
             <th>Actions</th>
           </tr>
@@ -561,9 +554,7 @@
             <th>Unit</th>
             <th>Delivered Stock</th>
             <th>Storage Stock</th>
-            <th>Bar Storage</th>
             <th>Total Usage</th>
-            <th>Remaining Stock</th>
             <th>Storage Accuracy</th>
             <th>FIFO Batch Dates</th>
           </tr>
@@ -713,9 +704,7 @@
             <th>Unit</th>
             <th>Delivered Stock</th>
             <th>Storage Stock</th>
-            <th>Bar Storage</th>
             <th>Total Usage</th>
-            <th>Remaining Stock</th>
             <th>Stock Accuracy</th>
             <th>FIFO Batch Date</th>
             <th>Actions</th>
@@ -733,7 +722,6 @@
         category: 'MILK',
         name: 'Whole Milk',
         unit: 'PCS',
-        barStorage: 20,
         usedQty: 14,
         editing: false,
         selected: false,
@@ -746,7 +734,6 @@
         category: 'MILK',
         name: 'Oat Milk',
         unit: 'PCS',
-        barStorage: 10,
         usedQty: 6,
         editing: false,
         selected: false,
@@ -759,7 +746,6 @@
         category: 'BAR',
         name: 'Espresso Blend',
         unit: 'KG',
-        barStorage: 10,
         usedQty: 6,
         editing: false,
         selected: false,
@@ -806,10 +792,6 @@
     function calculateStorageStock(item) {
       const totalDelivered = getTotalDeliveredQty(item);
       return Math.max(0, totalDelivered - item.usedQty);
-    }
-
-    function calculateRemainingBarStock(item) {
-      return Math.max(0, item.barStorage - item.usedQty);
     }
 
     function calculateStockAccuracy(item) {
@@ -961,12 +943,10 @@
       const item = inventoryStore.find(i => i.id === id);
       if (item) {
         const nameVal = document.getElementById(`inline-name-${id}`).value.trim();
-        const barStorageVal = parseInt(document.getElementById(`inline-bar-${id}`).value) || 0;
         const usedVal = parseInt(document.getElementById(`inline-used-${id}`).value) || 0;
 
         const oldDate = getOldestBatchDate(item);
         if (nameVal) item.name = nameVal;
-        item.barStorage = barStorageVal;
         item.usedQty = usedVal;
         item.editing = false;
 
@@ -996,8 +976,7 @@
       items.forEach(item => {
         const totalDelivered = getTotalDeliveredQty(item);
         const storageStock = calculateStorageStock(item);
-        const barRemaining = calculateRemainingBarStock(item);
-        const remClass = barRemaining <= 3 ? 'low-remaining' : 'high-remaining';
+        const remClass = storageStock <= 3 ? 'low-remaining' : 'high-remaining';
 
         if (item.editing) {
           tbody.innerHTML += `
@@ -1008,10 +987,8 @@
               <td><input type="text" id="inline-name-${item.id}" class="inline-input" value="${item.name}" /></td>
               <td><span class="unit-pill">${item.unit}</span></td>
               <td><strong>${totalDelivered}</strong> ${item.unit}</td>
-              <td><strong>${storageStock} ${item.unit}</strong></td>
-              <td><input type="number" id="inline-bar-${item.id}" class="inline-input" value="${item.barStorage}" style="width:65px;" /></td>
+              <td><strong class="${remClass}">${storageStock} ${item.unit}</strong></td>
               <td><input type="number" id="inline-used-${item.id}" class="inline-input" value="${item.usedQty}" style="width:65px;" /></td>
-              <td><strong class="${remClass}">${barRemaining} ${item.unit}</strong></td>
               <td>${renderFifoDateCardUI(item)}</td>
               <td style="display:flex; gap:4px;">
                 <button class="btn-save-inline" onclick="saveInlineEdit(${item.id})">💾 Save</button>
@@ -1028,8 +1005,7 @@
               <td>${item.name}</td>
               <td><span class="unit-pill">${item.unit}</span></td>
               <td><strong>${totalDelivered}</strong> ${item.unit}</td>
-              <td><strong style="color:var(--text-gold);">${storageStock}</strong> ${item.unit}</td>
-              <td><strong>${item.barStorage}</strong> ${item.unit}</td>
+              <td><strong class="${remClass}">${storageStock} ${item.unit}</strong></td>
               <td>
                 <div class="inline-qty-box">
                   <button class="btn-qty-adj" onclick="quickAdjustUsage(${item.id}, -1)">-</button>
@@ -1037,7 +1013,6 @@
                   <button class="btn-qty-adj" onclick="quickAdjustUsage(${item.id}, 1)">+</button>
                 </div>
               </td>
-              <td><strong class="${remClass}">${barRemaining} ${item.unit}</strong></td>
               <td>${renderFifoDateCardUI(item)}</td>
               <td style="display:flex; gap:4px;">
                 <button class="btn-edit" onclick="toggleInlineEdit(${item.id})">✏ Edit</button>
@@ -1064,9 +1039,8 @@
       items.forEach(item => {
         const totalDelivered = getTotalDeliveredQty(item);
         const storageStock = calculateStorageStock(item);
-        const barRemaining = calculateRemainingBarStock(item);
         const accuracy = calculateStockAccuracy(item);
-        const remClass = barRemaining <= 3 ? 'low-remaining' : 'high-remaining';
+        const remClass = storageStock <= 3 ? 'low-remaining' : 'high-remaining';
 
         tbody.innerHTML += `
           <tr>
@@ -1076,10 +1050,8 @@
             <td>${item.name}</td>
             <td><span class="unit-pill">${item.unit}</span></td>
             <td><strong>${totalDelivered}</strong> ${item.unit}</td>
-            <td><strong style="color:var(--text-gold);">${storageStock}</strong> ${item.unit}</td>
-            <td><strong>${item.barStorage}</strong> ${item.unit}</td>
+            <td><strong class="${remClass}">${storageStock}</strong> ${item.unit}</td>
             <td>${item.usedQty} ${item.unit}</td>
-            <td><strong class="${remClass}">${barRemaining} ${item.unit}</strong></td>
             <td style="color:#94d2bd; font-weight:700;">${accuracy}</td>
             <td>${renderFifoDateCardUI(item)}</td>
             <td><button class="btn-delete" onclick="promptDeleteSingle(${item.id}, 'delivery')">Remove</button></td>
@@ -1103,7 +1075,6 @@
       items.forEach(item => {
         const totalDelivered = getTotalDeliveredQty(item);
         const storageStock = calculateStorageStock(item);
-        const barRemaining = calculateRemainingBarStock(item);
         const accuracy = calculateStockAccuracy(item);
 
         tbody.innerHTML += `
@@ -1112,10 +1083,8 @@
             <td>${item.name}</td>
             <td><span class="unit-pill">${item.unit}</span></td>
             <td><strong>${totalDelivered}</strong> ${item.unit}</td>
-            <td><strong style="color:var(--text-gold);">${storageStock}</strong> ${item.unit}</td>
-            <td><strong>${item.barStorage}</strong> ${item.unit}</td>
+            <td><strong class="${storageStock <= 3 ? 'low-remaining' : 'high-remaining'}">${storageStock}</strong> ${item.unit}</td>
             <td>${item.usedQty} ${item.unit}</td>
-            <td><strong class="${barRemaining <= 3 ? 'low-remaining' : 'high-remaining'}">${barRemaining} ${item.unit}</strong></td>
             <td style="color:#94d2bd; font-weight:700;">${accuracy}</td>
             <td>${renderFifoDateCardUI(item)}</td>
           </tr>
@@ -1129,13 +1098,13 @@
       else if (module === 'delivery') logs = historyLogs.filter(l => l.module === 'delivery');
 
       if (logs.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="12" style="text-align:center; padding: 20px;">No history logs recorded yet.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; padding: 20px;">No history logs recorded yet.</td></tr>`;
         return;
       }
 
       tbody.innerHTML += `
         <tr style="background: rgba(212, 163, 115, 0.15);">
-          <td colspan="12" style="padding: 8px 14px;">
+          <td colspan="10" style="padding: 8px 14px;">
             <button class="btn btn-delete" style="font-size:0.75rem;" onclick="clearHistoryLogs()">🗑 Clear History Logs</button>
           </td>
         </tr>
@@ -1149,7 +1118,7 @@
             <td><strong>${log.action}</strong></td>
             <td><strong>${log.category}</strong></td>
             <td>${log.itemName}</td>
-            <td colspan="6" style="color:var(--text-muted); font-size:0.8rem;">${log.detail}</td>
+            <td colspan="4" style="color:var(--text-muted); font-size:0.8rem;">${log.detail}</td>
             <td><span class="date-badge-current">${log.newDate}</span></td>
             <td>-</td>
           </tr>
@@ -1183,7 +1152,6 @@
       const name = document.getElementById('cafe-item-name').value.trim();
       const unit = document.getElementById('cafe-item-unit').value;
       const usedQty = parseInt(document.getElementById('cafe-item-used').value) || 0;
-      const barStorage = parseInt(document.getElementById('cafe-item-barstorage').value) || 0;
       const date = document.getElementById('cafe-item-date').value;
 
       let item = inventoryStore.find(i => i.name.toLowerCase() === name.toLowerCase());
@@ -1191,7 +1159,6 @@
       if (item) {
         const oldDate = getOldestBatchDate(item);
         item.usedQty += usedQty;
-        item.barStorage = Math.max(item.barStorage, barStorage);
         
         const storageRem = calculateStorageStock(item);
         const accuracy = calculateStockAccuracy(item);
@@ -1203,7 +1170,6 @@
           category,
           name,
           unit,
-          barStorage: barStorage || 14,
           usedQty,
           editing: false,
           selected: false,
@@ -1248,7 +1214,6 @@
           category,
           name,
           unit,
-          barStorage: 14,
           usedQty: 0,
           editing: false,
           selected: false,
