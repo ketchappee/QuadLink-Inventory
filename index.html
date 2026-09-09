@@ -937,6 +937,7 @@
                     <div class="qty-input-wrapper">
                         <input type="number" id="delQty" placeholder="0" min="1" required>
                         <select id="delUnit" required>
+                            <option value="Bottle/s">Bottle/s</option>
                             <option value="Pcs">Pcs</option>
                             <option value="Box">Box</option>
                             <option value="Case">Case</option>
@@ -1095,6 +1096,7 @@
                     <div class="qty-input-wrapper">
                         <input type="number" id="itemQty" placeholder="0" min="0">
                         <select id="itemUnit" required>
+                            <option value="Bottle/s">Bottle/s</option>
                             <option value="Pcs">Pcs</option>
                             <option value="Box">Box</option>
                             <option value="Case">Case</option>
@@ -1214,7 +1216,7 @@
 
     appData.inventory.forEach(item => {
         if (!item.subcategory) item.subcategory = "General";
-        if (!item.unit) item.unit = "Pcs";
+        if (!item.unit) item.unit = "Bottle/s";
         if (!item.lastUpdated) item.lastUpdated = new Date().toISOString().split('T')[0];
         if (!item.batches || !Array.isArray(item.batches)) {
             const oldQty = item.qty !== undefined ? item.qty : 0;
@@ -1227,7 +1229,7 @@
                 initQty: oldQty,
                 remQty: oldQty,
                 usedQty: 0,
-                unit: item.unit || 'Pcs',
+                unit: item.unit || 'Bottle/s',
                 location: "Bar",
                 sourceNote: oldSource
             }];
@@ -1236,7 +1238,7 @@
             delete item.sourceNote;
         } else {
             item.batches.forEach(b => {
-                if (!b.unit) b.unit = item.unit || 'Pcs';
+                if (!b.unit) b.unit = item.unit || 'Bottle/s';
                 if (!b.location) b.location = "Bar";
                 if (b.initQty === undefined) b.initQty = b.remQty || 0;
                 if (b.usedQty === undefined) b.usedQty = Math.max(0, b.initQty - (b.remQty || 0));
@@ -1373,7 +1375,7 @@
                             initQty: oldQty,
                             remQty: oldQty,
                             usedQty: 0,
-                            unit: item.unit || 'Pcs',
+                            unit: item.unit || 'Bottle/s',
                             location: "Bar",
                             sourceNote: oldSource
                         }];
@@ -1381,7 +1383,7 @@
                         delete item.addedDate;
                     } else {
                         item.batches.forEach(b => {
-                            if (!b.unit) b.unit = item.unit || 'Pcs';
+                            if (!b.unit) b.unit = item.unit || 'Bottle/s';
                             if (!b.location) b.location = "Bar";
                             if (b.initQty === undefined) b.initQty = b.remQty || 0;
                             if (b.usedQty === undefined) b.usedQty = Math.max(0, b.initQty - (b.remQty || 0));
@@ -1459,12 +1461,12 @@
     }
 
     function getItemActiveUnit(item) {
-        if (!item.batches || item.batches.length === 0) return item.unit || 'Pcs';
+        if (!item.batches || item.batches.length === 0) return item.unit || 'Bottle/s';
         sortItemBatches(item);
         const activeBatch = item.batches.find(b => b.remQty > 0);
         if (activeBatch && activeBatch.unit) return activeBatch.unit;
         const lastBatch = item.batches[item.batches.length - 1];
-        return (lastBatch && lastBatch.unit) ? lastBatch.unit : (item.unit || 'Pcs');
+        return (lastBatch && lastBatch.unit) ? lastBatch.unit : (item.unit || 'Bottle/s');
     }
 
     function sortItemBatches(item) {
@@ -1482,7 +1484,7 @@
         for (let batch of item.batches) {
             if (batch.remQty > 0) {
                 batch.lastUpdated = todayStr;
-                const batchUnit = batch.unit || item.unit || 'Pcs';
+                const batchUnit = batch.unit || item.unit || 'Bottle/s';
                 const batchLoc = batch.location || 'Bar';
                 if (batch.initQty === undefined) batch.initQty = batch.remQty;
                 if (batch.usedQty === undefined) batch.usedQty = 0;
@@ -1541,7 +1543,7 @@
 
     function addFIFOStock(item, qty, dateStr, sourceNoteStr, batchUnitStr, locationStr) {
         if (!item.batches) item.batches = [];
-        const unitToUse = batchUnitStr || item.unit || 'Pcs';
+        const unitToUse = batchUnitStr || item.unit || 'Bottle/s';
         const locToUse = locationStr || 'Bar';
         const todayStr = new Date().toISOString().split('T')[0];
         item.lastUpdated = todayStr;
@@ -2354,7 +2356,7 @@
         document.getElementById('delItemName').value = del.name;
         document.getElementById('delSupplier').value = del.supplier || 'JAMBI';
         document.getElementById('delQty').value = del.initQty;
-        document.getElementById('delUnit').value = del.unit || 'Pcs';
+        document.getElementById('delUnit').value = del.unit || 'Bottle/s';
         document.getElementById('delDate').value = del.deliveryDate;
 
         document.getElementById('delSubmitBtn').innerText = '💾 Save Changes';
