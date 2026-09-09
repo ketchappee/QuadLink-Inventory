@@ -6,7 +6,7 @@
       "name": "EMBORG FULL CREAM MILK",
       "unit": "PCS",
       "barStorage": 14,
-      "usedQty": 1,
+      "usedQty": 10,
       "editing": false,
       "selected": false,
       "batches": [
@@ -30,6 +30,96 @@
     }
   ],
   "historyLogs": [
+    {
+      "id": 1788933749095,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 10 PCS | Storage Rem: 50 PCS | Bar Rem: 4 PCS"
+    },
+    {
+      "id": 1788933748631,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 9 PCS | Storage Rem: 51 PCS | Bar Rem: 5 PCS"
+    },
+    {
+      "id": 1788933747575,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 8 PCS | Storage Rem: 52 PCS | Bar Rem: 6 PCS"
+    },
+    {
+      "id": 1788933747150,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 7 PCS | Storage Rem: 53 PCS | Bar Rem: 7 PCS"
+    },
+    {
+      "id": 1788933746799,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 6 PCS | Storage Rem: 54 PCS | Bar Rem: 8 PCS"
+    },
+    {
+      "id": 1788933746495,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 5 PCS | Storage Rem: 55 PCS | Bar Rem: 9 PCS"
+    },
+    {
+      "id": 1788933746215,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 4 PCS | Storage Rem: 56 PCS | Bar Rem: 10 PCS"
+    },
+    {
+      "id": 1788933745927,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 3 PCS | Storage Rem: 57 PCS | Bar Rem: 11 PCS"
+    },
+    {
+      "id": 1788933745671,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 2 PCS | Storage Rem: 58 PCS | Bar Rem: 12 PCS"
+    },
     {
       "id": 1788933745000,
       "module": "cafe",
@@ -61,5 +151,5 @@
       "detail": "Received initial batch 60 PCS into Storage"
     }
   ],
-  "lastUpdated": "2026-09-09T06:02:25.001Z"
+  "lastUpdated": "2026-09-09T06:02:29.096Z"
 }
