@@ -6,7 +6,7 @@
       "name": "EMBORG FULL CREAM MILK",
       "unit": "PCS",
       "barStorage": 14,
-      "usedQty": 39,
+      "usedQty": 45,
       "editing": false,
       "selected": false,
       "batches": [
@@ -30,6 +30,66 @@
     }
   ],
   "historyLogs": [
+    {
+      "id": 1788933761159,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 45 PCS | Storage Rem: 15 PCS | Bar Rem: 0 PCS"
+    },
+    {
+      "id": 1788933760702,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 44 PCS | Storage Rem: 16 PCS | Bar Rem: 0 PCS"
+    },
+    {
+      "id": 1788933760535,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 43 PCS | Storage Rem: 17 PCS | Bar Rem: 0 PCS"
+    },
+    {
+      "id": 1788933760342,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 42 PCS | Storage Rem: 18 PCS | Bar Rem: 0 PCS"
+    },
+    {
+      "id": 1788933760040,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 41 PCS | Storage Rem: 19 PCS | Bar Rem: 0 PCS"
+    },
+    {
+      "id": 1788933759743,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 40 PCS | Storage Rem: 20 PCS | Bar Rem: 0 PCS"
+    },
     {
       "id": 1788933759424,
       "module": "cafe",
@@ -481,5 +541,5 @@
       "detail": "Received initial batch 60 PCS into Storage"
     }
   ],
-  "lastUpdated": "2026-09-09T06:02:39.425Z"
+  "lastUpdated": "2026-09-09T06:02:41.160Z"
 }
