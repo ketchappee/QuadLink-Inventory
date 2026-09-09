@@ -656,6 +656,7 @@
       <button class="tab-btn" onclick="setCategoryFilter('delivery', 'HISTORY', this)">📜 HISTORY</button>
     </div>
 
+    <!-- REMOVED INITIAL BAR STORAGE FROM THIS FORM -->
     <form class="form-container" id="delivery-form" onsubmit="handleDeliverySubmit(event)">
       <div class="form-group">
         <label>Category</label>
@@ -694,11 +695,6 @@
       <div class="form-group">
         <label>Delivered Stock Qty</label>
         <input type="number" id="del-item-qty" min="1" value="10" required />
-      </div>
-
-      <div class="form-group">
-        <label>Initial Bar Storage</label>
-        <input type="number" id="del-item-bar-qty" min="0" value="5" required />
       </div>
 
       <div class="form-group">
@@ -743,7 +739,7 @@
 
     let historyLogs = [
       { id: 1, module: 'cafe', category: 'MILK', itemName: 'Whole Milk', action: 'Usage Recorded', oldDate: '2026-09-02', newDate: '2026-09-09', detail: 'Usage: +12 L | Storage Remaining: 36 L | Bar Remaining: 8 L' },
-      { id: 2, module: 'delivery', category: 'BAR', itemName: 'Espresso Blend', action: 'Delivery Received', oldDate: '2026-08-28', newDate: '2026-09-05', detail: 'Delivered: +25 KG | Storage Stock: 19 KG | Bar Storage: 10 KG' }
+      { id: 2, module: 'delivery', category: 'BAR', itemName: 'Espresso Blend', action: 'Delivery Received', oldDate: '2026-08-28', newDate: '2026-09-05', detail: 'Delivered: +25 KG | Storage Stock: 19 KG' }
     ];
 
     let markedOutPastries = [
@@ -777,7 +773,6 @@
       return Math.max(0, item.barStorage - item.usedQty);
     }
 
-    /* CLEAR HISTORY FUNCTION */
     function clearHistoryLogs() {
       if (confirm("Are you sure you want to clear all history logs? This cannot be undone.")) {
         historyLogs = [];
@@ -1140,7 +1135,6 @@
         item.date = date;
 
         const storageRem = calculateStorageStock(item);
-        const barRem = calculateRemainingBarStock(item);
         logHistoryEntry('cafe', category, name, 'Stock Updated', oldDate, date, `Delivered: +${deliveredQty} | Storage Rem: ${storageRem} ${unit} | Bar Storage: ${item.barStorage} | Usage: +${usedQty} ${unit}`);
       } else {
         inventoryStore.push({ id: Date.now(), category, name, unit, deliveredQty, barStorage, usedQty, date, previousDate: null, editing: false, selected: false });
@@ -1161,7 +1155,6 @@
       const name = document.getElementById('del-item-name').value.trim();
       const unit = document.getElementById('del-item-unit').value;
       const deliveredQty = parseInt(document.getElementById('del-item-qty').value) || 0;
-      const barStorage = parseInt(document.getElementById('del-item-bar-qty').value) || 0;
       const date = document.getElementById('del-item-date').value;
 
       let item = inventoryStore.find(i => i.name.toLowerCase() === name.toLowerCase());
@@ -1170,14 +1163,13 @@
         const oldDate = item.date;
         if (item.date !== date) item.previousDate = item.date;
         item.deliveredQty += deliveredQty;
-        item.barStorage += barStorage;
         item.date = date;
 
         const storageRem = calculateStorageStock(item);
-        logHistoryEntry('delivery', category, name, 'Delivery Received', oldDate, date, `Delivered: +${deliveredQty} ${unit} | Storage Rem: ${storageRem} ${unit} | Bar Storage: ${item.barStorage} ${unit}`);
+        logHistoryEntry('delivery', category, name, 'Delivery Received', oldDate, date, `Delivered: +${deliveredQty} ${unit} | Storage Rem: ${storageRem} ${unit}`);
       } else {
-        inventoryStore.push({ id: Date.now(), category, name, unit, deliveredQty, barStorage, usedQty: 0, date, previousDate: null, editing: false, selected: false });
-        logHistoryEntry('delivery', category, name, 'New Delivery Stock', null, date, `Received ${deliveredQty} ${unit} | Transferred ${barStorage} ${unit} to Bar Storage`);
+        inventoryStore.push({ id: Date.now(), category, name, unit, deliveredQty, barStorage: 0, usedQty: 0, date, previousDate: null, editing: false, selected: false });
+        logHistoryEntry('delivery', category, name, 'New Delivery Stock', null, date, `Received ${deliveredQty} ${unit} into storage`);
       }
 
       document.getElementById('del-item-name').value = '';
