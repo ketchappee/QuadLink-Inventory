@@ -6,7 +6,7 @@
       "name": "EMBORG FULL CREAM MILK",
       "unit": "PCS",
       "barStorage": 14,
-      "usedQty": 17,
+      "usedQty": 15,
       "editing": false,
       "selected": false,
       "batches": [
@@ -30,6 +30,26 @@
     }
   ],
   "historyLogs": [
+    {
+      "id": 1788933754750,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 15 PCS | Storage Rem: 45 PCS | Bar Rem: 0 PCS"
+    },
+    {
+      "id": 1788933753934,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 16 PCS | Storage Rem: 44 PCS | Bar Rem: 0 PCS"
+    },
     {
       "id": 1788933752791,
       "module": "cafe",
@@ -221,5 +241,5 @@
       "detail": "Received initial batch 60 PCS into Storage"
     }
   ],
-  "lastUpdated": "2026-09-09T06:02:32.792Z"
+  "lastUpdated": "2026-09-09T06:02:34.751Z"
 }
