@@ -218,6 +218,15 @@
       align-items: center;
     }
 
+    .github-status-badge {
+      font-size: 0.7rem;
+      color: var(--text-gold);
+      background: rgba(28, 22, 19, 0.8);
+      border: 1px solid var(--border-accent);
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
     .github-modal {
       display: none;
       position: absolute;
@@ -739,19 +748,18 @@
 </head>
 <body>
 
-  <!-- Top Right Header GitHub Buttons -->
+  <!-- Top Right Header GitHub Buttons & Status Badge -->
   <div class="github-sync-bar">
+    <span class="github-status-badge" id="sync-status">⚡ Sync Ready</span>
     <button class="btn btn-github" onclick="toggleGithubModal()">⚙ Config</button>
-    <button class="btn btn-github" onclick="saveToGithub()">💾 Save Sync</button>
-    <button class="btn btn-github" onclick="loadFromGithub()">🔄 Load Sync</button>
 
     <!-- GitHub Settings Modal -->
     <div class="github-modal" id="github-modal">
-      <h3>GitHub Settings</h3>
+      <h3>GitHub Credentials</h3>
       <input type="text" id="gh-owner" placeholder="GitHub Username / Owner" />
       <input type="text" id="gh-repo" placeholder="Repository Name" />
       <input type="password" id="gh-token" placeholder="Personal Access Token (PAT)" />
-      <button class="btn" style="width: 100%; justify-content: center; margin-top: 4px;" onclick="saveGithubConfig()">Save Settings</button>
+      <button class="btn" style="width: 100%; justify-content: center; margin-top: 4px;" onclick="saveGithubConfig()">Save Credentials</button>
     </div>
   </div>
 
@@ -1090,7 +1098,7 @@
   </div>
 
   <script>
-    // Data Stores with Before/After Date Tracking & History Logs
+    // Data Stores
     let inventoryStore = [
       { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveryQty: 48, usedQty: 12, date: '2026-09-09', previousDate: '2026-09-02', editing: false, editingDelivery: false, selected: false },
       { id: 2, category: 'MILK', name: 'Oat Milk', unit: 'L', deliveryQty: 24, usedQty: 6, date: '2026-09-08', previousDate: '2026-09-01', editing: false, editingDelivery: false, selected: false },
@@ -1115,19 +1123,108 @@
 
     let pendingDeleteAction = null;
 
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", async () => {
       const today = new Date().toISOString().split('T')[0];
       document.getElementById('cafe-item-date').value = today;
       document.getElementById('pastry-date').value = today;
       document.getElementById('del-item-date').value = today;
 
-      // Load Github settings
+      // Load Github credentials
       document.getElementById('gh-owner').value = localStorage.getItem('gh_owner') || '';
       document.getElementById('gh-repo').value = localStorage.getItem('gh_repo') || '';
       document.getElementById('gh-token').value = localStorage.getItem('gh_token') || '';
 
       renderAllTables();
+
+      // AUTO LOAD ON STARTUP / REFRESH
+      await loadFromGithub(true);
     });
+
+    /* AUTO GITHUB SAVE FUNCTION */
+    async function saveToGithub(silent = true) {
+      const owner = localStorage.getItem('gh_owner');
+      const repo = localStorage.getItem('gh_repo');
+      const token = localStorage.getItem('gh_token');
+
+      if (!owner || !repo || !token) {
+        updateSyncBadge('⚠️ Config Token Needed');
+        return;
+      }
+
+      updateSyncBadge('⏳ Syncing to GitHub...');
+
+      const filePath = 'inventory_data.json';
+      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+
+      const payloadData = {
+        inventoryStore,
+        markedOutPastries,
+        historyLogs,
+        lastUpdated: new Date().toISOString()
+      };
+
+      const contentString = JSON.stringify(payloadData, null, 2);
+      const contentEncoded = btoa(unescape(encodeURIComponent(contentString)));
+
+      try {
+        let sha = null;
+        const getRes = await fetch(apiUrl, { headers: { 'Authorization': `token ${token}` } });
+        if (getRes.ok) sha = (await getRes.json()).sha;
+
+        const putRes = await fetch(apiUrl, {
+          method: 'PUT',
+          headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: 'Auto-sync cafe inventory_data.json', content: contentEncoded, ...(sha && { sha }) })
+        });
+
+        if (putRes.ok) {
+          updateSyncBadge('✅ Auto-Saved to GitHub');
+          if (!silent) alert('Successfully saved to GitHub!');
+        } else {
+          updateSyncBadge('❌ Save Failed');
+        }
+      } catch (err) {
+        updateSyncBadge('❌ Network Error');
+      }
+    }
+
+    /* AUTO GITHUB LOAD FUNCTION */
+    async function loadFromGithub(silent = true) {
+      const owner = localStorage.getItem('gh_owner');
+      const repo = localStorage.getItem('gh_repo');
+      const token = localStorage.getItem('gh_token');
+
+      if (!owner || !repo || !token) return;
+
+      updateSyncBadge('⏳ Fetching from GitHub...');
+
+      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/inventory_data.json`;
+
+      try {
+        const response = await fetch(apiUrl, { headers: { 'Authorization': `token ${token}` } });
+        if (response.ok) {
+          const fileData = await response.json();
+          const parsedData = JSON.parse(decodeURIComponent(escape(atob(fileData.content))));
+          if (parsedData.inventoryStore) {
+            inventoryStore = parsedData.inventoryStore;
+            markedOutPastries = parsedData.markedOutPastries || [];
+            historyLogs = parsedData.historyLogs || [];
+            renderAllTables();
+            updateSyncBadge('✅ Loaded & Synced');
+            if (!silent) alert('Successfully loaded latest state from GitHub!');
+          }
+        } else {
+          updateSyncBadge('⚡ Ready');
+        }
+      } catch (err) {
+        updateSyncBadge('⚠️ Load Skipped');
+      }
+    }
+
+    function updateSyncBadge(text) {
+      const badge = document.getElementById('sync-status');
+      if (badge) badge.innerText = text;
+    }
 
     function logHistoryEntry(module, category, itemName, action, oldDate, newDate, detail) {
       historyLogs.unshift({
@@ -1181,6 +1278,7 @@
           markedOutPastries = markedOutPastries.filter(p => p.id !== id);
         }
         renderAllTables();
+        saveToGithub(); // Auto Save after deletion
       };
 
       document.getElementById('delete-modal-text').innerText = "Are you sure you want to delete this item? This action cannot be undone.";
@@ -1207,6 +1305,7 @@
           markedOutPastries = markedOutPastries.filter(p => !p.selected);
         }
         renderAllTables();
+        saveToGithub(); // Auto Save after bulk deletion
       };
 
       document.getElementById('delete-modal-text').innerText = `Are you sure you want to delete the ${count} selected item(s)? This action cannot be undone.`;
@@ -1248,7 +1347,7 @@
       }
     }
 
-    // Github Config
+    // Github Config Modal
     function toggleGithubModal() {
       document.getElementById('github-modal').classList.toggle('active');
     }
@@ -1257,81 +1356,9 @@
       localStorage.setItem('gh_owner', document.getElementById('gh-owner').value.trim());
       localStorage.setItem('gh_repo', document.getElementById('gh-repo').value.trim());
       localStorage.setItem('gh_token', document.getElementById('gh-token').value.trim());
-      alert('GitHub Settings Saved!');
+      alert('GitHub Credentials Saved! Syncing now...');
       toggleGithubModal();
-    }
-
-    async function saveToGithub() {
-      const owner = localStorage.getItem('gh_owner');
-      const repo = localStorage.getItem('gh_repo');
-      const token = localStorage.getItem('gh_token');
-
-      if (!owner || !repo || !token) {
-        alert('Please configure your GitHub credentials in "⚙ Config" first.');
-        toggleGithubModal();
-        return;
-      }
-
-      const filePath = 'inventory_data.json';
-      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
-
-      const payloadData = {
-        inventoryStore,
-        markedOutPastries,
-        historyLogs,
-        lastUpdated: new Date().toISOString()
-      };
-
-      const contentString = JSON.stringify(payloadData, null, 2);
-      const contentEncoded = btoa(unescape(encodeURIComponent(contentString)));
-
-      try {
-        let sha = null;
-        const getRes = await fetch(apiUrl, { headers: { 'Authorization': `token ${token}` } });
-        if (getRes.ok) sha = (await getRes.json()).sha;
-
-        const putRes = await fetch(apiUrl, {
-          method: 'PUT',
-          headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: 'Update cafe inventory_data.json', content: contentEncoded, ...(sha && { sha }) })
-        });
-
-        if (putRes.ok) alert('Successfully saved to GitHub repository!');
-        else alert('Error saving to GitHub');
-      } catch (err) {
-        alert('Network Error: ' + err.message);
-      }
-    }
-
-    async function loadFromGithub() {
-      const owner = localStorage.getItem('gh_owner');
-      const repo = localStorage.getItem('gh_repo');
-      const token = localStorage.getItem('gh_token');
-
-      if (!owner || !repo || !token) {
-        alert('Please configure your GitHub credentials in "⚙ Config" first.');
-        toggleGithubModal();
-        return;
-      }
-
-      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/inventory_data.json`;
-
-      try {
-        const response = await fetch(apiUrl, { headers: { 'Authorization': `token ${token}` } });
-        if (response.ok) {
-          const fileData = await response.json();
-          const parsedData = JSON.parse(decodeURIComponent(escape(atob(fileData.content))));
-          if (parsedData.inventoryStore) {
-            inventoryStore = parsedData.inventoryStore;
-            markedOutPastries = parsedData.markedOutPastries || [];
-            historyLogs = parsedData.historyLogs || [];
-            renderAllTables();
-            alert('Successfully loaded from GitHub!');
-          }
-        }
-      } catch (err) {
-        alert('Error loading from GitHub: ' + err.message);
-      }
+      loadFromGithub();
     }
 
     function navigateTo(pageId) {
@@ -1386,6 +1413,7 @@
         item.usedQty = Math.max(0, item.usedQty + delta);
         logHistoryEntry('cafe', item.category, item.name, 'Quick Adjustment', oldDate, today, `Bar Usage adjusted to ${item.usedQty} ${item.unit}`);
         renderAllTables();
+        saveToGithub(); // Auto Save
       }
     }
 
@@ -1429,6 +1457,7 @@
           logHistoryEntry('delivery', item.category, item.name, 'Stock Pre-Edit', oldDate, item.date, `Updated storage stock to ${delVal} ${item.unit}`);
         }
         renderAllTables();
+        saveToGithub(); // Auto Save
       }
     }
 
@@ -1440,7 +1469,6 @@
         return;
       }
 
-      // Group logs by Category (MILK, BAR, RETAIL, PASTRIES)
       const categories = ['MILK', 'BAR', 'RETAIL', 'PASTRIES'];
       const grouped = {};
       categories.forEach(c => grouped[c] = []);
@@ -1453,7 +1481,6 @@
 
       categories.forEach(cat => {
         if (grouped[cat] && grouped[cat].length > 0) {
-          // Category Header Row
           tbody.innerHTML += `
             <tr class="history-category-row">
               <td colspan="10">📌 ${cat} HISTORY LOGS</td>
@@ -1686,6 +1713,7 @@
       document.getElementById('cafe-item-name').value = '';
       document.getElementById('cafe-item-used').value = '0';
       renderAllTables();
+      saveToGithub(); // Auto Save after form submission
     }
 
     function handleDeliverySubmit(e) {
@@ -1715,6 +1743,7 @@
       document.getElementById('del-item-name').value = '';
       document.getElementById('del-item-qty').value = '10';
       renderAllTables();
+      saveToGithub(); // Auto Save after receiving delivery
     }
 
     function handleMarkedOutSubmit(e) {
@@ -1729,6 +1758,7 @@
       document.getElementById('pastry-item-name').value = '';
       document.getElementById('pastry-qty').value = '1';
       renderMarkedOutPastries();
+      saveToGithub(); // Auto Save
     }
   </script>
 </body>
