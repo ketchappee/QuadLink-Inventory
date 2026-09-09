@@ -700,6 +700,51 @@
   ],
   "logs": [
     {
+      "id": "log_1788919570339",
+      "timestamp": "2026-09-09 10:06",
+      "details": "Updated delivery shipment details for \"GILCO ALMOND MILK  ( 1 CASE )\""
+    },
+    {
+      "id": "log_1788919541740",
+      "timestamp": "2026-09-09 10:05",
+      "details": "📦 Logged delivery shipment for \"GILCO ALMOND MILK  ( 1 CASE )\" (12 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788919450761",
+      "timestamp": "2026-09-09 10:04",
+      "details": "📦 Logged delivery shipment for \"SANTOKU KNIFE\" (2 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788919445658",
+      "timestamp": "2026-09-09 10:04",
+      "details": "📦 Logged delivery shipment for \"THICK WHITE CHOPPING BOARD\" (2 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788919433285",
+      "timestamp": "2026-09-09 10:03",
+      "details": "📦 Logged delivery shipment for \"COFFEE TAMPER NEEDLES DISTRIBUTOR WOOD HANDLE\" (1 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788919392578",
+      "timestamp": "2026-09-09 10:03",
+      "details": "📦 Logged delivery shipment for \"CUPPA CALIBRATED ESPRESSO TAMPER 58mm\" (1 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788919387411",
+      "timestamp": "2026-09-09 10:03",
+      "details": "📦 Logged delivery shipment for \"CUPPA CALIBRATED ESPRESSO TAMPER 51mm\" (1 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788919354474",
+      "timestamp": "2026-09-09 10:02",
+      "details": "📦 Logged delivery shipment for \"COFFEE BRUSH\" (1 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788919162389",
+      "timestamp": "2026-09-09 09:59",
+      "details": "☁️ Saved local backup & synced to GitHub (inventory_data.json)"
+    },
+    {
       "id": "log_1788919157591",
       "timestamp": "2026-09-09 09:59",
       "details": "📦 Logged delivery shipment for \"LARGE DISPOSABLE FILTER\" (1 Pack). Flagged as pending for Storage."
@@ -853,54 +898,100 @@
       "id": "log_1788918141859",
       "timestamp": "2026-09-09 09:42",
       "details": "🚚 Transferred delivery \"SNICKERS\" (12 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"FITBAR\" (12 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"CLOUD 9 CLASSIC\" (12 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"LAY'S ORIGINAL\" (1 Case) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"LAY'S SOUR CREAM\" (1 Case) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"LAY'S CHEESE\" (1 Case) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"LOACKER\" (1 Box) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"TICTAC MINTS\" (1 Box) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"VITA COCO BIG\" (1 Case) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"VITA COCO SMALL\" (2 Case) directly into Café Storage stock."
     }
   ],
   "deliveries": [
+    {
+      "id": 1788919541740,
+      "name": "GILCO ALMOND MILK  ( 1 CASE )",
+      "category": "Café",
+      "subcategory": "MILK",
+      "supplier": "JAMBI",
+      "initQty": 12,
+      "remQty": 12,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788919450761,
+      "name": "SANTOKU KNIFE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788919445658,
+      "name": "THICK WHITE CHOPPING BOARD",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788919433285,
+      "name": "COFFEE TAMPER NEEDLES DISTRIBUTOR WOOD HANDLE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788919392578,
+      "name": "CUPPA CALIBRATED ESPRESSO TAMPER 58mm",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788919387411,
+      "name": "CUPPA CALIBRATED ESPRESSO TAMPER 51mm",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788919354474,
+      "name": "COFFEE BRUSH",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
     {
       "id": 1788919157591,
       "name": "LARGE DISPOSABLE FILTER",
@@ -1483,5 +1574,5 @@
     "LALAMOVE"
   ],
   "markedOutPastries": [],
-  "lastUpdatedTimestamp": 1788919157591
+  "lastUpdatedTimestamp": 1788919570339
 }
