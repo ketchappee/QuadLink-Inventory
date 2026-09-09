@@ -700,6 +700,41 @@
   ],
   "logs": [
     {
+      "id": "log_1788918919947",
+      "timestamp": "2026-09-09 09:55",
+      "details": "Updated delivery shipment details for \"STRAW HOLDER STAINLESS\""
+    },
+    {
+      "id": "log_1788918908106",
+      "timestamp": "2026-09-09 09:55",
+      "details": "📦 Logged delivery shipment for \"COFFEE ORGANIZER\" (1 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918893941",
+      "timestamp": "2026-09-09 09:54",
+      "details": "📦 Logged delivery shipment for \"STRAW HOLDER STAINLESS\" (1 Pack). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918873044",
+      "timestamp": "2026-09-09 09:54",
+      "details": "📦 Logged delivery shipment for \"8oz PAPER CUPS ( 25 pcs )\" (5 Pack). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918843052",
+      "timestamp": "2026-09-09 09:54",
+      "details": "📦 Logged delivery shipment for \"WHITE PAPER BAG  ( 500 PCS )\" (1 Pack). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788918795222",
+      "timestamp": "2026-09-09 09:53",
+      "details": "Updated delivery shipment details for \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( LARGE )\""
+    },
+    {
+      "id": "log_1788918761048",
+      "timestamp": "2026-09-09 09:52",
+      "details": "☁️ Saved local backup & synced to GitHub (inventory_data.json)"
+    },
+    {
       "id": "log_1788918747121",
       "timestamp": "2026-09-09 09:52",
       "details": "📦 Logged delivery shipment for \"KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( LARGE ) )\" (8 Pack). Flagged as pending for Storage."
@@ -863,47 +898,64 @@
       "id": "log_1788918141859",
       "timestamp": "2026-09-09 09:42",
       "details": "🚚 Transferred delivery \"SPRITE\" (24 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"LEA & PERRINS WORCESTERSHIRE\" (1 Bottle/s) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"RAM SWEET PICKLE RELISH\" (2 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"POTATO CHIPS\" (30 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"MOLINERA WHITE TRUFFLE OLIVE OIL\" (1 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"EDEN CHEESE SLICED BY 10\" (10 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"ARLA NATURAL MOZZARELLA\" (10 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788918141859",
-      "timestamp": "2026-09-09 09:42",
-      "details": "🚚 Transferred delivery \"STAINLESS MIXING BOWL 30cm\" (1 Pcs) directly into Café Storage stock."
     }
   ],
   "deliveries": [
     {
+      "id": 1788918908106,
+      "name": "COFFEE ORGANIZER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918893941,
+      "name": "STRAW HOLDER STAINLESS",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918873044,
+      "name": "8oz PAPER CUPS ( 25 pcs )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 5,
+      "remQty": 5,
+      "usedQty": 0,
+      "unit": "Pack",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788918843052,
+      "name": "WHITE PAPER BAG  ( 500 PCS )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Pack",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
       "id": 1788918747121,
-      "name": "KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( LARGE ) )",
+      "name": "KRAFT PAPER BAG WITH TWISTED HOLDER THICK ( LARGE )",
       "category": "Café",
       "subcategory": "BAR",
       "supplier": "JAMBI",
@@ -1392,5 +1444,5 @@
     "LALAMOVE"
   ],
   "markedOutPastries": [],
-  "lastUpdatedTimestamp": 1788918747121
+  "lastUpdatedTimestamp": 1788918919947
 }
