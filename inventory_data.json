@@ -6,7 +6,7 @@
       "name": "EMBORG FULL CREAM MILK",
       "unit": "PCS",
       "barStorage": 14,
-      "usedQty": 15,
+      "usedQty": 20,
       "editing": false,
       "selected": false,
       "batches": [
@@ -30,6 +30,56 @@
     }
   ],
   "historyLogs": [
+    {
+      "id": 1788933756207,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 20 PCS | Storage Rem: 40 PCS | Bar Rem: 0 PCS"
+    },
+    {
+      "id": 1788933756055,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 19 PCS | Storage Rem: 41 PCS | Bar Rem: 0 PCS"
+    },
+    {
+      "id": 1788933755903,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 18 PCS | Storage Rem: 42 PCS | Bar Rem: 0 PCS"
+    },
+    {
+      "id": 1788933755758,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 17 PCS | Storage Rem: 43 PCS | Bar Rem: 0 PCS"
+    },
+    {
+      "id": 1788933755622,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "FIFO Adjust",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 16 PCS | Storage Rem: 44 PCS | Bar Rem: 0 PCS"
+    },
     {
       "id": 1788933754750,
       "module": "cafe",
@@ -241,5 +291,5 @@
       "detail": "Received initial batch 60 PCS into Storage"
     }
   ],
-  "lastUpdated": "2026-09-09T06:02:34.751Z"
+  "lastUpdated": "2026-09-09T06:02:36.208Z"
 }
