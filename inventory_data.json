@@ -1154,6 +1154,31 @@
   ],
   "logs": [
     {
+      "id": "log_1788920827388",
+      "timestamp": "2026-09-09 10:27",
+      "details": "📦 Logged delivery shipment for \"SANTOKU KNIFE\" (3 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788920806058",
+      "timestamp": "2026-09-09 10:26",
+      "details": "📦 Logged delivery shipment for \"EVIAN ( 24 pcs )\" (3 Case). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788920788219",
+      "timestamp": "2026-09-09 10:26",
+      "details": "📦 Logged delivery shipment for \"PERRIER ( 24 pcs )\" (3 Case). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788920735019",
+      "timestamp": "2026-09-09 10:25",
+      "details": "📦 Logged delivery shipment for \"WOODEN STIRRER\" (7 Pack). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788920643493",
+      "timestamp": "2026-09-09 10:24",
+      "details": "☁️ Saved local backup & synced to GitHub (inventory_data.json)"
+    },
+    {
       "id": "log_1788920628938",
       "timestamp": "2026-09-09 10:23",
       "details": "🚚 Transferred delivery \"EMBORG FULL CREAM MILK ( 12PCS )\" (60 Pcs) directly into Café Storage stock."
@@ -1327,34 +1352,61 @@
       "id": "log_1788920564377",
       "timestamp": "2026-09-09 10:22",
       "details": "🚚 Transferred delivery \"BREAD KNIFE\" (2 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"CAN OPENER\" (2 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"FROTHER\" (2 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"16 OZ PLASTIC CUPS ( NO LOGO )\" (50 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"PLASTIC FLAT LIDS W/ HOLE ( NO LOGO )\" (50 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920564377",
-      "timestamp": "2026-09-09 10:22",
-      "details": "🚚 Transferred delivery \"PLASTIC DOME LIDS ( NO LOGO )\" (50 Pcs) directly into Café Storage stock."
     }
   ],
   "deliveries": [
+    {
+      "id": 1788920827388,
+      "name": "SANTOKU KNIFE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 3,
+      "remQty": 3,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-07-17",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788920806058,
+      "name": "EVIAN ( 24 pcs )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 3,
+      "remQty": 3,
+      "usedQty": 0,
+      "unit": "Case",
+      "deliveryDate": "2026-07-17",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788920788219,
+      "name": "PERRIER ( 24 pcs )",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 3,
+      "remQty": 3,
+      "usedQty": 0,
+      "unit": "Case",
+      "deliveryDate": "2026-07-17",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788920735019,
+      "name": "WOODEN STIRRER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 7,
+      "remQty": 7,
+      "usedQty": 0,
+      "unit": "Pack",
+      "deliveryDate": "2026-07-17",
+      "transferredToStorage": false
+    },
     {
       "id": 1788920467517,
       "name": "KIRKLAND SOY MILK",
@@ -2067,5 +2119,5 @@
     "LALAMOVE"
   ],
   "markedOutPastries": [],
-  "lastUpdatedTimestamp": 1788920628938
+  "lastUpdatedTimestamp": 1788920827388
 }
