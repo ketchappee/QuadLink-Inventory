@@ -1,19 +1,5 @@
 {
-  "inventoryStore": [
-    {
-      "id": 1787893084234,
-      "category": "MILK",
-      "name": "EMBORG FULL CREAM MILK",
-      "unit": "L",
-      "deliveryQty": 60,
-      "usedQty": 0,
-      "date": "2026-07-17",
-      "previousDate": null,
-      "editing": false,
-      "editingDelivery": false,
-      "selected": false
-    }
-  ],
+  "inventoryStore": [],
   "markedOutPastries": [
     {
       "id": 1,
@@ -25,5 +11,5 @@
       "selected": false
     }
   ],
-  "lastUpdated": "2026-08-28T04:58:05.288Z"
+  "lastUpdated": "2026-09-09T05:00:22.513Z"
 }
