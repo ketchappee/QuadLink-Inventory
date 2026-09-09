@@ -516,6 +516,11 @@
       box-shadow: 0 4px 12px rgba(212, 163, 115, 0.35);
     }
 
+    .tab-btn-history {
+      border-color: var(--border-accent);
+      color: var(--text-gold);
+    }
+
     /* ROLL ANIMATION FOR TABLE ROWS */
     @keyframes rollInPop {
       0% {
@@ -679,6 +684,14 @@
       font-style: italic;
     }
 
+    .history-category-row {
+      background: rgba(212, 163, 115, 0.15) !important;
+      font-weight: 700;
+      color: var(--text-gold);
+      letter-spacing: 1px;
+      font-size: 0.8rem;
+    }
+
     .tag-badge {
       display: inline-flex;
       align-items: center;
@@ -811,13 +824,14 @@
       <button class="btn btn-delete" onclick="promptDeleteSelected('cafe')">🗑 Delete Selected</button>
     </div>
 
-    <!-- Category Tabs -->
+    <!-- Category Tabs + Dedicated History Tab -->
     <div class="tab-bar" id="cafe-tab-bar">
       <button class="tab-btn active" onclick="setCategoryFilter('cafe', 'ALL', this)">ALL ITEMS</button>
       <button class="tab-btn" onclick="setCategoryFilter('cafe', 'MILK', this)">MILK ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('cafe', 'BAR', this)">BAR ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('cafe', 'RETAIL', this)">RETAIL ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('cafe', 'PASTRIES', this)">PASTRIES ONLY</button>
+      <button class="tab-btn tab-btn-history" onclick="setCategoryFilter('cafe', 'HISTORY', this)">📜 HISTORY</button>
     </div>
 
     <form class="form-container" id="cafe-form" onsubmit="handleCafeInventorySubmit(event)">
@@ -996,13 +1010,14 @@
       <button class="btn btn-delete" onclick="promptDeleteSelected('delivery')">🗑 Delete Selected</button>
     </div>
 
-    <!-- Category Tabs -->
+    <!-- Category Tabs + Dedicated History Tab -->
     <div class="tab-bar" id="delivery-tab-bar">
       <button class="tab-btn active" onclick="setCategoryFilter('delivery', 'ALL', this)">ALL ITEMS</button>
       <button class="tab-btn" onclick="setCategoryFilter('delivery', 'MILK', this)">MILK ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('delivery', 'BAR', this)">BAR ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('delivery', 'RETAIL', this)">RETAIL ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('delivery', 'PASTRIES', this)">PASTRIES ONLY</button>
+      <button class="tab-btn tab-btn-history" onclick="setCategoryFilter('delivery', 'HISTORY', this)">📜 HISTORY</button>
     </div>
 
     <form class="form-container" id="delivery-form" onsubmit="handleDeliverySubmit(event)">
@@ -1075,13 +1090,19 @@
   </div>
 
   <script>
-    // Data Stores with Before/After Date Tracking
+    // Data Stores with Before/After Date Tracking & History Logs
     let inventoryStore = [
       { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveryQty: 48, usedQty: 12, date: '2026-09-09', previousDate: '2026-09-02', editing: false, editingDelivery: false, selected: false },
       { id: 2, category: 'MILK', name: 'Oat Milk', unit: 'L', deliveryQty: 24, usedQty: 6, date: '2026-09-08', previousDate: '2026-09-01', editing: false, editingDelivery: false, selected: false },
       { id: 3, category: 'BAR', name: 'Espresso Blend', unit: 'KG', deliveryQty: 25, usedQty: 6, date: '2026-09-05', previousDate: '2026-08-28', editing: false, editingDelivery: false, selected: false },
       { id: 4, category: 'BAR', name: 'Matcha Powder', unit: 'KG', deliveryQty: 10, usedQty: 2, date: '2026-09-01', previousDate: '2026-08-20', editing: false, editingDelivery: false, selected: false },
       { id: 5, category: 'PASTRIES', name: 'Butter Croissant', unit: 'PCS', deliveryQty: 30, usedQty: 8, date: '2026-09-09', previousDate: '2026-09-03', editing: false, editingDelivery: false, selected: false }
+    ];
+
+    let historyLogs = [
+      { id: 1, module: 'cafe', category: 'MILK', itemName: 'Whole Milk', action: 'Usage Updated', oldDate: '2026-09-02', newDate: '2026-09-09', detail: 'Bar Usage updated to 12 L' },
+      { id: 2, module: 'cafe', category: 'MILK', itemName: 'Oat Milk', action: 'Usage Updated', oldDate: '2026-09-01', newDate: '2026-09-08', detail: 'Bar Usage updated to 6 L' },
+      { id: 3, module: 'delivery', category: 'BAR', itemName: 'Espresso Blend', action: 'Stock Received', oldDate: '2026-08-28', newDate: '2026-09-05', detail: 'Received 25 KG into storage' }
     ];
 
     let markedOutPastries = [
@@ -1108,6 +1129,19 @@
       renderAllTables();
     });
 
+    function logHistoryEntry(module, category, itemName, action, oldDate, newDate, detail) {
+      historyLogs.unshift({
+        id: Date.now(),
+        module,
+        category: category.toUpperCase(),
+        itemName,
+        action,
+        oldDate: oldDate || 'Initial Input',
+        newDate,
+        detail
+      });
+    }
+
     function getDaysAgoNote(dateString) {
       if (!dateString) return 'No Date';
       const inputDate = new Date(dateString);
@@ -1125,7 +1159,6 @@
       return '';
     }
 
-    /* Helper function to generate Before/After Date Card UI */
     function renderDateCardUI(currentDate, previousDate) {
       const daysAgoNote = getDaysAgoNote(currentDate);
       const prevHtml = previousDate ? `<span class="date-badge-previous">Prev: ${previousDate}</span>` : '<span class="days-ago-note">Initial Input</span>';
@@ -1245,6 +1278,7 @@
       const payloadData = {
         inventoryStore,
         markedOutPastries,
+        historyLogs,
         lastUpdated: new Date().toISOString()
       };
 
@@ -1290,6 +1324,7 @@
           if (parsedData.inventoryStore) {
             inventoryStore = parsedData.inventoryStore;
             markedOutPastries = parsedData.markedOutPastries || [];
+            historyLogs = parsedData.historyLogs || [];
             renderAllTables();
             alert('Successfully loaded from GitHub!');
           }
@@ -1316,9 +1351,11 @@
 
       if (module === 'cafe') {
         activeCafeFilter = category;
+        document.getElementById('cafe-form').style.display = (category === 'HISTORY') ? 'none' : 'flex';
         renderCafeInventory();
       } else if (module === 'delivery') {
         activeDeliveryFilter = category;
+        document.getElementById('delivery-form').style.display = (category === 'HISTORY') ? 'none' : 'flex';
         renderDeliveryInventory();
       } else if (module === 'summary') {
         activeSummaryFilter = category;
@@ -1341,11 +1378,13 @@
       const item = inventoryStore.find(i => i.id === id);
       if (item) {
         const today = new Date().toISOString().split('T')[0];
+        const oldDate = item.date;
         if (item.date !== today) {
           item.previousDate = item.date;
           item.date = today;
         }
         item.usedQty = Math.max(0, item.usedQty + delta);
+        logHistoryEntry('cafe', item.category, item.name, 'Quick Adjustment', oldDate, today, `Bar Usage adjusted to ${item.usedQty} ${item.unit}`);
         renderAllTables();
       }
     }
@@ -1362,6 +1401,7 @@
     function saveInlineEdit(id, type = 'cafe') {
       const item = inventoryStore.find(i => i.id === id);
       if (item) {
+        const oldDate = item.date;
         if (type === 'cafe') {
           const nameVal = document.getElementById(`inline-name-${id}`).value.trim();
           const usedVal = parseInt(document.getElementById(`inline-used-${id}`).value) || 0;
@@ -1375,6 +1415,7 @@
             item.date = dateVal;
           }
           item.editing = false;
+          logHistoryEntry('cafe', item.category, item.name, 'Pre-Edit Changed', oldDate, item.date, `Updated usage to ${usedVal} ${item.unit}`);
         } else if (type === 'delivery') {
           const delVal = parseInt(document.getElementById(`inline-del-${id}`).value) || 0;
           const dateVal = document.getElementById(`inline-del-date-${id}`).value;
@@ -1385,14 +1426,70 @@
             item.date = dateVal;
           }
           item.editingDelivery = false;
+          logHistoryEntry('delivery', item.category, item.name, 'Stock Pre-Edit', oldDate, item.date, `Updated storage stock to ${delVal} ${item.unit}`);
         }
         renderAllTables();
       }
     }
 
+    /* GROUPED HISTORY RENDERER */
+    function renderGroupedHistory(module, tbody) {
+      const logs = historyLogs.filter(l => l.module === module);
+      if (logs.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color: var(--text-muted); padding: 30px;">No history logs recorded yet.</td></tr>`;
+        return;
+      }
+
+      // Group logs by Category (MILK, BAR, RETAIL, PASTRIES)
+      const categories = ['MILK', 'BAR', 'RETAIL', 'PASTRIES'];
+      const grouped = {};
+      categories.forEach(c => grouped[c] = []);
+
+      logs.forEach(log => {
+        const catKey = log.category.toUpperCase();
+        if (!grouped[catKey]) grouped[catKey] = [];
+        grouped[catKey].push(log);
+      });
+
+      categories.forEach(cat => {
+        if (grouped[cat] && grouped[cat].length > 0) {
+          // Category Header Row
+          tbody.innerHTML += `
+            <tr class="history-category-row">
+              <td colspan="10">📌 ${cat} HISTORY LOGS</td>
+            </tr>
+          `;
+
+          grouped[cat].forEach(log => {
+            tbody.innerHTML += `
+              <tr>
+                <td>-</td>
+                <td><span class="tag-badge tag-house">${log.action}</span></td>
+                <td><strong>${log.category}</strong></td>
+                <td>${log.itemName}</td>
+                <td colspan="3">${log.detail}</td>
+                <td>
+                  <div class="date-history-card">
+                    <span class="date-badge-current">New: ${log.newDate}</span>
+                    <span class="date-badge-previous">Old: ${log.oldDate}</span>
+                  </div>
+                </td>
+                <td>-</td>
+              </tr>
+            `;
+          });
+        }
+      });
+    }
+
     function renderCafeInventory() {
       const tbody = document.getElementById('cafe-inventory-table-body');
       tbody.innerHTML = '';
+
+      if (activeCafeFilter === 'HISTORY') {
+        renderGroupedHistory('cafe', tbody);
+        return;
+      }
 
       let items = getSortedInventory();
       if (activeCafeFilter !== 'ALL') {
@@ -1459,6 +1556,11 @@
     function renderDeliveryInventory() {
       const tbody = document.getElementById('delivery-table-body');
       tbody.innerHTML = '';
+
+      if (activeDeliveryFilter === 'HISTORY') {
+        renderGroupedHistory('delivery', tbody);
+        return;
+      }
 
       let items = getSortedInventory();
       if (activeDeliveryFilter !== 'ALL') {
@@ -1570,12 +1672,15 @@
       let item = inventoryStore.find(i => i.name.toLowerCase() === name.toLowerCase());
 
       if (item) {
+        const oldDate = item.date;
         if (item.date !== date) item.previousDate = item.date;
         item.usedQty += usedQty;
         item.unit = unit;
         item.date = date;
+        logHistoryEntry('cafe', category, name, 'Stock Updated', oldDate, date, `Added ${usedQty} ${unit} usage`);
       } else {
         inventoryStore.push({ id: Date.now(), category, name, unit, deliveryQty: 0, usedQty, date, previousDate: null, editing: false, editingDelivery: false, selected: false });
+        logHistoryEntry('cafe', category, name, 'New Item Added', null, date, `Initial usage set to ${usedQty} ${unit}`);
       }
 
       document.getElementById('cafe-item-name').value = '';
@@ -1596,12 +1701,15 @@
       let item = inventoryStore.find(i => i.name.toLowerCase() === name.toLowerCase());
 
       if (item) {
+        const oldDate = item.date;
         if (item.date !== date) item.previousDate = item.date;
         item.deliveryQty += deliveryQty;
         item.unit = unit;
         item.date = date;
+        logHistoryEntry('delivery', category, name, 'Stock Received', oldDate, date, `Received +${deliveryQty} ${unit}`);
       } else {
         inventoryStore.push({ id: Date.now(), category, name, unit, deliveryQty, usedQty: 0, date, previousDate: null, editing: false, editingDelivery: false, selected: false });
+        logHistoryEntry('delivery', category, name, 'New Stock Entry', null, date, `Received initial ${deliveryQty} ${unit}`);
       }
 
       document.getElementById('del-item-name').value = '';
