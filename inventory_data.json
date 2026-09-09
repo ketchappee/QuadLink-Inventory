@@ -11,17 +11,6 @@
       "selected": false
     }
   ],
-  "historyLogs": [
-    {
-      "id": 1788933238215,
-      "module": "delivery",
-      "category": "MILK",
-      "itemName": "EMBORGE FULL CREAM MILK",
-      "action": "New Delivery Stock",
-      "oldDate": "Initial Input",
-      "newDate": "2026-07-17",
-      "detail": "Received 60 PCS into storage"
-    }
-  ],
-  "lastUpdated": "2026-09-09T06:01:30.374Z"
+  "historyLogs": [],
+  "lastUpdated": "2026-09-09T06:01:40.616Z"
 }
