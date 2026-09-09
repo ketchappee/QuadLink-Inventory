@@ -1502,6 +1502,86 @@
   ],
   "logs": [
     {
+      "id": "log_1788923017450",
+      "timestamp": "2026-09-09 11:03",
+      "details": "📦 Logged delivery shipment for \"HEINZ YELLOW MUSTARD 14oz\" (2 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922992932",
+      "timestamp": "2026-09-09 11:03",
+      "details": "📦 Logged delivery shipment for \"EDEN SLICED CHEESE\" (24 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922950330",
+      "timestamp": "2026-09-09 11:02",
+      "details": "📦 Logged delivery shipment for \"MCCORMICK PREPARED MUSTARD\" (2 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922929931",
+      "timestamp": "2026-09-09 11:02",
+      "details": "📦 Logged delivery shipment for \"MCCORMICK IODIZED SALT\" (1 Kg). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922909499",
+      "timestamp": "2026-09-09 11:01",
+      "details": "📦 Logged delivery shipment for \"MCCORMICK ONION POWDER\" (1 Bottle/s). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922902578",
+      "timestamp": "2026-09-09 11:01",
+      "details": "📦 Logged delivery shipment for \"MCCORMICK GARLIC POWDER\" (1 Bottle/s). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922894684",
+      "timestamp": "2026-09-09 11:01",
+      "details": "📦 Logged delivery shipment for \"MCCORMICK SPANISH PAPRIKA\" (1 Bottle/s). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922886774",
+      "timestamp": "2026-09-09 11:01",
+      "details": "📦 Logged delivery shipment for \"MCCORMICK BLACK PEPPER GROUND\" (1 Bottle/s). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922870106",
+      "timestamp": "2026-09-09 11:01",
+      "details": "📦 Logged delivery shipment for \"DEL MONTE KETCHUP ORIGINAL BLEND\" (5 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922854603",
+      "timestamp": "2026-09-09 11:00",
+      "details": "📦 Logged delivery shipment for \"MAGNOLIA MAYONNAISE\" (10 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922838715",
+      "timestamp": "2026-09-09 11:00",
+      "details": "📦 Logged delivery shipment for \"CENTURY TUNA PREMIUM\" (10 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922822100",
+      "timestamp": "2026-09-09 11:00",
+      "details": "📦 Logged delivery shipment for \"SPAM LITE\" (10 Pcs). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922813642",
+      "timestamp": "2026-09-09 11:00",
+      "details": "📦 Logged delivery shipment for \"LOTUS BISCOFF CARAMELIZED BISCUITS\" (5 Pack). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922794043",
+      "timestamp": "2026-09-09 10:59",
+      "details": "📦 Logged delivery shipment for \"BISCOFF SMOOTH SPREAD\" (5 Pack). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922777298",
+      "timestamp": "2026-09-09 10:59",
+      "details": "📦 Logged delivery shipment for \"MUSCOVADO SUGAR\" (10 Kg). Flagged as pending for Storage."
+    },
+    {
+      "id": "log_1788922759621",
+      "timestamp": "2026-09-09 10:59",
+      "details": "📦 Logged delivery shipment for \"JERSEY CONDENSED MILK\" (48 Pcs). Flagged as pending for Storage."
+    },
+    {
       "id": "log_1788922606396",
       "timestamp": "2026-09-09 10:56",
       "details": "🚚 Transferred delivery \"MICROFIBER TOWEL ( WHITE )\" (2 Pack) directly into Café Storage stock."
@@ -1620,89 +1700,217 @@
       "id": "log_1788921506188",
       "timestamp": "2026-09-09 10:38",
       "details": "📦 Logged delivery shipment for \"CUP ORGANIZER\" (1 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788921495996",
-      "timestamp": "2026-09-09 10:38",
-      "details": "📦 Logged delivery shipment for \"CALIBRATED FOOD THERMOMETER\" (2 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788921476891",
-      "timestamp": "2026-09-09 10:37",
-      "details": "📦 Logged delivery shipment for \"SMALL WIRE WHISK\" (3 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788920941026",
-      "timestamp": "2026-09-09 10:29",
-      "details": "📦 Logged delivery shipment for \"WATER PITCHER 2L\" (2 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788920927194",
-      "timestamp": "2026-09-09 10:28",
-      "details": "📦 Logged delivery shipment for \"DOUBLE WALLED ESPRESSO SHOT GLASS\" (3 Pack). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788920889818",
-      "timestamp": "2026-09-09 10:28",
-      "details": "📦 Logged delivery shipment for \"MEASURING PITCHER 5L\" (1 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788920872987",
-      "timestamp": "2026-09-09 10:27",
-      "details": "📦 Logged delivery shipment for \"DOUBLE JIGGER MEASURING CUP\" (4 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788920833900",
-      "timestamp": "2026-09-09 10:27",
-      "details": "☁️ Saved local backup & synced to GitHub (inventory_data.json)"
-    },
-    {
-      "id": "log_1788920827388",
-      "timestamp": "2026-09-09 10:27",
-      "details": "📦 Logged delivery shipment for \"SANTOKU KNIFE\" (3 Pcs). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788920806058",
-      "timestamp": "2026-09-09 10:26",
-      "details": "📦 Logged delivery shipment for \"EVIAN ( 24 pcs )\" (3 Case). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788920788219",
-      "timestamp": "2026-09-09 10:26",
-      "details": "📦 Logged delivery shipment for \"PERRIER ( 24 pcs )\" (3 Case). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788920735019",
-      "timestamp": "2026-09-09 10:25",
-      "details": "📦 Logged delivery shipment for \"WOODEN STIRRER\" (7 Pack). Flagged as pending for Storage."
-    },
-    {
-      "id": "log_1788920643493",
-      "timestamp": "2026-09-09 10:24",
-      "details": "☁️ Saved local backup & synced to GitHub (inventory_data.json)"
-    },
-    {
-      "id": "log_1788920628938",
-      "timestamp": "2026-09-09 10:23",
-      "details": "🚚 Transferred delivery \"EMBORG FULL CREAM MILK ( 12PCS )\" (60 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920628938",
-      "timestamp": "2026-09-09 10:23",
-      "details": "🚚 Transferred delivery \"OATSIDE MILK\" (30 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920628938",
-      "timestamp": "2026-09-09 10:23",
-      "details": "🚚 Transferred delivery \"KIRKLAND SOY MILK\" (24 Pcs) directly into Café Storage stock."
-    },
-    {
-      "id": "log_1788920621978",
-      "timestamp": "2026-09-09 10:23",
-      "details": "Updated delivery shipment details for \"OATSIDE MILK\""
     }
   ],
   "deliveries": [
+    {
+      "id": 1788923017450,
+      "name": "HEINZ YELLOW MUSTARD 14oz",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788922992932,
+      "name": "EDEN SLICED CHEESE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 24,
+      "remQty": 24,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788922950330,
+      "name": "MCCORMICK PREPARED MUSTARD",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 2,
+      "remQty": 2,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788922929931,
+      "name": "MCCORMICK IODIZED SALT",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Kg",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788922909499,
+      "name": "MCCORMICK ONION POWDER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Bottle/s",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788922902578,
+      "name": "MCCORMICK GARLIC POWDER",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Bottle/s",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788922894684,
+      "name": "MCCORMICK SPANISH PAPRIKA",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Bottle/s",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788922886774,
+      "name": "MCCORMICK BLACK PEPPER GROUND",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 1,
+      "remQty": 1,
+      "usedQty": 0,
+      "unit": "Bottle/s",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788922870106,
+      "name": "DEL MONTE KETCHUP ORIGINAL BLEND",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 5,
+      "remQty": 5,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788922854603,
+      "name": "MAGNOLIA MAYONNAISE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 10,
+      "remQty": 10,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788922838715,
+      "name": "CENTURY TUNA PREMIUM",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 10,
+      "remQty": 10,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788922822100,
+      "name": "SPAM LITE",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 10,
+      "remQty": 10,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788922813642,
+      "name": "LOTUS BISCOFF CARAMELIZED BISCUITS",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 5,
+      "remQty": 5,
+      "usedQty": 0,
+      "unit": "Pack",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788922794043,
+      "name": "BISCOFF SMOOTH SPREAD",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 5,
+      "remQty": 5,
+      "usedQty": 0,
+      "unit": "Pack",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788922777298,
+      "name": "MUSCOVADO SUGAR",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 10,
+      "remQty": 10,
+      "usedQty": 0,
+      "unit": "Kg",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
+    {
+      "id": 1788922759621,
+      "name": "JERSEY CONDENSED MILK",
+      "category": "Café",
+      "subcategory": "BAR",
+      "supplier": "JAMBI",
+      "initQty": 48,
+      "remQty": 48,
+      "usedQty": 0,
+      "unit": "Pcs",
+      "deliveryDate": "2026-08-06",
+      "transferredToStorage": false
+    },
     {
       "id": 1788922538142,
       "name": "PAPER CUP CARRIER/HOLDER",
@@ -2636,5 +2844,5 @@
     "LALAMOVE"
   ],
   "markedOutPastries": [],
-  "lastUpdatedTimestamp": 1788922606396
+  "lastUpdatedTimestamp": 1788923017451
 }
