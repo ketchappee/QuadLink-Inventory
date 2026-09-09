@@ -2218,61 +2218,69 @@
           <Style ss:ID="Header"><Font ss:Bold="1" ss:Color="#FFFFFF"/><Interior ss:Color="#8C7B6B" ss:Pattern="Solid"/></Style>
           <Style ss:ID="Title"><Font ss:Bold="1" ss:Size="12"/><Interior ss:Color="#EAE6E1" ss:Pattern="Solid"/></Style>
           <Style ss:ID="SubHeader"><Font ss:Bold="1"/><Interior ss:Color="#F8F6F4" ss:Pattern="Solid"/></Style>
+          <Style ss:ID="BatchRow"><Interior ss:Color="#FAFAFA" ss:Pattern="Solid"/></Style>
          </Styles>
 
-         <Worksheet ss:Name="Café Bar vs Storage Summary">
+         <Worksheet ss:Name="Inventory & Batch Ledger">
           <Table>
            <Row ss:StyleID="Title">
-            <Cell><Data ss:Type="String">Café Inventory Totals (Bar vs Storage)</Data></Cell>
+            <Cell><Data ss:Type="String">QuadLink Detailed Inventory & Delivery Dates Ledger</Data></Cell>
             <Cell><Data ss:Type="String">Export Date: ${fullTimeStr}</Data></Cell>
            </Row>
            <Row></Row>
            <Row ss:StyleID="Header">
             <Cell><Data ss:Type="String">Café Item Name</Data></Cell>
             <Cell><Data ss:Type="String">Subcategory</Data></Cell>
+            <Cell><Data ss:Type="String">Location</Data></Cell>
             <Cell><Data ss:Type="String">Unit</Data></Cell>
-            <Cell><Data ss:Type="String">Bar Stock (In-House)</Data></Cell>
-            <Cell><Data ss:Type="String">Storage Stock</Data></Cell>
-            <Cell><Data ss:Type="String">Total Remaining Stock</Data></Cell>
+            <Cell><Data ss:Type="String">Remaining Stock</Data></Cell>
             <Cell><Data ss:Type="String">Used Stock</Data></Cell>
-            <Cell><Data ss:Type="String">Initial Total (Formula)</Data></Cell>
+            <Cell><Data ss:Type="String">Source / Supplier</Data></Cell>
+            <Cell><Data ss:Type="String">Date Delivered / Added</Data></Cell>
+            <Cell><Data ss:Type="String">Last Updated Date</Data></Cell>
            </Row>`;
 
         const cafeItems = appData.inventory.filter(i => i.category === 'Café');
-        let rIndex = 4;
 
         cafeItems.forEach(item => {
-            const bar = getItemBarQty(item);
-            const storage = getItemStorageQty(item);
-            const rem = getItemTotalQty(item);
-            const used = getItemTotalUsed(item);
-            const unitStr = getItemActiveUnit(item);
+            sortItemBatches(item);
+            const itemUnit = getItemActiveUnit(item);
+            const totalRem = getItemTotalQty(item);
+            const totalUsed = getItemTotalUsed(item);
+            const itemLastUp = item.lastUpdated || dateTag;
 
             xml += `
-           <Row>
+           <Row ss:StyleID="SubHeader">
             <Cell><Data ss:Type="String">${item.name}</Data></Cell>
             <Cell><Data ss:Type="String">${item.subcategory}</Data></Cell>
-            <Cell><Data ss:Type="String">${unitStr}</Data></Cell>
-            <Cell><Data ss:Type="Number">${bar}</Data></Cell>
-            <Cell><Data ss:Type="Number">${storage}</Data></Cell>
-            <Cell ss:Formula="=RC[-2]+RC[-1]"><Data ss:Type="Number">${rem}</Data></Cell>
-            <Cell><Data ss:Type="Number">${used}</Data></Cell>
-            <Cell ss:Formula="=RC[-2]+RC[-1]"><Data ss:Type="Number">${rem + used}</Data></Cell>
+            <Cell><Data ss:Type="String">TOTAL SUMMARY</Data></Cell>
+            <Cell><Data ss:Type="String">${itemUnit}</Data></Cell>
+            <Cell><Data ss:Type="Number">${totalRem}</Data></Cell>
+            <Cell><Data ss:Type="Number">${totalUsed}</Data></Cell>
+            <Cell><Data ss:Type="String">-</Data></Cell>
+            <Cell><Data ss:Type="String">${item.batches && item.batches.length > 0 ? item.batches[0].addedDate : '-'}</Data></Cell>
+            <Cell><Data ss:Type="String">${itemLastUp}</Data></Cell>
            </Row>`;
-            rIndex++;
+
+            if (item.batches && item.batches.length > 0) {
+                item.batches.forEach(b => {
+                    xml += `
+           <Row ss:StyleID="BatchRow">
+            <Cell><Data ss:Type="String">   ↳ Batch: ${b.batchId || '-'}</Data></Cell>
+            <Cell><Data ss:Type="String">${item.subcategory}</Data></Cell>
+            <Cell><Data ss:Type="String">${b.location || 'Bar'}</Data></Cell>
+            <Cell><Data ss:Type="String">${b.unit || itemUnit}</Data></Cell>
+            <Cell><Data ss:Type="Number">${b.remQty}</Data></Cell>
+            <Cell><Data ss:Type="Number">${b.usedQty || 0}</Data></Cell>
+            <Cell><Data ss:Type="String">${b.sourceNote || 'In-House'}</Data></Cell>
+            <Cell><Data ss:Type="String">${b.addedDate}</Data></Cell>
+            <Cell><Data ss:Type="String">${b.lastUpdated || itemLastUp}</Data></Cell>
+           </Row>`;
+                });
+            }
         });
 
         xml += `
-           <Row ss:StyleID="SubHeader">
-            <Cell><Data ss:Type="String">TOTAL CAFÉ STOCK</Data></Cell>
-            <Cell><Data ss:Type="String"></Data></Cell>
-            <Cell><Data ss:Type="String"></Data></Cell>
-            <Cell ss:Formula="=SUM(D4:D${rIndex-1})"><Data ss:Type="Number">0</Data></Cell>
-            <Cell ss:Formula="=SUM(E4:E${rIndex-1})"><Data ss:Type="Number">0</Data></Cell>
-            <Cell ss:Formula="=SUM(F4:F${rIndex-1})"><Data ss:Type="Number">0</Data></Cell>
-            <Cell ss:Formula="=SUM(G4:G${rIndex-1})"><Data ss:Type="Number">0</Data></Cell>
-            <Cell ss:Formula="=SUM(H4:H${rIndex-1})"><Data ss:Type="Number">0</Data></Cell>
-           </Row>
           </Table>
          </Worksheet>
         </Workbook>`;
@@ -2281,7 +2289,7 @@
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = `cafe_bar_vs_storage_summary_${dateTag}.xls`;
+        link.download = `detailed_inventory_dated_report_${dateTag}.xls`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -2292,29 +2300,34 @@
         const dateTag = new Date().toISOString().split('T')[0];
         const fullTimeStr = getFormattedTimestamp();
 
-        let csvContent = `Report Title: Café Inventory Totals (Bar vs. Storage Summary),Generated Date: ${fullTimeStr}\n\n`;
-        csvContent += "Item Name,Subcategory,Unit,Bar Stock (In-House),Storage Stock,Total Remaining Stock,Used Stock,Initial Stock (Formula)\n";
+        let csvContent = `Report Title: QuadLink Detailed Inventory & Delivery Dates Ledger,Generated Date: ${fullTimeStr}\n\n`;
+        csvContent += "Item Name,Subcategory,Stock Location,Unit,Remaining Stock,Used Stock,Source / Supplier,Date Delivered / Added,Last Updated Date\n";
 
         const cafeItems = appData.inventory.filter(i => i.category === 'Café');
-        let rIndex = 4;
 
         cafeItems.forEach(item => {
-            const bar = getItemBarQty(item);
-            const storage = getItemStorageQty(item);
-            const rem = getItemTotalQty(item);
-            const used = getItemTotalUsed(item);
-            const unitStr = getItemActiveUnit(item);
-            const formula = `"=F${rIndex}+G${rIndex}"`;
+            sortItemBatches(item);
+            const itemUnit = getItemActiveUnit(item);
+            const totalRem = getItemTotalQty(item);
+            const totalUsed = getItemTotalUsed(item);
+            const itemLastUp = item.lastUpdated || dateTag;
+            const earliestDelDate = item.batches && item.batches.length > 0 ? item.batches[0].addedDate : '-';
 
-            csvContent += `"${item.name}","${item.subcategory}","${unitStr}",${bar},${storage},${rem},${used},${formula}\n`;
-            rIndex++;
+            csvContent += `"${item.name}","${item.subcategory}","TOTAL OVERALL","${itemUnit}",${totalRem},${totalUsed},"-","${earliestDelDate}","${itemLastUp}"\n`;
+
+            if (item.batches && item.batches.length > 0) {
+                item.batches.forEach(b => {
+                    const batchLastUp = b.lastUpdated || itemLastUp;
+                    csvContent += `"-- Batch: ${b.batchId || '-'}","${item.subcategory}","${b.location || 'Bar'}","${b.unit || itemUnit}",${b.remQty},${b.usedQty || 0},"${b.sourceNote || 'In-House'}","${b.addedDate}","${batchLastUp}"\n`;
+                });
+            }
         });
 
         const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = `cafe_bar_vs_storage_summary_${dateTag}.csv`;
+        link.download = `detailed_inventory_dated_report_${dateTag}.csv`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
