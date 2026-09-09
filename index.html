@@ -56,8 +56,8 @@
             background: var(--clear-trans-light);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            height: 64px;
-            padding: 0 20px;
+            min-height: 64px;
+            padding: 10px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -65,6 +65,8 @@
             position: sticky;
             top: 0;
             z-index: 90;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .nav-left { display: flex; align-items: center; gap: 12px; }
@@ -106,8 +108,8 @@
             transform: translateY(10px) scale(0.99);
             transition: opacity 0.3s ease, transform 0.3s ease;
             max-width: 1280px;
-            margin: 20px auto;
-            padding: 0 16px;
+            margin: 16px auto;
+            padding: 0 12px;
         }
 
         .page-view.active { display: block; opacity: 1; transform: translateY(0) scale(1); }
@@ -117,7 +119,7 @@
             backdrop-filter: blur(24px);
             border: 1px solid var(--clear-border);
             border-radius: 28px;
-            padding: 50px 24px;
+            padding: 40px 16px;
             text-align: center;
             box-shadow: var(--glass-shadow);
             display: flex;
@@ -125,26 +127,29 @@
             align-items: center;
             gap: 16px;
             max-width: 800px;
-            margin: 40px auto;
+            margin: 20px auto;
         }
 
         .home-hero-logo { height: 56px; width: auto; background: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 14px; border: 1px solid var(--clear-border); }
-        .home-hero h1 { font-size: 1.8rem; font-weight: 700; color: var(--text-main); }
+        .home-hero h1 { font-size: clamp(1.4rem, 4vw, 1.8rem); font-weight: 700; color: var(--text-main); }
         .home-hero p { font-size: 0.9rem; color: var(--text-muted); max-width: 400px; line-height: 1.5; }
 
-        .hero-action-group { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+        .hero-action-group { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; width: 100%; }
 
         .btn-proceed {
             background: var(--brand-color);
             color: #ffffff;
             font-size: 0.85rem;
             font-weight: 600;
-            padding: 12px 24px;
+            padding: 12px 20px;
             border-radius: 14px;
             border: 1px solid var(--clear-border);
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(140, 123, 107, 0.3);
             transition: all 0.25s ease;
+            flex: 1 1 200px;
+            max-width: 280px;
+            text-align: center;
         }
         .btn-proceed:hover { background: var(--brand-hover); transform: translateY(-1px); }
         .btn-proceed.secondary { background: var(--clear-trans-medium); color: var(--text-main); }
@@ -163,7 +168,7 @@
 
         .netflix-cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 16px;
         }
 
@@ -172,7 +177,7 @@
             backdrop-filter: blur(24px);
             border: 1px solid var(--clear-border);
             border-radius: 20px;
-            padding: 24px 20px;
+            padding: 20px 16px;
             cursor: pointer;
             box-shadow: var(--glass-shadow);
             display: flex;
@@ -184,16 +189,16 @@
         }
 
         .netflix-card:hover {
-            transform: scale(1.03) translateY(-3px);
+            transform: scale(1.02) translateY(-2px);
             background: var(--clear-trans-hover);
             border-color: var(--brand-color);
         }
 
         .netflix-card-icon {
-            font-size: 2.4rem;
+            font-size: 2.2rem;
             background: rgba(255, 255, 255, 0.7);
-            width: 60px;
-            height: 60px;
+            width: 56px;
+            height: 56px;
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -201,13 +206,13 @@
             border: 1px solid var(--clear-border);
         }
 
-        .netflix-card h3 { font-size: 1.1rem; font-weight: 700; }
-        .netflix-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
+        .netflix-card h3 { font-size: 1rem; font-weight: 700; }
+        .netflix-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
 
         .summary-kpi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
             margin-bottom: 20px;
         }
 
@@ -215,39 +220,41 @@
             background: var(--clear-trans-medium);
             backdrop-filter: blur(20px);
             border: 1px solid var(--clear-border);
-            border-radius: 20px;
-            padding: 18px;
+            border-radius: 18px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
             gap: 6px;
             box-shadow: var(--glass-shadow);
         }
 
-        .kpi-card-title { font-size: 0.68rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; }
-        .kpi-card-value { font-size: 1.6rem; font-weight: 800; color: var(--brand-color); }
+        .kpi-card-title { font-size: 0.65rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .kpi-card-value { font-size: 1.4rem; font-weight: 800; color: var(--brand-color); }
         .kpi-card-value.bar { color: #27AE60; }
         .kpi-card-value.storage { color: #2980B9; }
         .kpi-card-value.used { color: #C0392B; }
 
-        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
-        header h2 { font-size: 1.35rem; font-weight: 700; color: var(--text-main); }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+        header h2 { font-size: clamp(1.1rem, 3vw, 1.35rem); font-weight: 700; color: var(--text-main); }
 
-        .action-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+        .action-btns { display: flex; gap: 6px; flex-wrap: wrap; width: 100%; max-width: 100%; }
         
         button.btn {
             background: var(--clear-trans-medium);
             backdrop-filter: blur(12px);
             color: var(--text-main);
             border: 1px solid var(--clear-border);
-            padding: 8px 14px;
+            padding: 8px 12px;
             border-radius: 10px;
             cursor: pointer;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 5px;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
         button.btn:hover { background: var(--clear-trans-hover); }
@@ -264,7 +271,7 @@
         button.edit-btn { color: var(--warning); background: rgba(217, 160, 107, 0.15); border-color: rgba(217, 160, 107, 0.3); }
 
         .filter-toggle-label {
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: var(--text-main);
             display: inline-flex;
@@ -283,8 +290,9 @@
             border-radius: 20px;
             border: 1px solid var(--clear-border);
             box-shadow: var(--glass-shadow);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 16px;
+            margin-bottom: 16px;
+            width: 100%;
         }
 
         .sub-accordion-container {
@@ -306,21 +314,23 @@
         .sub-accordion-card:hover { border-color: var(--brand-color); }
 
         .sub-accordion-header {
-            padding: 14px 18px;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--text-main);
             background: rgba(255, 255, 255, 0.4);
             transition: background 0.2s ease;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         .sub-accordion-header:hover { background: rgba(255, 255, 255, 0.65); }
         
         .sub-accordion-badge {
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-weight: 600;
             background: rgba(140, 123, 107, 0.15);
             color: var(--brand-color);
@@ -352,12 +362,12 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s ease;
-            padding: 0 16px;
+            padding: 0 12px;
         }
 
         .sub-accordion-content.open {
             max-height: 2000px;
-            padding: 12px 16px 18px 16px;
+            padding: 12px 12px 16px 12px;
         }
 
         .sub-accordion-card.active .sub-accordion-arrow {
@@ -369,7 +379,7 @@
             backdrop-filter: blur(15px);
             border: 1px solid var(--clear-border);
             border-radius: 14px;
-            padding: 10px 16px;
+            padding: 10px 14px;
             margin-bottom: 14px;
             display: flex;
             align-items: center;
@@ -382,26 +392,33 @@
         .batch-info { font-size: 0.78rem; font-weight: 700; color: var(--text-main); }
         .batch-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
-        .search-bar-container { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-        .search-input-wrapper { position: relative; flex: 1; min-width: 220px; }
+        .search-bar-container { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; width: 100%; }
+        .search-input-wrapper { position: relative; flex: 1 1 200px; width: 100%; }
         .search-input-wrapper input { width: 100%; padding-left: 36px; }
         .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 0.85rem; color: var(--text-muted); pointer-events: none; }
 
         .category-section-header {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
             color: var(--text-main);
-            margin: 24px 0 10px 4px;
+            margin: 20px 0 10px 4px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 14px; }
-        .input-group { display: flex; flex-direction: column; gap: 5px; }
+        .form-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 12px; 
+            margin-bottom: 14px; 
+            width: 100%;
+        }
+
+        .input-group { display: flex; flex-direction: column; gap: 5px; width: 100%; }
         .input-group label { font-size: 0.65rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; }
 
-        .subcategory-input-wrapper, .qty-input-wrapper { display: flex; gap: 5px; align-items: center; }
+        .subcategory-input-wrapper, .qty-input-wrapper { display: flex; gap: 5px; align-items: center; width: 100%; }
         .subcategory-input-wrapper select { flex: 1; min-width: 0; }
         .qty-input-wrapper input { flex: 1; min-width: 0; width: 55%; }
         .qty-input-wrapper select { width: 45%; min-width: 70px; flex-shrink: 0; }
@@ -432,6 +449,7 @@
             outline: none;
             backdrop-filter: blur(10px);
             transition: all 0.2s ease;
+            width: 100%;
         }
         input:focus, select:focus { border-color: var(--brand-color); background: rgba(255, 255, 255, 0.95); }
         select option { background: #fff; color: #111; }
@@ -440,7 +458,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
         }
 
         .select-transfer {
@@ -460,17 +478,18 @@
         .table-container { 
             background: var(--clear-trans-medium);
             backdrop-filter: blur(20px);
-            border-radius: 20px; 
+            border-radius: 16px; 
             border: 1px solid var(--clear-border);
             box-shadow: var(--glass-shadow);
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             margin-bottom: 20px;
+            width: 100%;
         }
 
-        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 860px; }
-        th, td { padding: 12px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.35); font-size: 0.8rem; white-space: nowrap; }
-        th { background: rgba(255, 255, 255, 0.3); color: var(--text-muted); font-weight: 700; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.6px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 720px; }
+        th, td { padding: 10px 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.35); font-size: 0.78rem; white-space: nowrap; }
+        th { background: rgba(255, 255, 255, 0.3); color: var(--text-muted); font-weight: 700; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; }
 
         .qty-control { display: flex; align-items: center; gap: 5px; }
         .btn-qty { width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--clear-border); background: rgba(255, 255, 255, 0.6); cursor: pointer; font-weight: 600; font-size: 0.75rem; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -614,7 +633,7 @@
             gap: 8px;
         }
 
-        .log-section-title { font-size: 0.9rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
+        .log-section-title { font-size: 0.85rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
         .log-controls { display: flex; align-items: center; gap: 10px; }
         .select-all-label { font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 5px; cursor: pointer; }
 
@@ -641,8 +660,9 @@
             justify-content: space-between; 
             align-items: center; 
             gap: 10px;
+            flex-wrap: wrap;
         }
-        .log-item-left { display: flex; align-items: center; gap: 8px; }
+        .log-item-left { display: flex; align-items: center; gap: 8px; flex: 1 1 200px; }
         .log-checkbox { width: 14px; height: 14px; cursor: pointer; accent-color: var(--brand-color); }
         .log-date { font-weight: 600; color: var(--text-muted); font-size: 0.68rem; white-space: nowrap; }
 
@@ -665,6 +685,22 @@
             gap: 4px;
         }
         .inline-date-btn:hover { background: var(--brand-color); color: #fff; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .navbar { padding: 8px 12px; }
+            .action-btns { overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+            .form-grid { grid-template-columns: 1fr; }
+            .glass-card { padding: 12px; }
+            .summary-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .btn-proceed { max-width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .summary-kpi-grid { grid-template-columns: 1fr; }
+            .sub-accordion-header { flex-direction: column; align-items: flex-start; }
+            .action-cell-wrapper { flex-direction: column; align-items: flex-start; }
+        }
     </style>
 </head>
 <body>
@@ -676,9 +712,9 @@
             <img class="nav-brand-logo" src="viber_image_2026-09-02_16-28-15-350.png" alt="Quad Logo">
         </div>
     </div>
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <button type="button" onclick="loadFromGitHub()" class="btn github-btn" title="Sync from GitHub">☁️ Load GitHub Sync</button>
-        <button type="button" onclick="undoLastAction()" class="btn undo-btn" title="Undo last action (Ctrl+U)">↩️ Undo (Ctrl+U)</button>
+    <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+        <button type="button" onclick="loadFromGitHub()" class="btn github-btn" title="Sync from GitHub">☁️ Sync</button>
+        <button type="button" onclick="undoLastAction()" class="btn undo-btn" title="Undo last action (Ctrl+U)">↩️ Undo</button>
     </div>
 </nav>
 
@@ -707,9 +743,9 @@
             <button type="button" onclick="navigateTo('master')" class="btn">🔍 Master Search</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
-            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync to GitHub</button>
-            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
-            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
+            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Excel (.xls)</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 CSV (.csv)</button>
         </div>
     </header>
 
@@ -749,9 +785,9 @@
             <button type="button" onclick="navigateTo('inventory', 'Café')" class="btn">☕ Café Inventory</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
-            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync to GitHub</button>
-            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
-            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
+            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Excel (.xls)</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 CSV (.csv)</button>
         </div>
     </header>
 
@@ -829,9 +865,9 @@
             <button type="button" onclick="navigateTo('inventory', 'Café')" class="btn">☕ Café Inventory</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
-            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync to GitHub</button>
-            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
-            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
+            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Excel (.xls)</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 CSV (.csv)</button>
         </div>
     </header>
 
@@ -866,7 +902,7 @@
                     <input type="date" id="moDate" required>
                 </div>
             </div>
-            <div style="display: flex; gap: 8px;">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                 <button type="submit" class="btn primary">🔴 Mark Out Pastry & Update Stock</button>
                 <button type="button" class="btn danger-btn" onclick="deleteSelectedPastryFromDropdown()">🗑️ Delete Pastry Item Entirely</button>
             </div>
@@ -901,9 +937,9 @@
             <button type="button" onclick="navigateTo('master')" class="btn">🔍 Master Search</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
-            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync to GitHub</button>
-            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
-            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
+            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Excel (.xls)</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 CSV (.csv)</button>
         </div>
     </header>
 
@@ -967,7 +1003,7 @@
                     <input type="date" id="delDate" required>
                 </div>
             </div>
-            <div style="display: flex; gap: 8px; align-items: center;">
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
                 <button type="submit" id="delSubmitBtn" class="btn primary">+ Log Delivery Shipment</button>
                 <button type="button" id="delCancelEditBtn" class="btn" style="display: none;" onclick="cancelDeliveryEdit()">Cancel Edit</button>
             </div>
@@ -1011,9 +1047,9 @@
             <button type="button" onclick="navigateTo('menu')" class="btn">📂 Menu Selection</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
-            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync to GitHub</button>
-            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
-            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
+            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Excel (.xls)</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 CSV (.csv)</button>
         </div>
     </header>
 
@@ -1065,9 +1101,9 @@
             <button type="button" onclick="navigateTo('cafe-totals')" class="btn">📈 Bar vs Storage Summary</button>
             <button type="button" onclick="undoLastAction()" class="btn undo-btn">↩️ Undo (Ctrl+U)</button>
             <button type="button" onclick="loadFromGitHub()" class="btn github-btn">☁️ Load GitHub Sync</button>
-            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync to GitHub</button>
-            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Detailed Excel (.xls)</button>
-            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 Google Sheets (.csv)</button>
+            <button type="button" onclick="exportToFileGitHub()" class="btn save-file-btn">💾 Save & Sync</button>
+            <button type="button" onclick="exportToExcel()" class="btn excel-btn">📊 Excel (.xls)</button>
+            <button type="button" onclick="exportToGoogleSheets()" class="btn gsheet-btn">📈 CSV (.csv)</button>
         </div>
     </header>
 
@@ -1126,7 +1162,7 @@
                     <input type="date" id="itemAddedDate" required>
                 </div>
             </div>
-            <div style="display: flex; gap: 8px; align-items: center;">
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
                 <button type="submit" id="itemSubmitBtn" class="btn primary">+ Add Item / New Batch</button>
                 <button type="button" id="itemCancelEditBtn" class="btn" style="display: none;" onclick="cancelItemEdit()">Cancel Edit</button>
             </div>
@@ -2835,7 +2871,7 @@
                             </td>
                         </tr>
                         <tr id="batchRow-${item.id}" class="batch-breakdown-row" style="display: none;">
-                            <td colspan="6" style="padding: 10px 20px;">
+                            <td colspan="6" style="padding: 10px 12px;">
                                 <div style="font-size:0.75rem; font-weight:700; margin-bottom:6px; color:var(--brand-color);">📦 FIFO Batches Ledger (Monitored Chronologically):</div>
                                 <table class="batch-subtable">
                                     <thead>
