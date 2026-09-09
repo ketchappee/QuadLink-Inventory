@@ -556,7 +556,7 @@
       border-bottom: none;
     }
 
-    /* Inline Edit Styling */
+    /* Inline Pre-Edit Inputs */
     .inline-input {
       background: rgba(18, 14, 12, 0.8);
       border: 1px solid var(--accent-espresso);
@@ -571,6 +571,36 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+    }
+
+    /* Date Notes & Small Tags */
+    .date-note-container {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .date-main {
+      font-weight: 600;
+      color: var(--text-main);
+      font-size: 0.85rem;
+    }
+
+    .date-badge-note {
+      font-size: 0.7rem;
+      color: var(--accent-espresso);
+      background: rgba(212, 163, 115, 0.12);
+      border: 1px solid rgba(212, 163, 115, 0.25);
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .days-ago-note {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-style: italic;
     }
 
     .tag-badge {
@@ -760,7 +790,7 @@
             <th>Bar Usage (Pre-Edit)</th>
             <th>Remaining Stock</th>
             <th>Accuracy</th>
-            <th>Last Updated</th>
+            <th>Last Updated Date & Note</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -796,6 +826,7 @@
             <th>In-House Usage</th>
             <th>Current Remaining</th>
             <th>Stock Accuracy</th>
+            <th>Last Updated</th>
           </tr>
         </thead>
         <tbody id="stocks-summary-table-body" class="animated-table-body"></tbody>
@@ -940,8 +971,8 @@
             <th>Storage Stock</th>
             <th>Bar Usage</th>
             <th>Remaining</th>
-            <th>Date Received</th>
-            <th>Action</th>
+            <th>Received Date & Note</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody id="delivery-table-body" class="animated-table-body"></tbody>
@@ -952,11 +983,11 @@
   <script>
     // Data Stores
     let inventoryStore = [
-      { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveryQty: 48, usedQty: 12, date: '2026-09-09', editing: false },
-      { id: 2, category: 'MILK', name: 'Oat Milk', unit: 'L', deliveryQty: 24, usedQty: 6, date: '2026-09-09', editing: false },
-      { id: 3, category: 'BAR', name: 'Espresso Blend', unit: 'KG', deliveryQty: 25, usedQty: 6, date: '2026-09-09', editing: false },
-      { id: 4, category: 'BAR', name: 'Matcha Powder', unit: 'KG', deliveryQty: 10, usedQty: 2, date: '2026-09-09', editing: false },
-      { id: 5, category: 'PASTRIES', name: 'Butter Croissant', unit: 'PCS', deliveryQty: 30, usedQty: 8, date: '2026-09-09', editing: false }
+      { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveryQty: 48, usedQty: 12, date: '2026-09-09', editing: false, editingDelivery: false },
+      { id: 2, category: 'MILK', name: 'Oat Milk', unit: 'L', deliveryQty: 24, usedQty: 6, date: '2026-09-08', editing: false, editingDelivery: false },
+      { id: 3, category: 'BAR', name: 'Espresso Blend', unit: 'KG', deliveryQty: 25, usedQty: 6, date: '2026-09-05', editing: false, editingDelivery: false },
+      { id: 4, category: 'BAR', name: 'Matcha Powder', unit: 'KG', deliveryQty: 10, usedQty: 2, date: '2026-09-01', editing: false, editingDelivery: false },
+      { id: 5, category: 'PASTRIES', name: 'Butter Croissant', unit: 'PCS', deliveryQty: 30, usedQty: 8, date: '2026-09-09', editing: false, editingDelivery: false }
     ];
 
     let markedOutPastries = [
@@ -980,6 +1011,24 @@
 
       renderAllTables();
     });
+
+    // Helper to calculate days ago note
+    function getDaysAgoNote(dateString) {
+      if (!dateString) return 'No Date';
+      const inputDate = new Date(dateString);
+      const today = new Date();
+      inputDate.setHours(0,0,0,0);
+      today.setHours(0,0,0,0);
+
+      const diffTime = today - inputDate;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+      if (diffDays === 0) return '• Updated Today';
+      if (diffDays === 1) return '• Updated 1 day ago';
+      if (diffDays > 1) return `• Updated ${diffDays} days ago`;
+      if (diffDays < 0) return '• Scheduled / Future Date';
+      return '';
+    }
 
     // Github Modal Functions
     function toggleGithubModal() {
@@ -1142,7 +1191,7 @@
       return [...inventoryStore].sort((a, b) => a.category.localeCompare(b.category));
     }
 
-    // PRE-EDIT / QUICK ADJUST FUNCTIONS
+    // PRE-EDIT & DATE PRE-EDIT FUNCTIONS
     function quickAdjustUsage(id, delta) {
       const item = inventoryStore.find(i => i.id === id);
       if (item) {
@@ -1152,27 +1201,39 @@
       }
     }
 
-    function toggleInlineEdit(id) {
+    function toggleInlineEdit(id, type = 'cafe') {
       const item = inventoryStore.find(i => i.id === id);
       if (item) {
-        item.editing = !item.editing;
-        renderCafeInventory();
+        if (type === 'cafe') item.editing = !item.editing;
+        if (type === 'delivery') item.editingDelivery = !item.editingDelivery;
+        renderAllTables();
       }
     }
 
-    function saveInlineEdit(id) {
+    function saveInlineEdit(id, type = 'cafe') {
       const item = inventoryStore.find(i => i.id === id);
       if (item) {
-        const catVal = document.getElementById(`inline-cat-${id}`).value.trim().toUpperCase();
-        const nameVal = document.getElementById(`inline-name-${id}`).value.trim();
-        const unitVal = document.getElementById(`inline-unit-${id}`).value;
-        const usedVal = parseInt(document.getElementById(`inline-used-${id}`).value) || 0;
+        if (type === 'cafe') {
+          const catVal = document.getElementById(`inline-cat-${id}`).value.trim().toUpperCase();
+          const nameVal = document.getElementById(`inline-name-${id}`).value.trim();
+          const unitVal = document.getElementById(`inline-unit-${id}`).value;
+          const usedVal = parseInt(document.getElementById(`inline-used-${id}`).value) || 0;
+          const dateVal = document.getElementById(`inline-date-${id}`).value;
 
-        if (nameVal) item.name = nameVal;
-        if (catVal) item.category = catVal;
-        item.unit = unitVal;
-        item.usedQty = usedVal;
-        item.editing = false;
+          if (nameVal) item.name = nameVal;
+          if (catVal) item.category = catVal;
+          item.unit = unitVal;
+          item.usedQty = usedVal;
+          if (dateVal) item.date = dateVal;
+          item.editing = false;
+        } else if (type === 'delivery') {
+          const delVal = parseInt(document.getElementById(`inline-del-${id}`).value) || 0;
+          const dateVal = document.getElementById(`inline-del-date-${id}`).value;
+
+          item.deliveryQty = delVal;
+          if (dateVal) item.date = dateVal;
+          item.editingDelivery = false;
+        }
         renderAllTables();
       }
     }
@@ -1189,9 +1250,10 @@
       items.forEach((item, index) => {
         const remaining = item.deliveryQty - item.usedQty;
         const accuracy = item.deliveryQty > 0 ? ((remaining / item.deliveryQty) * 100).toFixed(0) + '%' : '100%';
+        const daysAgoNote = getDaysAgoNote(item.date);
 
         if (item.editing) {
-          // Inline Pre-Edit Form Row
+          // Inline Pre-Edit Form Row (Including Date Pre-Edit)
           const editRow = `
             <tr>
               <td><span class="tag-badge tag-house">In-House</span></td>
@@ -1211,16 +1273,16 @@
               <td><input type="number" id="inline-used-${item.id}" class="inline-input" value="${item.usedQty}" style="width: 70px;" /></td>
               <td><strong>${remaining} ${item.unit}</strong></td>
               <td class="accuracy-indicator">${accuracy}</td>
-              <td>${item.date}</td>
+              <td><input type="date" id="inline-date-${item.id}" class="inline-input" value="${item.date}" /></td>
               <td style="display: flex; gap: 4px;">
-                <button class="btn-save-inline" onclick="saveInlineEdit(${item.id})">💾 Save</button>
-                <button class="btn-delete" onclick="toggleInlineEdit(${item.id})">Cancel</button>
+                <button class="btn-save-inline" onclick="saveInlineEdit(${item.id}, 'cafe')">💾 Save</button>
+                <button class="btn-delete" onclick="toggleInlineEdit(${item.id}, 'cafe')">Cancel</button>
               </td>
             </tr>
           `;
           tbody.innerHTML += editRow;
         } else {
-          // Standard Row with Pre-Edit Quick Buttons (+ / - / Edit)
+          // Standard Row with Pre-Edit Date & Quick Adjust
           const row = `
             <tr style="animation-delay: ${index * 0.05}s">
               <td><span class="tag-badge tag-house">In-House Stock</span></td>
@@ -1236,9 +1298,15 @@
               </td>
               <td><strong>${remaining} ${item.unit}</strong></td>
               <td class="accuracy-indicator">${accuracy}</td>
-              <td>${item.date}</td>
+              <td>
+                <div class="date-note-container">
+                  <span class="date-main">${item.date}</span>
+                  <span class="date-badge-note">Last Change</span>
+                  <span class="days-ago-note">${daysAgoNote}</span>
+                </div>
+              </td>
               <td style="display: flex; gap: 4px;">
-                <button class="btn-edit" onclick="toggleInlineEdit(${item.id})">✏ Edit</button>
+                <button class="btn-edit" onclick="toggleInlineEdit(${item.id}, 'cafe')">✏ Edit / Date</button>
                 <button class="btn-delete" onclick="deleteInventoryItem(${item.id})">Remove</button>
               </td>
             </tr>
@@ -1259,21 +1327,53 @@
 
       items.forEach((item, index) => {
         const remaining = item.deliveryQty - item.usedQty;
+        const daysAgoNote = getDaysAgoNote(item.date);
 
-        const row = `
-          <tr style="animation-delay: ${index * 0.05}s">
-            <td><span class="tag-badge tag-storage">Stock Storage</span></td>
-            <td><strong>${item.category}</strong></td>
-            <td>${item.name}</td>
-            <td><span class="unit-pill">${item.unit}</span></td>
-            <td>${item.deliveryQty} ${item.unit}</td>
-            <td>${item.usedQty} ${item.unit}</td>
-            <td><strong>${remaining} ${item.unit}</strong></td>
-            <td>${item.date}</td>
-            <td><button class="btn-delete" onclick="deleteInventoryItem(${item.id})">Remove</button></td>
-          </tr>
-        `;
-        tbody.innerHTML += row;
+        if (item.editingDelivery) {
+          // Delivery Pre-Edit Row
+          const editRow = `
+            <tr>
+              <td><span class="tag-badge tag-storage">Stock Storage</span></td>
+              <td><strong>${item.category}</strong></td>
+              <td>${item.name}</td>
+              <td><span class="unit-pill">${item.unit}</span></td>
+              <td><input type="number" id="inline-del-${item.id}" class="inline-input" value="${item.deliveryQty}" style="width: 80px;" /></td>
+              <td>${item.usedQty} ${item.unit}</td>
+              <td><strong>${remaining} ${item.unit}</strong></td>
+              <td><input type="date" id="inline-del-date-${item.id}" class="inline-input" value="${item.date}" /></td>
+              <td style="display: flex; gap: 4px;">
+                <button class="btn-save-inline" onclick="saveInlineEdit(${item.id}, 'delivery')">💾 Save</button>
+                <button class="btn-delete" onclick="toggleInlineEdit(${item.id}, 'delivery')">Cancel</button>
+              </td>
+            </tr>
+          `;
+          tbody.innerHTML += editRow;
+        } else {
+          // Standard Delivery Row
+          const row = `
+            <tr style="animation-delay: ${index * 0.05}s">
+              <td><span class="tag-badge tag-storage">Stock Storage</span></td>
+              <td><strong>${item.category}</strong></td>
+              <td>${item.name}</td>
+              <td><span class="unit-pill">${item.unit}</span></td>
+              <td>${item.deliveryQty} ${item.unit}</td>
+              <td>${item.usedQty} ${item.unit}</td>
+              <td><strong>${remaining} ${item.unit}</strong></td>
+              <td>
+                <div class="date-note-container">
+                  <span class="date-main">${item.date}</span>
+                  <span class="date-badge-note">Received Date</span>
+                  <span class="days-ago-note">${daysAgoNote}</span>
+                </div>
+              </td>
+              <td style="display: flex; gap: 4px;">
+                <button class="btn-edit" onclick="toggleInlineEdit(${item.id}, 'delivery')">✏ Edit Date / Stock</button>
+                <button class="btn-delete" onclick="deleteInventoryItem(${item.id})">Remove</button>
+              </td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        }
       });
     }
 
@@ -1289,6 +1389,7 @@
       items.forEach((item, index) => {
         const remaining = item.deliveryQty - item.usedQty;
         const accuracy = item.deliveryQty > 0 ? ((remaining / item.deliveryQty) * 100).toFixed(0) + '%' : '100%';
+        const daysAgoNote = getDaysAgoNote(item.date);
 
         const row = `
           <tr style="animation-delay: ${index * 0.05}s">
@@ -1299,6 +1400,12 @@
             <td>${item.usedQty} ${item.unit}</td>
             <td><strong>${remaining} ${item.unit}</strong></td>
             <td class="accuracy-indicator">${accuracy}</td>
+            <td>
+              <div class="date-note-container">
+                <span class="date-main">${item.date}</span>
+                <span class="days-ago-note">${daysAgoNote}</span>
+              </div>
+            </td>
           </tr>
         `;
         tbody.innerHTML += row;
@@ -1351,7 +1458,8 @@
           deliveryQty: 0,
           usedQty: usedQty,
           date: date,
-          editing: false
+          editing: false,
+          editingDelivery: false
         });
       }
 
@@ -1387,7 +1495,8 @@
           deliveryQty: deliveryQty,
           usedQty: 0,
           date: date,
-          editing: false
+          editing: false,
+          editingDelivery: false
         });
       }
 
