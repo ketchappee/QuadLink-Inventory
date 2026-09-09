@@ -1,51 +1,5 @@
 {
-  "inventoryStore": [
-    {
-      "id": 1,
-      "category": "MILK",
-      "name": "Whole Milk",
-      "unit": "L",
-      "deliveryQty": 48,
-      "usedQty": 12,
-      "date": "2026-09-09"
-    },
-    {
-      "id": 2,
-      "category": "MILK",
-      "name": "Oat Milk",
-      "unit": "L",
-      "deliveryQty": 24,
-      "usedQty": 6,
-      "date": "2026-09-09"
-    },
-    {
-      "id": 3,
-      "category": "BAR",
-      "name": "Espresso Blend",
-      "unit": "KG",
-      "deliveryQty": 25,
-      "usedQty": 6,
-      "date": "2026-09-09"
-    },
-    {
-      "id": 4,
-      "category": "BAR",
-      "name": "Matcha Powder",
-      "unit": "KG",
-      "deliveryQty": 10,
-      "usedQty": 2,
-      "date": "2026-09-09"
-    },
-    {
-      "id": 5,
-      "category": "PASTRIES",
-      "name": "Butter Croissant",
-      "unit": "PCS",
-      "deliveryQty": 30,
-      "usedQty": 8,
-      "date": "2026-09-09"
-    }
-  ],
+  "inventoryStore": [],
   "markedOutPastries": [
     {
       "id": 1,
@@ -56,5 +10,5 @@
       "date": "2026-09-09"
     }
   ],
-  "lastUpdated": "2026-09-09T04:01:28.258Z"
+  "lastUpdated": "2026-09-09T04:05:34.395Z"
 }
