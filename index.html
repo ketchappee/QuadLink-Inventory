@@ -472,7 +472,7 @@
     /* 3. SUBPAGES LAYOUT */
     .subpage {
       padding: 80px 40px 50px;
-      max-width: 1280px;
+      max-width: 1350px;
       margin: 0 auto;
     }
 
@@ -738,6 +738,16 @@
       color: #94d2bd;
     }
 
+    .high-remaining {
+      color: #38ef7d;
+      font-weight: 700;
+    }
+
+    .low-remaining {
+      color: #ff8585;
+      font-weight: 700;
+    }
+
     @media (max-width: 768px) {
       .subpage { padding: 80px 20px 30px; }
       .card { width: 100%; height: 160px; }
@@ -878,7 +888,7 @@
       </div>
 
       <div class="form-group">
-        <label>Bar Usage Qty</label>
+        <label>Record Bar Usage</label>
         <input type="number" id="cafe-item-used" min="0" value="0" required />
       </div>
 
@@ -899,8 +909,9 @@
             <th>Category</th>
             <th>Item Name</th>
             <th>Unit</th>
-            <th>Bar Usage (Pre-Edit)</th>
-            <th>Remaining Stock</th>
+            <th>Bar Storage</th>
+            <th>Usage</th>
+            <th>Remaining Bar Stock</th>
             <th>Accuracy</th>
             <th>Date History (Before & After)</th>
             <th>Actions</th>
@@ -936,9 +947,10 @@
             <th>Unit</th>
             <th>Delivered Stock</th>
             <th>Storage Stock</th>
-            <th>Bar Usage</th>
+            <th>Bar Storage</th>
+            <th>Usage</th>
             <th>Remaining Stock</th>
-            <th>Accuracy</th>
+            <th>Stock Accuracy</th>
             <th>Date History (Before & After)</th>
           </tr>
         </thead>
@@ -1088,8 +1100,9 @@
             <th>Unit</th>
             <th>Delivered Stock</th>
             <th>Storage Stock</th>
-            <th>Bar Usage</th>
-            <th>Remaining Stock</th>
+            <th>Bar Storage</th>
+            <th>Usage</th>
+            <th>Remaining</th>
             <th>Date History (Before & After)</th>
             <th>Actions</th>
           </tr>
@@ -1100,19 +1113,18 @@
   </div>
 
   <script>
-    // Data Stores - Synchronized Delivery & Bar Pipeline
+    // Detailed Data Structure with Delivered, Storage, Bar Storage, Usage, and Remaining
     let inventoryStore = [
-      { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveryQty: 48, usedQty: 12, date: '2026-09-09', previousDate: '2026-09-02', editing: false, editingDelivery: false, selected: false },
-      { id: 2, category: 'MILK', name: 'Oat Milk', unit: 'L', deliveryQty: 24, usedQty: 6, date: '2026-09-08', previousDate: '2026-09-01', editing: false, editingDelivery: false, selected: false },
-      { id: 3, category: 'BAR', name: 'Espresso Blend', unit: 'KG', deliveryQty: 25, usedQty: 6, date: '2026-09-05', previousDate: '2026-08-28', editing: false, editingDelivery: false, selected: false },
-      { id: 4, category: 'BAR', name: 'Matcha Powder', unit: 'KG', deliveryQty: 10, usedQty: 2, date: '2026-09-01', previousDate: '2026-08-20', editing: false, editingDelivery: false, selected: false },
-      { id: 5, category: 'PASTRIES', name: 'Butter Croissant', unit: 'PCS', deliveryQty: 30, usedQty: 8, date: '2026-09-09', previousDate: '2026-09-03', editing: false, editingDelivery: false, selected: false }
+      { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveredQty: 48, barStorage: 20, usedQty: 12, date: '2026-09-09', previousDate: '2026-09-02', editing: false, editingDelivery: false, selected: false },
+      { id: 2, category: 'MILK', name: 'Oat Milk', unit: 'L', deliveredQty: 24, barStorage: 10, usedQty: 6, date: '2026-09-08', previousDate: '2026-09-01', editing: false, editingDelivery: false, selected: false },
+      { id: 3, category: 'BAR', name: 'Espresso Blend', unit: 'KG', deliveredQty: 25, barStorage: 10, usedQty: 6, date: '2026-09-05', previousDate: '2026-08-28', editing: false, editingDelivery: false, selected: false },
+      { id: 4, category: 'BAR', name: 'Matcha Powder', unit: 'KG', deliveredQty: 10, barStorage: 4, usedQty: 2, date: '2026-09-01', previousDate: '2026-08-20', editing: false, editingDelivery: false, selected: false },
+      { id: 5, category: 'PASTRIES', name: 'Butter Croissant', unit: 'PCS', deliveredQty: 30, barStorage: 15, usedQty: 8, date: '2026-09-09', previousDate: '2026-09-03', editing: false, editingDelivery: false, selected: false }
     ];
 
     let historyLogs = [
-      { id: 1, module: 'cafe', category: 'MILK', itemName: 'Whole Milk', action: 'Usage Updated', oldDate: '2026-09-02', newDate: '2026-09-09', detail: 'Bar Usage updated to 12 L' },
-      { id: 2, module: 'cafe', category: 'MILK', itemName: 'Oat Milk', action: 'Usage Updated', oldDate: '2026-09-01', newDate: '2026-09-08', detail: 'Bar Usage updated to 6 L' },
-      { id: 3, module: 'delivery', category: 'BAR', itemName: 'Espresso Blend', action: 'Stock Received', oldDate: '2026-08-28', newDate: '2026-09-05', detail: 'Received 25 KG into storage' }
+      { id: 1, module: 'cafe', category: 'MILK', itemName: 'Whole Milk', action: 'Usage Recorded', oldDate: '2026-09-02', newDate: '2026-09-09', detail: 'Bar Usage updated to 12 L' },
+      { id: 2, module: 'delivery', category: 'BAR', itemName: 'Espresso Blend', action: 'Delivery Received', oldDate: '2026-08-28', newDate: '2026-09-05', detail: 'Delivered Stock +25 KG' }
     ];
 
     let markedOutPastries = [
@@ -1141,6 +1153,15 @@
       // AUTO LOAD ON STARTUP / REFRESH
       await loadFromGithub(true);
     });
+
+    /* Helper Calculations */
+    function calculateStorageStock(item) {
+      return Math.max(0, item.deliveredQty - item.barStorage);
+    }
+
+    function calculateRemaining(item) {
+      return Math.max(0, item.barStorage - item.usedQty);
+    }
 
     /* AUTO GITHUB SAVE FUNCTION */
     async function saveToGithub(silent = true) {
@@ -1412,17 +1433,10 @@
           item.previousDate = item.date;
           item.date = today;
         }
-
-        // Check bounds against delivered quantity
-        const newUsed = Math.max(0, item.usedQty + delta);
-        if (newUsed <= item.deliveryQty) {
-          item.usedQty = newUsed;
-          logHistoryEntry('cafe', item.category, item.name, 'Quick Adjustment', oldDate, today, `Bar Usage adjusted to ${item.usedQty} ${item.unit}`);
-          renderAllTables();
-          saveToGithub();
-        } else {
-          alert(`Bar Usage cannot exceed total Delivered Stock (${item.deliveryQty} ${item.unit}).`);
-        }
+        item.usedQty = Math.max(0, item.usedQty + delta);
+        logHistoryEntry('cafe', item.category, item.name, 'Quick Adjustment', oldDate, today, `Usage adjusted to ${item.usedQty} ${item.unit}`);
+        renderAllTables();
+        saveToGithub();
       }
     }
 
@@ -1441,32 +1455,33 @@
         const oldDate = item.date;
         if (type === 'cafe') {
           const nameVal = document.getElementById(`inline-name-${id}`).value.trim();
+          const barStorageVal = parseInt(document.getElementById(`inline-barstorage-${id}`).value) || 0;
           const usedVal = parseInt(document.getElementById(`inline-used-${id}`).value) || 0;
           const dateVal = document.getElementById(`inline-date-${id}`).value;
 
           if (nameVal) item.name = nameVal;
-          item.usedQty = Math.min(usedVal, item.deliveryQty);
+          item.barStorage = barStorageVal;
+          item.usedQty = usedVal;
 
           if (dateVal && dateVal !== item.date) {
             item.previousDate = item.date;
             item.date = dateVal;
           }
           item.editing = false;
-          logHistoryEntry('cafe', item.category, item.name, 'Pre-Edit Changed', oldDate, item.date, `Updated usage to ${usedVal} ${item.unit}`);
+          logHistoryEntry('cafe', item.category, item.name, 'Pre-Edit Changed', oldDate, item.date, `Bar Storage: ${barStorageVal}, Usage: ${usedVal}`);
         } else if (type === 'delivery') {
           const delVal = parseInt(document.getElementById(`inline-del-${id}`).value) || 0;
-          const usedVal = parseInt(document.getElementById(`inline-del-used-${id}`).value) || 0;
+          const barStorageVal = parseInt(document.getElementById(`inline-del-barstorage-${id}`).value) || 0;
           const dateVal = document.getElementById(`inline-del-date-${id}`).value;
 
-          item.deliveryQty = delVal;
-          item.usedQty = Math.min(usedVal, delVal);
-
+          item.deliveredQty = delVal;
+          item.barStorage = barStorageVal;
           if (dateVal && dateVal !== item.date) {
             item.previousDate = item.date;
             item.date = dateVal;
           }
           item.editingDelivery = false;
-          logHistoryEntry('delivery', item.category, item.name, 'Stock Pre-Edit', oldDate, item.date, `Updated delivered stock to ${delVal} ${item.unit}`);
+          logHistoryEntry('delivery', item.category, item.name, 'Stock Pre-Edit', oldDate, item.date, `Delivered: ${delVal}, Bar Storage: ${barStorageVal}`);
         }
         renderAllTables();
         saveToGithub();
@@ -1477,7 +1492,7 @@
     function renderGroupedHistory(module, tbody) {
       const logs = historyLogs.filter(l => l.module === module);
       if (logs.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color: var(--text-muted); padding: 30px;">No history logs recorded yet.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; color: var(--text-muted); padding: 30px;">No history logs recorded yet.</td></tr>`;
         return;
       }
 
@@ -1495,7 +1510,7 @@
         if (grouped[cat] && grouped[cat].length > 0) {
           tbody.innerHTML += `
             <tr class="history-category-row">
-              <td colspan="10">📌 ${cat} HISTORY LOGS</td>
+              <td colspan="11">📌 ${cat} HISTORY LOGS</td>
             </tr>
           `;
 
@@ -1536,9 +1551,10 @@
       }
 
       items.forEach((item, index) => {
-        const remaining = Math.max(0, item.deliveryQty - item.usedQty);
-        const accuracy = item.deliveryQty > 0 ? ((remaining / item.deliveryQty) * 100).toFixed(0) + '%' : '100%';
+        const remaining = calculateRemaining(item);
+        const accuracy = item.barStorage > 0 ? ((remaining / item.barStorage) * 100).toFixed(0) + '%' : '100%';
         const dateHistoryUI = renderDateCardUI(item.date, item.previousDate);
+        const remClass = remaining <= 3 ? 'low-remaining' : 'high-remaining';
 
         if (item.editing) {
           tbody.innerHTML += `
@@ -1554,8 +1570,9 @@
                   <option value="PCS" ${item.unit==='PCS'?'selected':''}>PCS</option>
                 </select>
               </td>
+              <td><input type="number" id="inline-barstorage-${item.id}" class="inline-input" value="${item.barStorage}" style="width: 70px;" /></td>
               <td><input type="number" id="inline-used-${item.id}" class="inline-input" value="${item.usedQty}" style="width: 70px;" /></td>
-              <td><strong>${remaining} ${item.unit}</strong></td>
+              <td><strong class="${remClass}">${remaining} ${item.unit}</strong></td>
               <td class="accuracy-indicator">${accuracy}</td>
               <td><input type="date" id="inline-date-${item.id}" class="inline-input" value="${item.date}" /></td>
               <td style="display: flex; gap: 4px;">
@@ -1572,6 +1589,7 @@
               <td><strong>${item.category}</strong></td>
               <td>${item.name}</td>
               <td><span class="unit-pill">${item.unit}</span></td>
+              <td><strong>${item.barStorage}</strong> ${item.unit}</td>
               <td>
                 <div class="inline-qty-box">
                   <button class="btn-qty-adj" onclick="quickAdjustUsage(${item.id}, -1)">-</button>
@@ -1579,7 +1597,7 @@
                   <button class="btn-qty-adj" onclick="quickAdjustUsage(${item.id}, 1)">+</button>
                 </div>
               </td>
-              <td><strong>${remaining} ${item.unit}</strong></td>
+              <td><strong class="${remClass}">${remaining} ${item.unit}</strong></td>
               <td class="accuracy-indicator">${accuracy}</td>
               <td>${dateHistoryUI}</td>
               <td style="display: flex; gap: 4px;">
@@ -1607,11 +1625,10 @@
       }
 
       items.forEach((item, index) => {
-        // Detailed Sync Calculations
-        const storageStock = Math.max(0, item.deliveryQty - item.usedQty); // Backroom Storage
-        const barUsage = item.usedQty; // Transferred / Used at Front Bar
-        const remainingStock = Math.max(0, item.deliveryQty - item.usedQty); // Net Available
+        const storageStock = calculateStorageStock(item);
+        const remaining = calculateRemaining(item);
         const dateHistoryUI = renderDateCardUI(item.date, item.previousDate);
+        const remClass = remaining <= 3 ? 'low-remaining' : 'high-remaining';
 
         if (item.editingDelivery) {
           tbody.innerHTML += `
@@ -1621,10 +1638,11 @@
               <td><strong>${item.category}</strong></td>
               <td>${item.name}</td>
               <td><span class="unit-pill">${item.unit}</span></td>
-              <td><input type="number" id="inline-del-${item.id}" class="inline-input" value="${item.deliveryQty}" style="width: 70px;" /></td>
+              <td><input type="number" id="inline-del-${item.id}" class="inline-input" value="${item.deliveredQty}" style="width: 75px;" /></td>
               <td><strong>${storageStock} ${item.unit}</strong></td>
-              <td><input type="number" id="inline-del-used-${item.id}" class="inline-input" value="${barUsage}" style="width: 70px;" /></td>
-              <td><strong>${remainingStock} ${item.unit}</strong></td>
+              <td><input type="number" id="inline-del-barstorage-${item.id}" class="inline-input" value="${item.barStorage}" style="width: 75px;" /></td>
+              <td>${item.usedQty} ${item.unit}</td>
+              <td><strong class="${remClass}">${remaining} ${item.unit}</strong></td>
               <td><input type="date" id="inline-del-date-${item.id}" class="inline-input" value="${item.date}" /></td>
               <td style="display: flex; gap: 4px;">
                 <button class="btn-save-inline" onclick="saveInlineEdit(${item.id}, 'delivery')">💾 Save</button>
@@ -1640,19 +1658,14 @@
               <td><strong>${item.category}</strong></td>
               <td>${item.name}</td>
               <td><span class="unit-pill">${item.unit}</span></td>
-              <td><strong>${item.deliveryQty}</strong> ${item.unit}</td>
-              <td><span style="color: #a3b18a; font-weight:700;">${storageStock} ${item.unit}</span></td>
-              <td>
-                <div class="inline-qty-box">
-                  <button class="btn-qty-adj" onclick="quickAdjustUsage(${item.id}, -1)">-</button>
-                  <span><strong>${barUsage}</strong> ${item.unit}</span>
-                  <button class="btn-qty-adj" onclick="quickAdjustUsage(${item.id}, 1)">+</button>
-                </div>
-              </td>
-              <td><strong>${remainingStock} ${item.unit}</strong></td>
+              <td><strong>${item.deliveredQty}</strong> ${item.unit}</td>
+              <td><strong style="color: var(--text-gold);">${storageStock}</strong> ${item.unit}</td>
+              <td><strong>${item.barStorage}</strong> ${item.unit}</td>
+              <td>${item.usedQty} ${item.unit}</td>
+              <td><strong class="${remClass}">${remaining} ${item.unit}</strong></td>
               <td>${dateHistoryUI}</td>
               <td style="display: flex; gap: 4px;">
-                <button class="btn-edit" onclick="toggleInlineEdit(${item.id}, 'delivery')">✏ Edit / Sync</button>
+                <button class="btn-edit" onclick="toggleInlineEdit(${item.id}, 'delivery')">✏ Edit Date / Stock</button>
                 <button class="btn-delete" onclick="promptDeleteSingle(${item.id}, 'delivery')">Remove</button>
               </td>
             </tr>
@@ -1671,21 +1684,22 @@
       }
 
       items.forEach((item, index) => {
-        const storageStock = Math.max(0, item.deliveryQty - item.usedQty);
-        const barUsage = item.usedQty;
-        const remaining = Math.max(0, item.deliveryQty - item.usedQty);
-        const accuracy = item.deliveryQty > 0 ? ((remaining / item.deliveryQty) * 100).toFixed(0) + '%' : '100%';
+        const storageStock = calculateStorageStock(item);
+        const remaining = calculateRemaining(item);
+        const accuracy = item.barStorage > 0 ? ((remaining / item.barStorage) * 100).toFixed(0) + '%' : '100%';
         const dateHistoryUI = renderDateCardUI(item.date, item.previousDate);
+        const remClass = remaining <= 3 ? 'low-remaining' : 'high-remaining';
 
         tbody.innerHTML += `
           <tr style="animation-delay: ${index * 0.05}s">
             <td><strong>${item.category}</strong></td>
             <td>${item.name}</td>
             <td><span class="unit-pill">${item.unit}</span></td>
-            <td><strong>${item.deliveryQty} ${item.unit}</strong></td>
-            <td><span style="color: #a3b18a; font-weight:700;">${storageStock} ${item.unit}</span></td>
-            <td>${barUsage} ${item.unit}</td>
-            <td><strong>${remaining} ${item.unit}</strong></td>
+            <td><strong>${item.deliveredQty}</strong> ${item.unit}</td>
+            <td><strong style="color: var(--text-gold);">${storageStock}</strong> ${item.unit}</td>
+            <td><strong>${item.barStorage}</strong> ${item.unit}</td>
+            <td>${item.usedQty} ${item.unit}</td>
+            <td><strong class="${remClass}">${remaining} ${item.unit}</strong></td>
             <td class="accuracy-indicator">${accuracy}</td>
             <td>${dateHistoryUI}</td>
           </tr>
@@ -1727,12 +1741,12 @@
       if (item) {
         const oldDate = item.date;
         if (item.date !== date) item.previousDate = item.date;
-        item.usedQty = Math.min(item.deliveryQty, item.usedQty + usedQty);
+        item.usedQty += usedQty;
         item.unit = unit;
         item.date = date;
-        logHistoryEntry('cafe', category, name, 'Stock Updated', oldDate, date, `Added ${usedQty} ${unit} usage`);
+        logHistoryEntry('cafe', category, name, 'Usage Recorded', oldDate, date, `Added ${usedQty} ${unit} usage`);
       } else {
-        inventoryStore.push({ id: Date.now(), category, name, unit, deliveryQty: 0, usedQty, date, previousDate: null, editing: false, editingDelivery: false, selected: false });
+        inventoryStore.push({ id: Date.now(), category, name, unit, deliveredQty: usedQty, barStorage: usedQty, usedQty: usedQty, date, previousDate: null, editing: false, editingDelivery: false, selected: false });
         logHistoryEntry('cafe', category, name, 'New Item Added', null, date, `Initial usage set to ${usedQty} ${unit}`);
       }
 
@@ -1749,7 +1763,7 @@
 
       const name = document.getElementById('del-item-name').value.trim();
       const unit = document.getElementById('del-item-unit').value;
-      const deliveryQty = parseInt(document.getElementById('del-item-qty').value) || 0;
+      const deliveredQty = parseInt(document.getElementById('del-item-qty').value) || 0;
       const date = document.getElementById('del-item-date').value;
 
       let item = inventoryStore.find(i => i.name.toLowerCase() === name.toLowerCase());
@@ -1757,13 +1771,13 @@
       if (item) {
         const oldDate = item.date;
         if (item.date !== date) item.previousDate = item.date;
-        item.deliveryQty += deliveryQty;
+        item.deliveredQty += deliveredQty;
         item.unit = unit;
         item.date = date;
-        logHistoryEntry('delivery', category, name, 'Stock Received', oldDate, date, `Received +${deliveryQty} ${unit}`);
+        logHistoryEntry('delivery', category, name, 'Delivery Received', oldDate, date, `Received +${deliveredQty} ${unit}`);
       } else {
-        inventoryStore.push({ id: Date.now(), category, name, unit, deliveryQty, usedQty: 0, date, previousDate: null, editing: false, editingDelivery: false, selected: false });
-        logHistoryEntry('delivery', category, name, 'New Stock Entry', null, date, `Received initial ${deliveryQty} ${unit}`);
+        inventoryStore.push({ id: Date.now(), category, name, unit, deliveredQty: deliveredQty, barStorage: Math.floor(deliveredQty * 0.4), usedQty: 0, date, previousDate: null, editing: false, editingDelivery: false, selected: false });
+        logHistoryEntry('delivery', category, name, 'New Stock Entry', null, date, `Received initial ${deliveredQty} ${unit}`);
       }
 
       document.getElementById('del-item-name').value = '';
