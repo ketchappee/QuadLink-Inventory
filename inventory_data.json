@@ -6,9 +6,9 @@
       "name": "EMBORG FULL CREAM MILK",
       "unit": "PCS",
       "deliveryQty": 60,
-      "usedQty": 46,
-      "date": "2026-08-28",
-      "previousDate": "2026-07-17",
+      "usedQty": 55,
+      "date": "2026-09-04",
+      "previousDate": "2026-08-28",
       "editing": false,
       "editingDelivery": false,
       "selected": false
@@ -25,5 +25,5 @@
       "selected": false
     }
   ],
-  "lastUpdated": "2026-08-28T05:03:24.243Z"
+  "lastUpdated": "2026-09-04T05:04:34.193Z"
 }
