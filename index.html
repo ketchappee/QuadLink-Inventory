@@ -340,7 +340,7 @@
       align-items: flex-end;
     }
 
-    .form-group { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 150px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 140px; }
     .form-group input, .form-group select {
       background: rgba(18, 14, 12, 0.65);
       border: 1px solid var(--border-subtle);
@@ -368,7 +368,6 @@
 
     .date-badge-current { font-size: 0.72rem; font-weight: 700; color: var(--text-main); background: rgba(226, 176, 120, 0.15); border: 1px solid rgba(226, 176, 120, 0.3); padding: 2px 6px; border-radius: 4px; }
     .date-badge-previous { font-size: 0.68rem; color: #d4a373; background: rgba(188, 108, 37, 0.12); border: 1px solid rgba(188, 108, 37, 0.25); padding: 1px 5px; border-radius: 3px; }
-    .days-ago-note { font-size: 0.68rem; color: var(--text-muted); font-style: italic; }
 
     .tag-badge { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 16px; font-size: 0.7rem; font-weight: 600; }
     .tag-house { background: rgba(212, 163, 115, 0.2); color: var(--text-gold); border: 1px solid rgba(212, 163, 115, 0.4); }
@@ -494,7 +493,17 @@
       </div>
 
       <div class="form-group">
-        <label>Record Bar Usage</label>
+        <label>Delivered Stock Qty</label>
+        <input type="number" id="cafe-item-delivered" min="0" value="10" required />
+      </div>
+
+      <div class="form-group">
+        <label>Bar Storage Qty</label>
+        <input type="number" id="cafe-item-barstorage" min="0" value="5" required />
+      </div>
+
+      <div class="form-group">
+        <label>Record Usage</label>
         <input type="number" id="cafe-item-used" min="0" value="0" required />
       </div>
 
@@ -503,7 +512,7 @@
         <input type="date" id="cafe-item-date" required />
       </div>
 
-      <button type="submit" class="btn">Update Bar Stock</button>
+      <button type="submit" class="btn">Update Bar & Delivery Stock</button>
     </form>
 
     <div class="table-container">
@@ -515,11 +524,12 @@
             <th>Category</th>
             <th>Item Name</th>
             <th>Unit</th>
+            <th>Delivered Stock</th>
+            <th>Storage Stock</th>
             <th>Bar Storage</th>
             <th>Usage</th>
             <th>Remaining Bar Stock</th>
-            <th>Accuracy</th>
-            <th>Date History (Before & After)</th>
+            <th>Date History</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -557,7 +567,7 @@
             <th>Usage</th>
             <th>Remaining Stock</th>
             <th>Stock Accuracy</th>
-            <th>Date History (Before & After)</th>
+            <th>Date History</th>
           </tr>
         </thead>
         <tbody id="stocks-summary-table-body"></tbody>
@@ -713,7 +723,7 @@
             <th>Bar Storage</th>
             <th>Usage</th>
             <th>Remaining</th>
-            <th>Date History (Before & After)</th>
+            <th>Date History</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -723,13 +733,12 @@
   </div>
 
   <script>
-    // Interconnected Stock System Data Structure
     let inventoryStore = [
-      { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveredQty: 48, barStorage: 20, usedQty: 12, date: '2026-09-09', previousDate: '2026-09-02', editing: false, editingDelivery: false, selected: false },
-      { id: 2, category: 'MILK', name: 'Oat Milk', unit: 'L', deliveredQty: 24, barStorage: 10, usedQty: 6, date: '2026-09-08', previousDate: '2026-09-01', editing: false, editingDelivery: false, selected: false },
-      { id: 3, category: 'BAR', name: 'Espresso Blend', unit: 'KG', deliveredQty: 25, barStorage: 10, usedQty: 6, date: '2026-09-05', previousDate: '2026-08-28', editing: false, editingDelivery: false, selected: false },
-      { id: 4, category: 'BAR', name: 'Matcha Powder', unit: 'KG', deliveredQty: 10, barStorage: 4, usedQty: 2, date: '2026-09-01', previousDate: '2026-08-20', editing: false, editingDelivery: false, selected: false },
-      { id: 5, category: 'PASTRIES', name: 'Butter Croissant', unit: 'PCS', deliveredQty: 30, barStorage: 15, usedQty: 8, date: '2026-09-09', previousDate: '2026-09-03', editing: false, editingDelivery: false, selected: false }
+      { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveredQty: 48, barStorage: 20, usedQty: 12, date: '2026-09-09', previousDate: '2026-09-02', editing: false, selected: false },
+      { id: 2, category: 'MILK', name: 'Oat Milk', unit: 'L', deliveredQty: 24, barStorage: 10, usedQty: 6, date: '2026-09-08', previousDate: '2026-09-01', editing: false, selected: false },
+      { id: 3, category: 'BAR', name: 'Espresso Blend', unit: 'KG', deliveredQty: 25, barStorage: 10, usedQty: 6, date: '2026-09-05', previousDate: '2026-08-28', editing: false, selected: false },
+      { id: 4, category: 'BAR', name: 'Matcha Powder', unit: 'KG', deliveredQty: 10, barStorage: 4, usedQty: 2, date: '2026-09-01', previousDate: '2026-08-20', editing: false, selected: false },
+      { id: 5, category: 'PASTRIES', name: 'Butter Croissant', unit: 'PCS', deliveredQty: 30, barStorage: 15, usedQty: 8, date: '2026-09-09', previousDate: '2026-09-03', editing: false, selected: false }
     ];
 
     let historyLogs = [
@@ -760,18 +769,24 @@
       await loadFromGithub(true);
     });
 
-    /* Interconnected Inventory Calculations */
     function calculateStorageStock(item) {
-      // Storage Stock decreases automatically as Cafe Usage increases
       return Math.max(0, item.deliveredQty - item.usedQty);
     }
 
     function calculateRemainingBarStock(item) {
-      // Remaining stock available at the bar
       return Math.max(0, item.barStorage - item.usedQty);
     }
 
-    /* AUTO GITHUB SAVE & LOAD */
+    /* CLEAR HISTORY FUNCTION */
+    function clearHistoryLogs() {
+      if (confirm("Are you sure you want to clear all history logs? This cannot be undone.")) {
+        historyLogs = [];
+        renderAllTables();
+        saveToGithub();
+      }
+    }
+
+    /* GITHUB SYNC */
     async function saveToGithub(silent = true) {
       const owner = localStorage.getItem('gh_owner');
       const repo = localStorage.getItem('gh_repo');
@@ -852,7 +867,7 @@
     }
 
     function renderDateCardUI(currentDate, previousDate) {
-      const prevHtml = previousDate ? `<span class="date-badge-previous">Prev: ${previousDate}</span>` : '<span class="days-ago-note">Initial Input</span>';
+      const prevHtml = previousDate ? `<span class="date-badge-previous">Prev: ${previousDate}</span>` : '<span style="font-size:0.68rem; color:var(--text-muted);">Initial</span>';
       return `<div style="display:flex; flex-direction:column; gap:3px;"><span class="date-badge-current">Current: ${currentDate}</span>${prevHtml}</div>`;
     }
 
@@ -876,6 +891,44 @@
       }
     }
 
+    function toggleInlineEdit(id) {
+      const item = inventoryStore.find(i => i.id === id);
+      if (item) {
+        item.editing = !item.editing;
+        renderAllTables();
+      }
+    }
+
+    function saveInlineEdit(id) {
+      const item = inventoryStore.find(i => i.id === id);
+      if (item) {
+        const nameVal = document.getElementById(`inline-name-${id}`).value.trim();
+        const deliveredVal = parseInt(document.getElementById(`inline-del-${id}`).value) || 0;
+        const barStorageVal = parseInt(document.getElementById(`inline-bar-${id}`).value) || 0;
+        const usedVal = parseInt(document.getElementById(`inline-used-${id}`).value) || 0;
+        const dateVal = document.getElementById(`inline-date-${id}`).value;
+
+        const oldDate = item.date;
+        if (nameVal) item.name = nameVal;
+        item.deliveredQty = deliveredVal;
+        item.barStorage = barStorageVal;
+        item.usedQty = usedVal;
+
+        if (dateVal && dateVal !== item.date) {
+          item.previousDate = item.date;
+          item.date = dateVal;
+        }
+        item.editing = false;
+
+        const storageRem = calculateStorageStock(item);
+        const barRem = calculateRemainingBarStock(item);
+        logHistoryEntry('cafe', item.category, item.name, 'Item Updated', oldDate, item.date, `Delivered: ${deliveredVal} | Storage Rem: ${storageRem} | Bar Storage: ${barStorageVal} | Usage: ${usedVal} ${item.unit}`);
+
+        renderAllTables();
+        saveToGithub();
+      }
+    }
+
     function renderCafeInventory() {
       const tbody = document.getElementById('cafe-inventory-table-body');
       tbody.innerHTML = '';
@@ -889,31 +942,57 @@
       if (activeCafeFilter !== 'ALL') items = items.filter(i => i.category.toUpperCase() === activeCafeFilter.toUpperCase());
 
       items.forEach(item => {
+        const storageStock = calculateStorageStock(item);
         const barRemaining = calculateRemainingBarStock(item);
-        const accuracy = item.barStorage > 0 ? ((barRemaining / item.barStorage) * 100).toFixed(0) + '%' : '100%';
         const remClass = barRemaining <= 3 ? 'low-remaining' : 'high-remaining';
 
-        tbody.innerHTML += `
-          <tr>
-            <td><input type="checkbox" class="row-checkbox" ${item.selected ? 'checked' : ''} onchange="toggleRowSelection(${item.id}, 'cafe')" /></td>
-            <td><span class="tag-badge tag-house">In-House</span></td>
-            <td><strong>${item.category}</strong></td>
-            <td>${item.name}</td>
-            <td><span class="unit-pill">${item.unit}</span></td>
-            <td><strong>${item.barStorage}</strong> ${item.unit}</td>
-            <td>
-              <div class="inline-qty-box">
-                <button class="btn-qty-adj" onclick="quickAdjustUsage(${item.id}, -1)">-</button>
-                <span><strong>${item.usedQty}</strong> ${item.unit}</span>
-                <button class="btn-qty-adj" onclick="quickAdjustUsage(${item.id}, 1)">+</button>
-              </div>
-            </td>
-            <td><strong class="${remClass}">${barRemaining} ${item.unit}</strong></td>
-            <td style="color:#94d2bd; font-weight:700;">${accuracy}</td>
-            <td>${renderDateCardUI(item.date, item.previousDate)}</td>
-            <td><button class="btn-delete" onclick="promptDeleteSingle(${item.id}, 'cafe')">Remove</button></td>
-          </tr>
-        `;
+        if (item.editing) {
+          tbody.innerHTML += `
+            <tr>
+              <td><input type="checkbox" disabled /></td>
+              <td><span class="tag-badge tag-house">In-House</span></td>
+              <td><strong>${item.category}</strong></td>
+              <td><input type="text" id="inline-name-${item.id}" class="inline-input" value="${item.name}" /></td>
+              <td><span class="unit-pill">${item.unit}</span></td>
+              <td><input type="number" id="inline-del-${item.id}" class="inline-input" value="${item.deliveredQty}" style="width:65px;" /></td>
+              <td><strong>${storageStock} ${item.unit}</strong></td>
+              <td><input type="number" id="inline-bar-${item.id}" class="inline-input" value="${item.barStorage}" style="width:65px;" /></td>
+              <td><input type="number" id="inline-used-${item.id}" class="inline-input" value="${item.usedQty}" style="width:65px;" /></td>
+              <td><strong class="${remClass}">${barRemaining} ${item.unit}</strong></td>
+              <td><input type="date" id="inline-date-${item.id}" class="inline-input" value="${item.date}" /></td>
+              <td style="display:flex; gap:4px;">
+                <button class="btn-save-inline" onclick="saveInlineEdit(${item.id})">💾 Save</button>
+                <button class="btn-delete" onclick="toggleInlineEdit(${item.id})">Cancel</button>
+              </td>
+            </tr>
+          `;
+        } else {
+          tbody.innerHTML += `
+            <tr>
+              <td><input type="checkbox" class="row-checkbox" ${item.selected ? 'checked' : ''} onchange="toggleRowSelection(${item.id}, 'cafe')" /></td>
+              <td><span class="tag-badge tag-house">In-House</span></td>
+              <td><strong>${item.category}</strong></td>
+              <td>${item.name}</td>
+              <td><span class="unit-pill">${item.unit}</span></td>
+              <td><strong>${item.deliveredQty}</strong> ${item.unit}</td>
+              <td><strong style="color:var(--text-gold);">${storageStock}</strong> ${item.unit}</td>
+              <td><strong>${item.barStorage}</strong> ${item.unit}</td>
+              <td>
+                <div class="inline-qty-box">
+                  <button class="btn-qty-adj" onclick="quickAdjustUsage(${item.id}, -1)">-</button>
+                  <span><strong>${item.usedQty}</strong> ${item.unit}</span>
+                  <button class="btn-qty-adj" onclick="quickAdjustUsage(${item.id}, 1)">+</button>
+                </div>
+              </td>
+              <td><strong class="${remClass}">${barRemaining} ${item.unit}</strong></td>
+              <td>${renderDateCardUI(item.date, item.previousDate)}</td>
+              <td style="display:flex; gap:4px;">
+                <button class="btn-edit" onclick="toggleInlineEdit(${item.id})">✏ Edit</button>
+                <button class="btn-delete" onclick="promptDeleteSingle(${item.id}, 'cafe')">Remove</button>
+              </td>
+            </tr>
+          `;
+        }
       });
     }
 
@@ -993,9 +1072,17 @@
       else if (module === 'delivery') logs = historyLogs.filter(l => l.module === 'delivery');
 
       if (logs.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; padding: 20px;">No logs recorded yet.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="12" style="text-align:center; padding: 20px;">No history logs recorded yet.</td></tr>`;
         return;
       }
+
+      tbody.innerHTML += `
+        <tr style="background: rgba(212, 163, 115, 0.15);">
+          <td colspan="12" style="padding: 8px 14px;">
+            <button class="btn btn-delete" style="font-size:0.75rem;" onclick="clearHistoryLogs()">🗑 Clear History Logs</button>
+          </td>
+        </tr>
+      `;
 
       logs.forEach(log => {
         tbody.innerHTML += `
@@ -1004,7 +1091,7 @@
             <td><span class="tag-badge tag-house">${log.action}</span></td>
             <td><strong>${log.category}</strong></td>
             <td>${log.itemName}</td>
-            <td colspan="5" style="color:var(--text-muted);">${log.detail}</td>
+            <td colspan="6" style="color:var(--text-muted);">${log.detail}</td>
             <td><span class="date-badge-current">${log.newDate}</span></td>
             <td>-</td>
           </tr>
@@ -1037,6 +1124,8 @@
 
       const name = document.getElementById('cafe-item-name').value.trim();
       const unit = document.getElementById('cafe-item-unit').value;
+      const deliveredQty = parseInt(document.getElementById('cafe-item-delivered').value) || 0;
+      const barStorage = parseInt(document.getElementById('cafe-item-barstorage').value) || 0;
       const usedQty = parseInt(document.getElementById('cafe-item-used').value) || 0;
       const date = document.getElementById('cafe-item-date').value;
 
@@ -1045,15 +1134,17 @@
       if (item) {
         const oldDate = item.date;
         if (item.date !== date) item.previousDate = item.date;
+        item.deliveredQty += deliveredQty;
+        item.barStorage += barStorage;
         item.usedQty += usedQty;
         item.date = date;
 
         const storageRem = calculateStorageStock(item);
         const barRem = calculateRemainingBarStock(item);
-        logHistoryEntry('cafe', category, name, 'Usage Recorded', oldDate, date, `Recorded +${usedQty} ${unit} usage | Storage Rem: ${storageRem} ${unit} | Bar Rem: ${barRem} ${unit}`);
+        logHistoryEntry('cafe', category, name, 'Stock Updated', oldDate, date, `Delivered: +${deliveredQty} | Storage Rem: ${storageRem} ${unit} | Bar Storage: ${item.barStorage} | Usage: +${usedQty} ${unit}`);
       } else {
-        inventoryStore.push({ id: Date.now(), category, name, unit, deliveredQty: usedQty * 2, barStorage: usedQty * 2, usedQty, date, previousDate: null, editing: false, editingDelivery: false, selected: false });
-        logHistoryEntry('cafe', category, name, 'New Cafe Item', null, date, `Initial Bar Usage set to ${usedQty} ${unit}`);
+        inventoryStore.push({ id: Date.now(), category, name, unit, deliveredQty, barStorage, usedQty, date, previousDate: null, editing: false, selected: false });
+        logHistoryEntry('cafe', category, name, 'New Cafe Item', null, date, `Added ${name} | Delivered: ${deliveredQty} | Bar Storage: ${barStorage} | Usage: ${usedQty} ${unit}`);
       }
 
       document.getElementById('cafe-item-name').value = '';
@@ -1085,7 +1176,7 @@
         const storageRem = calculateStorageStock(item);
         logHistoryEntry('delivery', category, name, 'Delivery Received', oldDate, date, `Delivered: +${deliveredQty} ${unit} | Storage Rem: ${storageRem} ${unit} | Bar Storage: ${item.barStorage} ${unit}`);
       } else {
-        inventoryStore.push({ id: Date.now(), category, name, unit, deliveredQty, barStorage, usedQty: 0, date, previousDate: null, editing: false, editingDelivery: false, selected: false });
+        inventoryStore.push({ id: Date.now(), category, name, unit, deliveredQty, barStorage, usedQty: 0, date, previousDate: null, editing: false, selected: false });
         logHistoryEntry('delivery', category, name, 'New Delivery Stock', null, date, `Received ${deliveredQty} ${unit} | Transferred ${barStorage} ${unit} to Bar Storage`);
       }
 
