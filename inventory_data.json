@@ -6,10 +6,10 @@
       "name": "EMBORG FULL CREAM MILK",
       "unit": "PCS",
       "deliveredQty": 60,
-      "barStorage": 0,
-      "usedQty": 0,
-      "date": "2026-07-17",
-      "previousDate": null,
+      "barStorage": 14,
+      "usedQty": 46,
+      "date": "2026-08-28",
+      "previousDate": "2026-07-17",
       "editing": false,
       "selected": false
     }
@@ -27,6 +27,16 @@
   ],
   "historyLogs": [
     {
+      "id": 1788933188199,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "Item Updated",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-08-28",
+      "detail": "Delivered: 60 | Storage Rem: 14 | Bar Storage: 14 | Usage: 46 PCS"
+    },
+    {
       "id": 1788933152654,
       "module": "delivery",
       "category": "MILK",
@@ -37,5 +47,5 @@
       "detail": "Received 60 PCS into storage"
     }
   ],
-  "lastUpdated": "2026-09-09T05:52:32.656Z"
+  "lastUpdated": "2026-09-09T05:53:08.200Z"
 }
