@@ -254,6 +254,63 @@
       margin-bottom: 8px;
     }
 
+    /* ANIMATED DELETE POPUP MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: rgba(28, 22, 19, 0.92);
+      border: 1px solid var(--border-accent);
+      border-radius: 16px;
+      padding: 24px 30px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      transform: scale(0.8) translateY(20px);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-box h3 {
+      color: #ff8585;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .modal-box p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
     /* 1. MAIN WELCOME PAGE */
     #main-page {
       justify-content: center;
@@ -299,7 +356,7 @@
       line-height: 1.6;
     }
 
-    /* 2. HOME SELECTION PAGE (NETFLIX DESIGN SELECTION) */
+    /* 2. HOME SELECTION PAGE */
     #home-page {
       padding: 90px 40px 50px;
       align-items: center;
@@ -414,6 +471,11 @@
       margin-bottom: 20px;
       border-bottom: 1px solid var(--border-subtle);
       padding-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .subpage h2 {
@@ -452,6 +514,11 @@
       color: #120e0c;
       border-color: var(--accent-espresso);
       box-shadow: 0 4px 12px rgba(212, 163, 115, 0.35);
+    }
+
+    .tab-btn-history {
+      border-color: var(--border-accent);
+      color: var(--text-gold);
     }
 
     /* ROLL ANIMATION FOR TABLE ROWS */
@@ -556,6 +623,14 @@
       border-bottom: none;
     }
 
+    /* Checkboxes */
+    .row-checkbox {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent-warm);
+      cursor: pointer;
+    }
+
     /* Inline Pre-Edit Inputs */
     .inline-input {
       background: rgba(18, 14, 12, 0.8);
@@ -651,6 +726,12 @@
       color: #94d2bd;
     }
 
+    .history-detail {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
     @media (max-width: 768px) {
       .subpage { padding: 80px 20px 30px; }
       .card { width: 100%; height: 160px; }
@@ -677,6 +758,18 @@
     </div>
   </div>
 
+  <!-- ANIMATED CONFIRMATION DELETE POPUP MODAL -->
+  <div class="modal-overlay" id="delete-modal">
+    <div class="modal-box">
+      <h3>Confirm Deletion</h3>
+      <p id="delete-modal-text">Are you sure you want to delete the selected item(s)? This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="btn btn-delete" onclick="executePendingDelete()">Yes, Delete</button>
+        <button class="btn" style="background: rgba(255,255,255,0.1); border-color: var(--border-subtle);" onclick="closeDeleteModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
   <!-- 1. MAIN WELCOME PAGE -->
   <div id="main-page" class="page active">
     <div class="welcome-card">
@@ -689,7 +782,7 @@
     </div>
   </div>
 
-  <!-- 2. HOME SELECTION PAGE (NETFLIX DESIGN SELECTION) -->
+  <!-- 2. HOME SELECTION PAGE -->
   <div id="home-page" class="page">
     <button class="btn btn-nav-topleft" onclick="navigateTo('main-page')">← Main Page</button>
     <h2 class="profile-title">Select Module</h2>
@@ -731,18 +824,20 @@
     <button class="btn btn-nav-topleft" onclick="navigateTo('home-page')">← Home</button>
     <div class="subpage-header">
       <h2>Cafe Inventory</h2>
+      <button class="btn btn-delete" onclick="promptDeleteSelected('cafe')">🗑 Delete Selected</button>
     </div>
 
-    <!-- Category Tabs -->
+    <!-- Category Tabs + History Tab -->
     <div class="tab-bar" id="cafe-tab-bar">
       <button class="tab-btn active" onclick="setCategoryFilter('cafe', 'ALL', this)">ALL ITEMS</button>
       <button class="tab-btn" onclick="setCategoryFilter('cafe', 'MILK', this)">MILK ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('cafe', 'BAR', this)">BAR ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('cafe', 'RETAIL', this)">RETAIL ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('cafe', 'PASTRIES', this)">PASTRIES ONLY</button>
+      <button class="tab-btn tab-btn-history" onclick="setCategoryFilter('cafe', 'HISTORY', this)">📜 HISTORY LOG</button>
     </div>
 
-    <form class="form-container" onsubmit="handleCafeInventorySubmit(event)">
+    <form class="form-container" id="cafe-form" onsubmit="handleCafeInventorySubmit(event)">
       <div class="form-group">
         <label>Category</label>
         <select id="cafe-cat-select" onchange="toggleCustomInput('cafe-cat-select', 'cafe-custom-cat-group')">
@@ -793,7 +888,8 @@
     <div class="table-container">
       <table>
         <thead>
-          <tr>
+          <tr id="cafe-table-header">
+            <th style="width: 30px;"><input type="checkbox" onchange="toggleSelectAll('cafe', this)" /></th>
             <th>Type</th>
             <th>Category</th>
             <th>Item Name</th>
@@ -850,6 +946,7 @@
     <button class="btn btn-nav-topleft" onclick="navigateTo('home-page')">← Home</button>
     <div class="subpage-header">
       <h2>Marked Out Pastries</h2>
+      <button class="btn btn-delete" onclick="promptDeleteSelected('pastry')">🗑 Delete Selected</button>
     </div>
 
     <form class="form-container" onsubmit="handleMarkedOutSubmit(event)">
@@ -894,6 +991,7 @@
       <table>
         <thead>
           <tr>
+            <th style="width: 30px;"><input type="checkbox" onchange="toggleSelectAll('pastry', this)" /></th>
             <th>Pastry Item</th>
             <th>Qty</th>
             <th>Unit</th>
@@ -912,18 +1010,20 @@
     <button class="btn btn-nav-topleft" onclick="navigateTo('home-page')">← Home</button>
     <div class="subpage-header">
       <h2>Delivery Inventory</h2>
+      <button class="btn btn-delete" onclick="promptDeleteSelected('delivery')">🗑 Delete Selected</button>
     </div>
 
-    <!-- Category Tabs -->
+    <!-- Category Tabs + History Tab -->
     <div class="tab-bar" id="delivery-tab-bar">
       <button class="tab-btn active" onclick="setCategoryFilter('delivery', 'ALL', this)">ALL ITEMS</button>
       <button class="tab-btn" onclick="setCategoryFilter('delivery', 'MILK', this)">MILK ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('delivery', 'BAR', this)">BAR ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('delivery', 'RETAIL', this)">RETAIL ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('delivery', 'PASTRIES', this)">PASTRIES ONLY</button>
+      <button class="tab-btn tab-btn-history" onclick="setCategoryFilter('delivery', 'HISTORY', this)">📜 HISTORY LOG</button>
     </div>
 
-    <form class="form-container" onsubmit="handleDeliverySubmit(event)">
+    <form class="form-container" id="delivery-form" onsubmit="handleDeliverySubmit(event)">
       <div class="form-group">
         <label>Category</label>
         <select id="del-cat-select" onchange="toggleCustomInput('del-cat-select', 'del-custom-cat-group')">
@@ -974,7 +1074,8 @@
     <div class="table-container">
       <table>
         <thead>
-          <tr>
+          <tr id="delivery-table-header">
+            <th style="width: 30px;"><input type="checkbox" onchange="toggleSelectAll('delivery', this)" /></th>
             <th>Type</th>
             <th>Category</th>
             <th>Item Name</th>
@@ -992,22 +1093,29 @@
   </div>
 
   <script>
-    // Data Stores with previousDate preservation
+    // Data Stores with History Logs & Selection States
     let inventoryStore = [
-      { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveryQty: 48, usedQty: 12, date: '2026-09-09', previousDate: '2026-09-02', editing: false, editingDelivery: false },
-      { id: 2, category: 'MILK', name: 'Oat Milk', unit: 'L', deliveryQty: 24, usedQty: 6, date: '2026-09-08', previousDate: '2026-09-01', editing: false, editingDelivery: false },
-      { id: 3, category: 'BAR', name: 'Espresso Blend', unit: 'KG', deliveryQty: 25, usedQty: 6, date: '2026-09-05', previousDate: '2026-08-28', editing: false, editingDelivery: false },
-      { id: 4, category: 'BAR', name: 'Matcha Powder', unit: 'KG', deliveryQty: 10, usedQty: 2, date: '2026-09-01', previousDate: '2026-08-20', editing: false, editingDelivery: false },
-      { id: 5, category: 'PASTRIES', name: 'Butter Croissant', unit: 'PCS', deliveryQty: 30, usedQty: 8, date: '2026-09-09', previousDate: '2026-09-03', editing: false, editingDelivery: false }
+      { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveryQty: 48, usedQty: 12, date: '2026-09-09', previousDate: '2026-09-02', editing: false, editingDelivery: false, selected: false },
+      { id: 2, category: 'MILK', name: 'Oat Milk', unit: 'L', deliveryQty: 24, usedQty: 6, date: '2026-09-08', previousDate: '2026-09-01', editing: false, editingDelivery: false, selected: false },
+      { id: 3, category: 'BAR', name: 'Espresso Blend', unit: 'KG', deliveryQty: 25, usedQty: 6, date: '2026-09-05', previousDate: '2026-08-28', editing: false, editingDelivery: false, selected: false },
+      { id: 4, category: 'BAR', name: 'Matcha Powder', unit: 'KG', deliveryQty: 10, usedQty: 2, date: '2026-09-01', previousDate: '2026-08-20', editing: false, editingDelivery: false, selected: false },
+      { id: 5, category: 'PASTRIES', name: 'Butter Croissant', unit: 'PCS', deliveryQty: 30, usedQty: 8, date: '2026-09-09', previousDate: '2026-09-03', editing: false, editingDelivery: false, selected: false }
     ];
 
     let markedOutPastries = [
-      { id: 1, name: 'Butter Croissant', unit: 'PCS', qty: 2, reason: 'Expired / Day-Old', date: '2026-09-09' }
+      { id: 1, name: 'Butter Croissant', unit: 'PCS', qty: 2, reason: 'Expired / Day-Old', date: '2026-09-09', selected: false }
+    ];
+
+    let historyLogs = [
+      { id: 1, module: 'cafe', itemName: 'Whole Milk', action: 'Usage Updated', detail: 'Bar Usage set to 12 L', timestamp: '2026-09-09 10:15 AM' },
+      { id: 2, module: 'delivery', itemName: 'Oat Milk', action: 'Delivery Received', detail: 'Added 24 L into storage', timestamp: '2026-09-08 08:30 AM' }
     ];
 
     let activeCafeFilter = 'ALL';
     let activeDeliveryFilter = 'ALL';
     let activeSummaryFilter = 'ALL';
+
+    let pendingDeleteAction = null;
 
     document.addEventListener("DOMContentLoaded", () => {
       const today = new Date().toISOString().split('T')[0];
@@ -1023,7 +1131,19 @@
       renderAllTables();
     });
 
-    // Helper to calculate days ago note
+    function logHistory(module, itemName, action, detail) {
+      const now = new Date();
+      const timeStr = now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      historyLogs.unshift({
+        id: Date.now(),
+        module,
+        itemName,
+        action,
+        detail,
+        timestamp: timeStr
+      });
+    }
+
     function getDaysAgoNote(dateString) {
       if (!dateString) return 'No Date';
       const inputDate = new Date(dateString);
@@ -1041,26 +1161,98 @@
       return '';
     }
 
-    // Github Modal Functions
+    /* DELETE MODAL POPUP SYSTEM */
+    function promptDeleteSingle(id, type) {
+      pendingDeleteAction = () => {
+        if (type === 'cafe' || type === 'delivery') {
+          const item = inventoryStore.find(i => i.id === id);
+          if (item) logHistory(type, item.name, 'Item Removed', 'Single item deleted');
+          inventoryStore = inventoryStore.filter(i => i.id !== id);
+        } else if (type === 'pastry') {
+          markedOutPastries = markedOutPastries.filter(p => p.id !== id);
+        }
+        renderAllTables();
+      };
+
+      document.getElementById('delete-modal-text').innerText = "Are you sure you want to delete this item? This action cannot be undone.";
+      openDeleteModal();
+    }
+
+    function promptDeleteSelected(type) {
+      let count = 0;
+      if (type === 'cafe' || type === 'delivery') {
+        count = inventoryStore.filter(i => i.selected).length;
+      } else if (type === 'pastry') {
+        count = markedOutPastries.filter(p => p.selected).length;
+      }
+
+      if (count === 0) {
+        alert('Please select at least one item using the checkboxes to delete.');
+        return;
+      }
+
+      pendingDeleteAction = () => {
+        if (type === 'cafe' || type === 'delivery') {
+          inventoryStore.filter(i => i.selected).forEach(i => logHistory(type, i.name, 'Item Removed', 'Batch deletion'));
+          inventoryStore = inventoryStore.filter(i => !i.selected);
+        } else if (type === 'pastry') {
+          markedOutPastries = markedOutPastries.filter(p => !p.selected);
+        }
+        renderAllTables();
+      };
+
+      document.getElementById('delete-modal-text').innerText = `Are you sure you want to delete the ${count} selected item(s)? This action cannot be undone.`;
+      openDeleteModal();
+    }
+
+    function openDeleteModal() {
+      document.getElementById('delete-modal').classList.add('active');
+    }
+
+    function closeDeleteModal() {
+      document.getElementById('delete-modal').classList.remove('active');
+      pendingDeleteAction = null;
+    }
+
+    function executePendingDelete() {
+      if (pendingDeleteAction) pendingDeleteAction();
+      closeDeleteModal();
+    }
+
+    /* SELECT ALL TOGGLE */
+    function toggleSelectAll(type, headerCheckbox) {
+      const isChecked = headerCheckbox.checked;
+      if (type === 'cafe' || type === 'delivery') {
+        inventoryStore.forEach(i => i.selected = isChecked);
+      } else if (type === 'pastry') {
+        markedOutPastries.forEach(p => p.selected = isChecked);
+      }
+      renderAllTables();
+    }
+
+    function toggleRowSelection(id, type) {
+      if (type === 'cafe' || type === 'delivery') {
+        const item = inventoryStore.find(i => i.id === id);
+        if (item) item.selected = !item.selected;
+      } else if (type === 'pastry') {
+        const pastry = markedOutPastries.find(p => p.id === id);
+        if (pastry) pastry.selected = !pastry.selected;
+      }
+    }
+
+    // Github Config
     function toggleGithubModal() {
-      const modal = document.getElementById('github-modal');
-      modal.classList.toggle('active');
+      document.getElementById('github-modal').classList.toggle('active');
     }
 
     function saveGithubConfig() {
-      const owner = document.getElementById('gh-owner').value.trim();
-      const repo = document.getElementById('gh-repo').value.trim();
-      const token = document.getElementById('gh-token').value.trim();
-
-      localStorage.setItem('gh_owner', owner);
-      localStorage.setItem('gh_repo', repo);
-      localStorage.setItem('gh_token', token);
-
+      localStorage.setItem('gh_owner', document.getElementById('gh-owner').value.trim());
+      localStorage.setItem('gh_repo', document.getElementById('gh-repo').value.trim());
+      localStorage.setItem('gh_token', document.getElementById('gh-token').value.trim());
       alert('GitHub Settings Saved!');
       toggleGithubModal();
     }
 
-    // GITHUB SAVE SYNC
     async function saveToGithub() {
       const owner = localStorage.getItem('gh_owner');
       const repo = localStorage.getItem('gh_repo');
@@ -1078,6 +1270,7 @@
       const payloadData = {
         inventoryStore,
         markedOutPastries,
+        historyLogs,
         lastUpdated: new Date().toISOString()
       };
 
@@ -1086,42 +1279,22 @@
 
       try {
         let sha = null;
-        const getRes = await fetch(apiUrl, {
-          headers: { 'Authorization': `token ${token}` }
-        });
-
-        if (getRes.ok) {
-          const fileData = await getRes.json();
-          sha = fileData.sha;
-        }
-
-        const body = {
-          message: 'Update cafe inventory_data.json via QuadLink Cafe Web System',
-          content: contentEncoded,
-          ...(sha && { sha })
-        };
+        const getRes = await fetch(apiUrl, { headers: { 'Authorization': `token ${token}` } });
+        if (getRes.ok) sha = (await getRes.json()).sha;
 
         const putRes = await fetch(apiUrl, {
           method: 'PUT',
-          headers: {
-            'Authorization': `token ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(body)
+          headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: 'Update cafe inventory_data.json', content: contentEncoded, ...(sha && { sha }) })
         });
 
-        if (putRes.ok) {
-          alert('Successfully saved and synced inventory_data.json to GitHub repository!');
-        } else {
-          const errData = await putRes.json();
-          alert('Error saving to GitHub: ' + (errData.message || 'Unknown Error'));
-        }
+        if (putRes.ok) alert('Successfully saved to GitHub repository!');
+        else alert('Error saving to GitHub');
       } catch (err) {
-        alert('Network or GitHub API Error: ' + err.message);
+        alert('Network Error: ' + err.message);
       }
     }
 
-    // GITHUB LOAD SYNC
     async function loadFromGithub() {
       const owner = localStorage.getItem('gh_owner');
       const repo = localStorage.getItem('gh_repo');
@@ -1133,29 +1306,20 @@
         return;
       }
 
-      const filePath = 'inventory_data.json';
-      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/inventory_data.json`;
 
       try {
-        const response = await fetch(apiUrl, {
-          headers: { 'Authorization': `token ${token}` }
-        });
-
+        const response = await fetch(apiUrl, { headers: { 'Authorization': `token ${token}` } });
         if (response.ok) {
           const fileData = await response.json();
-          const decodedContent = decodeURIComponent(escape(atob(fileData.content)));
-          const parsedData = JSON.parse(decodedContent);
-
-          if (parsedData.inventoryStore && parsedData.markedOutPastries) {
+          const parsedData = JSON.parse(decodeURIComponent(escape(atob(fileData.content))));
+          if (parsedData.inventoryStore) {
             inventoryStore = parsedData.inventoryStore;
-            markedOutPastries = parsedData.markedOutPastries;
+            markedOutPastries = parsedData.markedOutPastries || [];
+            historyLogs = parsedData.historyLogs || [];
             renderAllTables();
-            alert('Successfully loaded and synced inventory_data.json from GitHub repository!');
-          } else {
-            alert('Invalid inventory_data.json format in repository.');
+            alert('Successfully loaded from GitHub!');
           }
-        } else {
-          alert('Failed to find inventory_data.json in repository. Make sure you Save Sync first.');
         }
       } catch (err) {
         alert('Error loading from GitHub: ' + err.message);
@@ -1170,20 +1334,20 @@
 
     function toggleCustomInput(selectId, customGroupId) {
       const selectVal = document.getElementById(selectId).value;
-      const group = document.getElementById(customGroupId);
-      group.style.display = (selectVal === 'CUSTOM') ? 'flex' : 'none';
+      document.getElementById(customGroupId).style.display = (selectVal === 'CUSTOM') ? 'flex' : 'none';
     }
 
     function setCategoryFilter(module, category, buttonElement) {
-      const parentBar = buttonElement.parentElement;
-      parentBar.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      buttonElement.parentElement.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       buttonElement.classList.add('active');
 
       if (module === 'cafe') {
         activeCafeFilter = category;
+        document.getElementById('cafe-form').style.display = (category === 'HISTORY') ? 'none' : 'flex';
         renderCafeInventory();
       } else if (module === 'delivery') {
         activeDeliveryFilter = category;
+        document.getElementById('delivery-form').style.display = (category === 'HISTORY') ? 'none' : 'flex';
         renderDeliveryInventory();
       } else if (module === 'summary') {
         activeSummaryFilter = category;
@@ -1202,7 +1366,6 @@
       return [...inventoryStore].sort((a, b) => a.category.localeCompare(b.category));
     }
 
-    // PRE-EDIT & DATE PRE-EDIT FUNCTIONS WITH PREVIOUS DATE RETENTION
     function quickAdjustUsage(id, delta) {
       const item = inventoryStore.find(i => i.id === id);
       if (item) {
@@ -1212,6 +1375,7 @@
           item.date = today;
         }
         item.usedQty = Math.max(0, item.usedQty + delta);
+        logHistory('cafe', item.name, 'Quick Adjust', `Usage changed by ${delta > 0 ? '+' : ''}${delta} ${item.unit}`);
         renderAllTables();
       }
     }
@@ -1229,22 +1393,18 @@
       const item = inventoryStore.find(i => i.id === id);
       if (item) {
         if (type === 'cafe') {
-          const catVal = document.getElementById(`inline-cat-${id}`).value.trim().toUpperCase();
           const nameVal = document.getElementById(`inline-name-${id}`).value.trim();
-          const unitVal = document.getElementById(`inline-unit-${id}`).value;
           const usedVal = parseInt(document.getElementById(`inline-used-${id}`).value) || 0;
           const dateVal = document.getElementById(`inline-date-${id}`).value;
 
           if (nameVal) item.name = nameVal;
-          if (catVal) item.category = catVal;
-          item.unit = unitVal;
           item.usedQty = usedVal;
-          
           if (dateVal && dateVal !== item.date) {
             item.previousDate = item.date;
             item.date = dateVal;
           }
           item.editing = false;
+          logHistory('cafe', item.name, 'Pre-Edit Saved', `Updated to ${usedVal} ${item.unit}`);
         } else if (type === 'delivery') {
           const delVal = parseInt(document.getElementById(`inline-del-${id}`).value) || 0;
           const dateVal = document.getElementById(`inline-del-date-${id}`).value;
@@ -1255,6 +1415,7 @@
             item.date = dateVal;
           }
           item.editingDelivery = false;
+          logHistory('delivery', item.name, 'Delivery Pre-Edit', `Storage set to ${delVal} ${item.unit}`);
         }
         renderAllTables();
       }
@@ -1263,6 +1424,29 @@
     function renderCafeInventory() {
       const tbody = document.getElementById('cafe-inventory-table-body');
       tbody.innerHTML = '';
+
+      if (activeCafeFilter === 'HISTORY') {
+        const cafeLogs = historyLogs.filter(l => l.module === 'cafe');
+        if (cafeLogs.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color: var(--text-muted);">No history logs recorded yet.</td></tr>`;
+          return;
+        }
+        cafeLogs.forEach((log, index) => {
+          tbody.innerHTML += `
+            <tr style="animation-delay: ${index * 0.04}s">
+              <td>-</td>
+              <td><span class="tag-badge tag-house">History</span></td>
+              <td><strong>LOG</strong></td>
+              <td>${log.itemName}</td>
+              <td>-</td>
+              <td colspan="3" class="history-detail"><strong>${log.action}</strong>: ${log.detail}</td>
+              <td><span class="days-ago-note">${log.timestamp}</span></td>
+              <td>-</td>
+            </tr>
+          `;
+        });
+        return;
+      }
 
       let items = getSortedInventory();
       if (activeCafeFilter !== 'ALL') {
@@ -1276,9 +1460,9 @@
         const prevDateHtml = item.previousDate ? `<span class="date-prev-note">Prev Date: ${item.previousDate}</span>` : '';
 
         if (item.editing) {
-          // Inline Pre-Edit Form Row
-          const editRow = `
+          tbody.innerHTML += `
             <tr>
+              <td><input type="checkbox" disabled /></td>
               <td><span class="tag-badge tag-house">In-House</span></td>
               <td><input type="text" id="inline-cat-${item.id}" class="inline-input" value="${item.category}" /></td>
               <td><input type="text" id="inline-name-${item.id}" class="inline-input" value="${item.name}" /></td>
@@ -1287,10 +1471,6 @@
                   <option value="L" ${item.unit==='L'?'selected':''}>L</option>
                   <option value="KG" ${item.unit==='KG'?'selected':''}>KG</option>
                   <option value="PCS" ${item.unit==='PCS'?'selected':''}>PCS</option>
-                  <option value="BOTTLE" ${item.unit==='BOTTLE'?'selected':''}>BOTTLE</option>
-                  <option value="PACK" ${item.unit==='PACK'?'selected':''}>PACK</option>
-                  <option value="BOX" ${item.unit==='BOX'?'selected':''}>BOX</option>
-                  <option value="CASE" ${item.unit==='CASE'?'selected':''}>CASE</option>
                 </select>
               </td>
               <td><input type="number" id="inline-used-${item.id}" class="inline-input" value="${item.usedQty}" style="width: 70px;" /></td>
@@ -1303,11 +1483,10 @@
               </td>
             </tr>
           `;
-          tbody.innerHTML += editRow;
         } else {
-          // Standard Row displaying Current + Previous Date Notes
-          const row = `
+          tbody.innerHTML += `
             <tr style="animation-delay: ${index * 0.05}s">
+              <td><input type="checkbox" class="row-checkbox" ${item.selected ? 'checked' : ''} onchange="toggleRowSelection(${item.id}, 'cafe')" /></td>
               <td><span class="tag-badge tag-house">In-House Stock</span></td>
               <td><strong>${item.category}</strong></td>
               <td>${item.name}</td>
@@ -1331,11 +1510,10 @@
               </td>
               <td style="display: flex; gap: 4px;">
                 <button class="btn-edit" onclick="toggleInlineEdit(${item.id}, 'cafe')">✏ Edit / Date</button>
-                <button class="btn-delete" onclick="deleteInventoryItem(${item.id})">Remove</button>
+                <button class="btn-delete" onclick="promptDeleteSingle(${item.id}, 'cafe')">Remove</button>
               </td>
             </tr>
           `;
-          tbody.innerHTML += row;
         }
       });
     }
@@ -1343,6 +1521,29 @@
     function renderDeliveryInventory() {
       const tbody = document.getElementById('delivery-table-body');
       tbody.innerHTML = '';
+
+      if (activeDeliveryFilter === 'HISTORY') {
+        const delLogs = historyLogs.filter(l => l.module === 'delivery');
+        if (delLogs.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color: var(--text-muted);">No delivery history logs recorded yet.</td></tr>`;
+          return;
+        }
+        delLogs.forEach((log, index) => {
+          tbody.innerHTML += `
+            <tr style="animation-delay: ${index * 0.04}s">
+              <td>-</td>
+              <td><span class="tag-badge tag-storage">History</span></td>
+              <td><strong>LOG</strong></td>
+              <td>${log.itemName}</td>
+              <td>-</td>
+              <td colspan="3" class="history-detail"><strong>${log.action}</strong>: ${log.detail}</td>
+              <td><span class="days-ago-note">${log.timestamp}</span></td>
+              <td>-</td>
+            </tr>
+          `;
+        });
+        return;
+      }
 
       let items = getSortedInventory();
       if (activeDeliveryFilter !== 'ALL') {
@@ -1355,9 +1556,9 @@
         const prevDateHtml = item.previousDate ? `<span class="date-prev-note">Prev Date: ${item.previousDate}</span>` : '';
 
         if (item.editingDelivery) {
-          // Delivery Pre-Edit Row
-          const editRow = `
+          tbody.innerHTML += `
             <tr>
+              <td><input type="checkbox" disabled /></td>
               <td><span class="tag-badge tag-storage">Stock Storage</span></td>
               <td><strong>${item.category}</strong></td>
               <td>${item.name}</td>
@@ -1372,11 +1573,10 @@
               </td>
             </tr>
           `;
-          tbody.innerHTML += editRow;
         } else {
-          // Standard Delivery Row
-          const row = `
+          tbody.innerHTML += `
             <tr style="animation-delay: ${index * 0.05}s">
+              <td><input type="checkbox" class="row-checkbox" ${item.selected ? 'checked' : ''} onchange="toggleRowSelection(${item.id}, 'delivery')" /></td>
               <td><span class="tag-badge tag-storage">Stock Storage</span></td>
               <td><strong>${item.category}</strong></td>
               <td>${item.name}</td>
@@ -1394,11 +1594,10 @@
               </td>
               <td style="display: flex; gap: 4px;">
                 <button class="btn-edit" onclick="toggleInlineEdit(${item.id}, 'delivery')">✏ Edit Date / Stock</button>
-                <button class="btn-delete" onclick="deleteInventoryItem(${item.id})">Remove</button>
+                <button class="btn-delete" onclick="promptDeleteSingle(${item.id}, 'delivery')">Remove</button>
               </td>
             </tr>
           `;
-          tbody.innerHTML += row;
         }
       });
     }
@@ -1418,7 +1617,7 @@
         const daysAgoNote = getDaysAgoNote(item.date);
         const prevDateHtml = item.previousDate ? `<span class="date-prev-note">Prev Date: ${item.previousDate}</span>` : '';
 
-        const row = `
+        tbody.innerHTML += `
           <tr style="animation-delay: ${index * 0.05}s">
             <td><strong>${item.category}</strong></td>
             <td>${item.name}</td>
@@ -1436,7 +1635,6 @@
             </td>
           </tr>
         `;
-        tbody.innerHTML += row;
       });
     }
 
@@ -1445,26 +1643,24 @@
       tbody.innerHTML = '';
 
       markedOutPastries.forEach((item, index) => {
-        const row = `
+        tbody.innerHTML += `
           <tr style="animation-delay: ${index * 0.05}s">
+            <td><input type="checkbox" class="row-checkbox" ${item.selected ? 'checked' : ''} onchange="toggleRowSelection(${item.id}, 'pastry')" /></td>
             <td><strong>${item.name}</strong></td>
             <td>${item.qty}</td>
             <td><span class="unit-pill">${item.unit}</span></td>
             <td>${item.reason}</td>
             <td>${item.date}</td>
-            <td><button class="btn-delete" onclick="deletePastryItem(${item.id})">Remove</button></td>
+            <td><button class="btn-delete" onclick="promptDeleteSingle(${item.id}, 'pastry')">Remove</button></td>
           </tr>
         `;
-        tbody.innerHTML += row;
       });
     }
 
     function handleCafeInventorySubmit(e) {
       e.preventDefault();
       let category = document.getElementById('cafe-cat-select').value;
-      if (category === 'CUSTOM') {
-        category = document.getElementById('cafe-custom-cat-input').value.trim().toUpperCase() || 'CUSTOM';
-      }
+      if (category === 'CUSTOM') category = document.getElementById('cafe-custom-cat-input').value.trim().toUpperCase() || 'CUSTOM';
 
       const name = document.getElementById('cafe-item-name').value.trim();
       const unit = document.getElementById('cafe-item-unit').value;
@@ -1479,20 +1675,10 @@
         item.unit = unit;
         item.date = date;
       } else {
-        inventoryStore.push({
-          id: Date.now(),
-          category: category,
-          name: name,
-          unit: unit,
-          deliveryQty: 0,
-          usedQty: usedQty,
-          date: date,
-          previousDate: null,
-          editing: false,
-          editingDelivery: false
-        });
+        inventoryStore.push({ id: Date.now(), category, name, unit, deliveryQty: 0, usedQty, date, previousDate: null, editing: false, editingDelivery: false, selected: false });
       }
 
+      logHistory('cafe', name, 'Item Added/Updated', `Usage: ${usedQty} ${unit}`);
       document.getElementById('cafe-item-name').value = '';
       document.getElementById('cafe-item-used').value = '0';
       renderAllTables();
@@ -1501,9 +1687,7 @@
     function handleDeliverySubmit(e) {
       e.preventDefault();
       let category = document.getElementById('del-cat-select').value;
-      if (category === 'CUSTOM') {
-        category = document.getElementById('del-custom-cat-input').value.trim().toUpperCase() || 'CUSTOM';
-      }
+      if (category === 'CUSTOM') category = document.getElementById('del-custom-cat-input').value.trim().toUpperCase() || 'CUSTOM';
 
       const name = document.getElementById('del-item-name').value.trim();
       const unit = document.getElementById('del-item-unit').value;
@@ -1518,20 +1702,10 @@
         item.unit = unit;
         item.date = date;
       } else {
-        inventoryStore.push({
-          id: Date.now(),
-          category: category,
-          name: name,
-          unit: unit,
-          deliveryQty: deliveryQty,
-          usedQty: 0,
-          date: date,
-          previousDate: null,
-          editing: false,
-          editingDelivery: false
-        });
+        inventoryStore.push({ id: Date.now(), category, name, unit, deliveryQty, usedQty: 0, date, previousDate: null, editing: false, editingDelivery: false, selected: false });
       }
 
+      logHistory('delivery', name, 'Stock Received', `Added: ${deliveryQty} ${unit}`);
       document.getElementById('del-item-name').value = '';
       document.getElementById('del-item-qty').value = '10';
       renderAllTables();
@@ -1545,27 +1719,9 @@
       const reason = document.getElementById('pastry-reason').value;
       const date = document.getElementById('pastry-date').value;
 
-      markedOutPastries.push({
-        id: Date.now(),
-        name: name,
-        unit: unit,
-        qty: qty,
-        reason: reason,
-        date: date
-      });
-
+      markedOutPastries.push({ id: Date.now(), name, unit, qty, reason, date, selected: false });
       document.getElementById('pastry-item-name').value = '';
       document.getElementById('pastry-qty').value = '1';
-      renderMarkedOutPastries();
-    }
-
-    function deleteInventoryItem(id) {
-      inventoryStore = inventoryStore.filter(i => i.id !== id);
-      renderAllTables();
-    }
-
-    function deletePastryItem(id) {
-      markedOutPastries = markedOutPastries.filter(p => p.id !== id);
       renderMarkedOutPastries();
     }
   </script>
