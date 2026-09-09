@@ -516,11 +516,6 @@
       box-shadow: 0 4px 12px rgba(212, 163, 115, 0.35);
     }
 
-    .tab-btn-history {
-      border-color: var(--border-accent);
-      color: var(--text-gold);
-    }
-
     /* ROLL ANIMATION FOR TABLE ROWS */
     @keyframes rollInPop {
       0% {
@@ -648,31 +643,26 @@
       gap: 6px;
     }
 
-    /* Date Notes & Small Tags */
-    .date-note-container {
+    /* BEFORE & AFTER DATE HISTORY SMALL SHOW NOTES */
+    .date-history-card {
       display: flex;
       flex-direction: column;
       gap: 3px;
     }
 
-    .date-main {
-      font-weight: 600;
+    .date-badge-current {
+      font-size: 0.72rem;
+      font-weight: 700;
       color: var(--text-main);
-      font-size: 0.85rem;
-    }
-
-    .date-badge-note {
-      font-size: 0.7rem;
-      color: var(--text-gold);
-      background: rgba(212, 163, 115, 0.15);
-      border: 1px solid rgba(212, 163, 115, 0.3);
+      background: rgba(226, 176, 120, 0.15);
+      border: 1px solid rgba(226, 176, 120, 0.3);
       padding: 2px 6px;
       border-radius: 4px;
       display: inline-block;
       width: fit-content;
     }
 
-    .date-prev-note {
+    .date-badge-previous {
       font-size: 0.68rem;
       color: #d4a373;
       background: rgba(188, 108, 37, 0.12);
@@ -724,12 +714,6 @@
     .accuracy-indicator {
       font-weight: 700;
       color: #94d2bd;
-    }
-
-    .history-detail {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      line-height: 1.4;
     }
 
     @media (max-width: 768px) {
@@ -827,14 +811,13 @@
       <button class="btn btn-delete" onclick="promptDeleteSelected('cafe')">🗑 Delete Selected</button>
     </div>
 
-    <!-- Category Tabs + History Tab -->
+    <!-- Category Tabs -->
     <div class="tab-bar" id="cafe-tab-bar">
       <button class="tab-btn active" onclick="setCategoryFilter('cafe', 'ALL', this)">ALL ITEMS</button>
       <button class="tab-btn" onclick="setCategoryFilter('cafe', 'MILK', this)">MILK ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('cafe', 'BAR', this)">BAR ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('cafe', 'RETAIL', this)">RETAIL ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('cafe', 'PASTRIES', this)">PASTRIES ONLY</button>
-      <button class="tab-btn tab-btn-history" onclick="setCategoryFilter('cafe', 'HISTORY', this)">📜 HISTORY LOG</button>
     </div>
 
     <form class="form-container" id="cafe-form" onsubmit="handleCafeInventorySubmit(event)">
@@ -888,7 +871,7 @@
     <div class="table-container">
       <table>
         <thead>
-          <tr id="cafe-table-header">
+          <tr>
             <th style="width: 30px;"><input type="checkbox" onchange="toggleSelectAll('cafe', this)" /></th>
             <th>Type</th>
             <th>Category</th>
@@ -897,7 +880,7 @@
             <th>Bar Usage (Pre-Edit)</th>
             <th>Remaining Stock</th>
             <th>Accuracy</th>
-            <th>Last Updated & Previous Date Note</th>
+            <th>Date History (Before & After)</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -933,7 +916,7 @@
             <th>In-House Usage</th>
             <th>Current Remaining</th>
             <th>Stock Accuracy</th>
-            <th>Last Updated & Prev Date</th>
+            <th>Date History (Before & After)</th>
           </tr>
         </thead>
         <tbody id="stocks-summary-table-body" class="animated-table-body"></tbody>
@@ -1013,14 +996,13 @@
       <button class="btn btn-delete" onclick="promptDeleteSelected('delivery')">🗑 Delete Selected</button>
     </div>
 
-    <!-- Category Tabs + History Tab -->
+    <!-- Category Tabs -->
     <div class="tab-bar" id="delivery-tab-bar">
       <button class="tab-btn active" onclick="setCategoryFilter('delivery', 'ALL', this)">ALL ITEMS</button>
       <button class="tab-btn" onclick="setCategoryFilter('delivery', 'MILK', this)">MILK ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('delivery', 'BAR', this)">BAR ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('delivery', 'RETAIL', this)">RETAIL ONLY</button>
       <button class="tab-btn" onclick="setCategoryFilter('delivery', 'PASTRIES', this)">PASTRIES ONLY</button>
-      <button class="tab-btn tab-btn-history" onclick="setCategoryFilter('delivery', 'HISTORY', this)">📜 HISTORY LOG</button>
     </div>
 
     <form class="form-container" id="delivery-form" onsubmit="handleDeliverySubmit(event)">
@@ -1074,7 +1056,7 @@
     <div class="table-container">
       <table>
         <thead>
-          <tr id="delivery-table-header">
+          <tr>
             <th style="width: 30px;"><input type="checkbox" onchange="toggleSelectAll('delivery', this)" /></th>
             <th>Type</th>
             <th>Category</th>
@@ -1083,7 +1065,7 @@
             <th>Storage Stock</th>
             <th>Bar Usage</th>
             <th>Remaining</th>
-            <th>Received Date & Prev Date Note</th>
+            <th>Date History (Before & After)</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -1093,7 +1075,7 @@
   </div>
 
   <script>
-    // Data Stores with History Logs & Selection States
+    // Data Stores with Before/After Date Tracking
     let inventoryStore = [
       { id: 1, category: 'MILK', name: 'Whole Milk', unit: 'L', deliveryQty: 48, usedQty: 12, date: '2026-09-09', previousDate: '2026-09-02', editing: false, editingDelivery: false, selected: false },
       { id: 2, category: 'MILK', name: 'Oat Milk', unit: 'L', deliveryQty: 24, usedQty: 6, date: '2026-09-08', previousDate: '2026-09-01', editing: false, editingDelivery: false, selected: false },
@@ -1104,11 +1086,6 @@
 
     let markedOutPastries = [
       { id: 1, name: 'Butter Croissant', unit: 'PCS', qty: 2, reason: 'Expired / Day-Old', date: '2026-09-09', selected: false }
-    ];
-
-    let historyLogs = [
-      { id: 1, module: 'cafe', itemName: 'Whole Milk', action: 'Usage Updated', detail: 'Bar Usage set to 12 L', timestamp: '2026-09-09 10:15 AM' },
-      { id: 2, module: 'delivery', itemName: 'Oat Milk', action: 'Delivery Received', detail: 'Added 24 L into storage', timestamp: '2026-09-08 08:30 AM' }
     ];
 
     let activeCafeFilter = 'ALL';
@@ -1131,19 +1108,6 @@
       renderAllTables();
     });
 
-    function logHistory(module, itemName, action, detail) {
-      const now = new Date();
-      const timeStr = now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      historyLogs.unshift({
-        id: Date.now(),
-        module,
-        itemName,
-        action,
-        detail,
-        timestamp: timeStr
-      });
-    }
-
     function getDaysAgoNote(dateString) {
       if (!dateString) return 'No Date';
       const inputDate = new Date(dateString);
@@ -1161,12 +1125,24 @@
       return '';
     }
 
+    /* Helper function to generate Before/After Date Card UI */
+    function renderDateCardUI(currentDate, previousDate) {
+      const daysAgoNote = getDaysAgoNote(currentDate);
+      const prevHtml = previousDate ? `<span class="date-badge-previous">Prev: ${previousDate}</span>` : '<span class="days-ago-note">Initial Input</span>';
+
+      return `
+        <div class="date-history-card">
+          <span class="date-badge-current">Current: ${currentDate}</span>
+          ${prevHtml}
+          <span class="days-ago-note">${daysAgoNote}</span>
+        </div>
+      `;
+    }
+
     /* DELETE MODAL POPUP SYSTEM */
     function promptDeleteSingle(id, type) {
       pendingDeleteAction = () => {
         if (type === 'cafe' || type === 'delivery') {
-          const item = inventoryStore.find(i => i.id === id);
-          if (item) logHistory(type, item.name, 'Item Removed', 'Single item deleted');
           inventoryStore = inventoryStore.filter(i => i.id !== id);
         } else if (type === 'pastry') {
           markedOutPastries = markedOutPastries.filter(p => p.id !== id);
@@ -1193,7 +1169,6 @@
 
       pendingDeleteAction = () => {
         if (type === 'cafe' || type === 'delivery') {
-          inventoryStore.filter(i => i.selected).forEach(i => logHistory(type, i.name, 'Item Removed', 'Batch deletion'));
           inventoryStore = inventoryStore.filter(i => !i.selected);
         } else if (type === 'pastry') {
           markedOutPastries = markedOutPastries.filter(p => !p.selected);
@@ -1270,7 +1245,6 @@
       const payloadData = {
         inventoryStore,
         markedOutPastries,
-        historyLogs,
         lastUpdated: new Date().toISOString()
       };
 
@@ -1316,7 +1290,6 @@
           if (parsedData.inventoryStore) {
             inventoryStore = parsedData.inventoryStore;
             markedOutPastries = parsedData.markedOutPastries || [];
-            historyLogs = parsedData.historyLogs || [];
             renderAllTables();
             alert('Successfully loaded from GitHub!');
           }
@@ -1343,11 +1316,9 @@
 
       if (module === 'cafe') {
         activeCafeFilter = category;
-        document.getElementById('cafe-form').style.display = (category === 'HISTORY') ? 'none' : 'flex';
         renderCafeInventory();
       } else if (module === 'delivery') {
         activeDeliveryFilter = category;
-        document.getElementById('delivery-form').style.display = (category === 'HISTORY') ? 'none' : 'flex';
         renderDeliveryInventory();
       } else if (module === 'summary') {
         activeSummaryFilter = category;
@@ -1375,7 +1346,6 @@
           item.date = today;
         }
         item.usedQty = Math.max(0, item.usedQty + delta);
-        logHistory('cafe', item.name, 'Quick Adjust', `Usage changed by ${delta > 0 ? '+' : ''}${delta} ${item.unit}`);
         renderAllTables();
       }
     }
@@ -1399,12 +1369,12 @@
 
           if (nameVal) item.name = nameVal;
           item.usedQty = usedVal;
+
           if (dateVal && dateVal !== item.date) {
             item.previousDate = item.date;
             item.date = dateVal;
           }
           item.editing = false;
-          logHistory('cafe', item.name, 'Pre-Edit Saved', `Updated to ${usedVal} ${item.unit}`);
         } else if (type === 'delivery') {
           const delVal = parseInt(document.getElementById(`inline-del-${id}`).value) || 0;
           const dateVal = document.getElementById(`inline-del-date-${id}`).value;
@@ -1415,7 +1385,6 @@
             item.date = dateVal;
           }
           item.editingDelivery = false;
-          logHistory('delivery', item.name, 'Delivery Pre-Edit', `Storage set to ${delVal} ${item.unit}`);
         }
         renderAllTables();
       }
@@ -1425,29 +1394,6 @@
       const tbody = document.getElementById('cafe-inventory-table-body');
       tbody.innerHTML = '';
 
-      if (activeCafeFilter === 'HISTORY') {
-        const cafeLogs = historyLogs.filter(l => l.module === 'cafe');
-        if (cafeLogs.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color: var(--text-muted);">No history logs recorded yet.</td></tr>`;
-          return;
-        }
-        cafeLogs.forEach((log, index) => {
-          tbody.innerHTML += `
-            <tr style="animation-delay: ${index * 0.04}s">
-              <td>-</td>
-              <td><span class="tag-badge tag-house">History</span></td>
-              <td><strong>LOG</strong></td>
-              <td>${log.itemName}</td>
-              <td>-</td>
-              <td colspan="3" class="history-detail"><strong>${log.action}</strong>: ${log.detail}</td>
-              <td><span class="days-ago-note">${log.timestamp}</span></td>
-              <td>-</td>
-            </tr>
-          `;
-        });
-        return;
-      }
-
       let items = getSortedInventory();
       if (activeCafeFilter !== 'ALL') {
         items = items.filter(i => i.category.toUpperCase() === activeCafeFilter.toUpperCase());
@@ -1456,8 +1402,7 @@
       items.forEach((item, index) => {
         const remaining = item.deliveryQty - item.usedQty;
         const accuracy = item.deliveryQty > 0 ? ((remaining / item.deliveryQty) * 100).toFixed(0) + '%' : '100%';
-        const daysAgoNote = getDaysAgoNote(item.date);
-        const prevDateHtml = item.previousDate ? `<span class="date-prev-note">Prev Date: ${item.previousDate}</span>` : '';
+        const dateHistoryUI = renderDateCardUI(item.date, item.previousDate);
 
         if (item.editing) {
           tbody.innerHTML += `
@@ -1500,14 +1445,7 @@
               </td>
               <td><strong>${remaining} ${item.unit}</strong></td>
               <td class="accuracy-indicator">${accuracy}</td>
-              <td>
-                <div class="date-note-container">
-                  <span class="date-main">${item.date}</span>
-                  <span class="date-badge-note">Last Change</span>
-                  ${prevDateHtml}
-                  <span class="days-ago-note">${daysAgoNote}</span>
-                </div>
-              </td>
+              <td>${dateHistoryUI}</td>
               <td style="display: flex; gap: 4px;">
                 <button class="btn-edit" onclick="toggleInlineEdit(${item.id}, 'cafe')">✏ Edit / Date</button>
                 <button class="btn-delete" onclick="promptDeleteSingle(${item.id}, 'cafe')">Remove</button>
@@ -1522,29 +1460,6 @@
       const tbody = document.getElementById('delivery-table-body');
       tbody.innerHTML = '';
 
-      if (activeDeliveryFilter === 'HISTORY') {
-        const delLogs = historyLogs.filter(l => l.module === 'delivery');
-        if (delLogs.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color: var(--text-muted);">No delivery history logs recorded yet.</td></tr>`;
-          return;
-        }
-        delLogs.forEach((log, index) => {
-          tbody.innerHTML += `
-            <tr style="animation-delay: ${index * 0.04}s">
-              <td>-</td>
-              <td><span class="tag-badge tag-storage">History</span></td>
-              <td><strong>LOG</strong></td>
-              <td>${log.itemName}</td>
-              <td>-</td>
-              <td colspan="3" class="history-detail"><strong>${log.action}</strong>: ${log.detail}</td>
-              <td><span class="days-ago-note">${log.timestamp}</span></td>
-              <td>-</td>
-            </tr>
-          `;
-        });
-        return;
-      }
-
       let items = getSortedInventory();
       if (activeDeliveryFilter !== 'ALL') {
         items = items.filter(i => i.category.toUpperCase() === activeDeliveryFilter.toUpperCase());
@@ -1552,8 +1467,7 @@
 
       items.forEach((item, index) => {
         const remaining = item.deliveryQty - item.usedQty;
-        const daysAgoNote = getDaysAgoNote(item.date);
-        const prevDateHtml = item.previousDate ? `<span class="date-prev-note">Prev Date: ${item.previousDate}</span>` : '';
+        const dateHistoryUI = renderDateCardUI(item.date, item.previousDate);
 
         if (item.editingDelivery) {
           tbody.innerHTML += `
@@ -1584,14 +1498,7 @@
               <td>${item.deliveryQty} ${item.unit}</td>
               <td>${item.usedQty} ${item.unit}</td>
               <td><strong>${remaining} ${item.unit}</strong></td>
-              <td>
-                <div class="date-note-container">
-                  <span class="date-main">${item.date}</span>
-                  <span class="date-badge-note">Received Date</span>
-                  ${prevDateHtml}
-                  <span class="days-ago-note">${daysAgoNote}</span>
-                </div>
-              </td>
+              <td>${dateHistoryUI}</td>
               <td style="display: flex; gap: 4px;">
                 <button class="btn-edit" onclick="toggleInlineEdit(${item.id}, 'delivery')">✏ Edit Date / Stock</button>
                 <button class="btn-delete" onclick="promptDeleteSingle(${item.id}, 'delivery')">Remove</button>
@@ -1614,8 +1521,7 @@
       items.forEach((item, index) => {
         const remaining = item.deliveryQty - item.usedQty;
         const accuracy = item.deliveryQty > 0 ? ((remaining / item.deliveryQty) * 100).toFixed(0) + '%' : '100%';
-        const daysAgoNote = getDaysAgoNote(item.date);
-        const prevDateHtml = item.previousDate ? `<span class="date-prev-note">Prev Date: ${item.previousDate}</span>` : '';
+        const dateHistoryUI = renderDateCardUI(item.date, item.previousDate);
 
         tbody.innerHTML += `
           <tr style="animation-delay: ${index * 0.05}s">
@@ -1626,13 +1532,7 @@
             <td>${item.usedQty} ${item.unit}</td>
             <td><strong>${remaining} ${item.unit}</strong></td>
             <td class="accuracy-indicator">${accuracy}</td>
-            <td>
-              <div class="date-note-container">
-                <span class="date-main">${item.date}</span>
-                ${prevDateHtml}
-                <span class="days-ago-note">${daysAgoNote}</span>
-              </div>
-            </td>
+            <td>${dateHistoryUI}</td>
           </tr>
         `;
       });
@@ -1678,7 +1578,6 @@
         inventoryStore.push({ id: Date.now(), category, name, unit, deliveryQty: 0, usedQty, date, previousDate: null, editing: false, editingDelivery: false, selected: false });
       }
 
-      logHistory('cafe', name, 'Item Added/Updated', `Usage: ${usedQty} ${unit}`);
       document.getElementById('cafe-item-name').value = '';
       document.getElementById('cafe-item-used').value = '0';
       renderAllTables();
@@ -1705,7 +1604,6 @@
         inventoryStore.push({ id: Date.now(), category, name, unit, deliveryQty, usedQty: 0, date, previousDate: null, editing: false, editingDelivery: false, selected: false });
       }
 
-      logHistory('delivery', name, 'Stock Received', `Added: ${deliveryQty} ${unit}`);
       document.getElementById('del-item-name').value = '';
       document.getElementById('del-item-qty').value = '10';
       renderAllTables();
