@@ -7,7 +7,7 @@
       "unit": "PCS",
       "deliveredQty": 60,
       "barStorage": 0,
-      "usedQty": 2,
+      "usedQty": 8,
       "date": "2026-09-09",
       "previousDate": null,
       "editing": false,
@@ -27,6 +27,66 @@
     }
   ],
   "historyLogs": [
+    {
+      "id": 1788932414319,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "Quick Adjust",
+      "oldDate": "2026-09-09",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 8 PCS | Storage Rem: 52 | Bar Rem: 0"
+    },
+    {
+      "id": 1788932414199,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "Quick Adjust",
+      "oldDate": "2026-09-09",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 7 PCS | Storage Rem: 53 | Bar Rem: 0"
+    },
+    {
+      "id": 1788932414063,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "Quick Adjust",
+      "oldDate": "2026-09-09",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 6 PCS | Storage Rem: 54 | Bar Rem: 0"
+    },
+    {
+      "id": 1788932413920,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "Quick Adjust",
+      "oldDate": "2026-09-09",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 5 PCS | Storage Rem: 55 | Bar Rem: 0"
+    },
+    {
+      "id": 1788932413759,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "Quick Adjust",
+      "oldDate": "2026-09-09",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 4 PCS | Storage Rem: 56 | Bar Rem: 0"
+    },
+    {
+      "id": 1788932413607,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORG FULL CREAM MILK",
+      "action": "Quick Adjust",
+      "oldDate": "2026-09-09",
+      "newDate": "2026-09-09",
+      "detail": "Usage: 3 PCS | Storage Rem: 57 | Bar Rem: 0"
+    },
     {
       "id": 1788932413119,
       "module": "cafe",
@@ -128,5 +188,5 @@
       "detail": "Received initial 60 PCS"
     }
   ],
-  "lastUpdated": "2026-09-09T05:40:13.121Z"
+  "lastUpdated": "2026-09-09T05:40:24.479Z"
 }
