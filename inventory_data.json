@@ -6,10 +6,10 @@
       "name": "EMBORGE FULL CREAM MILK",
       "unit": "PCS",
       "deliveredQty": 60,
-      "barStorage": 24,
+      "barStorage": 14,
       "usedQty": 0,
-      "date": "2026-07-17",
-      "previousDate": null,
+      "date": "2026-08-28",
+      "previousDate": "2026-07-17",
       "editing": false,
       "editingDelivery": false,
       "selected": false
@@ -27,6 +27,16 @@
     }
   ],
   "historyLogs": [
+    {
+      "id": 1788932015482,
+      "module": "cafe",
+      "category": "MILK",
+      "itemName": "EMBORGE FULL CREAM MILK",
+      "action": "Pre-Edit Changed",
+      "oldDate": "2026-07-17",
+      "newDate": "2026-08-28",
+      "detail": "Bar Storage: 14, Usage: 0"
+    },
     {
       "id": 1788931976410,
       "module": "delivery",
@@ -78,5 +88,5 @@
       "detail": "Received initial 60 PCS"
     }
   ],
-  "lastUpdated": "2026-09-09T05:32:56.411Z"
+  "lastUpdated": "2026-09-09T05:33:35.483Z"
 }
