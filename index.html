@@ -650,6 +650,21 @@
         .batch-subtable { width: 100%; margin: 8px 0; font-size: 0.73rem; }
         .batch-subtable th { font-size: 0.62rem; background: rgba(0,0,0,0.03); }
         .batch-subtable td { padding: 6px 10px; }
+        
+        .inline-date-btn {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--clear-border);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .inline-date-btn:hover { background: var(--brand-color); color: #fff; }
     </style>
 </head>
 <body>
@@ -1206,7 +1221,6 @@
     if (!appData.markedOutPastries) appData.markedOutPastries = [];
     if (!appData.lastUpdatedTimestamp) appData.lastUpdatedTimestamp = Date.now();
 
-    // Standardize Deliveries Structure & Transfer Status
     appData.deliveries.forEach(del => {
         if (del.initQty === undefined) del.initQty = del.qty !== undefined ? del.qty : 0;
         if (del.remQty === undefined) del.remQty = del.qty !== undefined ? del.qty : del.initQty;
@@ -2364,6 +2378,21 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    async function changeDeliveryDate(id) {
+        const del = appData.deliveries.find(d => d.id === id);
+        if (!del) return;
+
+        const newDate = prompt(`Edit Delivery Date for "${del.name}":`, del.deliveryDate);
+        if (newDate && newDate.trim() !== '') {
+            saveSnapshotForUndo();
+            const oldDate = del.deliveryDate;
+            del.deliveryDate = newDate.trim();
+            recordLog(`📅 Changed delivery date for "${del.name}" from [${oldDate}] to [${del.deliveryDate}]`);
+            await autoSaveData();
+            refreshAllViews();
+        }
+    }
+
     function cancelDeliveryEdit() {
         document.getElementById('editingDeliveryId').value = '';
         document.getElementById('delItemName').value = '';
@@ -2625,11 +2654,15 @@
                 <td><strong class="${qtyStatusClass}">${remQty}</strong> <span class="unit-label">${del.unit}</span></td>
                 <td><span class="used-badge-red">-${usedQty} ${del.unit}</span></td>
                 <td>${statusBadge}</td>
-                <td>${del.deliveryDate}</td>
+                <td>
+                    <button type="button" class="inline-date-btn" onclick="changeDeliveryDate(${del.id})" title="Click to Change Delivery Date">
+                        📅 ${del.deliveryDate}
+                    </button>
+                </td>
                 <td>
                     <div class="action-cell-wrapper">
                         ${transferBtn}
-                        <button type="button" class="btn edit-btn" onclick="editDeliveryRecord(${del.id})" style="padding: 5px 8px; font-size: 0.72rem;">✏️ Edit</button>
+                        <button type="button" class="btn edit-btn" onclick="editDeliveryRecord(${del.id})" style="padding: 5px 8px; font-size: 0.72rem;">✏️ Edit Details</button>
                         <button type="button" class="btn-delete-x" onclick="deleteDeliveryItem(${del.id})" title="Delete">✕</button>
                     </div>
                 </td>
