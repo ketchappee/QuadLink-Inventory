@@ -51,43 +51,29 @@
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateZ(0);
+            will-change: transform, background-color, border-color, box-shadow;
+            backface-visibility: hidden;
         }
 
         .glass-card:hover {
             background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-8px) scale(1.03);
+            transform: translate3d(0, -6px, 0) scale(1.02);
             border-color: rgba(255, 255, 255, 0.3);
-            z-index: 10;
+            box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.15);
         }
 
         .glass-card.active {
             background: rgba(255, 255, 255, 0.85);
             border: 1px solid rgba(255, 255, 255, 0.8);
-            transform: translateY(-4px) scale(1.01);
+            transform: translate3d(0, -4px, 0);
             box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.15);
-            z-index: 5;
         }
         
         .glass-card.active h3 { color: #1c1917; }
-        .glass-card.active p { color: #57534e; }
-        .glass-card.active .icon-container { background: #1c1917; color: white; }
-
-        .glass-input {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(4px);
-        }
-        .glass-input:focus {
-            background: rgba(255, 255, 255, 0.95);
-            outline: none;
-            border-color: #a8a29e;
-            box-shadow: 0 0 0 2px rgba(168, 162, 158, 0.3);
-        }
-
-        /* Animations */
-        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
-        .slide-up { animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .fade-in { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .slide-up { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -96,6 +82,27 @@
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Text Shimmer Animation */
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .animate-shimmer {
+            background-size: 200% auto;
+            animation: shimmer 4s linear infinite;
+        }
+
+        /* Mac-like Magnification Hover (144Hz Smooth) */
+        .mac-hover {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            will-change: transform, box-shadow;
+            transform: translate3d(0, 0, 0);
+        }
+        .mac-hover:hover {
+            transform: translate3d(0, -4px, 0) scale(1.08);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
         }
 
         /* Custom Checkbox */
@@ -151,9 +158,9 @@
                     <span class="text-2xl sm:text-3xl md:text-5xl font-light text-stone-300">INVENTORY</span>
                 </h1>
             </div>
-            <button onclick="proceedToHome()" class="group relative flex items-center justify-center gap-3 bg-white text-stone-900 px-6 md:px-8 py-3 md:py-4 rounded-full font-bold text-sm md:text-base transition-all duration-300 ease-out hover:bg-stone-200 hover:shadow-2xl hover:shadow-white/20 hover:-translate-y-2 hover:scale-110 origin-center overflow-hidden mt-2 md:mt-4">
+            <button onclick="proceedToHome()" class="smooth-gpu group relative flex items-center justify-center gap-3 bg-white text-stone-900 px-6 md:px-8 py-3 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-stone-200 overflow-hidden mt-2 md:mt-4">
                 <span>Enter System</span>
-                <i data-lucide="arrow-right" class="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1"></i>
+                <i data-lucide="arrow-right" class="w-4 h-4 md:w-5 md:h-5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5"></i>
             </button>
         </div>
     </div>
@@ -164,10 +171,10 @@
         <!-- Header -->
         <header class="px-4 sm:px-6 md:px-8 py-4 flex justify-between items-center glass-panel sticky top-0 z-30 border-x-0 border-t-0 rounded-none bg-white/10">
             <div class="flex items-center gap-3 md:gap-4">
-                <div onclick="proceedToLanding()" title="Return to Main Page" class="w-10 h-10 md:w-12 md:h-12 bg-white/90 rounded-xl md:rounded-2xl flex items-center justify-center shadow-lg cursor-pointer transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:shadow-xl">
-                    <img src="quadlogo.ico" alt="Quadlink Logo" class="w-6 h-6 md:w-8 md:h-8 object-contain">
-                </div>
-                <h2 class="text-xl md:text-2xl font-bold tracking-tight text-white hidden sm:block">QUADLINK</h2>
+                <button onclick="returnToLanding()" class="w-10 h-10 md:w-12 md:h-12 bg-white/90 rounded-xl md:rounded-2xl flex items-center justify-center shadow-lg mac-hover border-none outline-none cursor-pointer group">
+                    <img src="quadlogo_3.ico" alt="Logo" class="w-6 h-6 md:w-8 md:h-8 object-contain transition-transform duration-300">
+                </button>
+                <h2 class="text-xl md:text-2xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-stone-400 to-white animate-shimmer hidden sm:block whitespace-nowrap">QUADLINK CAFE INVENTORY</h2>
             </div>
             
             <div class="flex items-center gap-2 px-4 py-2 glass-panel rounded-full text-xs md:text-sm font-semibold text-white bg-white/5">
@@ -221,25 +228,25 @@
             <!-- Action Bar -->
             <div class="glass-panel p-3 md:p-4 rounded-xl md:rounded-2xl flex flex-col lg:flex-row justify-between items-center gap-3 md:gap-4 fade-in">
                 <div class="flex items-center gap-2 md:gap-3 w-full lg:w-auto flex-wrap sm:flex-nowrap">
-                    <button onclick="deleteSelected()" id="btn-delete" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-red-500/80 hover:bg-red-500 text-white rounded-lg md:rounded-xl font-semibold text-xs md:text-sm transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-1 hover:shadow-xl origin-center disabled:hover:scale-100 disabled:hover:translate-y-0 disabled:opacity-40 disabled:cursor-not-allowed shadow-lg" disabled>
+                    <button onclick="deleteSelected()" id="btn-delete" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-red-500/80 hover:bg-red-500 text-white rounded-lg md:rounded-xl font-semibold text-xs md:text-sm disabled:opacity-40 disabled:cursor-not-allowed shadow-lg" disabled>
                         <i data-lucide="trash-2" class="w-4 h-4"></i>
                         <span class="hidden sm:inline">Delete Selected</span>
                         <span class="sm:hidden">Delete</span>
                         <span id="selected-count" class="bg-white text-red-600 text-[10px] md:text-xs px-1.5 md:px-2 py-0.5 rounded-full hidden">0</span>
                     </button>
-                    <button onclick="clearHistory()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-lg md:rounded-xl font-semibold text-xs md:text-sm transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-1 hover:shadow-xl origin-center">
+                    <button onclick="clearHistory()" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-lg md:rounded-xl font-semibold text-xs md:text-sm">
                         <i data-lucide="history" class="w-4 h-4"></i>
                         <span class="hidden sm:inline">Clear History</span>
                         <span class="sm:hidden">Clear</span>
                     </button>
-                    <button onclick="exportToExcel()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-emerald-500/80 hover:bg-emerald-500 text-white rounded-lg md:rounded-xl font-semibold text-xs md:text-sm transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-1 hover:shadow-xl origin-center shadow-lg">
+                    <button onclick="exportToExcel()" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-emerald-500/80 hover:bg-emerald-500 text-white rounded-lg md:rounded-xl font-semibold text-xs md:text-sm shadow-lg">
                         <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
                         <span class="hidden sm:inline">Export to Excel</span>
                         <span class="sm:hidden">Export</span>
                     </button>
                 </div>
                 
-                <button onclick="openAddModal()" class="w-full lg:w-auto flex items-center justify-center gap-2 bg-white hover:bg-stone-200 text-stone-900 px-6 py-3 md:py-2.5 rounded-xl font-bold text-sm transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-1 hover:shadow-2xl origin-center shadow-xl whitespace-nowrap z-10">
+                <button onclick="openAddModal()" class="smooth-gpu w-full lg:w-auto flex items-center justify-center gap-2 bg-white hover:bg-stone-200 text-stone-900 px-6 py-3 md:py-2.5 rounded-xl font-bold text-sm whitespace-nowrap">
                     <i data-lucide="plus" class="w-4 h-4 md:w-5 md:h-5"></i>
                     <span id="add-btn-text">Add Item</span>
                 </button>
@@ -337,8 +344,8 @@
                 </div>
                 
                 <div class="pt-4 flex gap-3">
-                    <button type="button" onclick="closeAddModal()" class="flex-1 px-4 py-3 bg-white/10 border border-white/20 text-white rounded-xl font-bold hover:bg-white/20 transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-xl origin-center text-sm md:text-base">Cancel</button>
-                    <button type="submit" class="flex-1 px-4 py-3 bg-white text-stone-900 rounded-xl font-bold hover:bg-stone-200 transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-1 hover:shadow-xl origin-center shadow-lg text-sm md:text-base">Save Item</button>
+                    <button type="button" onclick="closeAddModal()" class="smooth-gpu flex-1 px-4 py-3 bg-white/10 border border-white/20 text-white rounded-xl font-bold hover:bg-white/20 text-sm md:text-base">Cancel</button>
+                    <button type="submit" class="smooth-gpu flex-1 px-4 py-3 bg-white text-stone-900 rounded-xl font-bold hover:bg-stone-200 shadow-lg text-sm md:text-base">Save Item</button>
                 </div>
             </form>
         </div>
@@ -396,18 +403,16 @@
             }, 600);
         }
 
-        function proceedToLanding() {
+        function returnToLanding() {
             const landingPage = document.getElementById('landing-page');
             const homePage = document.getElementById('home-page');
             
-            // Fade out the home page
             homePage.classList.remove('opacity-100');
             homePage.classList.add('opacity-0', 'pointer-events-none');
             
-            // Wait for fade out, then show landing page
             setTimeout(() => {
                 landingPage.style.display = 'flex';
-                // Trigger a reflow to ensure the transition plays smoothly
+                // Trigger reflow to ensure transitions play correctly
                 void landingPage.offsetWidth; 
                 landingPage.style.opacity = '1';
                 landingPage.style.pointerEvents = 'auto';
