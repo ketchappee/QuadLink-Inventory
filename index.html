@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -265,7 +265,7 @@
                 
                 <!-- Table Content -->
                 <div class="overflow-x-auto w-full transition-opacity duration-300 min-h-[300px]" id="table-container">
-                    <table class="w-full text-left border-collapse min-w-[650px]">
+                    <table class="w-full text-left border-collapse min-w-[700px]">
                         <thead class="bg-black/30 border-b border-white/20" id="table-head">
                             <!-- Dynamically populated -->
                         </thead>
@@ -285,7 +285,7 @@
         </main>
     </div>
 
-    <!-- ==================== ADD ITEM MODAL ==================== -->
+    <!-- ==================== ADD / EDIT ITEM MODAL ==================== -->
     <div id="add-modal" class="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4">
         <div class="glass-panel bg-stone-900/80 rounded-3xl shadow-2xl w-full max-w-md p-6 md:p-8 transform translate-y-8 transition-transform duration-300 scale-95 border border-white/20" id="add-modal-content">
             <div class="flex justify-between items-center mb-6">
@@ -295,7 +295,7 @@
                 </button>
             </div>
             
-            <form id="add-form" onsubmit="handleAddItem(event)" class="space-y-4 md:space-y-5">
+            <form id="add-form" onsubmit="handleSaveItem(event)" class="space-y-4 md:space-y-5">
                 <div>
                     <label class="block text-xs md:text-sm font-semibold text-stone-300 mb-1.5">Item Name</label>
                     <input type="text" id="input-name" required placeholder="e.g. Espresso Beans" class="glass-input w-full px-4 py-2.5 rounded-xl text-stone-900 text-sm font-medium shadow-inner placeholder-stone-500">
@@ -306,6 +306,7 @@
                         <label id="label-category" class="block text-xs md:text-sm font-semibold text-stone-300 mb-1.5">Category</label>
                         <select id="input-category" required class="glass-input w-full px-4 py-2.5 rounded-xl text-stone-900 text-sm font-medium shadow-inner appearance-none cursor-pointer">
                             <option value="" disabled selected>Select...</option>
+                            <option value="Beans">Beans</option>
                             <option value="Coffee">Coffee</option>
                             <option value="Milk">Milk / Dairy</option>
                             <option value="Cups">Cups</option>
@@ -345,7 +346,7 @@
                 
                 <div class="pt-4 flex gap-3">
                     <button type="button" onclick="closeAddModal()" class="flex-1 px-4 py-3 bg-white/10 border border-white/20 text-white rounded-xl font-bold hover:bg-white/20 transition-colors text-sm md:text-base">Cancel</button>
-                    <button type="submit" class="flex-1 px-4 py-3 bg-white text-stone-900 rounded-xl font-bold hover:bg-stone-200 transition-colors shadow-lg text-sm md:text-base">Save Item</button>
+                    <button type="submit" id="save-btn-text" class="flex-1 px-4 py-3 bg-white text-stone-900 rounded-xl font-bold hover:bg-stone-200 transition-colors shadow-lg text-sm md:text-base">Save Item</button>
                 </div>
             </form>
         </div>
@@ -367,7 +368,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, onSnapshot, collection, writeBatch } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, deleteDoc, onSnapshot, collection, writeBatch } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- FIREBASE CONFIGURATION ---
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'quadlink-inventory-app';
@@ -376,16 +377,30 @@
         let auth, db, userId, itemsCollection;
         
         // --- GLOBAL APP STATE ---
-        window.appState = {
-            'in-house': [],
-            'storage': [],
-            'marked-out': []
-        };
+        const LOCAL_STORAGE_KEY = 'quadlink_inventory_state';
+        
+        function loadLocalState() {
+            const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+            if (saved) {
+                try { return JSON.parse(saved); } catch(e) { console.error(e); }
+            }
+            return { 'in-house': [], 'storage': [], 'marked-out': [] };
+        }
+
+        window.appState = loadLocalState();
         window.currentTab = 'in-house';
         window.selectedIds = new Set(); 
+        window.editingId = null; // Tracks if we are currently editing an item
         
-        const generateID = () => crypto.randomUUID();
+        const generateID = () => 'local_' + crypto.randomUUID();
         const getTodayStr = () => new Date().toISOString().split('T')[0];
+
+        function persistAndRefresh() {
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(window.appState));
+            window.updateTabCounts();
+            window.renderTable();
+            if (window.lucide) lucide.createIcons();
+        }
 
         // --- INIT FIREBASE ---
         if (firebaseConfig && Object.keys(firebaseConfig).length > 0) {
@@ -394,7 +409,7 @@
             db = getFirestore(app);
             initFirebase();
         } else {
-            console.warn("No Firebase config detected. Running in memory-only mode.");
+            console.warn("No Firebase config detected. Running with LocalStorage persistence.");
         }
 
         async function initFirebase() {
@@ -408,10 +423,8 @@
                 if (!auth.currentUser) return;
                 userId = auth.currentUser.uid;
                 
-                // Set up collection reference specifically for this user/app (Rule 1 Strict Paths)
                 itemsCollection = collection(db, 'artifacts', appId, 'users', userId, 'inventory_items');
 
-                // Real-time listener for database sync
                 onSnapshot(itemsCollection, (snapshot) => {
                     const newData = { 'in-house': [], 'storage': [], 'marked-out': [] };
                     
@@ -422,12 +435,12 @@
                         }
                     });
 
-                    // Sort items by date (newest first)
                     for (let key in newData) {
                         newData[key].sort((a, b) => new Date(b.date) - new Date(a.date));
                     }
 
                     window.appState = newData;
+                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(window.appState));
                     window.updateTabCounts();
                     window.renderTable();
                 }, (error) => {
@@ -446,7 +459,7 @@
 
             window.updateTabCounts();
             window.renderTable();
-            lucide.createIcons();
+            if (window.lucide) lucide.createIcons();
         });
 
         // --- NAVIGATION & TABS ---
@@ -459,6 +472,18 @@
                 landingPage.style.display = 'none';
                 homePage.classList.remove('opacity-0', 'pointer-events-none');
                 homePage.classList.add('opacity-100');
+            }, 600);
+        }
+
+        window.returnToLanding = function() {
+            const landingPage = document.getElementById('landing-page');
+            const homePage = document.getElementById('home-page');
+            homePage.classList.remove('opacity-100');
+            homePage.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                landingPage.style.display = 'flex';
+                landingPage.style.opacity = '1';
+                landingPage.style.pointerEvents = 'auto';
             }, 600);
         }
 
@@ -534,6 +559,7 @@
                         <th class="px-4 md:px-6 py-4 text-xs md:text-sm uppercase tracking-widest text-stone-300 font-bold whitespace-nowrap">Quantity</th>
                         <th class="px-4 md:px-6 py-4 text-xs md:text-sm uppercase tracking-widest text-stone-300 font-bold whitespace-nowrap">Unit</th>
                         <th class="px-4 md:px-6 py-4 text-xs md:text-sm uppercase tracking-widest text-stone-300 font-bold whitespace-nowrap">Date</th>
+                        <th class="px-4 md:px-6 py-4 text-xs md:text-sm uppercase tracking-widest text-stone-300 font-bold text-right whitespace-nowrap">Actions</th>
                     </tr>
                 `;
 
@@ -552,11 +578,17 @@
                             <td class="px-4 md:px-6 py-4 text-sm font-bold text-white whitespace-nowrap">${row.quantity}</td>
                             <td class="px-4 md:px-6 py-4 text-sm font-medium text-stone-300 whitespace-nowrap">${row.unit}</td>
                             <td class="px-4 md:px-6 py-4 text-sm font-medium text-stone-300 whitespace-nowrap">${row.date}</td>
+                            <td class="px-4 md:px-6 py-4 text-sm text-right whitespace-nowrap">
+                                <button onclick="openEditModal('${row._id}')" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-xs font-semibold transition-colors inline-flex items-center gap-1.5 border border-white/15">
+                                    <i data-lucide="pencil" class="w-3.5 h-3.5"></i> Edit
+                                </button>
+                            </td>
                         </tr>
                     `;
                 });
                 tableBody.innerHTML = bodyHTML;
             }
+            if (window.lucide) lucide.createIcons();
             window.updateTabCounts();
         }
 
@@ -642,22 +674,22 @@
                     try {
                         const batch = writeBatch(db);
                         window.selectedIds.forEach(id => {
-                            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'inventory_items', id);
-                            batch.delete(docRef);
+                            if (!id.startsWith('local_')) {
+                                const docRef = doc(db, 'artifacts', appId, 'users', userId, 'inventory_items', id);
+                                batch.delete(docRef);
+                            }
                         });
                         await batch.commit();
-                        window.selectedIds.clear();
-                        window.updateDeleteButtonState();
                     } catch (e) {
                         console.error("Error deleting from Firebase:", e);
                     }
-                } else {
-                    // Fallback to local memory deletion if not connected
-                    window.appState[window.currentTab] = window.appState[window.currentTab].filter(item => !window.selectedIds.has(item._id));
-                    window.selectedIds.clear();
-                    window.updateDeleteButtonState();
-                    window.renderTable();
                 }
+                
+                // Remove from local app state & local storage
+                window.appState[window.currentTab] = window.appState[window.currentTab].filter(item => !window.selectedIds.has(item._id));
+                window.selectedIds.clear();
+                window.updateDeleteButtonState();
+                persistAndRefresh();
             });
         }
 
@@ -670,32 +702,55 @@
                     try {
                         const batch = writeBatch(db);
                         window.appState[window.currentTab].forEach(item => {
-                            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'inventory_items', item._id);
-                            batch.delete(docRef);
+                            if (!item._id.startsWith('local_')) {
+                                const docRef = doc(db, 'artifacts', appId, 'users', userId, 'inventory_items', item._id);
+                                batch.delete(docRef);
+                            }
                         });
                         await batch.commit();
-                        window.selectedIds.clear();
-                        window.updateDeleteButtonState();
                     } catch (e) {
                         console.error("Error clearing Firebase collection:", e);
                     }
-                } else {
-                    // Fallback local memory clearing
-                    window.appState[window.currentTab] = [];
-                    window.selectedIds.clear();
-                    window.updateDeleteButtonState();
-                    window.renderTable();
                 }
+                
+                window.appState[window.currentTab] = [];
+                window.selectedIds.clear();
+                window.updateDeleteButtonState();
+                persistAndRefresh();
             });
         }
 
-        // --- ADD ITEM LOGIC & MODAL ---
+        // --- ADD / EDIT ITEM MODAL LOGIC ---
         window.openAddModal = function() {
+            window.editingId = null;
+            document.getElementById('modal-title').textContent = 'Add Item';
+            document.getElementById('save-btn-text').textContent = 'Save Item';
             const modal = document.getElementById('add-modal');
             const content = document.getElementById('add-modal-content');
             document.getElementById('add-form').reset();
             document.getElementById('input-date').value = getTodayStr(); 
             
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            content.classList.remove('translate-y-8', 'scale-95');
+            content.classList.add('translate-y-0', 'scale-100');
+        }
+
+        window.openEditModal = function(id) {
+            const item = window.appState[window.currentTab].find(i => i._id === id);
+            if (!item) return;
+
+            window.editingId = id;
+            document.getElementById('modal-title').textContent = 'Edit Item';
+            document.getElementById('save-btn-text').textContent = 'Update Item';
+            
+            document.getElementById('input-name').value = item.name;
+            document.getElementById('input-category').value = item.category;
+            document.getElementById('input-quantity').value = item.quantity;
+            document.getElementById('input-unit').value = item.unit;
+            document.getElementById('input-date').value = item.date;
+
+            const modal = document.getElementById('add-modal');
+            const content = document.getElementById('add-modal-content');
             modal.classList.remove('opacity-0', 'pointer-events-none');
             content.classList.remove('translate-y-8', 'scale-95');
             content.classList.add('translate-y-0', 'scale-100');
@@ -708,36 +763,54 @@
             content.classList.add('translate-y-8', 'scale-95');
             setTimeout(() => {
                 modal.classList.add('opacity-0', 'pointer-events-none');
+                window.editingId = null;
             }, 300);
         }
 
-        window.handleAddItem = async function(event) {
+        window.handleSaveItem = async function(event) {
             event.preventDefault();
-            const newItem = {
+            const itemData = {
                 name: document.getElementById('input-name').value,
                 category: document.getElementById('input-category').value,
                 quantity: parseFloat(document.getElementById('input-quantity').value) || 0,
                 unit: document.getElementById('input-unit').value,
                 date: document.getElementById('input-date').value,
-                tab: window.currentTab // Map this item to current section tab
+                tab: window.currentTab
             };
 
-            if (userId && itemsCollection) {
-                try {
-                    // Add directly to Firebase; the real-time listener will instantly refresh the table!
-                    const docRef = doc(itemsCollection);
-                    await setDoc(docRef, newItem);
-                    window.closeAddModal();
-                } catch (e) {
-                    console.error("Error adding to Firebase:", e);
+            if (window.editingId) {
+                // EDIT EXISTING ITEM
+                const index = window.appState[window.currentTab].findIndex(i => i._id === window.editingId);
+                if (index !== -1) {
+                    window.appState[window.currentTab][index] = { _id: window.editingId, ...itemData };
+                }
+
+                if (userId && itemsCollection && !window.editingId.startsWith('local_')) {
+                    try {
+                        const docRef = doc(db, 'artifacts', appId, 'users', userId, 'inventory_items', window.editingId);
+                        await setDoc(docRef, itemData, { merge: true });
+                    } catch (e) {
+                        console.error("Error updating in Firebase:", e);
+                    }
                 }
             } else {
-                // Fallback to local memory saving
-                newItem._id = generateID();
-                window.appState[window.currentTab].unshift(newItem); 
-                window.closeAddModal();
-                setTimeout(() => window.renderTable(), 300);
+                // ADD NEW ITEM
+                const newId = generateID();
+                const newItem = { _id: newId, ...itemData };
+                window.appState[window.currentTab].unshift(newItem);
+
+                if (userId && itemsCollection) {
+                    try {
+                        const docRef = doc(itemsCollection);
+                        await setDoc(docRef, itemData);
+                    } catch (e) {
+                        console.error("Error adding to Firebase:", e);
+                    }
+                }
             }
+
+            window.closeAddModal();
+            persistAndRefresh();
         }
 
         // --- EXPORT TO EXCEL ---
