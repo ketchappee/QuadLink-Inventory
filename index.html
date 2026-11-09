@@ -344,54 +344,113 @@
                 </div>
                 
                 <div class="pt-4 flex gap-3">
-                    <button type="button" onclick="closeAddModal()" class="smooth-gpu flex-1 px-4 py-3 bg-white/10 border border-white/20 text-white rounded-xl font-bold hover:bg-white/20 text-sm md:text-base">Cancel</button>
-                    <button type="submit" class="smooth-gpu flex-1 px-4 py-3 bg-white text-stone-900 rounded-xl font-bold hover:bg-stone-200 shadow-lg text-sm md:text-base">Save Item</button>
+                    <button type="button" onclick="closeAddModal()" class="flex-1 px-4 py-3 bg-white/10 border border-white/20 text-white rounded-xl font-bold hover:bg-white/20 transition-colors text-sm md:text-base">Cancel</button>
+                    <button type="submit" class="flex-1 px-4 py-3 bg-white text-stone-900 rounded-xl font-bold hover:bg-stone-200 transition-colors shadow-lg text-sm md:text-base">Save Item</button>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- ==================== CONFIRM MODAL ==================== -->
+    <div id="confirm-modal" class="fixed inset-0 z-[70] bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4">
+        <div class="glass-panel bg-stone-900/95 rounded-3xl shadow-2xl w-full max-w-sm p-6 md:p-8 transform translate-y-8 transition-transform duration-300 scale-95 border border-white/20" id="confirm-modal-content">
+            <h3 class="text-xl font-bold text-white mb-2">Confirm Action</h3>
+            <p id="confirm-message" class="text-stone-300 text-sm mb-6 font-medium">Are you sure?</p>
+            <div class="flex gap-3">
+                <button onclick="closeConfirmModal()" class="flex-1 px-4 py-3 bg-white/10 border border-white/20 text-white rounded-xl font-bold hover:bg-white/20 transition-colors text-sm">Cancel</button>
+                <button id="confirm-action-btn" class="flex-1 px-4 py-3 bg-red-500/80 text-white rounded-xl font-bold hover:bg-red-500 transition-colors shadow-lg text-sm">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ==================== JAVASCRIPT LOGIC ==================== -->
-    <script>
-        // --- DATA STATE ---
-        // Hidden UUIDs for selection mapping, UI removes visible ID column
-        const generateID = () => Math.random().toString(36).substr(2, 9);
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot, collection, writeBatch } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- FIREBASE CONFIGURATION ---
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'quadlink-inventory-app';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+
+        let auth, db, userId, itemsCollection;
+        
+        // --- GLOBAL APP STATE ---
+        window.appState = {
+            'in-house': [],
+            'storage': [],
+            'marked-out': []
+        };
+        window.currentTab = 'in-house';
+        window.selectedIds = new Set(); 
+        
+        const generateID = () => crypto.randomUUID();
         const getTodayStr = () => new Date().toISOString().split('T')[0];
 
-        let appState = {
-            'in-house': [
-                { _id: generateID(), name: 'Espresso Beans (House)', category: 'Coffee', quantity: 4.5, unit: 'KG', date: '2026-10-30' },
-                { _id: generateID(), name: 'Whole Milk', category: 'Milk', quantity: 12, unit: 'BOTTLES', date: '2026-10-30' },
-                { _id: generateID(), name: 'Butter Croissant', category: 'Pastry', quantity: 24, unit: 'PCS', date: '2026-10-30' },
-            ],
-            'storage': [
-                { _id: generateID(), name: 'Espresso Beans (House)', category: 'Coffee', quantity: 50, unit: 'KG', date: '2026-10-25' },
-                { _id: generateID(), name: 'Vanilla Syrup', category: 'Syrups', quantity: 24, unit: 'BOTTLES', date: '2026-10-20' },
-                { _id: generateID(), name: 'Paper Cups 12oz', category: 'Cups', quantity: 10, unit: 'PACKS', date: '2026-10-28' }
-            ],
-            'marked-out': [
-                { _id: generateID(), name: 'Blueberry Muffin', category: 'Pastry', quantity: 4, unit: 'PCS', date: '2026-10-29' },
-            ]
-        };
+        // --- INIT FIREBASE ---
+        if (firebaseConfig && Object.keys(firebaseConfig).length > 0) {
+            const app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            initFirebase();
+        } else {
+            console.warn("No Firebase config detected. Running in memory-only mode.");
+        }
 
-        let currentTab = 'in-house';
-        let selectedIds = new Set(); 
+        async function initFirebase() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined') {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                
+                if (!auth.currentUser) return;
+                userId = auth.currentUser.uid;
+                
+                // Set up collection reference specifically for this user/app (Rule 1 Strict Paths)
+                itemsCollection = collection(db, 'artifacts', appId, 'users', userId, 'inventory_items');
 
-        // --- INIT ---
+                // Real-time listener for database sync
+                onSnapshot(itemsCollection, (snapshot) => {
+                    const newData = { 'in-house': [], 'storage': [], 'marked-out': [] };
+                    
+                    snapshot.forEach(docSnap => {
+                        const data = docSnap.data();
+                        if (newData[data.tab]) {
+                            newData[data.tab].push({ _id: docSnap.id, ...data });
+                        }
+                    });
+
+                    // Sort items by date (newest first)
+                    for (let key in newData) {
+                        newData[key].sort((a, b) => new Date(b.date) - new Date(a.date));
+                    }
+
+                    window.appState = newData;
+                    window.updateTabCounts();
+                    window.renderTable();
+                }, (error) => {
+                    console.error("Firestore sync error:", error);
+                });
+            } catch (e) {
+                console.error("Firebase auth/init error:", e);
+            }
+        }
+
+        // --- INIT UI ---
         document.addEventListener('DOMContentLoaded', () => {
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', options);
-            
-            // Set date picker to today by default
             document.getElementById('input-date').value = getTodayStr();
 
-            updateTabCounts();
-            renderTable();
+            window.updateTabCounts();
+            window.renderTable();
             lucide.createIcons();
         });
 
         // --- NAVIGATION & TABS ---
-        function proceedToHome() {
+        window.proceedToHome = function() {
             const landingPage = document.getElementById('landing-page');
             const homePage = document.getElementById('home-page');
             landingPage.style.opacity = '0';
@@ -403,30 +462,13 @@
             }, 600);
         }
 
-        function returnToLanding() {
-            const landingPage = document.getElementById('landing-page');
-            const homePage = document.getElementById('home-page');
-            
-            homePage.classList.remove('opacity-100');
-            homePage.classList.add('opacity-0', 'pointer-events-none');
-            
-            setTimeout(() => {
-                landingPage.style.display = 'flex';
-                // Trigger reflow to ensure transitions play correctly
-                void landingPage.offsetWidth; 
-                landingPage.style.opacity = '1';
-                landingPage.style.pointerEvents = 'auto';
-            }, 600);
-        }
-
-        function switchTab(tabId) {
-            if (currentTab === tabId) return;
-            currentTab = tabId;
-            selectedIds.clear(); 
-            updateDeleteButtonState();
+        window.switchTab = function(tabId) {
+            if (window.currentTab === tabId) return;
+            window.currentTab = tabId;
+            window.selectedIds.clear(); 
+            window.updateDeleteButtonState();
             document.getElementById('search-input').value = '';
             
-            // UI Updates
             const tabs = ['in-house', 'storage', 'marked-out'];
             tabs.forEach(t => {
                 const card = document.getElementById(`tab-${t}`);
@@ -438,23 +480,22 @@
             tableContainer.style.opacity = '0';
             
             setTimeout(() => {
-                renderTable();
+                window.renderTable();
                 tableContainer.style.opacity = '1';
             }, 200);
         }
 
-        function updateTabCounts() {
-            document.getElementById('count-in-house').textContent = `${appState['in-house'].length} Items`;
-            document.getElementById('count-storage').textContent = `${appState['storage'].length} Items`;
-            document.getElementById('count-marked-out').textContent = `${appState['marked-out'].length} Items`;
+        window.updateTabCounts = function() {
+            document.getElementById('count-in-house').textContent = `${window.appState['in-house'].length} Items`;
+            document.getElementById('count-storage').textContent = `${window.appState['storage'].length} Items`;
+            document.getElementById('count-marked-out').textContent = `${window.appState['marked-out'].length} Items`;
         }
 
         // --- TABLE RENDERING ---
-        function renderTable() {
+        window.renderTable = function() {
             const searchQ = document.getElementById('search-input').value.toLowerCase();
-            const rawData = appState[currentTab];
+            const rawData = window.appState[window.currentTab];
             
-            // Filter Data
             const data = rawData.filter(item => 
                 item.name.toLowerCase().includes(searchQ) || 
                 item.category.toLowerCase().includes(searchQ)
@@ -465,7 +506,7 @@
                 'storage': 'Storage Inventory',
                 'marked-out': 'Marked Out Items'
             };
-            document.getElementById('section-title').textContent = titles[currentTab];
+            document.getElementById('section-title').textContent = titles[window.currentTab];
             
             const tableHead = document.getElementById('table-head');
             const tableBody = document.getElementById('table-body');
@@ -481,9 +522,8 @@
                 emptyState.classList.add('hidden');
                 emptyState.classList.remove('flex');
 
-                const allSelected = data.length > 0 && data.every(item => selectedIds.has(item._id));
+                const allSelected = data.length > 0 && data.every(item => window.selectedIds.has(item._id));
 
-                // Table Header (NO ID COLUMN)
                 tableHead.innerHTML = `
                     <tr>
                         <th class="px-4 md:px-6 py-4 w-12">
@@ -497,10 +537,9 @@
                     </tr>
                 `;
 
-                // Table Body
                 let bodyHTML = '';
                 data.forEach(row => {
-                    const isChecked = selectedIds.has(row._id);
+                    const isChecked = window.selectedIds.has(row._id);
                     bodyHTML += `
                         <tr class="hover:bg-white/10 transition-colors duration-200 ${isChecked ? 'bg-white/20' : ''}">
                             <td class="px-4 md:px-6 py-4">
@@ -518,27 +557,26 @@
                 });
                 tableBody.innerHTML = bodyHTML;
             }
-            updateTabCounts();
+            window.updateTabCounts();
         }
 
         // --- SELECTION LOGIC ---
-        function toggleSelectAll(checkbox, currentDataIdsStr) {
-            // Because of single quotes in stringify, replacing to parse properly
+        window.toggleSelectAll = function(checkbox, currentDataIdsStr) {
             const currentDataIds = JSON.parse(currentDataIdsStr.replace(/'/g, '"'));
             if (checkbox.checked) {
-                currentDataIds.forEach(id => selectedIds.add(id));
+                currentDataIds.forEach(id => window.selectedIds.add(id));
             } else {
-                currentDataIds.forEach(id => selectedIds.delete(id));
+                currentDataIds.forEach(id => window.selectedIds.delete(id));
             }
-            renderTable(); 
-            updateDeleteButtonState();
+            window.renderTable(); 
+            window.updateDeleteButtonState();
         }
 
-        function toggleSelectRow(id) {
-            if (selectedIds.has(id)) selectedIds.delete(id);
-            else selectedIds.add(id);
+        window.toggleSelectRow = function(id) {
+            if (window.selectedIds.has(id)) window.selectedIds.delete(id);
+            else window.selectedIds.add(id);
             
-            updateDeleteButtonState();
+            window.updateDeleteButtonState();
             
             const rowCheckboxes = document.querySelectorAll('.row-checkbox');
             let allChecked = true;
@@ -555,12 +593,12 @@
             if (headerCheckbox) headerCheckbox.checked = allChecked && rowCheckboxes.length > 0;
         }
 
-        function updateDeleteButtonState() {
+        window.updateDeleteButtonState = function() {
             const btn = document.getElementById('btn-delete');
             const badge = document.getElementById('selected-count');
-            if (selectedIds.size > 0) {
+            if (window.selectedIds.size > 0) {
                 btn.disabled = false;
-                badge.textContent = selectedIds.size;
+                badge.textContent = window.selectedIds.size;
                 badge.classList.remove('hidden');
             } else {
                 btn.disabled = true;
@@ -568,38 +606,102 @@
             }
         }
 
-        // --- ACTIONS ---
-        function deleteSelected() {
-            if (selectedIds.size === 0) return;
-            appState[currentTab] = appState[currentTab].filter(item => !selectedIds.has(item._id));
-            selectedIds.clear();
-            updateDeleteButtonState();
-            renderTable();
+        // --- CONFIRM MODAL CONTROLS ---
+        window.showConfirmModal = function(message, onConfirm) {
+            document.getElementById('confirm-message').textContent = message;
+            const modal = document.getElementById('confirm-modal');
+            const content = document.getElementById('confirm-modal-content');
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            content.classList.remove('translate-y-8', 'scale-95');
+            content.classList.add('translate-y-0', 'scale-100');
+
+            const btn = document.getElementById('confirm-action-btn');
+            btn.onclick = () => {
+                onConfirm();
+                window.closeConfirmModal();
+            };
         }
 
-        function clearHistory() {
-            if (appState[currentTab].length === 0) return;
-            if(confirm(`Clear ALL items in ${currentTab.replace('-', ' ').toUpperCase()}?`)) {
-                appState[currentTab] = [];
-                selectedIds.clear();
-                updateDeleteButtonState();
-                renderTable();
-            }
+        window.closeConfirmModal = function() {
+            const modal = document.getElementById('confirm-modal');
+            const content = document.getElementById('confirm-modal-content');
+            content.classList.remove('translate-y-0', 'scale-100');
+            content.classList.add('translate-y-8', 'scale-95');
+            setTimeout(() => {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+            }, 300);
         }
 
-        // --- ADD ITEM MODAL ---
-        function openAddModal() {
+        // --- ACTIONS & DATABASE SYNC ---
+        window.deleteSelected = async function() {
+            if (window.selectedIds.size === 0) return;
+            
+            window.showConfirmModal(`Permanently delete ${window.selectedIds.size} selected item(s)?`, async () => {
+                if (userId && itemsCollection) {
+                    try {
+                        const batch = writeBatch(db);
+                        window.selectedIds.forEach(id => {
+                            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'inventory_items', id);
+                            batch.delete(docRef);
+                        });
+                        await batch.commit();
+                        window.selectedIds.clear();
+                        window.updateDeleteButtonState();
+                    } catch (e) {
+                        console.error("Error deleting from Firebase:", e);
+                    }
+                } else {
+                    // Fallback to local memory deletion if not connected
+                    window.appState[window.currentTab] = window.appState[window.currentTab].filter(item => !window.selectedIds.has(item._id));
+                    window.selectedIds.clear();
+                    window.updateDeleteButtonState();
+                    window.renderTable();
+                }
+            });
+        }
+
+        window.clearHistory = async function() {
+            if (window.appState[window.currentTab].length === 0) return;
+            
+            const tabName = window.currentTab.replace('-', ' ').toUpperCase();
+            window.showConfirmModal(`Clear ALL items in ${tabName}? This action cannot be undone.`, async () => {
+                if (userId && itemsCollection) {
+                    try {
+                        const batch = writeBatch(db);
+                        window.appState[window.currentTab].forEach(item => {
+                            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'inventory_items', item._id);
+                            batch.delete(docRef);
+                        });
+                        await batch.commit();
+                        window.selectedIds.clear();
+                        window.updateDeleteButtonState();
+                    } catch (e) {
+                        console.error("Error clearing Firebase collection:", e);
+                    }
+                } else {
+                    // Fallback local memory clearing
+                    window.appState[window.currentTab] = [];
+                    window.selectedIds.clear();
+                    window.updateDeleteButtonState();
+                    window.renderTable();
+                }
+            });
+        }
+
+        // --- ADD ITEM LOGIC & MODAL ---
+        window.openAddModal = function() {
             const modal = document.getElementById('add-modal');
             const content = document.getElementById('add-modal-content');
             document.getElementById('add-form').reset();
-            document.getElementById('input-date').value = getTodayStr(); // reset date
+            document.getElementById('input-date').value = getTodayStr(); 
             
             modal.classList.remove('opacity-0', 'pointer-events-none');
             content.classList.remove('translate-y-8', 'scale-95');
             content.classList.add('translate-y-0', 'scale-100');
         }
 
-        function closeAddModal() {
+        window.closeAddModal = function() {
             const modal = document.getElementById('add-modal');
             const content = document.getElementById('add-modal-content');
             content.classList.remove('translate-y-0', 'scale-100');
@@ -609,32 +711,45 @@
             }, 300);
         }
 
-        function handleAddItem(event) {
+        window.handleAddItem = async function(event) {
             event.preventDefault();
             const newItem = {
-                _id: generateID(),
                 name: document.getElementById('input-name').value,
                 category: document.getElementById('input-category').value,
                 quantity: parseFloat(document.getElementById('input-quantity').value) || 0,
                 unit: document.getElementById('input-unit').value,
-                date: document.getElementById('input-date').value
+                date: document.getElementById('input-date').value,
+                tab: window.currentTab // Map this item to current section tab
             };
-            appState[currentTab].unshift(newItem); 
-            closeAddModal();
-            setTimeout(() => renderTable(), 300);
+
+            if (userId && itemsCollection) {
+                try {
+                    // Add directly to Firebase; the real-time listener will instantly refresh the table!
+                    const docRef = doc(itemsCollection);
+                    await setDoc(docRef, newItem);
+                    window.closeAddModal();
+                } catch (e) {
+                    console.error("Error adding to Firebase:", e);
+                }
+            } else {
+                // Fallback to local memory saving
+                newItem._id = generateID();
+                window.appState[window.currentTab].unshift(newItem); 
+                window.closeAddModal();
+                setTimeout(() => window.renderTable(), 300);
+            }
         }
 
         // --- EXPORT TO EXCEL ---
-        function exportToExcel() {
+        window.exportToExcel = function() {
             const mergedMap = new Map();
 
-            // Process In House and Storage inventories (excluding Marked Out)
             const processItem = (item, source) => {
                 const key = item.name.toLowerCase().trim();
                 if (!mergedMap.has(key)) {
                     mergedMap.set(key, {
                         desc: item.name,
-                        unit: item.unit, // Taking first unit found
+                        unit: item.unit, 
                         inHouse: 0,
                         storage: 0
                     });
@@ -644,23 +759,19 @@
                 if (source === 'storage') record.storage += item.quantity;
             };
 
-            appState['in-house'].forEach(item => processItem(item, 'in-house'));
-            appState['storage'].forEach(item => processItem(item, 'storage'));
+            window.appState['in-house'].forEach(item => processItem(item, 'in-house'));
+            window.appState['storage'].forEach(item => processItem(item, 'storage'));
 
-            // Format Current Date
             const today = new Date();
             const dateStr = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
-            // Create Excel data structure based on the EXACT template requirements
-            // Row 1: A1: Date, B1: Title
             const wsData = [
-                [`Date: ${dateStr}`, "CAFÉ INVENTORY ( QUADLINK )"], // Row 1
-                ["Organized by product categories with In-House and Storage breakdown"], // Row 2
-                [], // Row 3 (Empty)
-                ["Item Description", "Unit", "In-House Bar", "Back Storage", "Total On-Hand", "Stock Status"] // Row 4 (Headers)
+                [`Date: ${dateStr}`, "CAFÉ INVENTORY ( QUADLINK )"],
+                ["Organized by product categories with In-House and Storage breakdown"], 
+                [], 
+                ["Item Description", "Unit", "In-House Bar", "Back Storage", "Total On-Hand", "Stock Status"] 
             ];
 
-            // Add Merged Items
             mergedMap.forEach(row => {
                 const total = row.inHouse + row.storage;
                 const status = total > 0 ? 'OK' : 'EMPTY';
@@ -674,16 +785,12 @@
                 ]);
             });
 
-            // Build Worksheet
             const ws = XLSX.utils.aoa_to_sheet(wsData);
-            
-            // Adjust column widths slightly for better presentation
             ws['!cols'] = [ {wch: 30}, {wch: 10}, {wch: 15}, {wch: 15}, {wch: 15}, {wch: 15} ];
 
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, "Inventory");
 
-            // Format filename
             const formattedDate = `${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}-${String(today.getFullYear()).slice(-2)}`;
             const fileName = `${formattedDate} ( INVENTORY ).xlsx`;
 
