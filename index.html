@@ -419,6 +419,23 @@
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, deleteDoc, onSnapshot, collection, writeBatch } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+        // --- GLOBAL KEYBOARD LISTENER (ESC KEY CLOSES MODALS) ---
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const addModal = document.getElementById('add-modal');
+                const confirmModal = document.getElementById('confirm-modal');
+
+                // If add modal is open, close it
+                if (addModal && !addModal.classList.contains('pointer-events-none')) {
+                    window.closeAddModal();
+                }
+                // If confirmation modal is open, close it
+                else if (confirmModal && !confirmModal.classList.contains('pointer-events-none')) {
+                    window.closeConfirmModal();
+                }
+            }
+        });
+
         // --- TOAST NOTIFICATIONS ---
         window.showToast = function(message, type = 'success') {
             const toast = document.getElementById('toast-notification');
