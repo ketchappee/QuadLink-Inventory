@@ -45,30 +45,31 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
         
+        /* Smooth Zoom-In / Zoom-Out Pop-Up Card Animation */
         .glass-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            transform: translateZ(0);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            transform: scale(1) translateZ(0);
             will-change: transform, background-color, border-color, box-shadow;
             backface-visibility: hidden;
         }
 
         .glass-card:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate3d(0, -6px, 0) scale(1.02);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.25);
+            background: rgba(255, 255, 255, 0.22);
+            transform: scale(1.04) translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
         .glass-card.active {
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(255, 255, 255, 0.9);
-            transform: translate3d(0, -4px, 0);
-            box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.25);
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.25);
         }
         
         .glass-card.active h3 { color: #1c1917; }
@@ -199,12 +200,12 @@
         <!-- Main Content -->
         <main class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-6 md:py-8 w-full space-y-6 md:space-y-8 flex-grow pb-24">
             
-            <!-- Navigation Cards -->
+            <!-- Navigation Cards with Zoom-In/Zoom-Out Pop-Up Animation -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                 <!-- In House Tab -->
                 <button onclick="switchTab('in-house')" id="tab-in-house" class="glass-card active p-5 md:p-6 rounded-2xl md:rounded-3xl text-left flex flex-col cursor-pointer group">
                     <div class="flex justify-between items-start mb-4 md:mb-6 w-full">
-                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white transition-colors duration-300 shadow">
+                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white transition-transform duration-300 group-hover:scale-110 shadow">
                             <i data-lucide="coffee" class="w-6 h-6 md:w-7 md:h-7"></i>
                         </div>
                         <span id="count-in-house" class="text-[11px] md:text-xs font-extrabold px-2.5 py-1 rounded-full bg-stone-900/60 text-white backdrop-blur-md border border-white/20 shadow-sm">0 Items</span>
@@ -216,7 +217,7 @@
                 <!-- Storage Tab -->
                 <button onclick="switchTab('storage')" id="tab-storage" class="glass-card p-5 md:p-6 rounded-2xl md:rounded-3xl text-left flex flex-col cursor-pointer group">
                     <div class="flex justify-between items-start mb-4 md:mb-6 w-full">
-                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white transition-colors duration-300 shadow">
+                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white transition-transform duration-300 group-hover:scale-110 shadow">
                             <i data-lucide="package" class="w-6 h-6 md:w-7 md:h-7"></i>
                         </div>
                         <span id="count-storage" class="text-[11px] md:text-xs font-extrabold px-2.5 py-1 rounded-full bg-stone-900/60 text-white backdrop-blur-md border border-white/20 shadow-sm">0 Items</span>
@@ -228,7 +229,7 @@
                 <!-- Marked Out Tab -->
                 <button onclick="switchTab('marked-out')" id="tab-marked-out" class="glass-card p-5 md:p-6 rounded-2xl md:rounded-3xl text-left flex flex-col cursor-pointer group sm:col-span-2 md:col-span-1">
                     <div class="flex justify-between items-start mb-4 md:mb-6 w-full">
-                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white transition-colors duration-300 shadow">
+                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white transition-transform duration-300 group-hover:scale-110 shadow">
                             <i data-lucide="archive-x" class="w-6 h-6 md:w-7 md:h-7"></i>
                         </div>
                         <span id="count-marked-out" class="text-[11px] md:text-xs font-extrabold px-2.5 py-1 rounded-full bg-stone-900/60 text-white backdrop-blur-md border border-white/20 shadow-sm">0 Items</span>
@@ -253,19 +254,20 @@
                         <span class="md:hidden">Clear</span>
                     </button>
                     
-                    <!-- GitHub Sync: Save to Repo Button -->
-                    <button onclick="saveToGitHub()" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-purple-600/90 hover:bg-purple-600 text-white rounded-lg md:rounded-xl font-bold text-xs md:text-sm shadow-lg transition-transform hover:scale-105">
-                        <i data-lucide="cloud-upload" class="w-4 h-4"></i>
-                        <span class="hidden md:inline">Save to GitHub</span>
-                        <span class="md:hidden">Save to GH</span>
+                    <!-- Save DB Button -->
+                    <button onclick="saveDatabaseFile()" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-indigo-600/90 hover:bg-indigo-600 text-white rounded-lg md:rounded-xl font-bold text-xs md:text-sm shadow-lg transition-transform hover:scale-105">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span class="hidden md:inline">Save DB</span>
+                        <span class="md:hidden">Save DB</span>
                     </button>
                     
-                    <!-- GitHub Sync: Load from Repo Button -->
-                    <button onclick="loadFromGitHub()" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-blue-600/90 hover:bg-blue-600 text-white rounded-lg md:rounded-xl font-bold text-xs md:text-sm shadow-lg transition-transform hover:scale-105">
-                        <i data-lucide="cloud-download" class="w-4 h-4"></i>
-                        <span class="hidden md:inline">Load from GitHub</span>
-                        <span class="md:hidden">Load GH</span>
+                    <!-- Load DB Button -->
+                    <button onclick="triggerLoadFile()" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-amber-600/90 hover:bg-amber-600 text-white rounded-lg md:rounded-xl font-bold text-xs md:text-sm shadow-lg transition-transform hover:scale-105">
+                        <i data-lucide="upload" class="w-4 h-4"></i>
+                        <span class="hidden md:inline">Load DB</span>
+                        <span class="md:hidden">Load DB</span>
                     </button>
+                    <input type="file" id="file-load-input" accept=".json" class="hidden" onchange="loadDatabaseFile(event)">
 
                     <button onclick="exportToExcel()" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-emerald-600/90 hover:bg-emerald-600 text-white rounded-lg md:rounded-xl font-bold text-xs md:text-sm shadow-lg transition-transform hover:scale-105">
                         <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
@@ -392,37 +394,11 @@
         </div>
     </div>
 
-    <!-- ==================== GITHUB TOKEN PROMPT MODAL ==================== -->
-    <div id="github-modal" class="fixed inset-0 z-[80] bg-black/75 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4">
-        <div class="glass-panel bg-stone-900/95 rounded-3xl shadow-2xl w-full max-w-md p-6 md:p-8 transform translate-y-8 transition-transform duration-300 scale-95 border border-white/30">
-            <h3 class="text-xl font-extrabold text-white mb-2">GitHub Sync Authentication</h3>
-            <p class="text-stone-300 text-xs mb-4">Enter your GitHub Personal Access Token (PAT with <code class="bg-black/50 px-1.5 py-0.5 rounded text-amber-300 font-mono">repo</code> scope) to connect to <strong class="text-white">ketchappee/QuadLink-Inventory</strong>. This is securely stored in your browser session memory only.</p>
-            
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold text-stone-200 mb-1">GitHub Personal Access Token</label>
-                    <input type="password" id="github-token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" class="w-full px-4 py-2.5 bg-black/50 border border-white/30 rounded-xl text-sm font-medium text-white placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-purple-400">
-                </div>
-                <div class="flex gap-3 pt-2">
-                    <button type="button" onclick="closeGitHubModal()" class="flex-1 px-4 py-3 bg-white/10 border border-white/30 text-white rounded-xl font-bold hover:bg-white/20 transition-colors text-sm">Cancel</button>
-                    <button type="button" onclick="submitGitHubAction()" id="github-action-submit-btn" class="flex-1 px-4 py-3 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-500 transition-colors shadow-lg text-sm">Proceed</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- ==================== JAVASCRIPT LOGIC ==================== -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, deleteDoc, onSnapshot, collection, writeBatch } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // --- GITHUB CONFIGURATION ---
-        const GH_OWNER = 'ketchappee';
-        const GH_REPO = 'QuadLink-Inventory';
-        const GH_FILE_PATH = 'database.json';
-
-        let pendingGitHubAction = null;
 
         // --- TOAST NOTIFICATIONS ---
         window.showToast = function(message, type = 'success') {
@@ -803,154 +779,71 @@
             });
         };
 
-        // ==================== GITHUB API INTEGRATION (FIXED & ROBUST) ====================
-        window.saveToGitHub = function() {
-            pendingGitHubAction = 'save';
-            openGitHubModal();
-        };
-
-        window.loadFromGitHub = function() {
-            pendingGitHubAction = 'load';
-            openGitHubModal();
-        };
-
-        window.openGitHubModal = function() {
-            const modal = document.getElementById('github-modal');
-            const cachedToken = sessionStorage.getItem('quadlink_gh_token') || '';
-            document.getElementById('github-token-input').value = cachedToken;
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-        };
-
-        window.closeGitHubModal = function() {
-            const modal = document.getElementById('github-modal');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            document.getElementById('github-token-input').value = '';
-            pendingGitHubAction = null;
-        };
-
-        window.submitGitHubAction = async function() {
-            const token = document.getElementById('github-token-input').value.trim();
-            if (!token) {
-                alert('Please enter a valid GitHub Personal Access Token.');
-                return;
-            }
-            sessionStorage.setItem('quadlink_gh_token', token);
-            closeGitHubModal();
-
-            if (pendingGitHubAction === 'save') {
-                await executeGitHubSave(token);
-            } else if (pendingGitHubAction === 'load') {
-                await executeGitHubLoad(token);
-            }
-        };
-
-        async function executeGitHubSave(token) {
-            showToast('Saving database to GitHub repository...', 'success');
-            const apiUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE_PATH}`;
+        // ==================== LOCAL SAVE & LOAD DB BACKUP ====================
+        window.saveDatabaseFile = function() {
+            const dataStr = JSON.stringify(window.appState, null, 2);
+            const blob = new Blob([dataStr], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
             
-            try {
-                // 1. Fetch current file SHA if it already exists (Required for GitHub updates)
-                let fileSha = null;
-                const getRes = await fetch(apiUrl, {
-                    headers: { 
-                        'Authorization': `Bearer ${token}`, 
-                        'Accept': 'application/vnd.github+json' 
-                    }
-                });
-                if (getRes.ok) {
-                    const fileData = await getRes.json();
-                    fileSha = fileData.sha;
-                }
+            const a = document.createElement('a');
+            a.href = url;
+            const dateStr = new Date().toISOString().split('T')[0];
+            a.download = `quadlink_db_backup_${dateStr}.json`;
+            
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('Database file successfully downloaded!', 'success');
+        };
 
-                // 2. Properly encode JSON content to UTF-8 Base64
-                const jsonString = JSON.stringify(window.appState, null, 2);
-                const base64Content = btoa(unescape(encodeURIComponent(jsonString)));
+        window.triggerLoadFile = function() {
+            document.getElementById('file-load-input').click();
+        };
 
-                // 3. Send PUT request to GitHub API
-                const bodyData = {
-                    message: `Auto-update database.json via QuadLink App [${new Date().toISOString()}]`,
-                    content: base64Content,
-                    branch: 'main'
-                };
-                if (fileSha) {
-                    bodyData.sha = fileSha;
-                }
+        window.loadDatabaseFile = function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
 
-                const putRes = await fetch(apiUrl, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Accept': 'application/vnd.github+json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(bodyData)
-                });
-
-                if (putRes.ok) {
-                    showToast('Successfully saved database to GitHub!', 'success');
-                } else {
-                    const errJson = await putRes.json();
-                    throw new Error(errJson.message || 'Failed to update file in GitHub repository.');
-                }
-            } catch (err) {
-                console.error('GitHub Save Error:', err);
-                showToast(`Save Failed: ${err.message}`, 'error');
-            }
-        }
-
-        async function executeGitHubLoad(token) {
-            showToast('Fetching latest database from GitHub...', 'success');
-            const apiUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE_PATH}`;
-
-            try {
-                const res = await fetch(apiUrl, {
-                    headers: { 
-                        'Authorization': `Bearer ${token}`, 
-                        'Accept': 'application/vnd.github+json' 
-                    }
-                });
-
-                if (!res.ok) {
-                    throw new Error('Could not locate database.json in ketchappee/QuadLink-Inventory.');
-                }
-
-                const fileData = await res.json();
-                
-                // Decode base64 UTF-8 content properly
-                const rawBin = atob(fileData.content.replace(/\s/g, ''));
-                const decodedJson = decodeURIComponent(escape(rawBin));
-                const importedData = JSON.parse(decodedJson);
-
-                if (importedData['in-house'] && importedData['storage'] && importedData['marked-out']) {
-                    window.appState = importedData;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
                     
-                    // Sync back to Firebase if connected
-                    if (userId && itemsCollection) {
-                        try {
-                            const batch = writeBatch(db);
-                            const tabs = ['in-house', 'storage', 'marked-out'];
-                            tabs.forEach(tab => {
-                                importedData[tab].forEach(item => {
-                                    const docRef = doc(db, 'artifacts', appId, 'users', userId, 'inventory_items', item._id);
-                                    batch.set(docRef, item);
-                                });
-                            });
-                            await batch.commit();
-                        } catch (e) {
-                            console.error("Firebase sync error during GitHub load:", e);
-                        }
-                    }
+                    if (importedData['in-house'] && importedData['storage'] && importedData['marked-out']) {
+                        window.showConfirmModal("Loading this backup file will overwrite your current screen data. Proceed?", async () => {
+                            window.appState = importedData;
+                            
+                            if (userId && itemsCollection) {
+                                try {
+                                    const batch = writeBatch(db);
+                                    const tabs = ['in-house', 'storage', 'marked-out'];
+                                    tabs.forEach(tab => {
+                                        importedData[tab].forEach(item => {
+                                            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'inventory_items', item._id);
+                                            batch.set(docRef, item);
+                                        });
+                                    });
+                                    await batch.commit();
+                                } catch (e) {
+                                    console.error("Firebase sync error during load:", e);
+                                }
+                            }
 
-                    persistAndRefresh();
-                    showToast('Successfully loaded database from GitHub!', 'success');
-                } else {
-                    throw new Error('Invalid database structure inside repository file.');
+                            persistAndRefresh();
+                            document.getElementById('file-load-input').value = '';
+                            showToast('Database file successfully loaded!', 'success');
+                        });
+                    } else {
+                        alert("Invalid backup file format. Missing required tab collections.");
+                    }
+                } catch (err) {
+                    console.error("Parse error:", err);
+                    alert("Error reading file. Please ensure it is a valid JSON backup file.");
                 }
-            } catch (err) {
-                console.error('GitHub Load Error:', err);
-                showToast(`Load Failed: ${err.message}`, 'error');
-            }
-        }
+            };
+            reader.readAsText(file);
+        };
 
         // --- ADD / EDIT ITEM MODAL LOGIC ---
         window.openAddModal = function() {
