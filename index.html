@@ -227,22 +227,39 @@
 
             <!-- Action Bar -->
             <div class="glass-panel p-3 md:p-4 rounded-xl md:rounded-2xl flex flex-col lg:flex-row justify-between items-center gap-3 md:gap-4 fade-in">
-                <div class="flex items-center gap-2 md:gap-3 w-full lg:w-auto flex-wrap sm:flex-nowrap">
+                <!-- Flex-wrap updated to accommodate new buttons smoothly -->
+                <div class="flex items-center gap-2 md:gap-3 w-full lg:w-auto flex-wrap">
                     <button onclick="deleteSelected()" id="btn-delete" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-red-500/80 hover:bg-red-500 text-white rounded-lg md:rounded-xl font-semibold text-xs md:text-sm disabled:opacity-40 disabled:cursor-not-allowed shadow-lg" disabled>
                         <i data-lucide="trash-2" class="w-4 h-4"></i>
-                        <span class="hidden sm:inline">Delete Selected</span>
-                        <span class="sm:hidden">Delete</span>
+                        <span class="hidden md:inline">Delete Selected</span>
+                        <span class="md:hidden">Delete</span>
                         <span id="selected-count" class="bg-white text-red-600 text-[10px] md:text-xs px-1.5 md:px-2 py-0.5 rounded-full hidden">0</span>
                     </button>
                     <button onclick="clearHistory()" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-lg md:rounded-xl font-semibold text-xs md:text-sm">
                         <i data-lucide="history" class="w-4 h-4"></i>
-                        <span class="hidden sm:inline">Clear History</span>
-                        <span class="sm:hidden">Clear</span>
+                        <span class="hidden md:inline">Clear History</span>
+                        <span class="md:hidden">Clear</span>
                     </button>
+                    
+                    <!-- NEW: Save Database Button -->
+                    <button onclick="saveDatabaseFile()" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-indigo-500/80 hover:bg-indigo-500 text-white rounded-lg md:rounded-xl font-semibold text-xs md:text-sm shadow-lg">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span class="hidden md:inline">Save DB</span>
+                        <span class="md:hidden">Save DB</span>
+                    </button>
+                    
+                    <!-- NEW: Load Database Button -->
+                    <button onclick="triggerLoadFile()" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-amber-500/80 hover:bg-amber-500 text-white rounded-lg md:rounded-xl font-semibold text-xs md:text-sm shadow-lg">
+                        <i data-lucide="upload" class="w-4 h-4"></i>
+                        <span class="hidden md:inline">Load DB</span>
+                        <span class="md:hidden">Load DB</span>
+                    </button>
+                    <input type="file" id="file-load-input" accept=".json" class="hidden" onchange="loadDatabaseFile(event)">
+
                     <button onclick="exportToExcel()" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-emerald-500/80 hover:bg-emerald-500 text-white rounded-lg md:rounded-xl font-semibold text-xs md:text-sm shadow-lg">
                         <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
-                        <span class="hidden sm:inline">Export to Excel</span>
-                        <span class="sm:hidden">Export</span>
+                        <span class="hidden md:inline">Export to Excel</span>
+                        <span class="md:hidden">Export</span>
                     </button>
                 </div>
                 
@@ -359,7 +376,7 @@
             <p id="confirm-message" class="text-stone-300 text-sm mb-6 font-medium">Are you sure?</p>
             <div class="flex gap-3">
                 <button onclick="closeConfirmModal()" class="flex-1 px-4 py-3 bg-white/10 border border-white/20 text-white rounded-xl font-bold hover:bg-white/20 transition-colors text-sm">Cancel</button>
-                <button id="confirm-action-btn" class="flex-1 px-4 py-3 bg-red-500/80 text-white rounded-xl font-bold hover:bg-red-500 transition-colors shadow-lg text-sm">Yes, Delete</button>
+                <button id="confirm-action-btn" class="flex-1 px-4 py-3 bg-red-500/80 text-white rounded-xl font-bold hover:bg-red-500 transition-colors shadow-lg text-sm">Confirm</button>
             </div>
         </div>
     </div>
@@ -390,7 +407,7 @@
         window.appState = loadLocalState();
         window.currentTab = 'in-house';
         window.selectedIds = new Set(); 
-        window.editingId = null; // Tracks if we are currently editing an item
+        window.editingId = null; 
         
         const generateID = () => 'local_' + crypto.randomUUID();
         const getTodayStr = () => new Date().toISOString().split('T')[0];
@@ -644,11 +661,17 @@
             const modal = document.getElementById('confirm-modal');
             const content = document.getElementById('confirm-modal-content');
             
+            // Fix Delete button styling when used for non-delete confirmations
+            const btn = document.getElementById('confirm-action-btn');
+            btn.textContent = message.includes('delete') || message.includes('Clear') ? 'Yes, Delete' : 'Confirm Action';
+            btn.className = message.includes('delete') || message.includes('Clear') 
+                ? 'flex-1 px-4 py-3 bg-red-500/80 text-white rounded-xl font-bold hover:bg-red-500 transition-colors shadow-lg text-sm'
+                : 'flex-1 px-4 py-3 bg-amber-500/80 text-white rounded-xl font-bold hover:bg-amber-500 transition-colors shadow-lg text-sm';
+
             modal.classList.remove('opacity-0', 'pointer-events-none');
             content.classList.remove('translate-y-8', 'scale-95');
             content.classList.add('translate-y-0', 'scale-100');
 
-            const btn = document.getElementById('confirm-action-btn');
             btn.onclick = () => {
                 onConfirm();
                 window.closeConfirmModal();
@@ -719,6 +742,72 @@
                 persistAndRefresh();
             });
         }
+
+        // --- SAVE / LOAD DB (JSON BACKUPS) ---
+        window.saveDatabaseFile = function() {
+            const dataStr = JSON.stringify(window.appState, null, 2);
+            const blob = new Blob([dataStr], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            const dateStr = new Date().toISOString().split('T')[0];
+            a.download = `quadlink_db_backup_${dateStr}.json`;
+            
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        };
+
+        window.triggerLoadFile = function() {
+            document.getElementById('file-load-input').click();
+        };
+
+        window.loadDatabaseFile = function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    
+                    // Validate basic expected structure before replacing app state
+                    if (importedData['in-house'] && importedData['storage'] && importedData['marked-out']) {
+                        window.showConfirmModal("Loading this backup will overwrite your current screen data. Proceed?", async () => {
+                            window.appState = importedData;
+                            
+                            // Upsert back to Firebase if connected
+                            if (userId && itemsCollection) {
+                                try {
+                                    const batch = writeBatch(db);
+                                    const tabs = ['in-house', 'storage', 'marked-out'];
+                                    tabs.forEach(tab => {
+                                        importedData[tab].forEach(item => {
+                                            const docRef = doc(db, 'artifacts', appId, 'users', userId, 'inventory_items', item._id);
+                                            batch.set(docRef, item);
+                                        });
+                                    });
+                                    await batch.commit();
+                                } catch (error) {
+                                    console.error("Error pushing loaded data to Firebase:", error);
+                                }
+                            }
+
+                            persistAndRefresh();
+                            document.getElementById('file-load-input').value = ''; // Reset file input
+                        });
+                    } else {
+                        alert("Invalid backup file format. Missing required tab collections.");
+                    }
+                } catch (err) {
+                    console.error("Parse error:", err);
+                    alert("Error reading file. Please ensure it is a valid JSON backup file.");
+                }
+            };
+            reader.readAsText(file);
+        };
 
         // --- ADD / EDIT ITEM MODAL LOGIC ---
         window.openAddModal = function() {
