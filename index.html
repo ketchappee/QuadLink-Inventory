@@ -420,9 +420,9 @@
         // --- GITHUB CONFIGURATION ---
         const GH_OWNER = 'ketchappee';
         const GH_REPO = 'QuadLink-Inventory';
-        const GH_FILE_PATH = 'database.json'; // Path inside your repo where DB will be saved/loaded
+        const GH_FILE_PATH = 'database.json';
 
-        let pendingGitHubAction = null; // 'save' or 'load'
+        let pendingGitHubAction = null;
 
         // --- TOAST NOTIFICATIONS ---
         window.showToast = function(message, type = 'success') {
@@ -803,7 +803,7 @@
             });
         };
 
-        // ==================== GITHUB API INTEGRATION ====================
+        // ==================== GITHUB API INTEGRATION (FIXED & ROBUST) ====================
         window.saveToGitHub = function() {
             pendingGitHubAction = 'save';
             openGitHubModal();
@@ -816,10 +816,8 @@
 
         window.openGitHubModal = function() {
             const modal = document.getElementById('github-modal');
-            // Pre-fill token if cached in sessionStorage
             const cachedToken = sessionStorage.getItem('quadlink_gh_token') || '';
             document.getElementById('github-token-input').value = cachedToken;
-            
             modal.classList.remove('opacity-0', 'pointer-events-none');
         };
 
@@ -851,33 +849,38 @@
             const apiUrl = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE_PATH}`;
             
             try {
-                // 1. Get existing file sha if it exists (required by GitHub API to update files)
+                // 1. Fetch current file SHA if it already exists (Required for GitHub updates)
                 let fileSha = null;
                 const getRes = await fetch(apiUrl, {
-                    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+                    headers: { 
+                        'Authorization': `Bearer ${token}`, 
+                        'Accept': 'application/vnd.github+json' 
+                    }
                 });
                 if (getRes.ok) {
                     const fileData = await getRes.json();
                     fileSha = fileData.sha;
                 }
 
-                // 2. Prepare content payload (Base64 encoded)
+                // 2. Properly encode JSON content to UTF-8 Base64
                 const jsonString = JSON.stringify(window.appState, null, 2);
-                const contentEncoded = btoa(unescape(encodeURIComponent(jsonString)));
+                const base64Content = btoa(unescape(encodeURIComponent(jsonString)));
 
-                // 3. Push commit to GitHub repo
+                // 3. Send PUT request to GitHub API
                 const bodyData = {
-                    message: `Auto-update inventory database via QuadLink App [${new Date().toISOString()}]`,
-                    content: contentEncoded,
+                    message: `Auto-update database.json via QuadLink App [${new Date().toISOString()}]`,
+                    content: base64Content,
                     branch: 'main'
                 };
-                if (fileSha) bodyData.sha = fileSha;
+                if (fileSha) {
+                    bodyData.sha = fileSha;
+                }
 
                 const putRes = await fetch(apiUrl, {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `token ${token}`,
-                        'Accept': 'application/vnd.github.v3+json',
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/vnd.github+json',
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(bodyData)
@@ -887,11 +890,11 @@
                     showToast('Successfully saved database to GitHub!', 'success');
                 } else {
                     const errJson = await putRes.json();
-                    throw new Error(errJson.message || 'Failed to push commit to GitHub');
+                    throw new Error(errJson.message || 'Failed to update file in GitHub repository.');
                 }
             } catch (err) {
                 console.error('GitHub Save Error:', err);
-                showToast(`GitHub Save Failed: ${err.message}`, 'error');
+                showToast(`Save Failed: ${err.message}`, 'error');
             }
         }
 
@@ -901,14 +904,21 @@
 
             try {
                 const res = await fetch(apiUrl, {
-                    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+                    headers: { 
+                        'Authorization': `Bearer ${token}`, 
+                        'Accept': 'application/vnd.github+json' 
+                    }
                 });
 
-                if (!res.ok) throw new Error('Could not find database.json in repository.');
+                if (!res.ok) {
+                    throw new Error('Could not locate database.json in ketchappee/QuadLink-Inventory.');
+                }
 
                 const fileData = await res.json();
-                // Decode base64 content
-                const decodedJson = decodeURIComponent(escape(atob(fileData.content.replace(/\s/g, ''))));
+                
+                // Decode base64 UTF-8 content properly
+                const rawBin = atob(fileData.content.replace(/\s/g, ''));
+                const decodedJson = decodeURIComponent(escape(rawBin));
                 const importedData = JSON.parse(decodedJson);
 
                 if (importedData['in-house'] && importedData['storage'] && importedData['marked-out']) {
@@ -934,11 +944,11 @@
                     persistAndRefresh();
                     showToast('Successfully loaded database from GitHub!', 'success');
                 } else {
-                    throw new Error('Invalid database format structure.');
+                    throw new Error('Invalid database structure inside repository file.');
                 }
             } catch (err) {
                 console.error('GitHub Load Error:', err);
-                showToast(`GitHub Load Failed: ${err.message}`, 'error');
+                showToast(`Load Failed: ${err.message}`, 'error');
             }
         }
 
