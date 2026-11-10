@@ -21,14 +21,12 @@
         body {
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
-            /* Premium Cafe Background Image */
             background-image: url('https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=3000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
 
-        /* Dark overlay to make glass components readable */
         .bg-overlay {
             position: fixed;
             inset: 0;
@@ -36,7 +34,7 @@
             z-index: -1;
         }
 
-        /* Glassmorphism Styles */
+        /* Glassmorphism Panels */
         .glass-panel {
             background: rgba(30, 25, 20, 0.45);
             backdrop-filter: blur(20px);
@@ -45,14 +43,14 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
         
-        /* Smooth Zoom-In / Zoom-Out Pop-Up Card Animation */
+        /* Ultra Smooth Glass Cards */
         .glass-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
             transform: scale(1) translateZ(0);
             will-change: transform, background-color, border-color, box-shadow;
             backface-visibility: hidden;
@@ -60,14 +58,15 @@
 
         .glass-card:hover {
             background: rgba(255, 255, 255, 0.22);
-            transform: scale(1.04) translateY(-4px);
+            transform: scale(1.03) translateY(-4px);
             border-color: rgba(255, 255, 255, 0.45);
             box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.3);
         }
 
+        /* Active Glass Card with High-Contrast Dark Icons */
         .glass-card.active {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.95);
             transform: scale(1.02) translateY(-2px);
             box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.25);
         }
@@ -75,23 +74,24 @@
         .glass-card.active h3 { color: #1c1917; }
         .glass-card.active p { color: #44403c !important; }
         .glass-card.active span { color: #292524 !important; background: rgba(0,0,0,0.08) !important; border-color: rgba(0,0,0,0.15) !important; }
+        .glass-card.active .icon-container { background: rgba(0, 0, 0, 0.08) !important; color: #1c1917 !important; }
+        .glass-card.active .logo-icon { color: #1c1917 !important; stroke: #1c1917 !important; }
 
-        /* Wiggle Animation for Logo Icons on Hover */
-        @keyframes wiggle {
+        /* Smooth Wiggle Animation for Logo Icons on Hover */
+        @keyframes smoothWiggle {
             0% { transform: rotate(0deg) scale(1); }
-            20% { transform: rotate(-12deg) scale(1.15); }
-            40% { transform: rotate(10deg) scale(1.15); }
-            60% { transform: rotate(-8deg) scale(1.15); }
-            80% { transform: rotate(6deg) scale(1.15); }
-            100% { transform: rotate(0deg) scale(1.1); }
+            25% { transform: rotate(-10deg) scale(1.12); }
+            50% { transform: rotate(8deg) scale(1.12); }
+            75% { transform: rotate(-6deg) scale(1.12); }
+            100% { transform: rotate(0deg) scale(1.08); }
         }
 
         .glass-card:hover .logo-icon {
-            animation: wiggle 0.6s ease-in-out infinite alternate;
+            animation: smoothWiggle 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .logo-icon {
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
             transform-origin: center;
         }
 
@@ -108,11 +108,11 @@
         }
 
         @keyframes rowFadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .row-animate {
-            animation: rowFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: rowFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes shimmer {
@@ -125,12 +125,12 @@
         }
 
         .mac-hover {
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform, box-shadow;
             transform: translate3d(0, 0, 0);
         }
         .mac-hover:hover {
-            transform: translate3d(0, -4px, 0) scale(1.08);
+            transform: translate3d(0, -4px, 0) scale(1.06);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
         }
 
@@ -142,7 +142,7 @@
             border-radius: 0.375rem;
             background-color: rgba(255, 255, 255, 0.2);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             display: grid;
             place-content: center;
         }
@@ -151,7 +151,7 @@
             width: 0.65rem;
             height: 0.65rem;
             transform: scale(0);
-            transition: 120ms transform ease-in-out;
+            transition: 180ms transform cubic-bezier(0.16, 1, 0.3, 1);
             box-shadow: inset 1em 1em #1c1917;
             background-color: #1c1917;
             transform-origin: center;
@@ -176,7 +176,7 @@
     <div class="bg-overlay"></div>
 
     <!-- Toast Notification Banner -->
-    <div id="toast-notification" class="fixed top-5 right-5 z-[100] transform translate-y-[-150%] opacity-0 transition-all duration-300 glass-panel bg-stone-900/90 border border-white/30 px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3">
+    <div id="toast-notification" class="fixed top-5 right-5 z-[100] transform translate-y-[-150%] opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] glass-panel bg-stone-900/90 border border-white/30 px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3">
         <i id="toast-icon" data-lucide="check-circle" class="w-5 h-5 text-emerald-400"></i>
         <span id="toast-message" class="text-sm font-bold text-white">Action successful</span>
     </div>
@@ -191,7 +191,7 @@
                     <span class="text-2xl sm:text-3xl md:text-5xl font-light text-stone-200">INVENTORY</span>
                 </h1>
             </div>
-            <button onclick="proceedToHome()" class="smooth-gpu group relative flex items-center justify-center gap-3 bg-white text-stone-900 px-6 md:px-8 py-3 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-stone-100 shadow-xl overflow-hidden mt-2 md:mt-4 transition-transform hover:scale-105">
+            <button onclick="proceedToHome()" class="group relative flex items-center justify-center gap-3 bg-white text-stone-900 px-6 md:px-8 py-3 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-stone-100 shadow-xl overflow-hidden mt-2 md:mt-4 transition-all duration-300 hover:scale-105 active:scale-95">
                 <span>Enter System</span>
                 <i data-lucide="arrow-right" class="w-4 h-4 md:w-5 md:h-5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5"></i>
             </button>
@@ -219,83 +219,83 @@
         <!-- Main Content -->
         <main class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-6 md:py-8 w-full space-y-6 md:space-y-8 flex-grow pb-24">
             
-            <!-- Navigation Cards with Wiggle Logo Animations -->
+            <!-- Navigation Cards -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                 <!-- In House Tab -->
                 <button onclick="switchTab('in-house')" id="tab-in-house" class="glass-card active p-5 md:p-6 rounded-2xl md:rounded-3xl text-left flex flex-col cursor-pointer group">
                     <div class="flex justify-between items-start mb-4 md:mb-6 w-full">
-                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white shadow">
+                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white shadow transition-all duration-300">
                             <i data-lucide="coffee" class="logo-icon w-6 h-6 md:w-7 md:h-7"></i>
                         </div>
-                        <span id="count-in-house" class="text-[11px] md:text-xs font-extrabold px-2.5 py-1 rounded-full bg-stone-900/60 text-white backdrop-blur-md border border-white/20 shadow-sm">0 Items</span>
+                        <span id="count-in-house" class="text-[11px] md:text-xs font-extrabold px-2.5 py-1 rounded-full bg-stone-900/60 text-white backdrop-blur-md border border-white/20 shadow-sm transition-all duration-300">0 Items</span>
                     </div>
-                    <h3 class="text-lg md:text-xl font-extrabold tracking-tight text-white drop-shadow-sm">In House</h3>
-                    <p class="mt-1 md:mt-2 text-xs md:text-sm text-stone-200 font-semibold">Daily active stock.</p>
+                    <h3 class="text-lg md:text-xl font-extrabold tracking-tight text-white drop-shadow-sm transition-colors duration-300">In House</h3>
+                    <p class="mt-1 md:mt-2 text-xs md:text-sm text-stone-200 font-semibold transition-colors duration-300">Daily active stock.</p>
                 </button>
 
                 <!-- Storage Tab -->
                 <button onclick="switchTab('storage')" id="tab-storage" class="glass-card p-5 md:p-6 rounded-2xl md:rounded-3xl text-left flex flex-col cursor-pointer group">
                     <div class="flex justify-between items-start mb-4 md:mb-6 w-full">
-                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white shadow">
+                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white shadow transition-all duration-300">
                             <i data-lucide="package" class="logo-icon w-6 h-6 md:w-7 md:h-7"></i>
                         </div>
-                        <span id="count-storage" class="text-[11px] md:text-xs font-extrabold px-2.5 py-1 rounded-full bg-stone-900/60 text-white backdrop-blur-md border border-white/20 shadow-sm">0 Items</span>
+                        <span id="count-storage" class="text-[11px] md:text-xs font-extrabold px-2.5 py-1 rounded-full bg-stone-900/60 text-white backdrop-blur-md border border-white/20 shadow-sm transition-all duration-300">0 Items</span>
                     </div>
-                    <h3 class="text-lg md:text-xl font-extrabold tracking-tight text-white drop-shadow-sm">Storage</h3>
-                    <p class="mt-1 md:mt-2 text-xs md:text-sm text-stone-200 font-semibold">Track bulk supplies.</p>
+                    <h3 class="text-lg md:text-xl font-extrabold tracking-tight text-white drop-shadow-sm transition-colors duration-300">Storage</h3>
+                    <p class="mt-1 md:mt-2 text-xs md:text-sm text-stone-200 font-semibold transition-colors duration-300">Track bulk supplies.</p>
                 </button>
 
                 <!-- Marked Out Tab -->
                 <button onclick="switchTab('marked-out')" id="tab-marked-out" class="glass-card p-5 md:p-6 rounded-2xl md:rounded-3xl text-left flex flex-col cursor-pointer group sm:col-span-2 md:col-span-1">
                     <div class="flex justify-between items-start mb-4 md:mb-6 w-full">
-                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white shadow">
+                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white shadow transition-all duration-300">
                             <i data-lucide="archive-x" class="logo-icon w-6 h-6 md:w-7 md:h-7"></i>
                         </div>
-                        <span id="count-marked-out" class="text-[11px] md:text-xs font-extrabold px-2.5 py-1 rounded-full bg-stone-900/60 text-white backdrop-blur-md border border-white/20 shadow-sm">0 Items</span>
+                        <span id="count-marked-out" class="text-[11px] md:text-xs font-extrabold px-2.5 py-1 rounded-full bg-stone-900/60 text-white backdrop-blur-md border border-white/20 shadow-sm transition-all duration-300">0 Items</span>
                     </div>
-                    <h3 class="text-lg md:text-xl font-extrabold tracking-tight text-white drop-shadow-sm">Marked Out</h3>
-                    <p class="mt-1 md:mt-2 text-xs md:text-sm text-stone-200 font-semibold">Review waste & damage.</p>
+                    <h3 class="text-lg md:text-xl font-extrabold tracking-tight text-white drop-shadow-sm transition-colors duration-300">Marked Out</h3>
+                    <p class="mt-1 md:mt-2 text-xs md:text-sm text-stone-200 font-semibold transition-colors duration-300">Review waste & damage.</p>
                 </button>
             </div>
 
             <!-- Action Bar -->
             <div class="glass-panel p-3 md:p-4 rounded-xl md:rounded-2xl flex flex-col lg:flex-row justify-between items-center gap-3 md:gap-4 fade-in">
                 <div class="flex items-center gap-2 md:gap-3 w-full lg:w-auto flex-wrap">
-                    <button onclick="deleteSelected()" id="btn-delete" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-red-600/90 hover:bg-red-600 text-white rounded-lg md:rounded-xl font-bold text-xs md:text-sm disabled:opacity-40 disabled:cursor-not-allowed shadow-lg transition-transform hover:scale-105" disabled>
+                    <button onclick="deleteSelected()" id="btn-delete" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-red-600/90 hover:bg-red-600 text-white rounded-lg md:rounded-xl font-bold text-xs md:text-sm disabled:opacity-40 disabled:cursor-not-allowed shadow-lg transition-all duration-300 hover:scale-105 active:scale-95" disabled>
                         <i data-lucide="trash-2" class="w-4 h-4"></i>
                         <span class="hidden md:inline">Delete Selected</span>
                         <span class="md:hidden">Delete</span>
                         <span id="selected-count" class="bg-white text-red-700 text-[10px] md:text-xs px-1.5 md:px-2 py-0.5 rounded-full font-extrabold hidden">0</span>
                     </button>
-                    <button onclick="clearHistory()" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-white/15 hover:bg-white/25 text-white border border-white/30 rounded-lg md:rounded-xl font-bold text-xs md:text-sm shadow transition-transform hover:scale-105">
+                    <button onclick="clearHistory()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-white/15 hover:bg-white/25 text-white border border-white/30 rounded-lg md:rounded-xl font-bold text-xs md:text-sm shadow transition-all duration-300 hover:scale-105 active:scale-95">
                         <i data-lucide="history" class="w-4 h-4"></i>
                         <span class="hidden md:inline">Clear History</span>
                         <span class="md:hidden">Clear</span>
                     </button>
                     
                     <!-- Save DB Button -->
-                    <button onclick="saveDatabaseFile()" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-indigo-600/90 hover:bg-indigo-600 text-white rounded-lg md:rounded-xl font-bold text-xs md:text-sm shadow-lg transition-transform hover:scale-105">
+                    <button onclick="saveDatabaseFile()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-indigo-600/90 hover:bg-indigo-600 text-white rounded-lg md:rounded-xl font-bold text-xs md:text-sm shadow-lg transition-all duration-300 hover:scale-105 active:scale-95">
                         <i data-lucide="download" class="w-4 h-4"></i>
                         <span class="hidden md:inline">Save DB</span>
                         <span class="md:hidden">Save DB</span>
                     </button>
                     
                     <!-- Load DB Button -->
-                    <button onclick="triggerLoadFile()" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-amber-600/90 hover:bg-amber-600 text-white rounded-lg md:rounded-xl font-bold text-xs md:text-sm shadow-lg transition-transform hover:scale-105">
+                    <button onclick="triggerLoadFile()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-amber-600/90 hover:bg-amber-600 text-white rounded-lg md:rounded-xl font-bold text-xs md:text-sm shadow-lg transition-all duration-300 hover:scale-105 active:scale-95">
                         <i data-lucide="upload" class="w-4 h-4"></i>
                         <span class="hidden md:inline">Load DB</span>
                         <span class="md:hidden">Load DB</span>
                     </button>
                     <input type="file" id="file-load-input" accept=".json" class="hidden" onchange="loadDatabaseFile(event)">
 
-                    <button onclick="exportToExcel()" class="smooth-gpu flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-emerald-600/90 hover:bg-emerald-600 text-white rounded-lg md:rounded-xl font-bold text-xs md:text-sm shadow-lg transition-transform hover:scale-105">
+                    <button onclick="exportToExcel()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-emerald-600/90 hover:bg-emerald-600 text-white rounded-lg md:rounded-xl font-bold text-xs md:text-sm shadow-lg transition-all duration-300 hover:scale-105 active:scale-95">
                         <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
                         <span class="hidden md:inline">Export to Excel</span>
                         <span class="md:hidden">Export</span>
                     </button>
                 </div>
                 
-                <button onclick="openAddModal()" class="smooth-gpu w-full lg:w-auto flex items-center justify-center gap-2 bg-white hover:bg-stone-100 text-stone-900 px-6 py-3 md:py-2.5 rounded-xl font-extrabold text-sm whitespace-nowrap shadow-xl transition-transform hover:scale-105">
+                <button onclick="openAddModal()" class="w-full lg:w-auto flex items-center justify-center gap-2 bg-white hover:bg-stone-100 text-stone-900 px-6 py-3 md:py-2.5 rounded-xl font-extrabold text-sm whitespace-nowrap shadow-xl transition-all duration-300 hover:scale-105 active:scale-95">
                     <i data-lucide="plus" class="w-4 h-4 md:w-5 md:h-5 text-stone-900"></i>
                     <span id="add-btn-text">Add Item</span>
                 </button>
@@ -308,12 +308,12 @@
                     <h2 id="section-title" class="text-lg md:text-xl font-extrabold text-white tracking-tight drop-shadow-sm">In House Inventory</h2>
                     <div class="relative w-full sm:w-auto">
                         <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-stone-300 w-4 h-4"></i>
-                        <input type="text" id="search-input" onkeyup="renderTable()" placeholder="Search items..." class="w-full sm:w-56 md:w-64 pl-9 pr-4 py-2 bg-black/40 border border-white/30 rounded-full text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-white/60 text-white placeholder-stone-300 shadow-inner transition-all">
+                        <input type="text" id="search-input" onkeyup="renderTable()" placeholder="Search items..." class="w-full sm:w-56 md:w-64 pl-9 pr-4 py-2 bg-black/40 border border-white/30 rounded-full text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-white/60 text-white placeholder-stone-300 shadow-inner transition-all duration-300">
                     </div>
                 </div>
                 
                 <!-- Table Content -->
-                <div class="overflow-x-auto w-full transition-opacity duration-300 min-h-[300px]" id="table-container">
+                <div class="overflow-x-auto w-full transition-all duration-300 min-h-[300px]" id="table-container">
                     <table class="w-full text-left border-collapse min-w-[700px]">
                         <thead class="bg-black/50 border-b border-white/20" id="table-head">
                             <!-- Dynamically populated -->
@@ -335,8 +335,8 @@
     </div>
 
     <!-- ==================== ADD / EDIT ITEM MODAL ==================== -->
-    <div id="add-modal" class="fixed inset-0 z-[60] bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4">
-        <div class="glass-panel bg-stone-900/90 rounded-3xl shadow-2xl w-full max-w-md p-6 md:p-8 transform translate-y-8 transition-transform duration-300 scale-95 border border-white/30" id="add-modal-content">
+    <div id="add-modal" class="fixed inset-0 z-[60] bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-center p-4">
+        <div class="glass-panel bg-stone-900/90 rounded-3xl shadow-2xl w-full max-w-md p-6 md:p-8 transform translate-y-8 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] scale-95 border border-white/30" id="add-modal-content">
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-xl font-extrabold text-white" id="modal-title">Add Item</h3>
                 <button onclick="closeAddModal()" class="text-stone-300 hover:text-white transition-all duration-300 ease-out hover:scale-125 hover:rotate-90 origin-center p-2 rounded-full hover:bg-white/10">
@@ -394,21 +394,21 @@
                 </div>
                 
                 <div class="pt-4 flex gap-3">
-                    <button type="button" onclick="closeAddModal()" class="flex-1 px-4 py-3 bg-white/10 border border-white/30 text-white rounded-xl font-bold hover:bg-white/20 transition-colors text-sm md:text-base">Cancel</button>
-                    <button type="submit" id="save-btn-text" class="flex-1 px-4 py-3 bg-white text-stone-900 rounded-xl font-extrabold hover:bg-stone-100 transition-colors shadow-lg text-sm md:text-base">Save Item</button>
+                    <button type="button" onclick="closeAddModal()" class="flex-1 px-4 py-3 bg-white/10 border border-white/30 text-white rounded-xl font-bold hover:bg-white/20 transition-all duration-300 text-sm md:text-base">Cancel</button>
+                    <button type="submit" id="save-btn-text" class="flex-1 px-4 py-3 bg-white text-stone-900 rounded-xl font-extrabold hover:bg-stone-100 transition-all duration-300 shadow-lg text-sm md:text-base">Save Item</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- ==================== CONFIRM MODAL ==================== -->
-    <div id="confirm-modal" class="fixed inset-0 z-[70] bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4">
-        <div class="glass-panel bg-stone-900/95 rounded-3xl shadow-2xl w-full max-w-sm p-6 md:p-8 transform translate-y-8 transition-transform duration-300 scale-95 border border-white/30" id="confirm-modal-content">
+    <div id="confirm-modal" class="fixed inset-0 z-[70] bg-black/70 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-center p-4">
+        <div class="glass-panel bg-stone-900/95 rounded-3xl shadow-2xl w-full max-w-sm p-6 md:p-8 transform translate-y-8 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] scale-95 border border-white/30" id="confirm-modal-content">
             <h3 class="text-xl font-extrabold text-white mb-2">Confirm Action</h3>
             <p id="confirm-message" class="text-stone-200 text-sm mb-6 font-semibold">Are you sure?</p>
             <div class="flex gap-3">
-                <button onclick="closeConfirmModal()" class="flex-1 px-4 py-3 bg-white/10 border border-white/30 text-white rounded-xl font-bold hover:bg-white/20 transition-colors text-sm">Cancel</button>
-                <button id="confirm-action-btn" class="flex-1 px-4 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-500 transition-colors shadow-lg text-sm">Confirm</button>
+                <button onclick="closeConfirmModal()" class="flex-1 px-4 py-3 bg-white/10 border border-white/30 text-white rounded-xl font-bold hover:bg-white/20 transition-all duration-300 text-sm">Cancel</button>
+                <button id="confirm-action-btn" class="flex-1 px-4 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-500 transition-all duration-300 shadow-lg text-sm">Confirm</button>
             </div>
         </div>
     </div>
@@ -419,24 +419,21 @@
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, deleteDoc, onSnapshot, collection, writeBatch } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- GLOBAL KEYBOARD LISTENER (ESC KEY CLOSES MODALS) ---
+        // Global ESC key event listener
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 const addModal = document.getElementById('add-modal');
                 const confirmModal = document.getElementById('confirm-modal');
 
-                // If add modal is open, close it
                 if (addModal && !addModal.classList.contains('pointer-events-none')) {
                     window.closeAddModal();
-                }
-                // If confirmation modal is open, close it
-                else if (confirmModal && !confirmModal.classList.contains('pointer-events-none')) {
+                } else if (confirmModal && !confirmModal.classList.contains('pointer-events-none')) {
                     window.closeConfirmModal();
                 }
             }
         });
 
-        // --- TOAST NOTIFICATIONS ---
+        // Toast notifications
         window.showToast = function(message, type = 'success') {
             const toast = document.getElementById('toast-notification');
             const toastMessage = document.getElementById('toast-message');
@@ -461,7 +458,7 @@
             }, 3500);
         }
 
-        // --- FIREBASE CONFIGURATION ---
+        // Firebase Setup
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'quadlink-inventory-app';
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
 
@@ -492,7 +489,6 @@
             if (window.lucide) lucide.createIcons();
         }
 
-        // --- INIT FIREBASE ---
         if (firebaseConfig && Object.keys(firebaseConfig).length > 0) {
             const app = initializeApp(firebaseConfig);
             auth = getAuth(app);
@@ -541,7 +537,6 @@
             }
         }
 
-        // --- INIT UI ---
         document.addEventListener('DOMContentLoaded', () => {
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', options);
@@ -552,7 +547,6 @@
             if (window.lucide) lucide.createIcons();
         });
 
-        // --- NAVIGATION & TABS ---
         window.proceedToHome = function() {
             const landingPage = document.getElementById('landing-page');
             const homePage = document.getElementById('home-page');
@@ -597,7 +591,7 @@
             setTimeout(() => {
                 window.renderTable();
                 tableContainer.style.opacity = '1';
-            }, 200);
+            }, 250);
         }
 
         window.updateTabCounts = function() {
@@ -606,7 +600,6 @@
             document.getElementById('count-marked-out').textContent = `${window.appState['marked-out'].length} Items`;
         }
 
-        // --- TABLE RENDERING WITH STAGGERED ROW ANIMATIONS ---
         window.renderTable = function() {
             const searchQ = document.getElementById('search-input').value.toLowerCase();
             const rawData = window.appState[window.currentTab];
@@ -656,9 +649,9 @@
                 let bodyHTML = '';
                 data.forEach((row, index) => {
                     const isChecked = window.selectedIds.has(row._id);
-                    const delay = Math.min(index * 0.04, 0.4);
+                    const delay = Math.min(index * 0.03, 0.35);
                     bodyHTML += `
-                        <tr class="row-animate hover:bg-white/15 transition-colors duration-200 ${isChecked ? 'bg-white/25' : ''}" style="animation-delay: ${delay}s">
+                        <tr class="row-animate hover:bg-white/15 transition-all duration-300 ${isChecked ? 'bg-white/25' : ''}" style="animation-delay: ${delay}s">
                             <td class="px-4 md:px-6 py-4">
                                 <input type="checkbox" class="custom-checkbox row-checkbox" value="${row._id}" onchange="toggleSelectRow('${row._id}')" ${isChecked ? 'checked' : ''}>
                             </td>
@@ -670,7 +663,7 @@
                             <td class="px-4 md:px-6 py-4 text-sm font-bold text-stone-200 whitespace-nowrap">${row.unit}</td>
                             <td class="px-4 md:px-6 py-4 text-sm font-semibold text-stone-200 whitespace-nowrap">${row.date}</td>
                             <td class="px-4 md:px-6 py-4 text-sm text-right whitespace-nowrap">
-                                <button onclick="openEditModal('${row._id}')" class="px-3.5 py-1.5 bg-white/20 hover:bg-white/30 text-white rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1.5 border border-white/30 shadow hover:scale-105">
+                                <button onclick="openEditModal('${row._id}')" class="px-3.5 py-1.5 bg-white/20 hover:bg-white/30 text-white rounded-lg text-xs font-bold transition-all duration-300 inline-flex items-center gap-1.5 border border-white/30 shadow hover:scale-105 active:scale-95">
                                     <i data-lucide="pencil" class="w-3.5 h-3.5"></i> Edit
                                 </button>
                             </td>
@@ -683,7 +676,6 @@
             window.updateTabCounts();
         }
 
-        // --- SELECTION LOGIC ---
         window.toggleSelectAll = function(checkbox, currentDataIdsStr) {
             const currentDataIds = JSON.parse(currentDataIdsStr.replace(/'/g, '"'));
             if (checkbox.checked) {
@@ -729,7 +721,6 @@
             }
         }
 
-        // --- CONFIRM MODAL CONTROLS ---
         window.showConfirmModal = function(message, onConfirm) {
             document.getElementById('confirm-message').textContent = message;
             const modal = document.getElementById('confirm-modal');
@@ -738,8 +729,8 @@
             const btn = document.getElementById('confirm-action-btn');
             btn.textContent = message.includes('delete') || message.includes('Clear') ? 'Yes, Delete' : 'Confirm Action';
             btn.className = message.includes('delete') || message.includes('Clear') 
-                ? 'flex-1 px-4 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-500 transition-colors shadow-lg text-sm'
-                : 'flex-1 px-4 py-3 bg-amber-600 text-white rounded-xl font-bold hover:bg-amber-500 transition-colors shadow-lg text-sm';
+                ? 'flex-1 px-4 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-500 transition-all duration-300 shadow-lg text-sm'
+                : 'flex-1 px-4 py-3 bg-amber-600 text-white rounded-xl font-bold hover:bg-amber-500 transition-all duration-300 shadow-lg text-sm';
 
             modal.classList.remove('opacity-0', 'pointer-events-none');
             content.classList.remove('translate-y-8', 'scale-95');
@@ -761,7 +752,6 @@
             }, 300);
         }
 
-        // --- ACTIONS & DATABASE SYNC ---
         window.deleteSelected = async function() {
             if (window.selectedIds.size === 0) return;
             
@@ -815,7 +805,6 @@
             });
         };
 
-        // ==================== LOCAL SAVE & LOAD DB BACKUP ====================
         window.saveDatabaseFile = function() {
             const dataStr = JSON.stringify(window.appState, null, 2);
             const blob = new Blob([dataStr], { type: "application/json" });
@@ -881,7 +870,6 @@
             reader.readAsText(file);
         };
 
-        // --- ADD / EDIT ITEM MODAL LOGIC ---
         window.openAddModal = function() {
             window.editingId = null;
             document.getElementById('modal-title').textContent = 'Add Item';
@@ -972,7 +960,6 @@
             persistAndRefresh();
         }
 
-        // --- EXPORT TO EXCEL ---
         window.exportToExcel = function() {
             const mergedMap = new Map();
 
