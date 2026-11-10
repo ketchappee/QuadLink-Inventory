@@ -76,6 +76,25 @@
         .glass-card.active p { color: #44403c !important; }
         .glass-card.active span { color: #292524 !important; background: rgba(0,0,0,0.08) !important; border-color: rgba(0,0,0,0.15) !important; }
 
+        /* Wiggle Animation for Logo Icons on Hover */
+        @keyframes wiggle {
+            0% { transform: rotate(0deg) scale(1); }
+            20% { transform: rotate(-12deg) scale(1.15); }
+            40% { transform: rotate(10deg) scale(1.15); }
+            60% { transform: rotate(-8deg) scale(1.15); }
+            80% { transform: rotate(6deg) scale(1.15); }
+            100% { transform: rotate(0deg) scale(1.1); }
+        }
+
+        .glass-card:hover .logo-icon {
+            animation: wiggle 0.6s ease-in-out infinite alternate;
+        }
+
+        .logo-icon {
+            transition: transform 0.3s ease;
+            transform-origin: center;
+        }
+
         .fade-in { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .slide-up { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
@@ -200,13 +219,13 @@
         <!-- Main Content -->
         <main class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-6 md:py-8 w-full space-y-6 md:space-y-8 flex-grow pb-24">
             
-            <!-- Navigation Cards with Zoom-In/Zoom-Out Pop-Up Animation -->
+            <!-- Navigation Cards with Wiggle Logo Animations -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                 <!-- In House Tab -->
                 <button onclick="switchTab('in-house')" id="tab-in-house" class="glass-card active p-5 md:p-6 rounded-2xl md:rounded-3xl text-left flex flex-col cursor-pointer group">
                     <div class="flex justify-between items-start mb-4 md:mb-6 w-full">
-                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white transition-transform duration-300 group-hover:scale-110 shadow">
-                            <i data-lucide="coffee" class="w-6 h-6 md:w-7 md:h-7"></i>
+                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white shadow">
+                            <i data-lucide="coffee" class="logo-icon w-6 h-6 md:w-7 md:h-7"></i>
                         </div>
                         <span id="count-in-house" class="text-[11px] md:text-xs font-extrabold px-2.5 py-1 rounded-full bg-stone-900/60 text-white backdrop-blur-md border border-white/20 shadow-sm">0 Items</span>
                     </div>
@@ -217,8 +236,8 @@
                 <!-- Storage Tab -->
                 <button onclick="switchTab('storage')" id="tab-storage" class="glass-card p-5 md:p-6 rounded-2xl md:rounded-3xl text-left flex flex-col cursor-pointer group">
                     <div class="flex justify-between items-start mb-4 md:mb-6 w-full">
-                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white transition-transform duration-300 group-hover:scale-110 shadow">
-                            <i data-lucide="package" class="w-6 h-6 md:w-7 md:h-7"></i>
+                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white shadow">
+                            <i data-lucide="package" class="logo-icon w-6 h-6 md:w-7 md:h-7"></i>
                         </div>
                         <span id="count-storage" class="text-[11px] md:text-xs font-extrabold px-2.5 py-1 rounded-full bg-stone-900/60 text-white backdrop-blur-md border border-white/20 shadow-sm">0 Items</span>
                     </div>
@@ -229,8 +248,8 @@
                 <!-- Marked Out Tab -->
                 <button onclick="switchTab('marked-out')" id="tab-marked-out" class="glass-card p-5 md:p-6 rounded-2xl md:rounded-3xl text-left flex flex-col cursor-pointer group sm:col-span-2 md:col-span-1">
                     <div class="flex justify-between items-start mb-4 md:mb-6 w-full">
-                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white transition-transform duration-300 group-hover:scale-110 shadow">
-                            <i data-lucide="archive-x" class="w-6 h-6 md:w-7 md:h-7"></i>
+                        <div class="icon-container p-3 rounded-xl md:rounded-2xl bg-white/25 text-white shadow">
+                            <i data-lucide="archive-x" class="logo-icon w-6 h-6 md:w-7 md:h-7"></i>
                         </div>
                         <span id="count-marked-out" class="text-[11px] md:text-xs font-extrabold px-2.5 py-1 rounded-full bg-stone-900/60 text-white backdrop-blur-md border border-white/20 shadow-sm">0 Items</span>
                     </div>
