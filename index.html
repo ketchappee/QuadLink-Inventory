@@ -961,54 +961,131 @@
         }
 
         window.exportToExcel = function() {
+            // Category Mapping & Custom Display Order
+            const categoryMap = {
+                'Beans': 'COFFEE BEANS',
+                'Coffee': 'COFFEE BEANS',
+                'Milk': 'MILK & DAIRY PRODUCTS',
+                'Syrups': 'SYRUPS, POWDERS & SWEETENERS',
+                'Beverages': 'BOTTLED & CANNED BEVERAGES',
+                'Pastry': 'SNACKS & RETAIL',
+                'Produce': 'FRESH PRODUCE & PERISHABLES',
+                'Cups': 'BAR PACKAGING & CONSUMABLES',
+                'Straw': 'BAR PACKAGING & CONSUMABLES',
+                'Packaging': 'BAR PACKAGING & CONSUMABLES',
+                'Etc.': 'OTHER SUPPLIES & MISCELLANEOUS'
+            };
+
+            const categoryOrder = [
+                'COFFEE BEANS',
+                'MILK & DAIRY PRODUCTS',
+                'SYRUPS, POWDERS & SWEETENERS',
+                'BOTTLED & CANNED BEVERAGES',
+                'SNACKS & RETAIL',
+                'FRESH PRODUCE & PERISHABLES',
+                'BAR PACKAGING & CONSUMABLES',
+                'OTHER SUPPLIES & MISCELLANEOUS'
+            ];
+
             const mergedMap = new Map();
 
             const processItem = (item, source) => {
                 const key = item.name.toLowerCase().trim();
+                const rawCat = item.category || 'Etc.';
+                const mappedGroup = categoryMap[rawCat] || (rawCat.toUpperCase().includes('MILK') ? 'MILK & DAIRY PRODUCTS' : 'OTHER SUPPLIES & MISCELLANEOUS');
+
                 if (!mergedMap.has(key)) {
                     mergedMap.set(key, {
                         desc: item.name,
-                        unit: item.unit, 
+                        unit: item.unit || 'Pcs',
+                        categoryGroup: mappedGroup,
                         inHouse: 0,
                         storage: 0
                     });
                 }
                 const record = mergedMap.get(key);
-                if (source === 'in-house') record.inHouse += item.quantity;
-                if (source === 'storage') record.storage += item.quantity;
+                if (source === 'in-house') record.inHouse += (parseFloat(item.quantity) || 0);
+                if (source === 'storage') record.storage += (parseFloat(item.quantity) || 0);
             };
 
             window.appState['in-house'].forEach(item => processItem(item, 'in-house'));
             window.appState['storage'].forEach(item => processItem(item, 'storage'));
 
             const today = new Date();
-            const dateStr = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            const dateStr = `${monthNames[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`;
 
             const wsData = [
-                [`Date: ${dateStr}`, "CAFÉ INVENTORY ( QUADLINK )"],
-                ["Organized by product categories with In-House and Storage breakdown"], 
-                [], 
-                ["Item Description", "Unit", "In-House Bar", "Back Storage", "Total On-Hand", "Stock Status"] 
+                ["CAFÉ INVENTORY ( QUADLINK )"],
+                [`Date: ${dateStr}`],
+                ["Organized by product categories with In-House and Storage breakdown"],
+                [],
+                ["Item Description", "Unit", "In-House Bar", "Back Storage", "Total On-Hand", "Stock Status"]
             ];
 
-            mergedMap.forEach(row => {
-                const total = row.inHouse + row.storage;
-                const status = total > 0 ? 'OK' : 'EMPTY';
-                wsData.push([
-                    row.desc,
-                    row.unit,
-                    row.inHouse,
-                    row.storage,
-                    total,
-                    status
-                ]);
+            // Group items by categoryGroup
+            const groupedData = {};
+            mergedMap.forEach(item => {
+                if (!groupedData[item.categoryGroup]) {
+                    groupedData[item.categoryGroup] = [];
+                }
+                groupedData[item.categoryGroup].push(item);
             });
 
+            let currentRow = 6; // Excel row numbering starts at row 6 for first data row
+            const firstDataRow = 6;
+
+            // Sort and push by category order
+            const activeCategories = categoryOrder.filter(cat => groupedData[cat] && groupedData[cat].length > 0);
+            
+            // Catch any unlisted categories
+            Object.keys(groupedData).forEach(cat => {
+                if (!activeCategories.includes(cat) && groupedData[cat].length > 0) {
+                    activeCategories.push(cat);
+                }
+            });
+
+            activeCategories.forEach(cat => {
+                // Category Header Row
+                wsData.push([`  ${cat}`, null, null, null, null, null]);
+                currentRow++;
+
+                groupedData[cat].forEach(row => {
+                    const cRef = `C${currentRow}`;
+                    const dRef = `D${currentRow}`;
+                    const eRef = `E${currentRow}`;
+
+                    wsData.push([
+                        row.desc,
+                        row.unit,
+                        row.inHouse,
+                        row.storage,
+                        { f: `${cRef}+${dRef}` },
+                        { f: `IF(${eRef}=0, "OUT OF STOCK", IF(${cRef}=0, "REPLENISH BAR", "OK"))` }
+                    ]);
+                    currentRow++;
+                });
+            });
+
+            const lastDataRow = currentRow - 1;
+
+            // Total Summary Row at bottom
+            if (lastDataRow >= firstDataRow) {
+                wsData.push([
+                    "TOTAL ITEMS COUNT",
+                    null,
+                    { f: `SUM(C${firstDataRow}:C${lastDataRow})` },
+                    { f: `SUM(D${firstDataRow}:D${lastDataRow})` },
+                    { f: `SUM(E${firstDataRow}:E${lastDataRow})` },
+                    null
+                ]);
+            }
+
             const ws = XLSX.utils.aoa_to_sheet(wsData);
-            ws['!cols'] = [ {wch: 30}, {wch: 10}, {wch: 15}, {wch: 15}, {wch: 15}, {wch: 15} ];
+            ws['!cols'] = [ {wch: 32}, {wch: 12}, {wch: 16}, {wch: 16}, {wch: 16}, {wch: 18} ];
 
             const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Inventory");
+            XLSX.utils.book_append_sheet(wb, ws, "Categorized Inventory");
 
             const formattedDate = `${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}-${String(today.getFullYear()).slice(-2)}`;
             const fileName = `${formattedDate} ( INVENTORY ).xlsx`;
