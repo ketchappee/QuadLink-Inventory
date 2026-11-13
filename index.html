@@ -344,7 +344,7 @@
                 </button>
             </div>
             
-            <form id="add-form" onsubmit="handleSaveItem(event)" class="space-y-4 md:space-y-5">
+            <form id="add-form" class="space-y-4 md:space-y-5">
                 <div>
                     <label class="block text-xs md:text-sm font-bold text-stone-200 mb-1.5">Item Name</label>
                     <input type="text" id="input-name" required placeholder="e.g. Espresso Beans" class="w-full px-4 py-2.5 bg-white text-stone-900 rounded-xl text-sm font-bold shadow-inner placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-300">
@@ -480,7 +480,14 @@
         window.selectedIds = new Set(); 
         window.editingId = null; 
         
-        const generateID = () => 'local_' + crypto.randomUUID();
+        const generateID = () => {
+            if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+                return 'local_' + crypto.randomUUID();
+            }
+            // Fallback for local file:// testing
+            return 'local_' + Date.now().toString(36) + Math.random().toString(36).substring(2);
+        };
+        
         const getTodayStr = () => new Date().toISOString().split('T')[0];
 
         function persistAndRefresh() {
@@ -542,6 +549,9 @@
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', options);
             document.getElementById('input-date').value = getTodayStr();
+
+            // Bind the save event directly to handle local testing environments properly
+            document.getElementById('add-form').addEventListener('submit', window.handleSaveItem);
 
             window.updateTabCounts();
             window.renderTable();
